@@ -14,6 +14,7 @@
 		0EB04B722AA6D17A00DC0933 /* NalssiUttungTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B712AA6D17A00DC0933 /* NalssiUttungTests.swift */; };
 		0EB04B7C2AA6D17A00DC0933 /* NalssiUttungUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B7B2AA6D17A00DC0933 /* NalssiUttungUITests.swift */; };
 		0EB04B7E2AA6D17A00DC0933 /* NalssiUttungUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B7D2AA6D17A00DC0933 /* NalssiUttungUITestsLaunchTests.swift */; };
+		7C0D1BDD2AAB7E7400A8BCFF /* LocationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0D1BDC2AAB7E7400A8BCFF /* LocationCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		0EB04B772AA6D17A00DC0933 /* NalssiUttungUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NalssiUttungUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EB04B7B2AA6D17A00DC0933 /* NalssiUttungUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiUttungUITests.swift; sourceTree = "<group>"; };
 		0EB04B7D2AA6D17A00DC0933 /* NalssiUttungUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiUttungUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7C0D1BDC2AAB7E7400A8BCFF /* LocationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,8 @@
 		0EB04B5F2AA6D17900DC0933 /* NalssiUttung */ = {
 			isa = PBXGroup;
 			children = (
+				7C0D1BDB2AAB7E5A00A8BCFF /* Components */,
+				7C0D1BD82AAB7E2E00A8BCFF /* Views */,
 				0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */,
 				0EB04B622AA6D17900DC0933 /* ContentView.swift */,
 				0EB04B642AA6D17A00DC0933 /* Assets.xcassets */,
@@ -125,6 +129,21 @@
 				0EB04B7D2AA6D17A00DC0933 /* NalssiUttungUITestsLaunchTests.swift */,
 			);
 			path = NalssiUttungUITests;
+			sourceTree = "<group>";
+		};
+		7C0D1BD82AAB7E2E00A8BCFF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7C0D1BDB2AAB7E5A00A8BCFF /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7C0D1BDC2AAB7E7400A8BCFF /* LocationCard.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EB04B632AA6D17900DC0933 /* ContentView.swift in Sources */,
+				7C0D1BDD2AAB7E7400A8BCFF /* LocationCard.swift in Sources */,
 				0EB04B612AA6D17900DC0933 /* NalssiUttungApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
