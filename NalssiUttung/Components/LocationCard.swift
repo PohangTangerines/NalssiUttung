@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct LocationCard: View {
-    var Location = "제주시 아라동"
+    var location = "제주시 아라동"
     var temperature  = 24
     var high = 33
     var low = 24
@@ -15,23 +15,28 @@ struct LocationCard: View {
     var body: some View {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color.yellow)
+                .fill(Color.seaSky)
                 .frame(width: 350, height: 140)
+                .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.black, lineWidth: 2)
+                            )
 
             HStack(alignment: .bottom) {
                 VStack(alignment: .leading, spacing: 12) {
                     // MARK: Location
-                    Text("\(Location)")
+                    Text("\(location)")
                         .font(.system(size: 17))
 
                     HStack {
-                        Image(systemName: "circle.fill")
-                            .foregroundColor(.blue)
+                        Image("dayClear")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
                             .frame(minWidth: 60, minHeight: 60)
 
                         VStack(alignment: .leading, spacing: 2) {
                             // MARK: Forecast Temperature Range
-                            Text("\(temperature)°  \(high)°")
+                            Text("\(temperature)°  흐림")
                                 .font(.system(size: 24))
                                 .bold()
 
