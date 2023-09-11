@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03B2F45A2AAF3CCB005A5AD4 /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */; };
 		0EB04B612AA6D17900DC0933 /* NalssiUttungApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */; };
 		0EB04B632AA6D17900DC0933 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B622AA6D17900DC0933 /* ContentView.swift */; };
 		0EB04B652AA6D17A00DC0933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EB04B642AA6D17A00DC0933 /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 		0EB04B7C2AA6D17A00DC0933 /* NalssiUttungUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B7B2AA6D17A00DC0933 /* NalssiUttungUITests.swift */; };
 		0EB04B7E2AA6D17A00DC0933 /* NalssiUttungUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B7D2AA6D17A00DC0933 /* NalssiUttungUITestsLaunchTests.swift */; };
 		7C0D1BDD2AAB7E7400A8BCFF /* LocationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0D1BDC2AAB7E7400A8BCFF /* LocationCard.swift */; };
+		7CA773DD2AA7949800D70BD3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7CA773DC2AA7949800D70BD3 /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Palette.swift"; sourceTree = "<group>"; };
 		0EB04B5D2AA6D17900DC0933 /* NalssiUttung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NalssiUttung.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiUttungApp.swift; sourceTree = "<group>"; };
 		0EB04B622AA6D17900DC0933 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -46,6 +49,7 @@
 		0EB04B7B2AA6D17A00DC0933 /* NalssiUttungUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiUttungUITests.swift; sourceTree = "<group>"; };
 		0EB04B7D2AA6D17A00DC0933 /* NalssiUttungUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiUttungUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7C0D1BDC2AAB7E7400A8BCFF /* LocationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCard.swift; sourceTree = "<group>"; };
+		7CA773DC2AA7949800D70BD3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,9 +77,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03B2F45B2AAF3DDA005A5AD4 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		0EB04B542AA6D17900DC0933 = {
 			isa = PBXGroup;
 			children = (
+				7CA773DC2AA7949800D70BD3 /* .swiftlint.yml */,
 				0EB04B5F2AA6D17900DC0933 /* NalssiUttung */,
 				0EB04B702AA6D17A00DC0933 /* NalssiUttungTests */,
 				0EB04B7A2AA6D17A00DC0933 /* NalssiUttungUITests */,
@@ -101,6 +114,7 @@
 				0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */,
 				0EB04B622AA6D17900DC0933 /* ContentView.swift */,
 				0EB04B642AA6D17A00DC0933 /* Assets.xcassets */,
+				03B2F45B2AAF3DDA005A5AD4 /* Extension */,
 				0EB04B662AA6D17A00DC0933 /* Preview Content */,
 			);
 			path = NalssiUttung;
@@ -156,6 +170,7 @@
 				0EB04B592AA6D17900DC0933 /* Sources */,
 				0EB04B5A2AA6D17900DC0933 /* Frameworks */,
 				0EB04B5B2AA6D17900DC0933 /* Resources */,
+				7CA773DB2AA7941D00D70BD3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -250,6 +265,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CA773DD2AA7949800D70BD3 /* .swiftlint.yml in Resources */,
 				0EB04B682AA6D17A00DC0933 /* Preview Assets.xcassets in Resources */,
 				0EB04B652AA6D17A00DC0933 /* Assets.xcassets in Resources */,
 			);
@@ -271,6 +287,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7CA773DB2AA7941D00D70BD3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0EB04B592AA6D17900DC0933 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -279,6 +316,7 @@
 				0EB04B632AA6D17900DC0933 /* ContentView.swift in Sources */,
 				7C0D1BDD2AAB7E7400A8BCFF /* LocationCard.swift in Sources */,
 				0EB04B612AA6D17900DC0933 /* NalssiUttungApp.swift in Sources */,
+				03B2F45A2AAF3CCB005A5AD4 /* Color+Palette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
