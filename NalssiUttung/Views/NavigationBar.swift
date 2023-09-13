@@ -30,23 +30,8 @@ struct NavigationBar: View {
                     .frame(maxWidth: 40, maxHeight: 40, alignment: .trailing)
             }
 
-            HStack(spacing: 2) {
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(Color.darkChacoal)
+            searchBar
 
-                TextField("title", text: $searchText, prompt: Text("지역 검색하기").foregroundColor(Color.darkChacoal))
-                    .font(.system(size: 18))
-
-            }
-            .foregroundColor(.secondary)
-            .padding(.horizontal, 6)
-            .padding(.vertical, 28)
-            .frame(maxHeight: 45, alignment: .leading)
-            .background(Color.seaSky, in: RoundedRectangle(cornerRadius: 10))
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.darkChacoal, lineWidth: 2)
-            )
         }
         .frame(height: 106, alignment: .top)
         .padding(.horizontal, 20)
@@ -55,6 +40,24 @@ struct NavigationBar: View {
         .frame(maxHeight: .infinity, alignment: .top)
         .navigationBarHidden(true)
         .ignoresSafeArea()
+    }
+
+    private var searchBar: some View {
+        HStack(spacing: 2) {
+            Image(systemName: "magnifyingglass")
+                .foregroundColor(Color.darkChacoal)
+
+            TextField("title", text: $searchText, prompt: Text("지역 검색하기").foregroundColor(Color.darkChacoal))
+                .font(.system(size: 18))
+
+        }
+        .foregroundColor(.secondary)
+        .padding(.horizontal, 6)
+        .padding(.vertical, 28)
+        .frame(maxHeight: 45, alignment: .leading)
+        .background(Color.seaSky, in: RoundedRectangle(cornerRadius: 10))
+        .overlay(RoundedRectangle(cornerRadius: 10)
+            .stroke(Color.darkChacoal, lineWidth: 2))
     }
 }
 
