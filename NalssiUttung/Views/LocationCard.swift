@@ -50,10 +50,8 @@ struct LocationCard: View {
             .padding(.leading, 20)
         }
         .frame(maxWidth: 350, maxHeight: 140, alignment: .bottom)
-        .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.black, lineWidth: 2)
-                    )
+        .overlay(RoundedRectangle(cornerRadius: 10)
+            .stroke(Color.black, lineWidth: 2))
     }
 }
 
