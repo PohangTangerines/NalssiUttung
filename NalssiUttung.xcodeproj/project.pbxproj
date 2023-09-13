@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		03B2F45A2AAF3CCB005A5AD4 /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */; };
+		03B2F46A2AB09F08005A5AD4 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4692AB09F08005A5AD4 /* Font+.swift */; };
+		03B2F46D2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46C2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf */; };
+		03B2F46F2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */; };
+		03B2F4712AB09FDD005A5AD4 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */; };
 		0EB04B612AA6D17900DC0933 /* NalssiUttungApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */; };
 		0EB04B632AA6D17900DC0933 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B622AA6D17900DC0933 /* ContentView.swift */; };
 		0EB04B652AA6D17A00DC0933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EB04B642AA6D17A00DC0933 /* Assets.xcassets */; };
@@ -41,6 +45,11 @@
 
 /* Begin PBXFileReference section */
 		03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Palette.swift"; sourceTree = "<group>"; };
+		03B2F4692AB09F08005A5AD4 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
+		03B2F46C2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IM_Hyemin-Bold.otf"; sourceTree = "<group>"; };
+		03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		03B2F4722AB0A063005A5AD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0EB04B5D2AA6D17900DC0933 /* NalssiUttung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NalssiUttung.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiUttungApp.swift; sourceTree = "<group>"; };
 		0EB04B622AA6D17900DC0933 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -87,8 +96,19 @@
 			isa = PBXGroup;
 			children = (
 				03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */,
+				03B2F4692AB09F08005A5AD4 /* Font+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		03B2F46B2AB09F89005A5AD4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				03B2F46C2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf */,
+				03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */,
+				03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		0EB04B542AA6D17900DC0933 = {
@@ -117,10 +137,12 @@
 			children = (
 				7CA9A3CF2AAF64EB0051CC25 /* Model */,
 				7C0D1BD82AAB7E2E00A8BCFF /* Views */,
+				03B2F4722AB0A063005A5AD4 /* Info.plist */,
 				0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */,
 				0EB04B622AA6D17900DC0933 /* ContentView.swift */,
 				0EB04B642AA6D17A00DC0933 /* Assets.xcassets */,
 				03B2F45B2AAF3DDA005A5AD4 /* Extension */,
+				03B2F46B2AB09F89005A5AD4 /* Resources */,
 				0EB04B662AA6D17A00DC0933 /* Preview Content */,
 			);
 			path = NalssiUttung;
@@ -276,7 +298,10 @@
 			files = (
 				7CA773DD2AA7949800D70BD3 /* .swiftlint.yml in Resources */,
 				0EB04B682AA6D17A00DC0933 /* Preview Assets.xcassets in Resources */,
+				03B2F46F2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf in Resources */,
+				03B2F46D2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf in Resources */,
 				0EB04B652AA6D17A00DC0933 /* Assets.xcassets in Resources */,
+				03B2F4712AB09FDD005A5AD4 /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +354,7 @@
 				7CA9A3CD2AAF60110051CC25 /* LocationListView.swift in Sources */,
 				0EB04B612AA6D17900DC0933 /* NalssiUttungApp.swift in Sources */,
 				03B2F45A2AAF3CCB005A5AD4 /* Color+Palette.swift in Sources */,
+				03B2F46A2AB09F08005A5AD4 /* Font+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +516,7 @@
 				DEVELOPMENT_TEAM = PAQ92DM7XD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NalssiUttung/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -519,6 +546,7 @@
 				DEVELOPMENT_TEAM = PAQ92DM7XD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NalssiUttung/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
