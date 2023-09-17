@@ -29,12 +29,34 @@ struct DailyWeatherData {
     var sunriseDate: Date
     var sunsetDate: Date
     var hourData: [SimpleHourData]
+    
+    struct SimpleHourData {
+        var date: Date
+        var weatherCondition: WeatherCondition
+        var temperature: Measurement<UnitTemperature>
+    }
 }
 
-struct SimpleHourData {
-    var date: Date
-    var weatherCondition: WeatherCondition
-    var temperature: Measurement<UnitTemperature>
+/// DetailView에서 사용될 주간 날씨 정보.
+struct WeeklyWeatherData {
+    var weather: Weather
+    
+    var dayData: [DayData]
+    
+    struct DayData {
+        var date: Date  // 날짜에 이용
+        var weatherCondition: WeatherCondition
+        var lowTemperature: Measurement<UnitTemperature>
+        var highTemperature: Measurement<UnitTemperature>
+        var rainProbability: Double
+    }
+}
+
+struct CurrentDetailWeatherData {
+    var precipitation: Precipitation
+    var precipitationAmount: Measurement<UnitLength>
+    var wind: Wind
+    var visibility: Measurement<UnitLength>
 }
 
 extension WeatherService {
@@ -72,13 +94,13 @@ extension WeatherService {
             (hourWeather.date.timeIntervalSinceNow/3600) > 0 && (hourWeather.date.timeIntervalSinceNow/3600) < 24
         }
         
-        var hourData: [SimpleHourData] = []
+        var hourData: [DailyWeatherData.SimpleHourData] = []
         filteredHourWeather.forEach { hourWeather in
             let date = hourWeather.date
             let condition = hourWeather.condition
             let temperature = hourWeather.temperature
             
-            hourData.append(SimpleHourData(date: date, weatherCondition: condition, temperature: temperature))
+            hourData.append(DailyWeatherData.SimpleHourData(date: date, weatherCondition: condition, temperature: temperature))
         }
         
         // TODO: force unwrapping handling
@@ -86,6 +108,38 @@ extension WeatherService {
         let sunsetDate = weather.dailyForecast.forecast.first!.sun.sunset!
         
         return DailyWeatherData(weather: weather, sunriseDate: sunriseDate, sunsetDate: sunsetDate, hourData: hourData)
+    }
+    
+    func getWeeklyWeatherData(weather: Weather) -> WeeklyWeatherData {
+        let filteredDayWeather = weather.dailyForecast.forecast.filter { dayWeather in
+            (dayWeather.date.timeIntervalSinceNow/3600) > -24 && (dayWeather.date.timeIntervalSinceNow/3600) < 144
+        }
+        
+        var dayData: [WeeklyWeatherData.DayData] = []
+        filteredDayWeather.forEach { dayWeather in
+            let date = dayWeather.date
+            let weatherCondition = dayWeather.condition
+            let lowTemperature = dayWeather.lowTemperature
+            let highTemperature = dayWeather.highTemperature
+            let rainProbability = dayWeather.precipitationChance
+            
+            dayData.append(WeeklyWeatherData.DayData(date: date, weatherCondition: weatherCondition, lowTemperature: lowTemperature, highTemperature: highTemperature, rainProbability: rainProbability))
+        }
+        
+        return WeeklyWeatherData(weather: weather, dayData: dayData)
+    }
+    
+    func getCurrentDetailWeatherData(weather: Weather) -> CurrentDetailWeatherData {
+        let wind = weather.currentWeather.wind
+        let visibility = weather.currentWeather.visibility
+        // currentWeather에는 강수량이 존재하지 않아, hourlyForecase의 현재 시간 범위의 강수량을 사용.
+        let hourWeather = weather.hourlyForecast.forecast.filter { hourWeather in (hourWeather.date.timeIntervalSinceNow/3600) >= -1 && (hourWeather.date.timeIntervalSinceNow/3600) < 0
+        }.first!
+        
+        let precipitation = hourWeather.precipitation
+        let precipitationAmount = hourWeather.precipitationAmount
+        
+        return CurrentDetailWeatherData(precipitation: precipitation, precipitationAmount: precipitationAmount, wind: wind, visibility: visibility)
     }
 }
 

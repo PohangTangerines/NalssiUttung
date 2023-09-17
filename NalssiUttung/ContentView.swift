@@ -39,6 +39,7 @@ struct ContentView: View {
                         self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
                         
                         weatherManager.getDailyWeatherData(weather: weather)
+                        weatherManager.getWeeklyWeatherData(weather: weather)
                     }
                 }
             }
