@@ -21,13 +21,15 @@ struct WeatherBoxData {
 }
 
 class WeatherManager: ObservableObject {
-    static let shared = WeatherService()
+    static let shared = WeatherManager()
+    
+    let manager = WeatherService()
     
     //    @Published var weather: Weather?
     
     func getWeatherBoxData(location: CLLocation) async -> WeatherBoxData? {
         do {
-            let weather = try await WeatherManager.shared.weather(for: location)
+            let weather = try await WeatherManager.shared.manager.weather(for: location)
             
             let currentTemperature = weather.currentWeather.temperature
             let weatherCondition = weather.currentWeather.condition
@@ -41,4 +43,8 @@ class WeatherManager: ObservableObject {
             return nil
         }
     }
+}
+
+func unitTempToDouble(temp: Measurement<UnitTemperature>) -> Double {
+    return temp.converted(to: .celsius).value
 }

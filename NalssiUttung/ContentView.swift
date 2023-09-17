@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
+import CoreLocation
+import WeatherKit
 
 struct ContentView: View {
     @ObservedObject var locationManager = LocationManager.shared
+    @ObservedObject var weatherManager = WeatherManager.shared
+    
+    @State private var weatherBoxData: WeatherBoxData?
     
     var body: some View {
         VStack {
@@ -17,14 +22,22 @@ struct ContentView: View {
                 .foregroundColor(.accentColor)
             Text("Hello, world!")
             
-            if let location = locationManager.location {
-                Text("위도: \(location.coordinate.latitude)")
-                Text("경도: \(location.coordinate.longitude)")
+            if let data = weatherBoxData {
+                Text("현재 온도 : \(unitTempToDouble(temp: data.currentTemperature))")
+                Text("위도 : \(data.location.coordinate.latitude)")
+                Text("경도 : \(data.location.coordinate.longitude)")
+                Text("날씨 : \(data.weatherCondition.description)")
+                Text("최저온도 : \(unitTempToDouble(temp: data.lowTemperature))")
+                Text("최고온도 : \(unitTempToDouble(temp: data.highTemperature))")
             } else {
-                Text("위치 정보를 가져올 수 없습니다.")
+                Text("날씨 정보를 가져올 수 없습니다.")
             }
-        }
-        .padding()
+        }.padding()
+            .task {
+                if let location = locationManager.location {
+                    self.weatherBoxData = await weatherManager.getWeatherBoxData(location: location)
+                }
+            }
     }
 }
 
