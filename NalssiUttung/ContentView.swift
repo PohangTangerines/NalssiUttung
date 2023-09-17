@@ -35,7 +35,9 @@ struct ContentView: View {
         }.padding()
             .task {
                 if let location = locationManager.location {
-                    self.weatherBoxData = await weatherManager.getWeatherBoxData(location: location)
+                    if let weather = await weatherManager.getWeather(location: location) {
+                        self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
+                    }
                 }
             }
     }

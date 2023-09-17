@@ -25,23 +25,32 @@ class WeatherManager: ObservableObject {
     
     let manager = WeatherService()
     
-    //    @Published var weather: Weather?
-    
-    func getWeatherBoxData(location: CLLocation) async -> WeatherBoxData? {
+    /// 현재 위치를 기반으로, Weather 객체를 반환합니다.
+    /// - Parameter location: 현재 위도, 경도를 기반으로 한 CLLocation 객체
+    /// - Returns: Weather 객체 (Optional)
+    func getWeather(location: CLLocation) async -> Weather? {
         do {
             let weather = try await WeatherManager.shared.manager.weather(for: location)
-            
-            let currentTemperature = weather.currentWeather.temperature
-            let weatherCondition = weather.currentWeather.condition
-            // TODO: force unwrapping error handling
-            let lowTemperature = weather.dailyForecast.forecast.first!.lowTemperature
-            let highTemperature = weather.dailyForecast.forecast.first!.highTemperature
-            
-            return WeatherBoxData(location: location, currentTemperature: currentTemperature, weatherCondition: weatherCondition, lowTemperature: lowTemperature, highTemperature: highTemperature)
+            return weather
         } catch {
-            print("Error Occurred in getWeatherBoxData: \(error.localizedDescription)")
+            print("Error Occurred in getWeather: \(error.localizedDescription)")
             return nil
         }
+    }
+    
+    /// Weather 객체를 기반으로, `WeatherBoxData` 객체를 반환합니다.
+    /// - Parameters:
+    ///   - location: 현재 위도, 경도를 기반으로 한 CLLocation 객체
+    ///   - weather: Weather 객체
+    /// - Returns: WeatherBoxData 객체
+    func getWeatherBoxData(location: CLLocation, weather: Weather) -> WeatherBoxData {
+        let currentTemperature = weather.currentWeather.temperature
+        let weatherCondition = weather.currentWeather.condition
+        // TODO: force unwrapping error handling
+        let lowTemperature = weather.dailyForecast.forecast.first!.lowTemperature
+        let highTemperature = weather.dailyForecast.forecast.first!.highTemperature
+        
+        return WeatherBoxData(location: location, currentTemperature: currentTemperature, weatherCondition: weatherCondition, lowTemperature: lowTemperature, highTemperature: highTemperature)
     }
 }
 
