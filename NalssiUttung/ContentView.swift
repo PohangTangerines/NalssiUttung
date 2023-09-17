@@ -17,7 +17,7 @@ struct ContentView: View {
                 .foregroundColor(.accentColor)
             Text("Hello, world!")
             
-            if let location = locationManager.getCurrentLocation() {
+            if let location = locationManager.location {
                 Text("위도: \(location.coordinate.latitude)")
                 Text("경도: \(location.coordinate.longitude)")
             } else {

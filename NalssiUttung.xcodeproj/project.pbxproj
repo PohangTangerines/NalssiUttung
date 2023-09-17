@@ -20,6 +20,7 @@
 		0EB04B7C2AA6D17A00DC0933 /* NalssiUttungUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B7B2AA6D17A00DC0933 /* NalssiUttungUITests.swift */; };
 		0EB04B7E2AA6D17A00DC0933 /* NalssiUttungUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B7D2AA6D17A00DC0933 /* NalssiUttungUITestsLaunchTests.swift */; };
 		0EE65AEA2AB6D5AD0038A32F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE65AE92AB6D5AD0038A32F /* LocationManager.swift */; };
+		0EE65AEC2AB6DC690038A32F /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE65AEB2AB6DC690038A32F /* WeatherManager.swift */; };
 		7C0D1BDD2AAB7E7400A8BCFF /* LocationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0D1BDC2AAB7E7400A8BCFF /* LocationCard.swift */; };
 		7CA773DD2AA7949800D70BD3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7CA773DC2AA7949800D70BD3 /* .swiftlint.yml */; };
 		7CA9A3C82AAF56FF0051CC25 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA9A3C72AAF56FF0051CC25 /* NavigationBar.swift */; };
@@ -62,6 +63,8 @@
 		0EB04B7B2AA6D17A00DC0933 /* NalssiUttungUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiUttungUITests.swift; sourceTree = "<group>"; };
 		0EB04B7D2AA6D17A00DC0933 /* NalssiUttungUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiUttungUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0EE65AE92AB6D5AD0038A32F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		0EE65AEB2AB6DC690038A32F /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
+		0EE65AED2AB6DC750038A32F /* NalssiUttung.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NalssiUttung.entitlements; sourceTree = "<group>"; };
 		7C0D1BDC2AAB7E7400A8BCFF /* LocationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCard.swift; sourceTree = "<group>"; };
 		7CA773DC2AA7949800D70BD3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7CA9A3C72AAF56FF0051CC25 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
@@ -137,6 +140,7 @@
 		0EB04B5F2AA6D17900DC0933 /* NalssiUttung */ = {
 			isa = PBXGroup;
 			children = (
+				0EE65AED2AB6DC750038A32F /* NalssiUttung.entitlements */,
 				0EE65AE82AB6D5A10038A32F /* Manager */,
 				7CA9A3CF2AAF64EB0051CC25 /* Model */,
 				7C0D1BD82AAB7E2E00A8BCFF /* Views */,
@@ -180,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				0EE65AE92AB6D5AD0038A32F /* LocationManager.swift */,
+				0EE65AEB2AB6DC690038A32F /* WeatherManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -360,6 +365,7 @@
 			files = (
 				7CA9A3D12AAF653C0051CC25 /* WetherModel.swift in Sources */,
 				0EB04B632AA6D17900DC0933 /* ContentView.swift in Sources */,
+				0EE65AEC2AB6DC690038A32F /* WeatherManager.swift in Sources */,
 				7CA9A3C82AAF56FF0051CC25 /* NavigationBar.swift in Sources */,
 				7C0D1BDD2AAB7E7400A8BCFF /* LocationCard.swift in Sources */,
 				7CA9A3CD2AAF60110051CC25 /* LocationListView.swift in Sources */,
@@ -522,6 +528,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NalssiUttung/NalssiUttung.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NalssiUttung/Preview Content\"";
@@ -541,7 +548,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiUttung;
+				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiUttung1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -554,6 +561,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NalssiUttung/NalssiUttung.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NalssiUttung/Preview Content\"";
@@ -573,7 +581,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiUttung;
+				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiUttung1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
