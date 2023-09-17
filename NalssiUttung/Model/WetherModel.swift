@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Weather: String {
+enum DummyWeather: String {
     case location = "제주시 아라동"
     case temperature  = "24"
     case high = "33"
