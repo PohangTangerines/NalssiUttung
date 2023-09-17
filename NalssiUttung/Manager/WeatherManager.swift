@@ -9,12 +9,6 @@ import Foundation
 import WeatherKit
 import CoreLocation
 
-//struct CurrentWeather {
-//    var temperature: Measurement<UnitTemperature>
-//    var weatherCondition: WeatherCondition
-//
-//}
-
 /// LocationListView에서 쓰이는 날씨 박스 내의 데이터를 관리하기 위해 사용하는 구조체입니다.
 /// 현재 온도, 날씨, 최저/최고 온도만을 지닙니다.
 struct WeatherBoxData {

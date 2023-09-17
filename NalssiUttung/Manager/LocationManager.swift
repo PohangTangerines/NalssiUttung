@@ -13,7 +13,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     private var locationManager = CLLocationManager()
     
-    @Published var location: CLLocation? = nil
+    @Published var location: CLLocation?
     
     override private init() {
         super.init()
