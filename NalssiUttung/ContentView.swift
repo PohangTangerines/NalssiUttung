@@ -8,12 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var locationManager = LocationManager.shared
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
             Text("Hello, world!")
+            
+            if let location = locationManager.getCurrentLocation() {
+                Text("위도: \(location.coordinate.latitude)")
+                Text("경도: \(location.coordinate.longitude)")
+            } else {
+                Text("위치 정보를 가져올 수 없습니다.")
+            }
         }
         .padding()
     }
