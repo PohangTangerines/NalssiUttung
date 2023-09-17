@@ -11,7 +11,7 @@ import WeatherKit
 
 struct ContentView: View {
     @ObservedObject var locationManager = LocationManager.shared
-    @ObservedObject var weatherManager = WeatherManager.shared
+    let weatherManager = WeatherService.shared
     
     @State private var weatherBoxData: WeatherBoxData?
     
@@ -37,6 +37,8 @@ struct ContentView: View {
                 if let location = locationManager.location {
                     if let weather = await weatherManager.getWeather(location: location) {
                         self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
+                        
+                        weatherManager.getDailyWeatherData(weather: weather)
                     }
                 }
             }
