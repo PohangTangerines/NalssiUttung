@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		036CA6912AB8C51E0056C453 /* DetailedWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA6902AB8C51E0056C453 /* DetailedWeatherData.swift */; };
+		036CA6932AB8C54F0056C453 /* DetailedWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */; };
 		03B2F45A2AAF3CCB005A5AD4 /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */; };
 		03B2F46A2AB09F08005A5AD4 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4692AB09F08005A5AD4 /* Font+.swift */; };
 		03B2F46D2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46C2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		036CA6902AB8C51E0056C453 /* DetailedWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedWeatherData.swift; sourceTree = "<group>"; };
+		036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedWeatherView.swift; sourceTree = "<group>"; };
 		03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Palette.swift"; sourceTree = "<group>"; };
 		03B2F4692AB09F08005A5AD4 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		03B2F46C2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IM_Hyemin-Bold.otf"; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 			children = (
 				7CA9A3D02AAF653C0051CC25 /* WetherModel.swift */,
 				036CA6902AB8C51E0056C453 /* DetailedWeatherData.swift */,
+				036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CA9A3D12AAF653C0051CC25 /* WetherModel.swift in Sources */,
+				036CA6932AB8C54F0056C453 /* DetailedWeatherView.swift in Sources */,
 				0EB04B632AA6D17900DC0933 /* ContentView.swift in Sources */,
 				7CA9A3C82AAF56FF0051CC25 /* NavigationBar.swift in Sources */,
 				7C0D1BDD2AAB7E7400A8BCFF /* LocationCard.swift in Sources */,
