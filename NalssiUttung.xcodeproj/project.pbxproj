@@ -12,6 +12,8 @@
 		03B2F46D2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46C2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf */; };
 		03B2F46F2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */; };
 		03B2F4712AB09FDD005A5AD4 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */; };
+		03B2F4632AB08EB7005A5AD4 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4622AB08EB7005A5AD4 /* Weather.swift */; };
+		03B2F4682AB09A6D005A5AD4 /* RealTimeWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4672AB09A6D005A5AD4 /* RealTimeWeather.swift */; };
 		0EB04B612AA6D17900DC0933 /* NalssiUttungApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */; };
 		0EB04B632AA6D17900DC0933 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B622AA6D17900DC0933 /* ContentView.swift */; };
 		0EB04B652AA6D17A00DC0933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EB04B642AA6D17A00DC0933 /* Assets.xcassets */; };
@@ -50,6 +52,8 @@
 		03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		03B2F4722AB0A063005A5AD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		03B2F4622AB08EB7005A5AD4 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		03B2F4672AB09A6D005A5AD4 /* RealTimeWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeWeather.swift; sourceTree = "<group>"; };
 		0EB04B5D2AA6D17900DC0933 /* NalssiUttung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NalssiUttung.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiUttungApp.swift; sourceTree = "<group>"; };
 		0EB04B622AA6D17900DC0933 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 				7CA9A3CF2AAF64EB0051CC25 /* Model */,
 				7C0D1BD82AAB7E2E00A8BCFF /* Views */,
 				03B2F4722AB0A063005A5AD4 /* Info.plist */,
+				03B2F4622AB08EB7005A5AD4 /* Weather.swift */,
+				03B2F4672AB09A6D005A5AD4 /* RealTimeWeather.swift */,
 				0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */,
 				0EB04B622AA6D17900DC0933 /* ContentView.swift */,
 				0EB04B642AA6D17A00DC0933 /* Assets.xcassets */,
@@ -348,6 +354,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CA9A3D12AAF653C0051CC25 /* WetherModel.swift in Sources */,
+				03B2F4632AB08EB7005A5AD4 /* Weather.swift in Sources */,
+				03B2F4682AB09A6D005A5AD4 /* RealTimeWeather.swift in Sources */,
 				0EB04B632AA6D17900DC0933 /* ContentView.swift in Sources */,
 				7CA9A3C82AAF56FF0051CC25 /* NavigationBar.swift in Sources */,
 				7C0D1BDD2AAB7E7400A8BCFF /* LocationCard.swift in Sources */,
