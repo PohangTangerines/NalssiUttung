@@ -18,7 +18,6 @@ struct LocationCard: View {
                 .fill(Color.seaSky)
                 .frame(maxWidth: 350, maxHeight: 140)
 
-
             HStack(alignment: .bottom) {
                 VStack(alignment: .leading, spacing: 12) {
                     // MARK: Location
