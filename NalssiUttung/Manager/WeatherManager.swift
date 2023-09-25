@@ -16,10 +16,10 @@ struct WeatherBoxData {
     var location: CLLocation
     var weather: Weather
     
-    var currentTemperature: Measurement<UnitTemperature>
+    var currentTemperature: Int
     var weatherCondition: WeatherCondition
-    var lowTemperature: Measurement<UnitTemperature>
-    var highTemperature: Measurement<UnitTemperature>
+    var lowestTemperature: Int
+    var highestTemperature: Int
 }
 
 /// MainView에서 사용될 아래쪽의 일일 날씨 정보.
@@ -79,14 +79,14 @@ extension WeatherService {
     ///   - weather: Weather 객체
     /// - Returns: WeatherBoxData 객체
     func getWeatherBoxData(location: CLLocation, weather: Weather) -> WeatherBoxData {
-        let currentTemperature = weather.currentWeather.temperature
+        let currentTemperature = unitTempToInt(temp: weather.currentWeather.temperature)
         let weatherCondition = weather.currentWeather.condition
         
         // TODO: force unwrapping error handling
-        let lowTemperature = weather.dailyForecast.forecast.first!.lowTemperature
-        let highTemperature = weather.dailyForecast.forecast.first!.highTemperature
+        let lowestTemperature = unitTempToInt(temp: weather.dailyForecast.forecast.first!.lowTemperature)
+        let highestTemperature = unitTempToInt(temp: weather.dailyForecast.forecast.first!.highTemperature)
         
-        return WeatherBoxData(location: location, weather: weather, currentTemperature: currentTemperature, weatherCondition: weatherCondition, lowTemperature: lowTemperature, highTemperature: highTemperature)
+        return WeatherBoxData(location: location, weather: weather, currentTemperature: currentTemperature, weatherCondition: weatherCondition, lowestTemperature: lowestTemperature, highestTemperature: highestTemperature)
     }
     
     func getDailyWeatherData(weather: Weather) -> DailyWeatherData {
@@ -143,6 +143,6 @@ extension WeatherService {
     }
 }
 
-func unitTempToDouble(temp: Measurement<UnitTemperature>) -> Double {
-    return temp.converted(to: .celsius).value
+func unitTempToInt(temp: Measurement<UnitTemperature>) -> Int {
+    return Int(temp.converted(to: .celsius).value)
 }

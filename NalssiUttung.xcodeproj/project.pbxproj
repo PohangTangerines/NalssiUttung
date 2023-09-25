@@ -35,7 +35,6 @@
 		7CA773DD2AA7949800D70BD3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7CA773DC2AA7949800D70BD3 /* .swiftlint.yml */; };
 		7CA9A3C82AAF56FF0051CC25 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA9A3C72AAF56FF0051CC25 /* NavigationBar.swift */; };
 		7CA9A3CD2AAF60110051CC25 /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA9A3CC2AAF60110051CC25 /* LocationListView.swift */; };
-		7CA9A3D12AAF653C0051CC25 /* WetherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA9A3D02AAF653C0051CC25 /* WetherModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,7 +88,6 @@
 		7CA773DC2AA7949800D70BD3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7CA9A3C72AAF56FF0051CC25 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		7CA9A3CC2AAF60110051CC25 /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
-		7CA9A3D02AAF653C0051CC25 /* WetherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WetherModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,7 +224,6 @@
 		7CA9A3CF2AAF64EB0051CC25 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7CA9A3D02AAF653C0051CC25 /* WetherModel.swift */,
 				036CA6902AB8C51E0056C453 /* DetailedWeatherData.swift */,
 				036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */,
 				036CA6942AB9582C0056C453 /* WeeklyWeatherData.swift */,
@@ -394,7 +391,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				036CA6782AB4C3540056C453 /* DailyWeatherView.swift in Sources */,
-				7CA9A3D12AAF653C0051CC25 /* WetherModel.swift in Sources */,
 				036CA6932AB8C54F0056C453 /* DetailedWeatherView.swift in Sources */,
 				03B2F4632AB08EB7005A5AD4 /* Weather.swift in Sources */,
 				03B2F4682AB09A6D005A5AD4 /* RealTimeWeather.swift in Sources */,

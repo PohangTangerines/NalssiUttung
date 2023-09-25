@@ -6,12 +6,25 @@
 //
 
 import SwiftUI
+import WeatherKit
 
 @main
 struct NalssiUttungApp: App {
+    @ObservedObject var locationManager = LocationManager.shared
+    let weatherManager = WeatherService.shared
+    
+    @State var weatherBoxData: WeatherBoxData?
+    
     var body: some Scene {
         WindowGroup {
-            LocationListView()
+            LocationCard(weatherBoxData: $weatherBoxData)
+                .task {
+                    if let location = locationManager.location {
+                        if let weather = await weatherManager.getWeather(location: location) {
+                            self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
+                    }
+                }
+            }
         }
     }
 }
