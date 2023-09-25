@@ -1,5 +1,5 @@
 //
-//  RealTimeWeather.swift
+//  RealTimeWeatherView.swift
 //  NalssiUttung
 //
 //  Created by 금가경 on 2023/09/12.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct RealTimeWeather: View {
-    @Binding var weather: Weather
+struct RealTimeWeatherView: View {
+    @Binding var realTimeWeather: RealTimeWeather
     
     var body: some View {
         ZStack {
@@ -22,17 +22,17 @@ struct RealTimeWeather: View {
             HStack(spacing: 0.0) {
                 VStack(alignment: .leading) {
                     HStack(alignment: .bottom) {
-                        Text("\(weather.temperature)°")
+                        Text("\(realTimeWeather.temperature)°")
                             .font(.system(size:80))
                             .padding(.bottom, -15.0)
-                        Text("\(weather.condition)")
+                        Text("\(realTimeWeather.condition)")
                             .font(.system(size:26))
                     }
                     .padding(.bottom, 21)
-                    Text("최고 \(weather.highTemperature)° | 최저 \(weather.lowTemperature)°")
+                    Text("최고 \(realTimeWeather.highTemperature)° | 최저 \(realTimeWeather.lowTemperature)°")
                         .font(.system(size:20))
                         .padding(.bottom, 24.0)
-                    Text("\(weather.weatherMessage)")
+                    Text("\(realTimeWeather.weatherMessage)")
                         .multilineTextAlignment(.leading)
                         .lineSpacing(4)
                         .font(.system(size:26))
@@ -44,8 +44,8 @@ struct RealTimeWeather: View {
     }
 }
 
-struct RealTimeWeather_Previews: PreviewProvider {
+struct RealTimeWeatherView_Previews: PreviewProvider {
     static var previews: some View {
-        RealTimeWeather(weather: .constant(Weather.sampleData[0]))
+        RealTimeWeatherView(realTimeWeather: .constant(RealTimeWeather.sampleData[0]))
     }
 }

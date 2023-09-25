@@ -16,10 +16,10 @@ struct WeatherBoxData {
     var location: CLLocation
     var weather: Weather
     
-    var currentTemperature: Measurement<UnitTemperature>
+    var currentTemperature: Int
     var weatherCondition: WeatherCondition
-    var lowTemperature: Measurement<UnitTemperature>
-    var highTemperature: Measurement<UnitTemperature>
+    var lowestTemperature: Int
+    var highestTemperature: Int
 }
 
 /// MainView에서 사용될 아래쪽의 일일 날씨 정보.
@@ -31,9 +31,9 @@ struct DailyWeatherData {
     var hourData: [SimpleHourData]
     
     struct SimpleHourData {
-        var date: Date
+        var time: String
         var weatherCondition: WeatherCondition
-        var temperature: Measurement<UnitTemperature>
+        var temperature: Int
     }
 }
 
@@ -44,19 +44,21 @@ struct WeeklyWeatherData {
     var dayData: [DayData]
     
     struct DayData {
-        var date: Date  // 날짜에 이용
+        var day: String
+        var date: String
         var weatherCondition: WeatherCondition
-        var lowTemperature: Measurement<UnitTemperature>
-        var highTemperature: Measurement<UnitTemperature>
-        var rainProbability: Double
+        var lowestTemperature: Int
+        var highestTemperature: Int
+        var precipitationChance: String
     }
 }
 
-struct CurrentDetailWeatherData {
-    var precipitation: Precipitation
-    var precipitationAmount: Measurement<UnitLength>
-    var wind: Wind
-    var visibility: Measurement<UnitLength>
+struct DetailedWeatherData {
+    var precipitation: String
+    var precipitationAmount: String
+    var windDirection: String
+    var windSpeed: String
+    var visibility: String
 }
 
 extension WeatherService {
@@ -79,28 +81,30 @@ extension WeatherService {
     ///   - weather: Weather 객체
     /// - Returns: WeatherBoxData 객체
     func getWeatherBoxData(location: CLLocation, weather: Weather) -> WeatherBoxData {
-        let currentTemperature = weather.currentWeather.temperature
+        let currentTemperature = unitTempToInt(temp: weather.currentWeather.temperature)
         let weatherCondition = weather.currentWeather.condition
         
         // TODO: force unwrapping error handling
-        let lowTemperature = weather.dailyForecast.forecast.first!.lowTemperature
-        let highTemperature = weather.dailyForecast.forecast.first!.highTemperature
+        let lowestTemperature = unitTempToInt(temp: weather.dailyForecast.forecast.first!.lowTemperature)
+        let highestTemperature = unitTempToInt(temp: weather.dailyForecast.forecast.first!.highTemperature)
         
-        return WeatherBoxData(location: location, weather: weather, currentTemperature: currentTemperature, weatherCondition: weatherCondition, lowTemperature: lowTemperature, highTemperature: highTemperature)
+        return WeatherBoxData(location: location, weather: weather, currentTemperature: currentTemperature, weatherCondition: weatherCondition, lowestTemperature: lowestTemperature, highestTemperature: highestTemperature)
     }
     
     func getDailyWeatherData(weather: Weather) -> DailyWeatherData {
         let filteredHourWeather = weather.hourlyForecast.forecast.filter { hourWeather in
             (hourWeather.date.timeIntervalSinceNow/3600) > 0 && (hourWeather.date.timeIntervalSinceNow/3600) < 24
         }
-        
         var hourData: [DailyWeatherData.SimpleHourData] = []
         filteredHourWeather.forEach { hourWeather in
-            let date = hourWeather.date
-            let condition = hourWeather.condition
-            let temperature = hourWeather.temperature
+            let convertedTime = dateToTimeString(date: hourWeather.date)
             
-            hourData.append(DailyWeatherData.SimpleHourData(date: date, weatherCondition: condition, temperature: temperature))
+            let condition = hourWeather.condition
+            
+            let temperature = hourWeather.temperature
+            let convertedTemperature = unitTempToInt(temp: temperature)
+
+            hourData.append(DailyWeatherData.SimpleHourData(time: convertedTime, weatherCondition: condition, temperature: convertedTemperature))
         }
         
         // TODO: force unwrapping handling
@@ -118,31 +122,158 @@ extension WeatherService {
         var dayData: [WeeklyWeatherData.DayData] = []
         filteredDayWeather.forEach { dayWeather in
             let date = dayWeather.date
-            let weatherCondition = dayWeather.condition
-            let lowTemperature = dayWeather.lowTemperature
-            let highTemperature = dayWeather.highTemperature
-            let rainProbability = dayWeather.precipitationChance
             
-            dayData.append(WeeklyWeatherData.DayData(date: date, weatherCondition: weatherCondition, lowTemperature: lowTemperature, highTemperature: highTemperature, rainProbability: rainProbability))
+            let day = dateToDayString(date: date)
+            let convertedDate = dateToString(date: date)
+            
+            let weatherCondition = dayWeather.condition
+            let lowestTemperature = unitTempToInt(temp: dayWeather.lowTemperature)
+            let highestTemperature = unitTempToInt(temp: dayWeather.highTemperature)
+            let precipitationChance = precipitationChanceDoubleToPercentage(precipitationChance: dayWeather.precipitationChance)
+            
+            dayData.append(WeeklyWeatherData.DayData(day: day, date: convertedDate, weatherCondition: weatherCondition, lowestTemperature: lowestTemperature, highestTemperature: highestTemperature, precipitationChance: precipitationChance))
         }
         
         return WeeklyWeatherData(weather: weather, dayData: dayData)
     }
     
-    func getCurrentDetailWeatherData(weather: Weather) -> CurrentDetailWeatherData {
-        let wind = weather.currentWeather.wind
+    func getDetailedWeatherData(weather: Weather) -> DetailedWeatherData {
+        let windDirection = weather.currentWeather.wind.compassDirection
+        let convertedWindDirection = convertToKoreanWindDirection(windDirection.rawValue)
+
+        let windSpeed = weather.currentWeather.wind.speed
+        let convertedWindSpeed = unitWindSpeedToString(windSpeed: windSpeed)
+        
+        // 좋음/꽤 좋음/매우 좋음 등으로 표현하는 가시거리 존재하지 않음.
         let visibility = weather.currentWeather.visibility
+        let convertedVisibility = visibilityUnitLengthToString(visibility: visibility)
+        
         // currentWeather에는 강수량이 존재하지 않아, hourlyForecase의 현재 시간 범위의 강수량을 사용.
         let hourWeather = weather.hourlyForecast.forecast.filter { hourWeather in (hourWeather.date.timeIntervalSinceNow/3600) >= -1 && (hourWeather.date.timeIntervalSinceNow/3600) < 0
         }.first!
         
         let precipitation = hourWeather.precipitation
-        let precipitationAmount = hourWeather.precipitationAmount
+        let convertedPrecipitation = precipitationToKoreanString(precipitation.rawValue)
         
-        return CurrentDetailWeatherData(precipitation: precipitation, precipitationAmount: precipitationAmount, wind: wind, visibility: visibility)
+        let precipitationAmount = hourWeather.precipitationAmount
+        let convertedPrecipitationAmount = precipitationUnitLengthToString(precipitationAmount: precipitationAmount)
+                
+        return DetailedWeatherData(precipitation: convertedPrecipitation, precipitationAmount: convertedPrecipitationAmount, windDirection: convertedWindDirection, windSpeed: convertedWindSpeed, visibility: convertedVisibility)
     }
 }
 
-func unitTempToDouble(temp: Measurement<UnitTemperature>) -> Double {
-    return temp.converted(to: .celsius).value
+func unitTempToInt(temp: Measurement<UnitTemperature>) -> Int {
+    return Int(temp.converted(to: .celsius).value)
+}
+
+func dateToTimeString(date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "a h시"
+    dateFormatter.locale = Locale(identifier:"ko_KR")
+    
+    return dateFormatter.string(from: date)
+}
+
+func dateToDayString(date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "E"
+    dateFormatter.locale = Locale(identifier:"ko_KR")
+    
+    return dateFormatter.string(from: date)
+}
+
+func dateToString(date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "M.dd"
+    dateFormatter.locale = Locale(identifier:"ko_KR")
+    
+    return dateFormatter.string(from: date)
+}
+
+func precipitationToKoreanString(_ precipitation: String) -> String {
+    switch precipitation {
+    case "none" :
+        return "없음"
+    case "hail" :
+        return "우박"
+    case "mixed" :
+        return "혼합강우"
+    case "rain" :
+        return "비"
+    case "sleet" :
+        return "진눈깨비"
+    case "snow" :
+        return "눈"
+    default:
+        return "결과 없음"
+    }
+}
+func precipitationChanceDoubleToPercentage(precipitationChance: Double) -> String {
+    return "\(Int(precipitationChance * 100))%"
+}
+
+func convertToKoreanWindDirection(_ compassDirection: String) -> String {
+    switch compassDirection {
+    case "north" :
+        return "북풍"
+    case "northNortheast" :
+        return "북북동풍"
+    case "northeast" :
+        return "북동풍"
+    case "eastNortheast" :
+        return "동북동풍"
+    case "east" :
+        return "동풍"
+    case "eastSoutheast" :
+        return "동남풍"
+    case "southeast" :
+        return "남동풍"
+    case "southSoutheast" :
+        return "남남동풍"
+    case "south" :
+        return "남풍"
+    case "southSouthwest" :
+        return "남남서풍"
+    case "southwest" :
+        return "남서풍"
+    case "westSouthwest" :
+        return "서남서풍"
+    case "west" :
+        return "서풍"
+    case "westNorthwest" :
+        return "서북서풍"
+    case "northwest" :
+        return "북서풍"
+    case "northNorthwest" :
+        return "북북서"
+    default:
+        return "알 수 없음"
+    }
+}
+
+func unitWindSpeedToString(windSpeed: Measurement<UnitSpeed>) -> String {
+    let measurementFormatter = MeasurementFormatter()
+    measurementFormatter.unitOptions = .providedUnit
+    measurementFormatter.locale = Locale(identifier:"ko_KR")
+    measurementFormatter.numberFormatter.maximumFractionDigits = 1
+    
+    return measurementFormatter.string(from: windSpeed)
+}
+
+func visibilityUnitLengthToString(visibility: Measurement<UnitLength>) -> String {
+    let measurementFormatter = MeasurementFormatter()
+    measurementFormatter.unitOptions = .naturalScale
+    measurementFormatter.locale = Locale(identifier:"ko_KR")
+    measurementFormatter.numberFormatter.maximumFractionDigits = 0
+
+    return measurementFormatter.string(from: visibility)
+}
+
+func precipitationUnitLengthToString(precipitationAmount: Measurement<UnitLength>) -> String {
+    let measurementFormatter = MeasurementFormatter()
+    measurementFormatter.unitOptions = .providedUnit
+    measurementFormatter.locale = Locale(identifier:"ko_KR")
+    measurementFormatter.numberFormatter.maximumFractionDigits = 1
+    
+    return measurementFormatter.string(from: precipitationAmount)
 }

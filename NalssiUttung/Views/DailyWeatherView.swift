@@ -6,23 +6,26 @@
 //
 
 import SwiftUI
+import WeatherKit
 
 struct DailyWeatherView: View {
-    @Binding var dailyWeatherData: [DailyWeatherData]
+    @Binding var dailyWeatherData: DailyWeatherData?
+    
     var body: some View {
         ScrollView(.horizontal) {
+            if let dailyWeatherData = dailyWeatherData {
                 VStack(alignment: .leading) {
                     VStack {
                         HStack(spacing: 20) {
-                            ForEach(dailyWeatherData , id: \.time) {
-                                Text($0.time)
+                            ForEach(dailyWeatherData.hourData , id: \.time) {
+                                Text("\($0.time)")
                                     .font(.pretendardMedium(.footnote))
                             }
                         }
                         .padding(.bottom, 12)
                         HStack(spacing: 49) {
-                            ForEach(dailyWeatherData, id: \.time) {
-                                Image("\($0.weatherConditionIcon)")
+                            ForEach(dailyWeatherData.hourData, id: \.time) {
+                                Image("\($0.weatherCondition.rawValue)")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(maxWidth: 28)
@@ -34,19 +37,23 @@ struct DailyWeatherView: View {
                         .padding(.bottom, 20)
                         .offset(x: -28,  y: 20)
                     HStack(spacing: 52) {
-                        ForEach(dailyWeatherData, id: \.time) {
+                        ForEach(dailyWeatherData.hourData, id: \.time) {
                             Text("\($0.temperature)°")
                                 .font(.pretendardMedium(.footnote))
                         }
                     }
                 }
             }
-            .padding(20)
+            else {
+                Text("날씨 정보를 가져올 수 없습니다.")
+            }
+        }
+        .padding(20)
     }
 }
 
-struct DailyWeatherView_Previews: PreviewProvider {
-    static var previews: some View {
-        DailyWeatherView(dailyWeatherData: .constant(DailyWeatherData.sampleData))
-    }
-}
+//struct DailyWeatherView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DailyWeatherView()
+//    }
+//}
