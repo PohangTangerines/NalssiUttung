@@ -15,15 +15,18 @@ struct NalssiUttungApp: App {
     
     @State var weatherBoxData: WeatherBoxData?
     @State var dailyWeatherData: DailyWeatherData?
+    @State var weeklyWeatherData: WeeklyWeatherData?
+
     
     var body: some Scene {
         WindowGroup {
-            DailyWeatherView(dailyWeatherData: $dailyWeatherData)
+            WeeklyWeatherChartView(weeklyWeatherData: $weeklyWeatherData)
                 .task {
                     if let location = locationManager.location {
                         if let weather = await weatherManager.getWeather(location: location) {
                             self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
                             self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
+                            self.weeklyWeatherData = weatherManager.getWeeklyWeatherData(weather: weather)
                     }
                 }
             }

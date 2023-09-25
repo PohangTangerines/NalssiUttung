@@ -44,11 +44,12 @@ struct WeeklyWeatherData {
     var dayData: [DayData]
     
     struct DayData {
-        var date: Date  // 날짜에 이용
+        var day: String
+        var date: String
         var weatherCondition: WeatherCondition
-        var lowTemperature: Measurement<UnitTemperature>
-        var highTemperature: Measurement<UnitTemperature>
-        var rainProbability: Double
+        var lowestTemperature: Int
+        var highestTemperature: Int
+        var precipitationChance: String
     }
 }
 
@@ -120,12 +121,16 @@ extension WeatherService {
         var dayData: [WeeklyWeatherData.DayData] = []
         filteredDayWeather.forEach { dayWeather in
             let date = dayWeather.date
-            let weatherCondition = dayWeather.condition
-            let lowTemperature = dayWeather.lowTemperature
-            let highTemperature = dayWeather.highTemperature
-            let rainProbability = dayWeather.precipitationChance
             
-            dayData.append(WeeklyWeatherData.DayData(date: date, weatherCondition: weatherCondition, lowTemperature: lowTemperature, highTemperature: highTemperature, rainProbability: rainProbability))
+            let day = dateToDayString(date: date)
+            let convertedDate = dateToString(date: date)
+            
+            let weatherCondition = dayWeather.condition
+            let lowestTemperature = unitTempToInt(temp: dayWeather.lowTemperature)
+            let highestTemperature = unitTempToInt(temp: dayWeather.highTemperature)
+            let precipitationChance = precipitationChanceDoubleToPercentage(precipitationChance: dayWeather.precipitationChance)
+            
+            dayData.append(WeeklyWeatherData.DayData(day: day, date: convertedDate, weatherCondition: weatherCondition, lowestTemperature: lowestTemperature, highestTemperature: highestTemperature, precipitationChance: precipitationChance))
         }
         
         return WeeklyWeatherData(weather: weather, dayData: dayData)
@@ -155,4 +160,24 @@ func dateToTimeString(date: Date) -> String {
     dateFormatter.locale = Locale(identifier:"ko_KR")
     
     return dateFormatter.string(from: date)
+}
+
+func dateToDayString(date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "E"
+    dateFormatter.locale = Locale(identifier:"ko_KR")
+    
+    return dateFormatter.string(from: date)
+}
+
+func dateToString(date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "M.dd"
+    dateFormatter.locale = Locale(identifier:"ko_KR")
+    
+    return dateFormatter.string(from: date)
+}
+
+func precipitationChanceDoubleToPercentage(precipitationChance: Double) -> String {
+    return "\(Int(precipitationChance * 100))%"
 }
