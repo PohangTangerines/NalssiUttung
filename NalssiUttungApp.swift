@@ -18,7 +18,6 @@ struct NalssiUttungApp: App {
     @State var weeklyWeatherData: WeeklyWeatherData?
     @State var detailedWeatherData: DetailedWeatherData?
 
-    
     var body: some Scene {
         WindowGroup {
             DetailedWeatherView(detailedWeatherData: $detailedWeatherData)

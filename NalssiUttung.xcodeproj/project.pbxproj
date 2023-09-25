@@ -13,8 +13,8 @@
 		036CA69B2AB9591A0056C453 /* WeeklyWeatherChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA69A2AB9591A0056C453 /* WeeklyWeatherChartView.swift */; };
 		036CA69D2AB9598F0056C453 /* WeeklyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */; };
 		03B2F45A2AAF3CCB005A5AD4 /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */; };
-		03B2F4632AB08EB7005A5AD4 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4622AB08EB7005A5AD4 /* Weather.swift */; };
-		03B2F4682AB09A6D005A5AD4 /* RealTimeWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4672AB09A6D005A5AD4 /* RealTimeWeather.swift */; };
+		03B2F4632AB08EB7005A5AD4 /* RealTimeWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4622AB08EB7005A5AD4 /* RealTimeWeather.swift */; };
+		03B2F4682AB09A6D005A5AD4 /* RealTimeWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4672AB09A6D005A5AD4 /* RealTimeWeatherView.swift */; };
 		03B2F46A2AB09F08005A5AD4 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4692AB09F08005A5AD4 /* Font+.swift */; };
 		03B2F46D2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46C2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf */; };
 		03B2F46F2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */; };
@@ -58,8 +58,8 @@
 		036CA69A2AB9591A0056C453 /* WeeklyWeatherChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyWeatherChartView.swift; sourceTree = "<group>"; };
 		036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyWeatherView.swift; sourceTree = "<group>"; };
 		03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Palette.swift"; sourceTree = "<group>"; };
-		03B2F4622AB08EB7005A5AD4 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		03B2F4672AB09A6D005A5AD4 /* RealTimeWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeWeather.swift; sourceTree = "<group>"; };
+		03B2F4622AB08EB7005A5AD4 /* RealTimeWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeWeather.swift; sourceTree = "<group>"; };
+		03B2F4672AB09A6D005A5AD4 /* RealTimeWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeWeatherView.swift; sourceTree = "<group>"; };
 		03B2F4692AB09F08005A5AD4 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		03B2F46C2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IM_Hyemin-Bold.otf"; sourceTree = "<group>"; };
 		03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
@@ -212,6 +212,7 @@
 				036CA69A2AB9591A0056C453 /* WeeklyWeatherChartView.swift */,
 				036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */,
 				036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */,
+				03B2F4672AB09A6D005A5AD4 /* RealTimeWeatherView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,8 +220,7 @@
 		7CA9A3CF2AAF64EB0051CC25 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				03B2F4622AB08EB7005A5AD4 /* Weather.swift */,
-				03B2F4672AB09A6D005A5AD4 /* RealTimeWeather.swift */,
+				03B2F4622AB08EB7005A5AD4 /* RealTimeWeather.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -383,8 +383,8 @@
 			files = (
 				036CA6782AB4C3540056C453 /* DailyWeatherView.swift in Sources */,
 				036CA6932AB8C54F0056C453 /* DetailedWeatherView.swift in Sources */,
-				03B2F4632AB08EB7005A5AD4 /* Weather.swift in Sources */,
-				03B2F4682AB09A6D005A5AD4 /* RealTimeWeather.swift in Sources */,
+				03B2F4632AB08EB7005A5AD4 /* RealTimeWeather.swift in Sources */,
+				03B2F4682AB09A6D005A5AD4 /* RealTimeWeatherView.swift in Sources */,
 				0EB04B632AA6D17900DC0933 /* ContentView.swift in Sources */,
 				0EE65AEC2AB6DC690038A32F /* WeatherManager.swift in Sources */,
 				7CA9A3C82AAF56FF0051CC25 /* NavigationBar.swift in Sources */,
