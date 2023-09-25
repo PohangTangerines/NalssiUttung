@@ -53,11 +53,12 @@ struct WeeklyWeatherData {
     }
 }
 
-struct CurrentDetailWeatherData {
+struct DetailedWeatherData {
     var precipitation: Precipitation
-    var precipitationAmount: Measurement<UnitLength>
-    var wind: Wind
-    var visibility: Measurement<UnitLength>
+    var precipitationAmount: String
+    var windDirection: String
+    var windSpeed: String
+    var visibility: String
 }
 
 extension WeatherService {
@@ -136,17 +137,27 @@ extension WeatherService {
         return WeeklyWeatherData(weather: weather, dayData: dayData)
     }
     
-    func getCurrentDetailWeatherData(weather: Weather) -> CurrentDetailWeatherData {
-        let wind = weather.currentWeather.wind
+    func getDetailedWeatherData(weather: Weather) -> DetailedWeatherData {
+        let windDirection = weather.currentWeather.wind.compassDirection
+        let convertedWindDirection = convertToKoreanWindDirection(windDirection.rawValue)
+
+        let windSpeed = weather.currentWeather.wind.speed
+        let convertedWindSpeed = unitWindSpeedToString(windSpeed: windSpeed)
+        
+        // 좋음/꽤 좋음/매우 좋음 등으로 표현하는 가시거리 존재하지 않음.
         let visibility = weather.currentWeather.visibility
+        let convertedVisibility = visibilityUnitLengthToString(visibility: visibility)
+        
         // currentWeather에는 강수량이 존재하지 않아, hourlyForecase의 현재 시간 범위의 강수량을 사용.
         let hourWeather = weather.hourlyForecast.forecast.filter { hourWeather in (hourWeather.date.timeIntervalSinceNow/3600) >= -1 && (hourWeather.date.timeIntervalSinceNow/3600) < 0
         }.first!
         
+        // 실시간 강수정보에 대한 데이터 없음 - none(없음)/hail(우박)/mixed(혼합강우)/sleet(진눈깨비)/rain(비)/snow(눈), 따라서 임의의 값으로 처리해 놓음.
         let precipitation = hourWeather.precipitation
         let precipitationAmount = hourWeather.precipitationAmount
-        
-        return CurrentDetailWeatherData(precipitation: precipitation, precipitationAmount: precipitationAmount, wind: wind, visibility: visibility)
+        let convertedPrecipitationAmount = precipitationUnitLengthToString(precipitationAmount: precipitationAmount)
+                
+        return DetailedWeatherData(precipitation: precipitation, precipitationAmount: convertedPrecipitationAmount, windDirection: convertedWindDirection, windSpeed: convertedWindSpeed, visibility: convertedVisibility)
     }
 }
 
@@ -180,4 +191,70 @@ func dateToString(date: Date) -> String {
 
 func precipitationChanceDoubleToPercentage(precipitationChance: Double) -> String {
     return "\(Int(precipitationChance * 100))%"
+}
+
+func convertToKoreanWindDirection(_ compassDirection: String) -> String {
+    switch compassDirection {
+    case "north" :
+        return "북풍"
+    case "northNortheast" :
+        return "북북동풍"
+    case "northeast" :
+        return "북동풍"
+    case "eastNortheast" :
+        return "동북동풍"
+    case "east" :
+        return "동풍"
+    case "eastSoutheast" :
+        return "동남풍"
+    case "southeast" :
+        return "남동풍"
+    case "southSoutheast" :
+        return "남남동풍"
+    case "south" :
+        return "남풍"
+    case "southSouthwest" :
+        return "남남서풍"
+    case "southwest" :
+        return "남서풍"
+    case "westSouthwest" :
+        return "서남서풍"
+    case "west" :
+        return "서풍"
+    case "westNorthwest" :
+        return "서북서풍"
+    case "northwest" :
+        return "북서풍"
+    case "northNorthwest" :
+        return "북북서"
+    default:
+        return "알 수 없음"
+    }
+}
+
+func unitWindSpeedToString(windSpeed: Measurement<UnitSpeed>) -> String {
+    let measurementFormatter = MeasurementFormatter()
+    measurementFormatter.unitOptions = .providedUnit
+    measurementFormatter.locale = Locale(identifier:"ko_KR")
+    measurementFormatter.numberFormatter.maximumFractionDigits = 1
+    
+    return measurementFormatter.string(from: windSpeed)
+}
+
+func visibilityUnitLengthToString(visibility: Measurement<UnitLength>) -> String {
+    let measurementFormatter = MeasurementFormatter()
+    measurementFormatter.unitOptions = .naturalScale
+    measurementFormatter.locale = Locale(identifier:"ko_KR")
+    measurementFormatter.numberFormatter.maximumFractionDigits = 0
+
+    return measurementFormatter.string(from: visibility)
+}
+
+func precipitationUnitLengthToString(precipitationAmount: Measurement<UnitLength>) -> String {
+    let measurementFormatter = MeasurementFormatter()
+    measurementFormatter.unitOptions = .providedUnit
+    measurementFormatter.locale = Locale(identifier:"ko_KR")
+    measurementFormatter.numberFormatter.maximumFractionDigits = 1
+    
+    return measurementFormatter.string(from: precipitationAmount)
 }
