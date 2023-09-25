@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		036CA6742AB377650056C453 /* DailyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA6732AB377650056C453 /* DailyWeatherData.swift */; };
 		036CA6762AB4C2EB0056C453 /* DailyWeatherChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA6752AB4C2EB0056C453 /* DailyWeatherChartView.swift */; };
 		036CA6782AB4C3540056C453 /* DailyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA6772AB4C3540056C453 /* DailyWeatherView.swift */; };
 		036CA6912AB8C51E0056C453 /* DetailedWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA6902AB8C51E0056C453 /* DetailedWeatherData.swift */; };
@@ -55,7 +54,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		036CA6732AB377650056C453 /* DailyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherData.swift; sourceTree = "<group>"; };
 		036CA6752AB4C2EB0056C453 /* DailyWeatherChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherChartView.swift; sourceTree = "<group>"; };
 		036CA6772AB4C3540056C453 /* DailyWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherView.swift; sourceTree = "<group>"; };
 		036CA6902AB8C51E0056C453 /* DetailedWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedWeatherData.swift; sourceTree = "<group>"; };
@@ -227,7 +225,6 @@
 				036CA6902AB8C51E0056C453 /* DetailedWeatherData.swift */,
 				036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */,
 				036CA6942AB9582C0056C453 /* WeeklyWeatherData.swift */,
-				036CA6732AB377650056C453 /* DailyWeatherData.swift */,
 				03B2F4622AB08EB7005A5AD4 /* Weather.swift */,
 				03B2F4672AB09A6D005A5AD4 /* RealTimeWeather.swift */,
 			);
@@ -399,7 +396,6 @@
 				7CA9A3C82AAF56FF0051CC25 /* NavigationBar.swift in Sources */,
 				7C0D1BDD2AAB7E7400A8BCFF /* LocationCard.swift in Sources */,
 				7CA9A3CD2AAF60110051CC25 /* LocationListView.swift in Sources */,
-				036CA6742AB377650056C453 /* DailyWeatherData.swift in Sources */,
 				036CA6762AB4C2EB0056C453 /* DailyWeatherChartView.swift in Sources */,
 				0EB04B612AA6D17900DC0933 /* NalssiUttungApp.swift in Sources */,
 				036CA6912AB8C51E0056C453 /* DetailedWeatherData.swift in Sources */,

@@ -31,9 +31,9 @@ struct DailyWeatherData {
     var hourData: [SimpleHourData]
     
     struct SimpleHourData {
-        var date: Date
+        var time: String
         var weatherCondition: WeatherCondition
-        var temperature: Measurement<UnitTemperature>
+        var temperature: Int
     }
 }
 
@@ -93,14 +93,16 @@ extension WeatherService {
         let filteredHourWeather = weather.hourlyForecast.forecast.filter { hourWeather in
             (hourWeather.date.timeIntervalSinceNow/3600) > 0 && (hourWeather.date.timeIntervalSinceNow/3600) < 24
         }
-        
         var hourData: [DailyWeatherData.SimpleHourData] = []
         filteredHourWeather.forEach { hourWeather in
-            let date = hourWeather.date
-            let condition = hourWeather.condition
-            let temperature = hourWeather.temperature
+            let convertedTime = dateToTimeString(date: hourWeather.date)
             
-            hourData.append(DailyWeatherData.SimpleHourData(date: date, weatherCondition: condition, temperature: temperature))
+            let condition = hourWeather.condition
+            
+            let temperature = hourWeather.temperature
+            let convertedTemperature = unitTempToInt(temp: temperature)
+
+            hourData.append(DailyWeatherData.SimpleHourData(time: convertedTime, weatherCondition: condition, temperature: convertedTemperature))
         }
         
         // TODO: force unwrapping handling
@@ -145,4 +147,12 @@ extension WeatherService {
 
 func unitTempToInt(temp: Measurement<UnitTemperature>) -> Int {
     return Int(temp.converted(to: .celsius).value)
+}
+
+func dateToTimeString(date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "a h시"
+    dateFormatter.locale = Locale(identifier:"ko_KR")
+    
+    return dateFormatter.string(from: date)
 }

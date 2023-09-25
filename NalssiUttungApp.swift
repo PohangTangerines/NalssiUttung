@@ -14,14 +14,16 @@ struct NalssiUttungApp: App {
     let weatherManager = WeatherService.shared
     
     @State var weatherBoxData: WeatherBoxData?
+    @State var dailyWeatherData: DailyWeatherData?
     
     var body: some Scene {
         WindowGroup {
-            LocationCard(weatherBoxData: $weatherBoxData)
+            DailyWeatherChartView(dailyWeatherData: $dailyWeatherData)
                 .task {
                     if let location = locationManager.location {
                         if let weather = await weatherManager.getWeather(location: location) {
                             self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
+                            self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
                     }
                 }
             }
