@@ -30,8 +30,8 @@ struct DetailedWeatherView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width:36)
-//                        Text("\(detailedWeatherData.precipitation.rawValue)")
-//                            .font(.pretendardMedium(.footnote))
+                        Text("\(detailedWeatherData.precipitation)")
+                            .font(.pretendardMedium(.footnote))
                         Text("\(detailedWeatherData.precipitationAmount)")
                             .font(.pretendardMedium(.caption))
                     }

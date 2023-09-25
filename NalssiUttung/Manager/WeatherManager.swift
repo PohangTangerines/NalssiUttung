@@ -54,7 +54,7 @@ struct WeeklyWeatherData {
 }
 
 struct DetailedWeatherData {
-    var precipitation: Precipitation
+    var precipitation: String
     var precipitationAmount: String
     var windDirection: String
     var windSpeed: String
@@ -152,12 +152,13 @@ extension WeatherService {
         let hourWeather = weather.hourlyForecast.forecast.filter { hourWeather in (hourWeather.date.timeIntervalSinceNow/3600) >= -1 && (hourWeather.date.timeIntervalSinceNow/3600) < 0
         }.first!
         
-        // 실시간 강수정보에 대한 데이터 없음 - none(없음)/hail(우박)/mixed(혼합강우)/sleet(진눈깨비)/rain(비)/snow(눈), 따라서 임의의 값으로 처리해 놓음.
         let precipitation = hourWeather.precipitation
+        let convertedPrecipitation = precipitationToKoreanString(precipitation.rawValue)
+        
         let precipitationAmount = hourWeather.precipitationAmount
         let convertedPrecipitationAmount = precipitationUnitLengthToString(precipitationAmount: precipitationAmount)
                 
-        return DetailedWeatherData(precipitation: precipitation, precipitationAmount: convertedPrecipitationAmount, windDirection: convertedWindDirection, windSpeed: convertedWindSpeed, visibility: convertedVisibility)
+        return DetailedWeatherData(precipitation: convertedPrecipitation, precipitationAmount: convertedPrecipitationAmount, windDirection: convertedWindDirection, windSpeed: convertedWindSpeed, visibility: convertedVisibility)
     }
 }
 
@@ -189,6 +190,24 @@ func dateToString(date: Date) -> String {
     return dateFormatter.string(from: date)
 }
 
+func precipitationToKoreanString(_ precipitation: String) -> String {
+    switch precipitation {
+    case "none" :
+        return "없음"
+    case "hail" :
+        return "우박"
+    case "mixed" :
+        return "혼합강우"
+    case "rain" :
+        return "비"
+    case "sleet" :
+        return "진눈깨비"
+    case "snow" :
+        return "눈"
+    default:
+        return "결과 없음"
+    }
+}
 func precipitationChanceDoubleToPercentage(precipitationChance: Double) -> String {
     return "\(Int(precipitationChance * 100))%"
 }
