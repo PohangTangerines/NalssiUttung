@@ -18,7 +18,7 @@ struct NalssiUttungApp: App {
     
     var body: some Scene {
         WindowGroup {
-            DailyWeatherChartView(dailyWeatherData: $dailyWeatherData)
+            DailyWeatherView(dailyWeatherData: $dailyWeatherData)
                 .task {
                     if let location = locationManager.location {
                         if let weather = await weatherManager.getWeather(location: location) {
