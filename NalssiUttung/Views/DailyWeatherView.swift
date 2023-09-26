@@ -43,17 +43,10 @@ struct DailyWeatherView: View {
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
         }
         .padding(20)
     }
 }
-
-//struct DailyWeatherView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DailyWeatherView()
-//    }
-//}

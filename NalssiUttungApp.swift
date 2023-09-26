@@ -20,7 +20,7 @@ struct NalssiUttungApp: App {
 
     var body: some Scene {
         WindowGroup {
-            DetailedWeatherView(detailedWeatherData: $detailedWeatherData)
+            MainView()
                 .task {
                     if let location = locationManager.location {
                         if let weather = await weatherManager.getWeather(location: location) {

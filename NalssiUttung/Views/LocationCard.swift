@@ -42,8 +42,7 @@ struct LocationCard: View {
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     Text("날씨 정보를 가져올 수 없습니다.")
                 }
             }
@@ -56,9 +55,3 @@ struct LocationCard: View {
             .stroke(Color.black, lineWidth: 2))
     }
 }
-//struct LocationCard_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LocationCard()
-//            .preferredColorScheme(.dark)
-//    }
-//}
