@@ -16,7 +16,7 @@
 		03B2F4632AB08EB7005A5AD4 /* RealTimeWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4622AB08EB7005A5AD4 /* RealTimeWeather.swift */; };
 		03B2F4682AB09A6D005A5AD4 /* RealTimeWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4672AB09A6D005A5AD4 /* RealTimeWeatherView.swift */; };
 		03B2F46A2AB09F08005A5AD4 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4692AB09F08005A5AD4 /* Font+.swift */; };
-		03B2F46D2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46C2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf */; };
+		03B2F46D2AB09FAA005A5AD4 /* IMHyemin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46C2AB09FAA005A5AD4 /* IMHyemin-Bold.otf */; };
 		03B2F46F2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */; };
 		03B2F4712AB09FDD005A5AD4 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */; };
 		0E7DD5CD2AC95F3C00DE28D3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DD5CC2AC95F3C00DE28D3 /* MainView.swift */; };
@@ -62,7 +62,7 @@
 		03B2F4622AB08EB7005A5AD4 /* RealTimeWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeWeather.swift; sourceTree = "<group>"; };
 		03B2F4672AB09A6D005A5AD4 /* RealTimeWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeWeatherView.swift; sourceTree = "<group>"; };
 		03B2F4692AB09F08005A5AD4 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
-		03B2F46C2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IM_Hyemin-Bold.otf"; sourceTree = "<group>"; };
+		03B2F46C2AB09FAA005A5AD4 /* IMHyemin-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IMHyemin-Bold.otf"; sourceTree = "<group>"; };
 		03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		03B2F4722AB0A063005A5AD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 		03B2F46B2AB09F89005A5AD4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				03B2F46C2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf */,
+				03B2F46C2AB09FAA005A5AD4 /* IMHyemin-Bold.otf */,
 				03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */,
 				03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */,
 			);
@@ -336,7 +336,7 @@
 				7CA773DD2AA7949800D70BD3 /* .swiftlint.yml in Resources */,
 				0EB04B682AA6D17A00DC0933 /* Preview Assets.xcassets in Resources */,
 				03B2F46F2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf in Resources */,
-				03B2F46D2AB09FAA005A5AD4 /* IM_Hyemin-Bold.otf in Resources */,
+				03B2F46D2AB09FAA005A5AD4 /* IMHyemin-Bold.otf in Resources */,
 				0EB04B652AA6D17A00DC0933 /* Assets.xcassets in Resources */,
 				03B2F4712AB09FDD005A5AD4 /* Pretendard-Medium.otf in Resources */,
 			);
