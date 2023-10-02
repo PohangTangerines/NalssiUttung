@@ -60,8 +60,8 @@ struct DetailedWeatherView: View {
                             .frame(width:36)
                         Text("\(detailedWeatherData.visibility)")
                             .font(.pretendardMedium(.caption))
-//                        Text("\(detailedWeatherData.visibility)")
-//                            .font(.pretendardMedium(.footnote))
+                        Text("\(detailedWeatherData.visibility)")
+                            .font(.pretendardMedium(.footnote))
                     }
                 }
             } else {

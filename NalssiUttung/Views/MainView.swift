@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct MainView: View {
+    @Binding var dailyWeatherData: DailyWeatherData?
+    
     var body: some View {
         VStack(spacing: 0) {
             MainHeader()
             
             tempConditionRow
                 .padding(.bottom, 10)
+            // TODO: tempConditionRow ~ 최고 최저 온도 사이 padding값 물어보기. (임시값 10)
             
             HStack {
                 Text("최고 \(33)° | 최저 \(24)°")
@@ -21,12 +24,29 @@ struct MainView: View {
                 Spacer()
             }.padding(.bottom, 18)
             
-            HStack {
-                Text("일교차 크난\n고뿔 들리지 않게\n조심합서!")
-                    .font(.IMHyemin(.title))
-                    .IMHyeminLineHeight(.title, lineHeight: 40)
-                Spacer()
+            ZStack {
+                VStack {
+                    HStack {
+                        Text("일교차 크난\n고뿔 들리지 않게\n조심합서!")
+                            .font(.IMHyemin(.title))
+                            .IMHyeminLineHeight(.title, lineHeight: 40)
+                        Spacer()
+                    }
+                    Spacer()
+                }
+                VStack {
+                    Spacer().frame(height: 50)
+                    HStack {
+                        Spacer()
+                        Image("halla")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 280)
+                    }
+                }
             }
+            
+            DailyWeatherView(dailyWeatherData: $dailyWeatherData)
             
             Spacer()
         }.background(Color.seaSky).padding(.horizontal, 15)
@@ -68,11 +88,5 @@ struct MainHeader: View {
             }
         }.padding(.top, 7.5).padding(.bottom, 12)
             .background(Color.white)
-    }
-}
-
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
     }
 }
