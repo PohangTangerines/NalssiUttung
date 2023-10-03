@@ -71,12 +71,12 @@ struct MainView: View {
             
             if isInitView {
                 MainInitView(dailyWeatherData: $dailyWeatherData, canTransition: $canTransition)
-                    .transition(.move(edge: isInitView ? .top : .bottom))
+                    .transition(.move(edge: .top))
             } else {
                 MainScrolledView(weatherBoxData: $weatherBoxData,
                                  weeklyWeatherData: $weeklyWeatherData,
                                  detailedWeatherData: $detailedWeatherData)
-                    .transition(.move(edge: isInitView ? .bottom : .top))
+                .transition(.move(edge: .bottom))
             }
             
         }.padding(.horizontal, 15)
