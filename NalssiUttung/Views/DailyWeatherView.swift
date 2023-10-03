@@ -12,7 +12,7 @@ struct DailyWeatherView: View {
     @Binding var dailyWeatherData: DailyWeatherData?
     
     var body: some View {
-        ScrollView(.horizontal) {
+        ScrollView(.horizontal, showsIndicators: false) {
             if let dailyWeatherData = dailyWeatherData {
                 VStack(alignment: .leading) {
                     VStack {

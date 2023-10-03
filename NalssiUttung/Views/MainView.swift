@@ -6,15 +6,35 @@
 //
 
 import SwiftUI
+import ScrollKit
 
 struct MainView: View {
     @Binding var dailyWeatherData: DailyWeatherData?
-        
+    
+    @State private var dragOffset: CGSize = .zero
+    @State private var canTransition = false
+    
+    private var dragGesture: some Gesture {
+        DragGesture()
+              .onChanged { gesture in
+                  withAnimation(.easeIn(duration: 0.5)) {
+                      if gesture.translation.height < -100 {
+                          canTransition = true
+                      } else {
+                          canTransition = false
+                      }
+                  }
+              }
+              .onEnded { gesture in
+                  if gesture.translation.height < -100 {
+                      // View 전환
+                  }
+              }
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             MainHeader()
-            
-            ScrollView {
                 VStack(spacing: 0) {
                     tempConditionRow
                         .padding(.bottom, 10)
@@ -55,11 +75,15 @@ struct MainView: View {
                         .scaledToFit()
                         .frame(height: 10)
                         .foregroundColor(.black)
+                        .background {
+                            Circle().frame(width: 40, height: 40)
+                                .foregroundColor(canTransition ? Color.accentBlue : Color.clear)
+                        }
                         .padding(.top, 42).padding(.bottom, 21)
-                }
-            }
-            
-        }.padding(.horizontal, 15).background(Color.seaSky)
+                }.gesture(dragGesture)
+        }.padding(.horizontal, 15)
+            .offset(y: canTransition ? -50 : 0)
+            .background(Color.seaSky)
     }
     
     private var tempConditionRow: some View {
