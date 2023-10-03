@@ -12,7 +12,7 @@ struct MainScrolledView: View {
 
     var body: some View {
         VStack(spacing: 0) {            
-            LocationCard(weatherBoxData: $weatherBoxData)
+            LocationCardScrolled(weatherBoxData: $weatherBoxData)
         }.padding(.horizontal, 15).background(Color.seaSky)
     }
 }

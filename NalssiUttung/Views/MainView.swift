@@ -29,7 +29,6 @@ struct MainView: View {
         DragGesture()
             .onChanged { gesture in
                 withAnimation(.easeInOut(duration: 0.5)) {
-                    print(gesture.translation.height)
                     if isInitView {
                         if gesture.translation.height < -100 {
                             canTransition = true
