@@ -12,7 +12,7 @@ struct DailyWeatherView: View {
     @Binding var dailyWeatherData: DailyWeatherData?
     
     var body: some View {
-        ScrollView(.horizontal) {
+        ScrollView(.horizontal, showsIndicators: false) {
             if let dailyWeatherData = dailyWeatherData {
                 VStack(alignment: .leading) {
                     VStack {
@@ -43,17 +43,9 @@ struct DailyWeatherView: View {
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
         }
-        .padding(20)
     }
 }
-
-//struct DailyWeatherView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DailyWeatherView()
-//    }
-//}

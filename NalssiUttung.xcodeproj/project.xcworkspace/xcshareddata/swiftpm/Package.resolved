@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "scrollkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/danielsaidi/ScrollKit.git",
+      "state" : {
+        "revision" : "cbb941a2009f92f221c310156fd8be65845be79d",
+        "version" : "0.3.0"
+      }
+    }
+  ],
+  "version" : 2
+}

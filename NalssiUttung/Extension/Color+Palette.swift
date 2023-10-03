@@ -55,6 +55,11 @@ extension Color {
     static var darkChacoal: Self {
         .init(hex: "#444444")
     }
+    
+    // MARK: Others..
+    static var accentBlue: Self {
+        .init(hex: "4C65B9").opacity(0.2)
+    }
 }
 
 struct ColorPalette_Previews: PreviewProvider {
