@@ -12,7 +12,7 @@ import WeatherKit
 struct NalssiUttungApp: App {
     @ObservedObject var locationManager = LocationManager.shared
     let weatherManager = WeatherService.shared
-    
+
     @State var weatherBoxData: WeatherBoxData?
     @State var dailyWeatherData: DailyWeatherData?
     @State var weeklyWeatherData: WeeklyWeatherData?
@@ -20,7 +20,7 @@ struct NalssiUttungApp: App {
 
     var body: some Scene {
         WindowGroup {
-            DetailedWeatherView(detailedWeatherData: $detailedWeatherData)
+            RealTimeWeatherView(realTimeWeather: .constant(RealTimeWeather.sampleData[0]), location: .constant(locationManager.address))
                 .task {
                     if let location = locationManager.location {
                         if let weather = await weatherManager.getWeather(location: location) {
