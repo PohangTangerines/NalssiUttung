@@ -47,6 +47,5 @@ struct DailyWeatherView: View {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
         }
-        .padding(20)
     }
 }

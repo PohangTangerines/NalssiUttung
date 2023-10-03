@@ -20,6 +20,7 @@
 		03B2F46F2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */; };
 		03B2F4712AB09FDD005A5AD4 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */; };
 		0E7B8A7D2ACC3C52006E1F5E /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B8A7C2ACC3C52006E1F5E /* View+.swift */; };
+		0E7B8A802ACC56D6006E1F5E /* ScrollKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7B8A7F2ACC56D6006E1F5E /* ScrollKit */; };
 		0E7DD5CD2AC95F3C00DE28D3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DD5CC2AC95F3C00DE28D3 /* MainView.swift */; };
 		0EB04B612AA6D17900DC0933 /* NalssiUttungApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */; };
 		0EB04B632AA6D17900DC0933 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B622AA6D17900DC0933 /* ContentView.swift */; };
@@ -93,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E7B8A802ACC56D6006E1F5E /* ScrollKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +250,9 @@
 			dependencies = (
 			);
 			name = NalssiUttung;
+			packageProductDependencies = (
+				0E7B8A7F2ACC56D6006E1F5E /* ScrollKit */,
+			);
 			productName = NalssiUttung;
 			productReference = 0EB04B5D2AA6D17900DC0933 /* NalssiUttung.app */;
 			productType = "com.apple.product-type.application";
@@ -320,6 +325,9 @@
 				Base,
 			);
 			mainGroup = 0EB04B542AA6D17900DC0933;
+			packageReferences = (
+				0E7B8A7E2ACC56D6006E1F5E /* XCRemoteSwiftPackageReference "ScrollKit" */,
+			);
 			productRefGroup = 0EB04B5E2AA6D17900DC0933 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -737,6 +745,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0E7B8A7E2ACC56D6006E1F5E /* XCRemoteSwiftPackageReference "ScrollKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielsaidi/ScrollKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0E7B8A7F2ACC56D6006E1F5E /* ScrollKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E7B8A7E2ACC56D6006E1F5E /* XCRemoteSwiftPackageReference "ScrollKit" */;
+			productName = ScrollKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0EB04B552AA6D17900DC0933 /* Project object */;
 }
