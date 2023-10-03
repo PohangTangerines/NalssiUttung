@@ -71,10 +71,12 @@ struct MainView: View {
             
             if isInitView {
                 MainInitView(dailyWeatherData: $dailyWeatherData, canTransition: $canTransition)
-                    .transition(.move(edge: .top))
+                    .transition(.move(edge: isInitView ? .top : .bottom))
             } else {
-                MainScrolledView(weatherBoxData: $weatherBoxData)
-                    .transition(.move(edge: .bottom))
+                MainScrolledView(weatherBoxData: $weatherBoxData,
+                                 weeklyWeatherData: $weeklyWeatherData,
+                                 detailedWeatherData: $detailedWeatherData)
+                    .transition(.move(edge: isInitView ? .bottom : .top))
             }
             
         }.padding(.horizontal, 15)
@@ -109,7 +111,7 @@ struct MainView: View {
                     Image(systemName: "plus")
                         .font(.pretendardSemibold(.body))
                 }
-            }.padding(.top, 7.5).padding(.bottom, 12)
+            }.padding(.top, 7.5).padding(.bottom, 24)
         }
     }
 }

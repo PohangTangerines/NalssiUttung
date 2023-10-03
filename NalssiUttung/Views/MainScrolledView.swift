@@ -9,10 +9,15 @@ import SwiftUI
 
 struct MainScrolledView: View {
     @Binding var weatherBoxData: WeatherBoxData?
+    @Binding var weeklyWeatherData: WeeklyWeatherData?
+    @Binding var detailedWeatherData: DetailedWeatherData?
 
     var body: some View {
         VStack(spacing: 0) {            
             LocationCardScrolled(weatherBoxData: $weatherBoxData)
+            WeeklyWeatherView(weeklyWeatherData: $weeklyWeatherData)
+            DetailedWeatherView(detailedWeatherData: $detailedWeatherData)
+            Spacer()
         }.padding(.horizontal, 15).background(Color.seaSky)
     }
 }
