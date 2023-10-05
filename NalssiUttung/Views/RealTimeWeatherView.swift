@@ -36,9 +36,9 @@ struct RealTimeWeatherView: View {
                 // 버튼 클릭 시 실행할 코드
                 print("Button Tapped")
             }) {
-                Image(systemName: "plus.circle.fill")
-                    .foregroundColor(Color.buttonBlue)
-                    .font(.title)
+                Image(systemName: "plus")
+                    .foregroundColor(Color.black)
+                    .font(.system(size: 18))
             })
         }
     }
