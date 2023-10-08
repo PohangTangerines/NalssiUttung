@@ -66,36 +66,39 @@ struct MainView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            MainHeader()
-            
-            if isInitView {
-                MainInitView(dailyWeatherData: $dailyWeatherData, canTransition: $canTransition)
-                    .transition(.move(edge: .top))
-            } else {
-                MainScrolledView(weatherBoxData: $weatherBoxData,
-                                 weeklyWeatherData: $weeklyWeatherData,
-                                 detailedWeatherData: $detailedWeatherData)
-                .transition(.move(edge: .bottom))
-            }
-            
-        }.padding(.horizontal, 15)
-            .gesture(dragGesture)
-            .offset(y: viewOffsetY)
-            .background(Color.seaSky)
-            .task {
-                if let location = locationManager.location {
-                    if let weather = await weatherManager.getWeather(location: location) {
-                        self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
-                        self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
-                        self.weeklyWeatherData = weatherManager.getWeeklyWeatherData(weather: weather)
-                        self.detailedWeatherData = weatherManager.getDetailedWeatherData(weather: weather)
+        NavigationView {
+            VStack(spacing: 0) {
+                MainHeader(weatherBoxData: $weatherBoxData)
+
+                if isInitView {
+                    RealTimeWeatherView(dailyWeatherData: $dailyWeatherData, canTransition: $canTransition)
+                        .transition(.move(edge: .top))
+                } else {
+                    MainScrolledView(weatherBoxData: $weatherBoxData,
+                                     weeklyWeatherData: $weeklyWeatherData,
+                                     detailedWeatherData: $detailedWeatherData)
+                    .transition(.move(edge: .bottom))
                 }
-            }
+
+            }.padding(.horizontal, 15)
+                .gesture(dragGesture)
+                .offset(y: viewOffsetY)
+                .background(Color.seaSky)
+                .task {
+                    if let location = locationManager.location {
+                        if let weather = await weatherManager.getWeather(location: location) {
+                            self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
+                            self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
+                            self.weeklyWeatherData = weatherManager.getWeeklyWeatherData(weather: weather)
+                            self.detailedWeatherData = weatherManager.getDetailedWeatherData(weather: weather)
+                        }
+                    }
+                }
         }
     }
     
     private struct MainHeader: View {
+        @Binding var weatherBoxData: WeatherBoxData?
         let locationText: String = "제주시 애월읍"
         
         var body: some View {
@@ -108,8 +111,12 @@ struct MainView: View {
                 }
                 HStack {
                     Spacer()
-                    Image(systemName: "plus")
-                        .font(.pretendardSemibold(.body))
+
+                    NavigationLink(destination: LocationListView(weatherBoxData: $weatherBoxData)) {
+                        Image(systemName: "plus")
+                            .font(.pretendardSemibold(.body))
+                            .foregroundColor(.black)
+                    }
                 }
             }.padding(.top, 7.5).padding(.bottom, 24)
         }

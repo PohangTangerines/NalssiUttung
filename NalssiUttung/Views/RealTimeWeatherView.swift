@@ -1,81 +1,79 @@
 //
-//  RealTimeWeatherView.swift
+//  MainInitView.swift
 //  NalssiUttung
 //
-//  Created by 금가경 on 2023/09/12.
+//  Created by 이재원 on 2023/10/04.
 //
 
 import SwiftUI
 
 struct RealTimeWeatherView: View {
-    @Binding var realTimeWeather: RealTimeWeather
-    @Binding var location: String
-
+    @Binding var dailyWeatherData: DailyWeatherData?
+    @Binding var canTransition: Bool
+    
     var body: some View {
-        NavigationView() {
-            ZStack(alignment: .top) {
-                Color.seaSky
-                    .ignoresSafeArea()
-                hallaPhoto
-                    .padding(.top, 220)
-                realTimeContent
-                    .padding(.leading, 20.0)
-                    .padding(.top, 9)
-            }
-            .navigationBarTitle(location, displayMode: .inline)
-            .toolbar {
-                        ToolbarItem(placement: .principal) {
-                            HStack {
-                                Text(location)
-                                Image(systemName: "location.fill")
-                                    .font(.system(size: 18))
-                            }
-                        }
+        VStack(spacing: 0) {
+            tempConditionRow
+                .padding(.bottom, 10)
+            // TODO: tempConditionRow ~ 최고 최저 온도 사이 padding값 물어보기. (임시값 10)
+            
+            HStack {
+                Text("최고 \(33)° | 최저 \(24)°")
+                    .font(.pretendardMedium(.body))
+                Spacer()
+            }.padding(.bottom, 18)
+            
+            ZStack {
+                VStack {
+                    HStack {
+                        Text("일교차 크난\n고뿔 들리지 않게\n조심합서!")
+                            .font(.IMHyemin(.title))
+                            .IMHyeminLineHeight(.title, lineHeight: 40)
+                        Spacer()
                     }
-            .navigationBarItems(trailing: Button(action: {
-                // 버튼 클릭 시 실행할 코드
-                print("Button Tapped")
-            }) {
-                Image(systemName: "plus")
-                    .foregroundColor(Color.black)
-                    .font(.system(size: 18))
-            })
-        }
-    }
-
-    private var hallaPhoto: some View{
-        HStack {
-            Spacer()
-            Image("halla")
-        }
-    }
-
-    private var realTimeContent: some View{
-        return HStack(spacing: 0.0) {
-            VStack(alignment: .leading) {
-                HStack(alignment: .bottom) {
-                    Text("\(realTimeWeather.temperature)°")
-                        .font(.system(size:80))
-                        .padding(.bottom, -15.0)
-                    Text("\(realTimeWeather.condition)")
-                        .font(.system(size:26))
+                    Spacer()
                 }
-                .padding(.bottom, 21)
-                Text("최고 \(realTimeWeather.highTemperature)° | 최저 \(realTimeWeather.lowTemperature)°")
-                    .font(.system(size:20))
-                    .padding(.bottom, 24.0)
-                Text("\(realTimeWeather.weatherMessage)")
-                    .multilineTextAlignment(.leading)
-                    .lineSpacing(4)
-                    .font(.system(size:26))
+                VStack {
+                    Spacer().frame(height: 50)
+                    HStack {
+                        Spacer()
+                        Image("halla")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 280)
+                    }
+                }
             }
+            
+            DailyWeatherView(dailyWeatherData: $dailyWeatherData)
+            
+            Image(systemName: "chevron.down")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 10)
+                .foregroundColor(.black)
+                .background {
+                    Circle().frame(width: 40, height: 40)
+                        .foregroundColor(canTransition ? Color.accentBlue : Color.clear)
+                }
+                .padding(.top, 42).padding(.bottom, 21)
+        }
+    }
+    
+    private var tempConditionRow: some View {
+        HStack(alignment: .bottom) {
+            Text("24 ")
+                .font(.IMHyemin(.largeTitle2))
+                .tracking(-(Font.DEFontSize.largeTitle.rawValue * 0.1))
+            Text("°")
+                .font(.IMHyemin(.largeTitle))
+                .padding(.leading, -(Font.DEFontSize.largeTitle2.rawValue * 0.5))
+            Text("맑음")
+                .font(.IMHyemin(.title))
+                .padding(.bottom, 13)
+                .padding(.leading, -30)
             Spacer()
         }
     }
-}
-
-struct RealTimeWeatherView_Previews: PreviewProvider {
-    static var previews: some View {
-        RealTimeWeatherView(realTimeWeather: .constant(RealTimeWeather.sampleData[0]), location: .constant("test"))
-    }
+    
 }
