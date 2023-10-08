@@ -39,7 +39,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             if let placemark = placemarks?.first {
                 // 주소 정보를 파싱하여 필요한 부분만 추출합니다.
                 if let locality = placemark.locality, let subLocality = placemark.subLocality {
-                    self.address = "\(locality) \(subLocality)"
+                    if locality != "제주시" {
+                        self.address = "제주시 용담동"
+                    }
+                    else{
+                        self.address = "\(locality) \(subLocality)"
+                    }
                     print("현재 위치 주소: \(self.address)")
                 }
             }
