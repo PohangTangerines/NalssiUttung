@@ -1,5 +1,5 @@
 //
-//  MainInitView.swift
+//  RealTimeWeatherView.swift
 //  NalssiUttung
 //
 //  Created by 이재원 on 2023/10/04.
