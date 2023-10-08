@@ -47,16 +47,10 @@ struct WeeklyWeatherView: View {
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
         }
         .padding(.horizontal, 20)
     }
 }
-//struct DailyWeatherView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WeeklyWeatherView(weeklyWeatherData: .constant(WeeklyWeatherData.sampleData))
-//    }
-//}

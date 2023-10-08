@@ -79,8 +79,7 @@ struct WeeklyWeatherChartView: View {
                     .aspectRatio(2.36, contentMode: .fit)
                     .padding(-40)
                 }
-            }
-            else {
+            } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
         }
@@ -88,8 +87,3 @@ struct WeeklyWeatherChartView: View {
         .offset(y: 80)
     }
 }
-//struct DailyWeatherChartView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WeeklyWeatherChartView(weeklyWeatherData: .constant(WeeklyWeatherData.sampleData))
-//    }
-//}

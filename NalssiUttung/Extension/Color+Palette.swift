@@ -58,6 +58,11 @@ extension Color {
     static var buttonBlue: Self {
         .init(hex: "#9CA9D2")
     }
+    
+    // MARK: Others..
+    static var accentBlue: Self {
+        .init(hex: "4C65B9").opacity(0.2)
+    }
 }
 
 struct ColorPalette_Previews: PreviewProvider {

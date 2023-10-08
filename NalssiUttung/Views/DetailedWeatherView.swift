@@ -60,12 +60,11 @@ struct DetailedWeatherView: View {
                             .frame(width:36)
                         Text("\(detailedWeatherData.visibility)")
                             .font(.pretendardMedium(.caption))
-//                        Text("\(detailedWeatherData.visibility)")
-//                            .font(.pretendardMedium(.footnote))
+                        Text("\(detailedWeatherData.visibility)")
+                            .font(.pretendardMedium(.footnote))
                     }
                 }
-            }
-            else {
+            } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
         }
@@ -73,9 +72,3 @@ struct DetailedWeatherView: View {
         .frame(maxWidth: .infinity, maxHeight: 172)
     }
 }
-
-//    struct DetailedWeatherView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailedWeatherView(detailedWeatherData: .constant(DetailedWeatherData.sampleData[0]))
-//    }
-//}

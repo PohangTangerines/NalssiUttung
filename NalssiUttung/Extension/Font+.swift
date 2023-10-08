@@ -29,4 +29,13 @@ extension Font {
     static func IMHyemin(_ size: DEFontSize) -> Font {
         custom("IMHyemin-Bold", size: size.rawValue)
     }
+    
+    /// IMHyemin 폰트에서 lineHeight를 구현할 시 사용할 font's line height.
+    /// - Parameter size: Font Size (Enum)
+    /// - Returns: Line Spacing with specific size of font's line height.
+    static func IMHyeminHeight(_ size: DEFontSize) -> CGFloat {
+        let font = UIFont(name: "IMHyemin-Bold", size: size.rawValue)!
+        
+        return font.lineHeight
+    }
 }
