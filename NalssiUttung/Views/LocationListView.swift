@@ -14,32 +14,30 @@ struct LocationListView: View {
     let sampledata = RealTimeWeather.sampleCardData
 
     @State private var searchText = ""
+    @State private var isCardExpanded = false // 카드 확장/축소 상태를 추적
 
     var body: some View {
-        ZStack {
-            // MARK: Background
-            Color.seaSky
-                .ignoresSafeArea()
-
-            // MARK: Weather Widgets
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 20) {
-                    ForEach(sampledata, id: \.condition) { forecast in
-                        LocationCard(weatherBoxData: $weatherBoxData)
-                            .frame(maxWidth: .infinity, maxHeight: 140)
-                            .padding(.horizontal, 15)
-                    }
-                }
+        // MARK: Weather Widgets
+        List {
+            ForEach(sampledata, id: \.condition) { forecast in
+                LocationCard(weatherBoxData: $weatherBoxData)
+                    .frame(maxWidth: .infinity, maxHeight: 140)
+                    .listRowSeparator(.hidden)
             }
-            .safeAreaInset(edge: .top) {
-                EmptyView()
-                    .frame(maxHeight: 125)
-            }
+            .listRowBackground(Color.seaSky)
         }
+        .safeAreaInset(edge: .top) {
+            EmptyView()
+                .frame(maxHeight: 125)
+        }
+        .listStyle(.plain)
+        .background(Color.seaSky)
+        .scrollContentBackground(.hidden)
         .overlay {
             // MARK: Navigation Bar
             NavigationBar(searchText: $searchText)
         }
+        .navigationBarHidden(true)
     }
 }
 
