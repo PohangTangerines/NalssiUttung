@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NavigationBar: View {
     @Binding var searchText: String
+    @Binding var isEditMode: Bool
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
@@ -27,11 +28,17 @@ struct NavigationBar: View {
                     .font(.system(size: 18).weight(.semibold))
                     .foregroundColor(Color.darkChacoal)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-
-                Text("편집")
-                    .font(.system(size: 18).weight(.semibold))
-                    .foregroundColor(Color.darkChacoal)
-                    .frame(maxWidth: 40, maxHeight: 40, alignment: .trailing)
+                
+                Button(action: {
+                    withAnimation{
+                        self.isEditMode.toggle() // 편집 모드를 토글합니다.
+                    }
+                }){
+                    Text(isEditMode ? "완료" : "편집")
+                        .font(.system(size: 18).weight(.semibold))
+                        .foregroundColor(Color.darkChacoal)
+                        .frame(maxWidth: 40, maxHeight: 40, alignment: .trailing)
+                }
             }
 
             searchBar
@@ -42,8 +49,8 @@ struct NavigationBar: View {
         .padding(.top, 64)
         .background(Color.seaSky)
         .frame(maxHeight: .infinity, alignment: .top)
-        .navigationBarHidden(true)
         .ignoresSafeArea()
+        .navigationBarHidden(true)
     }
 
     private var searchBar: some View {
@@ -61,12 +68,12 @@ struct NavigationBar: View {
         .frame(maxHeight: 45, alignment: .leading)
         .background(Color.seaSky, in: RoundedRectangle(cornerRadius: 10))
         .overlay(RoundedRectangle(cornerRadius: 10)
-            .stroke(Color.darkChacoal, lineWidth: 2))
+        .stroke(Color.darkChacoal, lineWidth: 2))
     }
 }
 
 struct NavigationBar_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationBar(searchText: .constant(""))
+        NavigationBar(searchText: .constant(""), isEditMode: .constant(false))
     }
 }
