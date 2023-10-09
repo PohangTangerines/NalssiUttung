@@ -9,16 +9,26 @@ import SwiftUI
 
 struct LocationCard: View {
     @Binding var weatherBoxData: WeatherBoxData?
+    @Binding var isEditMode: Bool
+    @Binding var isCurrentLocation: Bool
 
-    @State var dateString: String = ""
 
     var body: some View {
         HStack(spacing: 0) {
             if let weatherBoxData = weatherBoxData {
                 VStack(alignment: .leading, spacing: 0) {
                     // MARK: Date
-                    Text("\(dateString)")
-                        .font(.pretendardSemibold(.caption))
+                    if isCurrentLocation {
+                        HStack{
+                            Text("나의 위치")
+                                .font(.pretendardSemibold(.caption))
+                                .font(.system(size: 20))
+                            Spacer()
+                        }
+                    }
+                    Text("\(weatherBoxData.location)")
+                            .font(.pretendardSemibold(.caption))
+
 
                     HStack(alignment: .top, spacing: 0) {
                         Image("dayClear")
@@ -45,6 +55,14 @@ struct LocationCard: View {
                         }.padding(.bottom, 18).padding(.top, 12)
 
                         Spacer()
+
+//                        if isEditMode{
+//                            Button(action: {
+//                                print("test")
+//                            }, label: {
+//                                Image(systemName: "line.horizontal.3")
+//                            })
+//                        }
                     }
                 }.padding(.top, 15).padding(.leading, 15)
                 .overlay(
@@ -54,12 +72,6 @@ struct LocationCard: View {
             } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
-        }.task {
-            let today = Date()
-            let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale(identifier: "ko_KR")
-            dateFormatter.dateFormat = "M월 d일 E요일"
-            self.dateString = dateFormatter.string(from: today)
         }
     }
 }

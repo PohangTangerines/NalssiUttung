@@ -68,7 +68,7 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                MainHeader(weatherBoxData: $weatherBoxData)
+                MainHeader(weatherBoxData: $weatherBoxData, locationText: $locationManager.address)
 
                 if isInitView {
                     RealTimeWeatherView(dailyWeatherData: $dailyWeatherData, canTransition: $canTransition)
@@ -99,8 +99,8 @@ struct MainView: View {
     
     private struct MainHeader: View {
         @Binding var weatherBoxData: WeatherBoxData?
-        let locationText: String = "제주시 애월읍"
-        
+        @Binding var locationText: String
+
         var body: some View {
             ZStack {
                 HStack {
