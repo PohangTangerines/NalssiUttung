@@ -120,7 +120,6 @@ struct DailyWeatherView: View {
         return Path { path in
             if [sunriseIndex, sunsetIndex].contains(index) {
                 if index != 0 && index != 25 {
-                    print(previousCoorY, nextCoorY)
                     path.move(to: CGPoint(x: 0, y: (previousCoorY*3 + nextCoorY)/4))
                     path.addLine(to: CGPoint(x: geoX*2, y: (previousCoorY + nextCoorY*3)/4))
                 }

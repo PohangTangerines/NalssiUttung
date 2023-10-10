@@ -12,7 +12,7 @@ import WeatherKit
 //    // weatherCondition -> 이미지 에셋 String.
 //    func weatherIcon() -> String {
 //        var res = ""
-//        
+//
 //        switch self {
 ////        case .blizzard:
 ////            return "halla"

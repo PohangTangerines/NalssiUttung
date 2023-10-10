@@ -70,7 +70,9 @@ struct MainView: View {
             MainHeader()
             
             if isInitView {
-                MainInitView(dailyWeatherData: $dailyWeatherData, canTransition: $canTransition)
+                MainInitView(dailyWeatherData: $dailyWeatherData,
+                             weatherBoxData: $weatherBoxData,
+                             canTransition: $canTransition)
                     .transition(.move(edge: .top))
             } else {
                 MainScrolledView(weatherBoxData: $weatherBoxData,
