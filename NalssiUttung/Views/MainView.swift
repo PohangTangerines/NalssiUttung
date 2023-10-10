@@ -112,7 +112,7 @@ struct MainView: View {
                 HStack {
                     Spacer()
 
-                    NavigationLink(destination: LocationListView(weatherBoxData: $weatherBoxData)) {
+                    NavigationLink(destination: LocationListView(weatherBoxData: $weatherBoxData, location: $locationText)) {
                         Image(systemName: "plus")
                             .font(.pretendardSemibold(.body))
                             .foregroundColor(.black)

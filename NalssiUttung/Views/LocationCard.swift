@@ -10,6 +10,7 @@ import SwiftUI
 struct LocationCard: View {
     @Binding var weatherBoxData: WeatherBoxData?
     @Binding var isEditMode: Bool
+    @Binding var location: String
     @Binding var isCurrentLocation: Bool
 
 
@@ -18,16 +19,18 @@ struct LocationCard: View {
             if let weatherBoxData = weatherBoxData {
                 VStack(alignment: .leading, spacing: 0) {
                     // MARK: Date
-                    if isCurrentLocation {
-                        HStack{
+                    HStack{
+                        if isCurrentLocation {
+
                             Text("나의 위치")
                                 .font(.pretendardSemibold(.caption))
-                                .font(.system(size: 20))
+                                .font(.system(size: 26))
                             Spacer()
                         }
-                    }
-                    Text("\(weatherBoxData.location)")
+                        Text("\(location)")
                             .font(.pretendardSemibold(.caption))
+                            .padding(.trailing, 20)
+                    }
 
 
                     HStack(alignment: .top, spacing: 0) {
