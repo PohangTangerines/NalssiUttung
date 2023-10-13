@@ -6,90 +6,29 @@
 //
 
 import SwiftUI
-import ScrollKit
 import WeatherKit
 
-struct MainView: View {
+struct CardModalView: View {
     // MARK: Weather Data 관련
     @ObservedObject var locationManager = LocationManager.shared
     let weatherManager = WeatherService.shared
-    
+
     @State var weatherBoxData: WeatherBoxData?
     @State var dailyWeatherData: DailyWeatherData?
     @State var weeklyWeatherData: WeeklyWeatherData?
     @State var detailedWeatherData: DetailedWeatherData?
-    
-    // MARK: View 전환 관련
-    @State private var dragOffset: CGSize = .zero
-    @State private var canTransition = false
-    @State private var viewOffsetY: CGFloat = 0
-    @State private var isInitView = true
 
     // MARK: Modal 관련
-    @State var modalState: ModalState = .notModalView
-    @State var isModalVisible: Bool = false
+    @Binding var modalState: ModalState
+    @Binding var isModalVisible: Bool
 
-    private var dragGesture: some Gesture {
-        DragGesture()
-            .onChanged { gesture in
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    if isInitView {
-                        if gesture.translation.height < -100 {
-                            canTransition = true
-                            viewOffsetY = -100
-                        } else {
-                            canTransition = false
-                            viewOffsetY = 0
-                        }
-                    } else {
-                        if gesture.translation.height > 100 {
-                            canTransition = true
-                            viewOffsetY = 100
-                        } else {
-                            canTransition = false
-                            viewOffsetY = 0
-                        }
-                    }
-                }
-            }
-            .onEnded { gesture in
-                withAnimation {
-                    viewOffsetY = 0
-                    canTransition = false
-                    if isInitView {
-                        if gesture.translation.height < -100 {
-                            isInitView = false
-                        }
-                    } else {
-                        if gesture.translation.height > 100 {
-                            isInitView = true
-                        }
-                    }
-                }
-            }
-    }
-    
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
                 MainHeader(weatherBoxData: $weatherBoxData, locationText: $locationManager.address, modalState: $modalState, isModalVisible: $isModalVisible)
-                    .task{
-                        locationManager.getLocationAddress()
-                    }
-
-                if isInitView {
-                    RealTimeWeatherView(dailyWeatherData: $dailyWeatherData, canTransition: $canTransition, isModalVisible: .constant(true))
-                        .transition(.move(edge: .top))
-                } else {
-                    MainScrolledView(weatherBoxData: $weatherBoxData,
-                                     weeklyWeatherData: $weeklyWeatherData,
-                                     detailedWeatherData: $detailedWeatherData)
-                    .transition(.move(edge: .bottom))
-                }
-
+                RealTimeWeatherView(dailyWeatherData: $dailyWeatherData, canTransition: .constant(false), isModalVisible: .constant(false))
+                    .transition(.move(edge: .top))
             }.padding(.horizontal, 15)
-                .gesture(dragGesture)
-                .offset(y: viewOffsetY)
                 .background(Color.seaSky)
                 .task {
                     if let location = locationManager.location {
@@ -103,7 +42,7 @@ struct MainView: View {
                 }
         }
     }
-    
+
     private struct MainHeader: View {
         @Binding var weatherBoxData: WeatherBoxData?
         @Binding var locationText: String

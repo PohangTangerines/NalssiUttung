@@ -10,7 +10,8 @@ import SwiftUI
 struct RealTimeWeatherView: View {
     @Binding var dailyWeatherData: DailyWeatherData?
     @Binding var canTransition: Bool
-    
+    @Binding var isModalVisible: Bool
+
     var body: some View {
         VStack(spacing: 0) {
             tempConditionRow
@@ -47,16 +48,18 @@ struct RealTimeWeatherView: View {
             
             DailyWeatherView(dailyWeatherData: $dailyWeatherData)
             
-            Image(systemName: "chevron.down")
-                .resizable()
-                .scaledToFit()
-                .frame(height: 10)
-                .foregroundColor(.black)
-                .background {
-                    Circle().frame(width: 40, height: 40)
-                        .foregroundColor(canTransition ? Color.accentBlue : Color.clear)
-                }
-                .padding(.top, 42).padding(.bottom, 21)
+            if isModalVisible{
+                Image(systemName: "chevron.down")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 10)
+                    .foregroundColor(.black)
+                    .background {
+                        Circle().frame(width: 40, height: 40)
+                            .foregroundColor(canTransition ? Color.accentBlue : Color.clear)
+                    }
+                    .padding(.top, 42).padding(.bottom, 21)
+            }
         }
     }
     

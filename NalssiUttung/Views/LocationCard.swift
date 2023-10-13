@@ -72,6 +72,13 @@ struct LocationCard: View {
                     RoundedRectangle(cornerRadius: 9)
                         .strokeBorder(Color.black, lineWidth: 1.5)
                 )
+                .onAppear(){
+                    print("여기는 card 안임")
+                    print("현재 온도: \(weatherBoxData.currentTemperature)°C")
+                    print("최고 온도: \(weatherBoxData.highestTemperature)°C")
+                    print("최저 온도: \(weatherBoxData.lowestTemperature)°C")
+                    print("날씨 상태: \(weatherBoxData.weatherCondition)")
+                }
             } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
@@ -120,10 +127,10 @@ struct LocationCardScrolled: View {
                         Spacer()
                     }
                 }.padding(.top, 15).padding(.leading, 15)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 9)
-                        .strokeBorder(Color.black, lineWidth: 1.5)
-                )
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 9)
+//                        .strokeBorder(Color.black, lineWidth: 1.5)
+//                )
             } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
