@@ -14,7 +14,10 @@ struct LocationListView: View {
     @Binding var currentLocation: String
 
     let weatherManager = WeatherService.shared
+    let locations = LocationInfo.Data.map { $0.location }
 
+    // TODO: 새로운 리스트에 값을 저장하면 보여주도록 하기. 지금은 items에 있는 모든 위치를 다 List로 보여주고 있음.
+    @State private var locationData: [String] = []
     @State private var items = UserDefaults.standard.stringArray(forKey: "items") ?? ["test"]
 
     @State private var searchText = ""
@@ -107,8 +110,8 @@ struct LocationListView: View {
             })
             .onAppear {
                 // 앱이 시작될 때 UserDefaults에서 항목 불러오기
-                UserDefaults.standard.set(["제주시 아라동", "제주시 오라동", "제주시 연동"], forKey: "items")
-                items = UserDefaults.standard.stringArray(forKey: "items") ?? ["제주시 아라동", "제주시 오라동", "제주시 연동"]
+                UserDefaults.standard.set(locations, forKey: "items")
+                items = UserDefaults.standard.stringArray(forKey: "items") ?? locations
                 print(items)
             }
 
