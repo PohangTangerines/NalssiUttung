@@ -55,6 +55,9 @@ extension Color {
     static var darkChacoal: Self {
         .init(hex: "#444444")
     }
+    static var buttonBlue: Self {
+        .init(hex: "#9CA9D2")
+    }
     
     // MARK: Others..
     static var accentBlue: Self {
