@@ -11,17 +11,11 @@ struct WeeklyWeatherView: View {
     @Binding var weeklyWeatherData: WeeklyWeatherData?
 
     var body: some View {
-        VStack(spacing: 28) {
+        VStack(spacing: 0) {
             if let weeklyWeatherData = weeklyWeatherData {
-                HStack {
-                    Rectangle()
-                        .frame(maxHeight: 2)
-                    Text("주간 날씨")
-                        .font(.IMHyemin(.footnote))
-                        .padding(.horizontal, 16)
-                    Rectangle()
-                        .frame(maxHeight: 2)
-                }
+                
+                ScrolledMainViewTextDivider(text: "주간 날씨").padding(.bottom, 15)
+
                 VStack {
                     VStack {
                         HStack(spacing: 24) {

@@ -15,19 +15,7 @@ struct DetailedWeatherView: View {
         VStack(spacing: 0) {
             if let detailedWeatherData = detailedWeatherData {
                 // MARK: 상세 날씨 구분선
-                HStack(spacing: 0) {
-                    Rectangle()
-                        .background(Color.black)
-                        .cornerRadius(10)
-                        .frame(minWidth: 95.25, maxHeight: 2)
-                    Text("상세 날씨")
-                        .font(.IMHyemin(.footnote))
-                        .padding(.horizontal, 12)
-                    Rectangle()
-                        .background(Color.black)
-                        .cornerRadius(10)
-                        .frame(minWidth: 95.25, maxHeight: 2)
-                }.padding(.bottom, 15)
+                ScrolledMainViewTextDivider(text: "상세 날씨").padding(.bottom, 15)
                 
                 // MARK: 강수량 & 바람 & 가시거리
                 HStack(spacing: 0) {
@@ -85,6 +73,26 @@ struct DetailedWeatherView: View {
                     .lineLimit(1)
                     .font(.pretendardMedium(.caption))
             }
+        }
+    }
+}
+
+struct ScrolledMainViewTextDivider: View {
+    let text: String
+    
+    var body: some View {
+        HStack(spacing: 0) {
+            Rectangle()
+                .background(Color.black)
+                .cornerRadius(10)
+                .frame(minWidth: 95.25, maxHeight: 2)
+            Text(text)
+                .font(.IMHyemin(.footnote))
+                .padding(.horizontal, 12)
+            Rectangle()
+                .background(Color.black)
+                .cornerRadius(10)
+                .frame(minWidth: 95.25, maxHeight: 2)
         }
     }
 }
