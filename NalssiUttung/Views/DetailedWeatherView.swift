@@ -28,6 +28,7 @@ struct DetailedWeatherView: View {
                         Rectangle()
                             .background(Color.black)
                             .frame(width: 1, height: 132).cornerRadius(10)
+                            .padding(.horizontal, 5)
                         DetailBox(title: "바람",
                                   imageName: "windy",
                                   detailString: "\(detailedWeatherData.windDirection)",
@@ -36,6 +37,7 @@ struct DetailedWeatherView: View {
                         Rectangle()
                             .background(Color.black)
                             .frame(width: 1, height: 132).cornerRadius(10)
+                            .padding(.horizontal, 5)
                         DetailBox(title: "가시거리",
                                   imageName: "visibility",
                                   detailString: " ",

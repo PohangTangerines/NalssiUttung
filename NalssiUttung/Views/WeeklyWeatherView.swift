@@ -22,20 +22,22 @@ struct WeeklyWeatherView: View {
                         let data = weeklyWeatherData.dayData[index]
                         
                         VStack(spacing: 0) {
+                            // MARK: day, date, weather icon
                             Text("\(data.day)")
                                 .font(.pretendardMedium(.footnote))
                                 .padding(.bottom, 3)
                             Text("\(data.date)")
                                 .font(.pretendardMedium(.caption))
                                 .padding(.bottom, 9)
-                            Image(data.weatherCondition.rawValue)
+                            Image(data.weatherCondition.weatherIcon())
                                 .resizable()
                                 .scaledToFit()
                                 .frame(maxWidth: 28)
-                                .padding(.bottom, 15)
+                                .padding(.bottom, 30)
                             
                             // MARK: Line Chart
                             GeometryReader { geometry in
+                                let midX = geometry.size.width / 2
                                 ZStack {
                                     let (highCoorY, lowCoorY) = getOffsetDot(nowData: data, dayData: weeklyWeatherData.dayData)
                                     
@@ -47,11 +49,12 @@ struct WeeklyWeatherView: View {
                                     // MARK: high, low Temperature Text
                                     Text("\(data.highestTemperature)°")
                                         .font(.pretendardMedium(.footnote))
-                                        .position(x: geometry.size.width / 2, y: highCoorY - 30)
+                                        .position(x: midX, y: highCoorY - 25)
                                     Text("\(data.lowestTemperature)°")
                                         .font(.pretendardMedium(.footnote))
-                                        .position(x: geometry.size.width / 2, y: lowCoorY + 30)
+                                        .position(x: midX, y: lowCoorY + 25)
                                     
+                                    // MARK: Temperature dots
                                     ZStack {
                                         Circle()
                                             .fill(Color.white)
@@ -59,7 +62,7 @@ struct WeeklyWeatherView: View {
                                                 Circle()
                                                     .stroke(Color.black, lineWidth: 2))
                                             .frame(width: 8)
-                                            .position(x: geometry.size.width / 2, y: highCoorY)
+                                            .position(x: midX, y: highCoorY)
                                         
                                         Circle()
                                             .fill(Color.white)
@@ -67,22 +70,23 @@ struct WeeklyWeatherView: View {
                                                 Circle()
                                                     .stroke(Color.black, lineWidth: 2))
                                             .frame(width: 8)
-                                            .position(x: geometry.size.width / 2, y: lowCoorY)
+                                            .position(x: midX, y: lowCoorY)
                                     }.zIndex(1)
+                                    
+                                    // MARK: precipitation
+                                    Text("\(data.precipitationChance)")
+                                        .font(.pretendardMedium(.caption2))
+                                        .position(x: midX, y: chartMaxGap + 25 + 28)
                                 }
-                            }.frame(minHeight: 123)
-                            
-                            //                        Text(temperatureString(time: data.time, temp: data.temperature))
-                            //                            .font(.pretendardMedium(.footnote))
-                            //                            .padding(.top, 15)
+                            }.frame(maxHeight: 200)
                         }
                     }
-                }
+                } // HStack (Box)
                 
             } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
-        }
+        }.padding(.bottom, 30) // VStack (Whole)
     }
     
     private func getOffsetDot(nowData: WeeklyWeatherData.DayData, dayData: [WeeklyWeatherData.DayData]) -> (CGFloat, CGFloat) {

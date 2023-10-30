@@ -21,7 +21,7 @@ struct LocationCardScrolled: View {
                         .font(.pretendardSemibold(.caption))
                     
                     HStack(alignment: .top, spacing: 0) {
-                        Image("dayClear")
+                        Image(weatherBoxData.weatherCondition.weatherIcon())
                             .resizable()
                             .scaledToFit()
                             .frame(width: 60)

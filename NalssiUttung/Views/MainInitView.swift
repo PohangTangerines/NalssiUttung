@@ -74,7 +74,7 @@ struct MainInitView: View {
             Text("°")
                 .font(.IMHyemin(.largeTitle))
                 .padding(.leading, -(Font.DEFontSize.largeTitle2.rawValue * 0.5))
-            Text("\(weatherBoxData!.weatherCondition.rawValue)")
+            Text("\(weatherBoxData!.weatherCondition.weatherString())")
                 .font(.IMHyemin(.title))
                 .padding(.bottom, 13)
                 .padding(.leading, -30)
