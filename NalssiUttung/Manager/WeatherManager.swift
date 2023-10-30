@@ -53,7 +53,9 @@ struct WeeklyWeatherData {
     
     var dayData: [DayData]
     
-    struct DayData {
+    struct DayData: Identifiable {
+        var id = UUID()
+        
         var day: String
         var date: String
         var weatherCondition: WeatherCondition

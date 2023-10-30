@@ -17,7 +17,9 @@ struct WeeklyWeatherView: View {
                 ScrolledMainViewTextDivider(text: "주간 날씨").padding(.bottom, 21)
                 
                 HStack(spacing: 0) {
-                    ForEach(weeklyWeatherData.dayData , id: \.date) { data in
+                    ForEach(weeklyWeatherData.dayData.indices, id: \.self) { index in
+                        let data = weeklyWeatherData.dayData[index]
+                        
                         VStack(spacing: 0) {
                             Text("\(data.day)")
                                 .font(.pretendardMedium(.footnote))
@@ -35,7 +37,8 @@ struct WeeklyWeatherView: View {
                             GeometryReader { geometry in
                                 ZStack {
                                     let (highCoorY, lowCoorY) = getOffsetDot(nowData: data, dayData: weeklyWeatherData.dayData)
-                                    let _ = print(highCoorY, lowCoorY)
+                                    let _ = print("날짜 : \(data.date)")
+                                    let _ = print(data.lowestTemperature, data.highestTemperature)
                                     
                                     //                                getChartLine(index: index, geometry: geometry)
                                     //                                    .stroke(Color.black, lineWidth: 2)
@@ -86,9 +89,12 @@ struct WeeklyWeatherView: View {
         }
         
         let unitGap = 52.5 / Double(maxTemp - minTemp)
-        let highTempOffSet = CGFloat( unitGap * Double(nowData.highestTemperature - minTemp) )
-        let lowTempOffset = CGFloat( unitGap * Double(nowData.lowestTemperature - minTemp) )
+        let highTempOffSet = 52.5 - CGFloat( unitGap * Double(nowData.highestTemperature - minTemp) )
+        let lowTempOffset = 52.5 - CGFloat( unitGap * Double(nowData.lowestTemperature - minTemp) )
         
         return (highTempOffSet, lowTempOffset)
     }
+    
+    // MARK: get Line of Chart (for 1 column)
+
 }
