@@ -11,6 +11,7 @@ struct RealTimeWeatherView: View {
     @Binding var dailyWeatherData: DailyWeatherData?
     @Binding var canTransition: Bool
     @Binding var isModalVisible: Bool
+    @Binding var weatherBoxData: WeatherBoxData?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -19,7 +20,7 @@ struct RealTimeWeatherView: View {
             // TODO: tempConditionRow ~ 최고 최저 온도 사이 padding값 물어보기. (임시값 10)
             
             HStack {
-                Text("최고 \(33)° | 최저 \(24)°")
+                Text("최고 \(weatherBoxData?.highestTemperature ?? 0)° | 최저 \(weatherBoxData?.lowestTemperature ?? 0)°")
                     .font(.pretendardMedium(.body))
                 Spacer()
             }.padding(.bottom, 18)

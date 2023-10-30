@@ -13,13 +13,17 @@ struct NavigationBar: View {
     @Binding var isTextFieldActive: Bool
     @FocusState private var isFocused: Bool
     @Environment(\.dismiss) var dismiss
+    
+//    @State private var items: [String] = []
+    @ObservedObject var userLocationList = UserLocationList()
+    let locations = LocationInfo.Data.map { $0.location }
 
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
                     dismiss()
-                }){
+                }) {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 18).weight(.medium))
                         .foregroundColor(Color.basalt)
@@ -32,10 +36,11 @@ struct NavigationBar: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 
                 Button(action: {
-                    withAnimation{
+                    userLocationList.saveItems()
+                    withAnimation {
                         self.isEditMode.toggle() // 편집 모드를 토글합니다.
                     }
-                }){
+                }) {
                     Text(isEditMode ? "완료" : "편집")
                         .font(.system(size: 18).weight(.semibold))
                         .foregroundColor(Color.darkChacoal)
@@ -53,10 +58,11 @@ struct NavigationBar: View {
         .frame(maxHeight: .infinity, alignment: .top)
         .ignoresSafeArea()
         .navigationBarHidden(true)
+        
     }
 
     private var searchBar: some View {
-        HStack{
+        HStack {
             HStack(spacing: 2) {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(Color.darkChacoal)
@@ -79,7 +85,7 @@ struct NavigationBar: View {
                 }
             }
 
-            if isTextFieldActive{
+            if isTextFieldActive {
                 Button(action: {
                     isFocused = false
                     isTextFieldActive.toggle()
@@ -94,6 +100,11 @@ struct NavigationBar: View {
             }
         }
     }
+    
+//    func saveModifiedItems() {
+//        UserDefaults.standard.set(items, forKey: "items")
+////        isEditMode.toggle()
+//    }
 }
 
 struct NavigationBar_Previews: PreviewProvider {

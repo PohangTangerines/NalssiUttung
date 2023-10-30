@@ -78,7 +78,7 @@ struct MainView: View {
                     }
 
                 if isInitView {
-                    RealTimeWeatherView(dailyWeatherData: $dailyWeatherData, canTransition: $canTransition, isModalVisible: .constant(true))
+                    RealTimeWeatherView(dailyWeatherData: $dailyWeatherData, canTransition: $canTransition, isModalVisible: .constant(true), weatherBoxData: $weatherBoxData)
                         .transition(.move(edge: .top))
                 } else {
                     MainScrolledView(weatherBoxData: $weatherBoxData,
@@ -109,6 +109,9 @@ struct MainView: View {
         @Binding var locationText: String
         @Binding var modalState: ModalState
         @Binding var isModalVisible: Bool
+        
+        //MARK: UserLocationList 관련
+    @ObservedObject var locationStore = LocationStore()
 
         var body: some View {
             ZStack {
@@ -117,7 +120,7 @@ struct MainView: View {
                         Button {
                             isModalVisible.toggle()
                         } label: {
-                            Image(systemName: "취소")
+                            Text("취소")
                                 .font(.pretendardSemibold(.body))
                                 .foregroundColor(.black)
                         }
@@ -129,9 +132,9 @@ struct MainView: View {
                 }
                 HStack {
                     Spacer()
-                    switch modalState{
+                    switch modalState {
                     case .notModalView:
-                        NavigationLink(destination: LocationListView(weatherBoxData: $weatherBoxData, currentLocation: $locationText)) {
+                        NavigationLink(destination: LocationListView(weatherBoxData: $weatherBoxData, locationStore: locationStore)) {
                             Image(systemName: "plus")
                                 .font(.pretendardSemibold(.body))
                                 .foregroundColor(.black)
@@ -139,9 +142,13 @@ struct MainView: View {
                     case .isModalViewAndContainedContent:
                         EmptyView()
                     case .isModalViewAndNotContainedContent:
-                        Image(systemName: "추가")
-                            .font(.pretendardSemibold(.body))
-                            .foregroundColor(.black)
+                        Button {
+                            print("")
+                        } label: {
+                            Text("추가")
+                                .font(.pretendardSemibold(.body))
+                                .foregroundColor(.black)
+                        }
                     }
 
                 }

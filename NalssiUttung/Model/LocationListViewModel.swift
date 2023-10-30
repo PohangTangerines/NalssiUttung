@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ModalState{
+enum ModalState {
     case notModalView
     case isModalViewAndContainedContent
     case isModalViewAndNotContainedContent
@@ -48,7 +48,6 @@ extension LocationInfo {
         LocationInfo(AWSNum: 752, location: "서광", altitude: 188, address: "서귀포시 안덕면 서광리", latitude: "33° 18‘ 16“", longitude: "126° 18‘ 21“"),
 
         // 제주동부
-
         LocationInfo(AWSNum: 188, location: "성산", altitude: 20, address: "제주특별자치도 서귀포시 성산읍 신산리", latitude: "33° 23‘ 12“", longitude: "126° 52‘ 48“"),
         LocationInfo(AWSNum: 862, location: "송당", altitude: 195, address: "제주특별자치도 제주시 구좌읍 송당리", latitude: "33° 28‘ 14“", longitude: "126° 46‘ 45“"),
         LocationInfo(AWSNum: 861, location: "월정", altitude: 34, address: "제주특별자치도 제주시 구좌읍 월정리", latitude: "33° 33‘ 44“", longitude: "126° 46‘ 41“"),
@@ -80,5 +79,27 @@ extension LocationInfo {
         // 추자도
         LocationInfo(AWSNum: 724, location: "추자도", altitude: 8, address: "제주특별자치도 제주시 추자면 영흥리", latitude: "33° 57‘ 28“", longitude: "126° 18‘ 5“"),
     ]
+}
 
+
+class UserLocationList : ObservableObject {
+    @Published var items: [String] = UserDefaults.standard.stringArray(forKey: "items") ?? [""]
+    
+    /// 항목 삭제 함수
+    func deleteItem(at offsets: IndexSet) {
+        items.remove(atOffsets: offsets)
+        saveItems() // 항목 삭제 후 UserDefaults에 저장
+    }
+    
+    /// 항목 이동 함수
+    func moveItem(from source: IndexSet, to destination: Int) {
+        items.move(fromOffsets: source, toOffset: destination)
+        saveItems() // 항목 이동 후 UserDefaults에 저장
+    }
+    
+    /// 항목을 UserDefaults에 저장하는 함수
+    func saveItems() {
+        UserDefaults.standard.set(items, forKey: "items")
+    }
+    
 }

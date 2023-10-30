@@ -9,17 +9,16 @@ import SwiftUI
 
 struct LocationCard: View {
     @Binding var weatherBoxData: WeatherBoxData?
-    @Binding var isEditMode: Bool
-    @Binding var location: String
+//    @Binding var isEditMode: Bool
+    @State var location: String
     @Binding var isCurrentLocation: Bool
-
 
     var body: some View {
         HStack(spacing: 0) {
             if let weatherBoxData = weatherBoxData {
                 VStack(alignment: .leading, spacing: 0) {
                     // MARK: Date
-                    HStack{
+                    HStack {
                         if isCurrentLocation {
 
                             Text("나의 위치")
@@ -72,7 +71,7 @@ struct LocationCard: View {
                     RoundedRectangle(cornerRadius: 9)
                         .strokeBorder(Color.black, lineWidth: 1.5)
                 )
-                .onAppear(){
+                .onAppear() {
                     print("여기는 card 안임")
                     print("현재 온도: \(weatherBoxData.currentTemperature)°C")
                     print("최고 온도: \(weatherBoxData.highestTemperature)°C")
@@ -85,7 +84,6 @@ struct LocationCard: View {
         }
     }
 }
-
 
 struct LocationCardScrolled: View {
     @Binding var weatherBoxData: WeatherBoxData?
