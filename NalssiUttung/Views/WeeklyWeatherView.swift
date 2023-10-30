@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WeeklyWeatherView: View {
+    let chartMaxGap: Double = 170
     @Binding var weeklyWeatherData: WeeklyWeatherData?
     
     var body: some View {
@@ -37,11 +38,19 @@ struct WeeklyWeatherView: View {
                             GeometryReader { geometry in
                                 ZStack {
                                     let (highCoorY, lowCoorY) = getOffsetDot(nowData: data, dayData: weeklyWeatherData.dayData)
-                                    let _ = print("날짜 : \(data.date)")
-                                    let _ = print(data.lowestTemperature, data.highestTemperature)
                                     
-                                    //                                getChartLine(index: index, geometry: geometry)
-                                    //                                    .stroke(Color.black, lineWidth: 2)
+                                    // MARK: high, low Temperature Line Path
+                                    let (highPath, lowPath) = getChartLine(dayData: weeklyWeatherData.dayData, index: index, geometry: geometry)
+                                    highPath.stroke(Color.black, lineWidth: 2)
+                                    lowPath.stroke(Color.black, lineWidth: 2)
+                                    
+                                    // MARK: high, low Temperature Text
+                                    Text("\(data.highestTemperature)°")
+                                        .font(.pretendardMedium(.footnote))
+                                        .position(x: geometry.size.width / 2, y: highCoorY - 30)
+                                    Text("\(data.lowestTemperature)°")
+                                        .font(.pretendardMedium(.footnote))
+                                        .position(x: geometry.size.width / 2, y: lowCoorY + 30)
                                     
                                     ZStack {
                                         Circle()
@@ -61,7 +70,7 @@ struct WeeklyWeatherView: View {
                                             .position(x: geometry.size.width / 2, y: lowCoorY)
                                     }.zIndex(1)
                                 }
-                            }.frame(minHeight: 60)
+                            }.frame(minHeight: 123)
                             
                             //                        Text(temperatureString(time: data.time, temp: data.temperature))
                             //                            .font(.pretendardMedium(.footnote))
@@ -83,18 +92,69 @@ struct WeeklyWeatherView: View {
         
         for data in dayData {
             // 최소, 최대 온도 비교 및 업데이트
-                minTemp = min(minTemp, data.lowestTemperature, data.highestTemperature)
+            minTemp = min(minTemp, data.lowestTemperature, data.highestTemperature)
             // 최대 온도 비교 및 업데이트
-                maxTemp = data.highestTemperature
+            maxTemp = data.highestTemperature
         }
         
         let unitGap = 52.5 / Double(maxTemp - minTemp)
-        let highTempOffSet = 52.5 - CGFloat( unitGap * Double(nowData.highestTemperature - minTemp) )
-        let lowTempOffset = 52.5 - CGFloat( unitGap * Double(nowData.lowestTemperature - minTemp) )
+        let highTempOffSet = chartMaxGap - CGFloat( unitGap * Double(nowData.highestTemperature - minTemp) )
+        let lowTempOffset = chartMaxGap - CGFloat( unitGap * Double(nowData.lowestTemperature - minTemp) )
         
         return (highTempOffSet, lowTempOffset)
     }
     
     // MARK: get Line of Chart (for 1 column)
-
+    private func getChartLine(dayData: [WeeklyWeatherData.DayData], index: Int, geometry: GeometryProxy) -> (Path, Path) {
+        let todayData = dayData[index]
+        let (highCoorY, lowCoorY) = getOffsetDot(nowData: todayData, dayData: dayData)
+        let geoX = geometry.size.width / 2
+        
+        var nextHighCoorY: CGFloat = 0
+        var nextLowCoorY: CGFloat = 0
+        var previousHighCoorY: CGFloat = 0
+        var previousLowCoorY: CGFloat = 0
+        
+        if index > 0 {
+            let previousDayData = dayData[index-1]
+            (previousHighCoorY, previousLowCoorY) = getOffsetDot(nowData: previousDayData, dayData: dayData)
+        }
+        
+        if index < 6 {
+            let nextDayData = dayData[index+1]
+            (nextHighCoorY, nextLowCoorY) = getOffsetDot(nowData: nextDayData, dayData: dayData)
+        }
+        
+        let highPath = Path { path in
+            // High Temperature Line
+            if index == 0 {
+                path.move(to: CGPoint(x: geoX, y: highCoorY))
+            } else {
+                path.move(to: CGPoint(x: 0, y: (highCoorY + previousHighCoorY)/2))
+            }
+            
+            path.addLine(to: CGPoint(x: geoX, y: highCoorY))
+                
+            if index != 6 {
+                path.addLine(to: CGPoint(x: geoX*2, y: (highCoorY + nextHighCoorY)/2))
+            }
+        }
+        
+        let lowPath = Path { path in
+            // Low Temperature Line
+            if index == 0 {
+                path.move(to: CGPoint(x: geoX, y: lowCoorY))
+            } else {
+                path.move(to: CGPoint(x: 0, y: (lowCoorY + previousLowCoorY)/2))
+            }
+            
+            path.addLine(to: CGPoint(x: geoX, y: lowCoorY))
+                
+            if index != 6 {
+                path.addLine(to: CGPoint(x: geoX*2, y: (lowCoorY + nextLowCoorY)/2))
+            }
+        }
+        
+        return (highPath, lowPath)
+    }
 }

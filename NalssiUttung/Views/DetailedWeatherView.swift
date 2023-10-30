@@ -17,30 +17,31 @@ struct DetailedWeatherView: View {
                 // MARK: 상세 날씨 구분선
                 ScrolledMainViewTextDivider(text: "상세 날씨").padding(.bottom, 15)
                 
-                // MARK: 강수량 & 바람 & 가시거리
-                HStack(spacing: 0) {
-                    DetailBox(title: "강수량",
-                              imageName: "precipitation",
-                              detailString: "\(detailedWeatherData.precipitation)",
-                              valueString: "\(detailedWeatherData.precipitationAmount)")
-                    .padding(.horizontal, 10)
-                    Rectangle()
-                        .background(Color.black)
-                        .frame(width: 1, height: 132).cornerRadius(10)
-                        .padding(.horizontal, 30)
-                    DetailBox(title: "바람",
-                              imageName: "windy",
-                              detailString: "\(detailedWeatherData.windDirection)",
-                              valueString: "\(detailedWeatherData.windSpeed)")
-                    Rectangle()
-                        .background(Color.black)
-                        .frame(width: 1, height: 132).cornerRadius(10)
-                        .padding(.horizontal, 30)
-                    DetailBox(title: "가시거리",
-                              imageName: "visibility",
-                              detailString: " ",
-                              valueString: "\(detailedWeatherData.visibility)")
-                    .padding(.horizontal, 10)
+                GeometryReader { geometry in
+                    // MARK: 강수량 & 바람 & 가시거리
+                    HStack(spacing: 0) {
+                        DetailBox(title: "강수량",
+                                  imageName: "precipitation",
+                                  detailString: "\(detailedWeatherData.precipitation)",
+                                  valueString: "\(detailedWeatherData.precipitationAmount)")
+                        .frame(maxWidth: geometry.size.width/3)
+                        Rectangle()
+                            .background(Color.black)
+                            .frame(width: 1, height: 132).cornerRadius(10)
+                        DetailBox(title: "바람",
+                                  imageName: "windy",
+                                  detailString: "\(detailedWeatherData.windDirection)",
+                                  valueString: "\(detailedWeatherData.windSpeed)")
+                        .frame(maxWidth: geometry.size.width/3)
+                        Rectangle()
+                            .background(Color.black)
+                            .frame(width: 1, height: 132).cornerRadius(10)
+                        DetailBox(title: "가시거리",
+                                  imageName: "visibility",
+                                  detailString: " ",
+                                  valueString: "\(detailedWeatherData.visibility)")
+                        .frame(maxWidth: geometry.size.width/3)
+                    }
                 }
             } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
