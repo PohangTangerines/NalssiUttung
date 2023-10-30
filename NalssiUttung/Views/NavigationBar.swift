@@ -42,9 +42,7 @@ struct NavigationBar: View {
                         .frame(maxWidth: 40, maxHeight: 40, alignment: .trailing)
                 }
             }
-
             searchBar
-
         }
         .frame(height: 106, alignment: .top)
         .padding(.horizontal, 20)

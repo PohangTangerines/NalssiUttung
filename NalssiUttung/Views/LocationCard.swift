@@ -9,19 +9,16 @@ import SwiftUI
 
 struct LocationCard: View {
     @Binding var weatherBoxData: WeatherBoxData?
-    @Binding var isEditMode: Bool
-    @Binding var location: String
+    @State var location: String
     @Binding var isCurrentLocation: Bool
-
 
     var body: some View {
         HStack(spacing: 0) {
             if let weatherBoxData = weatherBoxData {
                 VStack(alignment: .leading, spacing: 0) {
                     // MARK: Date
-                    HStack{
+                    HStack {
                         if isCurrentLocation {
-
                             Text("나의 위치")
                                 .font(.pretendardSemibold(.caption))
                                 .font(.system(size: 26))
@@ -31,7 +28,6 @@ struct LocationCard: View {
                             .font(.pretendardSemibold(.caption))
                             .padding(.trailing, 20)
                     }
-
 
                     HStack(alignment: .top, spacing: 0) {
                         Image("dayClear")
@@ -58,21 +54,13 @@ struct LocationCard: View {
                         }.padding(.bottom, 18).padding(.top, 12)
 
                         Spacer()
-
-//                        if isEditMode{
-//                            Button(action: {
-//                                print("test")
-//                            }, label: {
-//                                Image(systemName: "line.horizontal.3")
-//                            })
-//                        }
                     }
                 }.padding(.top, 15).padding(.leading, 15)
                 .overlay(
                     RoundedRectangle(cornerRadius: 9)
                         .strokeBorder(Color.black, lineWidth: 1.5)
                 )
-                .onAppear(){
+                .onAppear() {
                     print("여기는 card 안임")
                     print("현재 온도: \(weatherBoxData.currentTemperature)°C")
                     print("최고 온도: \(weatherBoxData.highestTemperature)°C")
@@ -85,7 +73,6 @@ struct LocationCard: View {
         }
     }
 }
-
 
 struct LocationCardScrolled: View {
     @Binding var weatherBoxData: WeatherBoxData?
@@ -127,10 +114,7 @@ struct LocationCardScrolled: View {
                         Spacer()
                     }
                 }.padding(.top, 15).padding(.leading, 15)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 9)
-//                        .strokeBorder(Color.black, lineWidth: 1.5)
-//                )
+
             } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
