@@ -76,7 +76,7 @@ struct DailyWeatherView: View {
                                         }.zIndex(1)
                                     }
                                 }
-                            }.frame(height: 20)
+                            }.frame(height: 25)
                             
                             Text(temperatureString(time: data.time, temp: data.temperature))
                                 .font(.pretendardMedium(.footnote))

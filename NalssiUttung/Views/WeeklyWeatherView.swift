@@ -29,6 +29,40 @@ struct WeeklyWeatherView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(maxWidth: 28)
+                                .padding(.bottom, 15)
+                            
+                            // MARK: Line Chart
+                            GeometryReader { geometry in
+                                ZStack {
+                                    let (highCoorY, lowCoorY) = getOffsetDot(nowData: data, dayData: weeklyWeatherData.dayData)
+                                    let _ = print(highCoorY, lowCoorY)
+                                    
+                                    //                                getChartLine(index: index, geometry: geometry)
+                                    //                                    .stroke(Color.black, lineWidth: 2)
+                                    
+                                    ZStack {
+                                        Circle()
+                                            .fill(Color.white)
+                                            .overlay(
+                                                Circle()
+                                                    .stroke(Color.black, lineWidth: 2))
+                                            .frame(width: 8)
+                                            .position(x: geometry.size.width / 2, y: highCoorY)
+                                        
+                                        Circle()
+                                            .fill(Color.white)
+                                            .overlay(
+                                                Circle()
+                                                    .stroke(Color.black, lineWidth: 2))
+                                            .frame(width: 8)
+                                            .position(x: geometry.size.width / 2, y: lowCoorY)
+                                    }.zIndex(1)
+                                }
+                            }.frame(minHeight: 60)
+                            
+                            //                        Text(temperatureString(time: data.time, temp: data.temperature))
+                            //                            .font(.pretendardMedium(.footnote))
+                            //                            .padding(.top, 15)
                         }
                     }
                 }
@@ -37,5 +71,24 @@ struct WeeklyWeatherView: View {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
         }
+    }
+    
+    private func getOffsetDot(nowData: WeeklyWeatherData.DayData, dayData: [WeeklyWeatherData.DayData]) -> (CGFloat, CGFloat) {
+        // -100 -> dummy
+        var minTemp: Int = 100
+        var maxTemp: Int = -100
+        
+        for data in dayData {
+            // 최소, 최대 온도 비교 및 업데이트
+                minTemp = min(minTemp, data.lowestTemperature, data.highestTemperature)
+            // 최대 온도 비교 및 업데이트
+                maxTemp = data.highestTemperature
+        }
+        
+        let unitGap = 52.5 / Double(maxTemp - minTemp)
+        let highTempOffSet = CGFloat( unitGap * Double(nowData.highestTemperature - minTemp) )
+        let lowTempOffset = CGFloat( unitGap * Double(nowData.lowestTemperature - minTemp) )
+        
+        return (highTempOffSet, lowTempOffset)
     }
 }
