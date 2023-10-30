@@ -182,6 +182,30 @@ extension WeatherService {
                 
         return DetailedWeatherData(precipitation: convertedPrecipitation, precipitationAmount: convertedPrecipitationAmount, windDirection: convertedWindDirection, windSpeed: convertedWindSpeed, visibility: convertedVisibility)
     }
+
+    func getWeatherInfoForAddress(address: String) async -> WeatherBoxData? {
+        let geocoder = CLGeocoder()
+
+        do {
+            let placemarks = try await geocoder.geocodeAddressString(address)
+            guard let location = placemarks.first?.location else {
+                print("Location not found for address: \(address)")
+                return nil
+            }
+
+            // WeatherService.shared.getWeather 함수도 async 함수이므로 await 키워드를 사용하여 호출합니다.
+            if let weather = try? await WeatherService.shared.getWeather(location: location) {
+                let weatherBoxData = WeatherService.shared.getWeatherBoxData(location: location, weather: weather)
+                return weatherBoxData
+            } else {
+                print("Failed to fetch weather data")
+                return nil
+            }
+        } catch {
+            print("Geocoding error: \(error.localizedDescription)")
+            return nil
+        }
+    }
 }
 
 func unitTempToInt(temp: Measurement<UnitTemperature>) -> Int {
