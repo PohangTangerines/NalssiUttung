@@ -86,7 +86,6 @@ struct LocationCard: View {
     }
 }
 
-
 struct LocationCardScrolled: View {
     @Binding var weatherBoxData: WeatherBoxData?
     
@@ -127,10 +126,10 @@ struct LocationCardScrolled: View {
                         Spacer()
                     }
                 }.padding(.top, 15).padding(.leading, 15)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 9)
-//                        .strokeBorder(Color.black, lineWidth: 1.5)
-//                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 9)
+                        .strokeBorder(Color.black, lineWidth: 1.5)
+                )
             } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
