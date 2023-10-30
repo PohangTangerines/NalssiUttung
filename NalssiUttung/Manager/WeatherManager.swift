@@ -30,10 +30,20 @@ struct DailyWeatherData {
     var sunsetDate: Date
     var hourData: [SimpleHourData]
     
-    struct SimpleHourData {
-        var time: String
+    struct SimpleHourData: Identifiable {
+        var id = UUID()
+        
+        var time: Date
         var weatherCondition: WeatherCondition
         var temperature: Int
+    }
+    
+    func indexOfSunrise() -> Int {
+        return hourData.firstIndex(where: { $0.time == sunriseDate })!
+    }
+    
+    func indexOfSunset() -> Int {
+        return hourData.firstIndex(where: { $0.time == sunsetDate })!
     }
 }
 
@@ -43,7 +53,9 @@ struct WeeklyWeatherData {
     
     var dayData: [DayData]
     
-    struct DayData {
+    struct DayData: Identifiable {
+        var id = UUID()
+        
         var day: String
         var date: String
         var weatherCondition: WeatherCondition
@@ -97,19 +109,29 @@ extension WeatherService {
         }
         var hourData: [DailyWeatherData.SimpleHourData] = []
         filteredHourWeather.forEach { hourWeather in
-            let convertedTime = dateToTimeString(date: hourWeather.date)
-            
+//            let convertedTime = dateToTimeString(date: hourWeather.date)
+            let time = hourWeather.date
             let condition = hourWeather.condition
             
             let temperature = hourWeather.temperature
             let convertedTemperature = unitTempToInt(temp: temperature)
 
-            hourData.append(DailyWeatherData.SimpleHourData(time: convertedTime, weatherCondition: condition, temperature: convertedTemperature))
+            hourData.append(DailyWeatherData.SimpleHourData(time: time, weatherCondition: condition, temperature: convertedTemperature))
         }
         
         // TODO: force unwrapping handling
         let sunriseDate = weather.dailyForecast.forecast.first!.sun.sunrise!
         let sunsetDate = weather.dailyForecast.forecast.first!.sun.sunset!
+        
+        // sunrise, sunset data append. weatherCondition과 temperature data - dummy.
+        hourData.append(DailyWeatherData.SimpleHourData(time: sunriseDate,
+                                                        weatherCondition: .clear,
+                                                        temperature: 100))
+        hourData.append(DailyWeatherData.SimpleHourData(time: sunsetDate,
+                                                        weatherCondition: .clear,
+                                                        temperature: 100))
+        // 시간 순 정렬
+        hourData.sort { $0.time < $1.time }
         
         return DailyWeatherData(weather: weather, sunriseDate: sunriseDate, sunsetDate: sunsetDate, hourData: hourData)
     }
@@ -188,6 +210,14 @@ extension WeatherService {
 
 func unitTempToInt(temp: Measurement<UnitTemperature>) -> Int {
     return Int(temp.converted(to: .celsius).value)
+}
+
+func dateToDetailTimeString(date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "a h:mm"
+    dateFormatter.locale = Locale(identifier:"ko_KR")
+    
+    return dateFormatter.string(from: date)
 }
 
 func dateToTimeString(date: Date) -> String {
