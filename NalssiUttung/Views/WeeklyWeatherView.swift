@@ -9,42 +9,33 @@ import SwiftUI
 
 struct WeeklyWeatherView: View {
     @Binding var weeklyWeatherData: WeeklyWeatherData?
-
+    
     var body: some View {
         VStack(spacing: 0) {
             if let weeklyWeatherData = weeklyWeatherData {
                 
-                ScrolledMainViewTextDivider(text: "주간 날씨").padding(.bottom, 15)
-
-                VStack {
-                    VStack {
-                        HStack(spacing: 24) {
-                            ForEach(weeklyWeatherData.dayData , id: \.date) { week in
-                                VStack {
-                                    Text("\(week.day)")
-                                        .font(.pretendardMedium(.footnote))
-                                    Text("\(week.date)")
-                                        .font(.pretendardMedium(.caption))
-                                    Image(week.weatherCondition.rawValue)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(maxWidth: 28)
-                                }
-                            }
-                        }
-                    }
-                    WeeklyWeatherChartView(weeklyWeatherData: $weeklyWeatherData)
-                    HStack(spacing: 33) {
-                        ForEach(weeklyWeatherData.dayData, id: \.date) {
-                            Text($0.precipitationChance)
-                                .font(.pretendardMedium(.caption2))
+                ScrolledMainViewTextDivider(text: "주간 날씨").padding(.bottom, 21)
+                
+                HStack(spacing: 0) {
+                    ForEach(weeklyWeatherData.dayData , id: \.date) { data in
+                        VStack(spacing: 0) {
+                            Text("\(data.day)")
+                                .font(.pretendardMedium(.footnote))
+                                .padding(.bottom, 3)
+                            Text("\(data.date)")
+                                .font(.pretendardMedium(.caption))
+                                .padding(.bottom, 9)
+                            Image(data.weatherCondition.rawValue)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxWidth: 28)
                         }
                     }
                 }
+                
             } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
         }
-        .padding(.horizontal, 20)
     }
 }

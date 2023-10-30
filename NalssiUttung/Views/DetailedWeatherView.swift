@@ -23,10 +23,11 @@ struct DetailedWeatherView: View {
                               imageName: "precipitation",
                               detailString: "\(detailedWeatherData.precipitation)",
                               valueString: "\(detailedWeatherData.precipitationAmount)")
+                    .padding(.horizontal, 10)
                     Rectangle()
                         .background(Color.black)
                         .frame(width: 1, height: 132).cornerRadius(10)
-                        .padding(.horizontal, 40)
+                        .padding(.horizontal, 30)
                     DetailBox(title: "바람",
                               imageName: "windy",
                               detailString: "\(detailedWeatherData.windDirection)",
@@ -34,11 +35,12 @@ struct DetailedWeatherView: View {
                     Rectangle()
                         .background(Color.black)
                         .frame(width: 1, height: 132).cornerRadius(10)
-                        .padding(.horizontal, 40)
+                        .padding(.horizontal, 30)
                     DetailBox(title: "가시거리",
                               imageName: "visibility",
                               detailString: " ",
                               valueString: "\(detailedWeatherData.visibility)")
+                    .padding(.horizontal, 10)
                 }
             } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
