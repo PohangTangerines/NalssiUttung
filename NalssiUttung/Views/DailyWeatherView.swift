@@ -94,7 +94,7 @@ struct DailyWeatherView: View {
         let minTemp = (dailyWeatherData?.hourData.map { $0.temperature }.filter { $0 != 100 }.min() ?? 0)
         let maxTemp = (dailyWeatherData?.hourData.map { $0.temperature }.filter { $0 != 100 }.max() ?? 0)
         
-        return CGFloat( ( 20 / (maxTemp - minTemp) ) * (nowTemp - minTemp) )
+        return CGFloat( ( 30 / (maxTemp - minTemp) ) * (nowTemp - minTemp) )
     }
     
     private func getChartLine(index: Int, geometry: GeometryProxy) -> Path {
