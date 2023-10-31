@@ -88,7 +88,7 @@ struct LocationCardScrolled: View {
                         .font(.pretendardSemibold(.caption))
                     
                     HStack(alignment: .top, spacing: 0) {
-                        Image("dayClear")
+                        Image(weatherBoxData.weatherCondition.weatherIcon())
                             .resizable()
                             .scaledToFit()
                             .frame(width: 60)
@@ -98,7 +98,7 @@ struct LocationCardScrolled: View {
                         VStack(alignment: .leading, spacing: 0) {
                             // MARK: 온도 및 날씨
                             HStack(spacing: 0) {
-                                Text("\(weatherBoxData.currentTemperature) ")
+                                Text("\(weatherBoxData.currentTemperature)")
                                     .font(.IMHyemin(.title2))
                                     .tracking(-(Font.DEFontSize.title2.rawValue * 0.1))
                                 Text("° 흐림")
@@ -114,7 +114,6 @@ struct LocationCardScrolled: View {
                         Spacer()
                     }
                 }.padding(.top, 15).padding(.leading, 15)
-
             } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }

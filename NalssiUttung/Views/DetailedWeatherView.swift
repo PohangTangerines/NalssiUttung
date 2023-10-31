@@ -12,63 +12,92 @@ struct DetailedWeatherView: View {
     @Binding var detailedWeatherData: DetailedWeatherData?
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 0) {
             if let detailedWeatherData = detailedWeatherData {
-                HStack(spacing: 16) {
-                    Rectangle()
-                        .frame(maxHeight: 2)
-                    Text("상세 날씨")
-                        .font(.IMHyemin(.footnote))
-                    Rectangle()
-                        .frame(maxHeight: 2)
-                }
-                HStack(spacing: 40.0) {
-                    VStack(spacing: 8) {
-                        Text("강수량")
-                            .font(.pretendardMedium(.caption))
-                        Image("precipitation")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width:36)
-                        Text("\(detailedWeatherData.precipitation)")
-                            .font(.pretendardMedium(.footnote))
-                        Text("\(detailedWeatherData.precipitationAmount)")
-                            .font(.pretendardMedium(.caption))
-                    }
-                    Rectangle()
-                        .frame(maxWidth: 2)
-                    VStack(spacing: 8) {
-                        Text("바람")
-                            .font(.pretendardMedium(.caption))
-                        Image("windy")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width:36)
-                        Text("\(detailedWeatherData.windDirection)")
-                            .font(.pretendardMedium(.footnote))
-                        Text("\(detailedWeatherData.windSpeed)")
-                            .font(.pretendardMedium(.caption))
-                    }
-                    Rectangle()
-                        .frame(maxWidth: 2)
-                    VStack(spacing: 8) {
-                        Text("가시거리")
-                            .font(.pretendardMedium(.caption))
-                        Image("visibility")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width:36)
-                        Text("\(detailedWeatherData.visibility)")
-                            .font(.pretendardMedium(.caption))
-                        Text("\(detailedWeatherData.visibility)")
-                            .font(.pretendardMedium(.footnote))
+                // MARK: 상세 날씨 구분선
+                ScrolledMainViewTextDivider(text: "상세 날씨").padding(.bottom, 15)
+                
+                GeometryReader { geometry in
+                    // MARK: 강수량 & 바람 & 가시거리
+                    HStack(spacing: 0) {
+                        DetailBox(title: "강수량",
+                                  imageName: "precipitation",
+                                  detailString: "\(detailedWeatherData.precipitation)",
+                                  valueString: "\(detailedWeatherData.precipitationAmount)")
+                        .frame(maxWidth: geometry.size.width/3)
+                        Rectangle()
+                            .background(Color.black)
+                            .frame(width: 1, height: 132).cornerRadius(10)
+                            .padding(.horizontal, 5)
+                        DetailBox(title: "바람",
+                                  imageName: "windy",
+                                  detailString: "\(detailedWeatherData.windDirection)",
+                                  valueString: "\(detailedWeatherData.windSpeed)")
+                        .frame(maxWidth: geometry.size.width/3)
+                        Rectangle()
+                            .background(Color.black)
+                            .frame(width: 1, height: 132).cornerRadius(10)
+                            .padding(.horizontal, 5)
+                        DetailBox(title: "가시거리",
+                                  imageName: "visibility",
+                                  detailString: " ",
+                                  valueString: "\(detailedWeatherData.visibility)")
+                        .frame(maxWidth: geometry.size.width/3)
                     }
                 }
             } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
         }
-        .padding(.horizontal, 20)
         .frame(maxWidth: .infinity, maxHeight: 172)
+    }
+    
+    // MARK: DetailedWeather Box
+    private struct DetailBox: View {
+        let title: String
+        let imageName: String
+        let detailString: String
+        let valueString: String
+        
+        var body: some View {
+            VStack(spacing: 0) {
+                Text(title)
+                    .lineLimit(1)
+                    .font(.pretendardMedium(.caption))
+                    .padding(.bottom, 6)
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width:36)
+                    .padding(.bottom, 6)
+                Text(detailString)
+                    .lineLimit(1)
+                    .font(.pretendardMedium(.footnote))
+                    .padding(.bottom, 6)
+                Text(valueString)
+                    .lineLimit(1)
+                    .font(.pretendardMedium(.caption))
+            }
+        }
+    }
+}
+
+struct ScrolledMainViewTextDivider: View {
+    let text: String
+    
+    var body: some View {
+        HStack(spacing: 0) {
+            Rectangle()
+                .background(Color.black)
+                .cornerRadius(10)
+                .frame(minWidth: 95.25, maxHeight: 2)
+            Text(text)
+                .font(.IMHyemin(.footnote))
+                .padding(.horizontal, 12)
+            Rectangle()
+                .background(Color.black)
+                .cornerRadius(10)
+                .frame(minWidth: 95.25, maxHeight: 2)
+        }
     }
 }

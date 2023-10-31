@@ -16,6 +16,8 @@ struct MainScrolledView: View {
         VStack(spacing: 0) {            
             LocationCardScrolled(weatherBoxData: $weatherBoxData)
             WeeklyWeatherView(weeklyWeatherData: $weeklyWeatherData)
+                .padding(.top, 27)
+                .padding(.bottom, 30)
             DetailedWeatherView(detailedWeatherData: $detailedWeatherData)
             Spacer()
         }.padding(.horizontal, 15).background(Color.seaSky)
