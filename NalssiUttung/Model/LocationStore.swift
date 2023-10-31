@@ -10,11 +10,17 @@ import SwiftUI
 class LocationStore: ObservableObject {
     @Published var selectedLocations: [String] = []
     
+    func loadLocations() {
+        selectedLocations = UserDefaults.standard.stringArray(forKey: "locations") ?? []
+    }
+    
     func saveLocations() {
         UserDefaults.standard.set(selectedLocations, forKey: "locations")
+        
     }
     
     func addLocation(_ location: String) {
+        loadLocations()
         selectedLocations.append(location)
         saveLocations()
     }

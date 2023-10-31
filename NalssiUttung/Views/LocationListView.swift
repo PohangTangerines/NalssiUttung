@@ -12,9 +12,8 @@ struct LocationListView: View {
     @Binding var weatherBoxData: WeatherBoxData?
     
     let weatherManager = WeatherService.shared
-    let locations = LocationInfo.Data.map { $0.location }
+    let locations = LocationInfo.Data.map { $0.address }
     
-    // TODO: 새로운 리스트에 값을 저장하면 보여주도록 하기. 지금은 items에 있는 모든 위치를 다 List로 보여주고 있음.
     @State var locationData: [String] = UserDefaults.standard.stringArray(forKey: "location") ?? []
     @ObservedObject var locationStore: LocationStore
     
@@ -35,31 +34,6 @@ struct LocationListView: View {
         ZStack {
             // MARK: Weather Widgets
             List {
-                ForEach(locationStore.selectedLocations, id: \.self) { selectedLocation in
-                    HStack {
-                        if isEditMode {
-                            Image(systemName: "trash.circle.fill")
-                                .foregroundColor(.red)
-                                .onTapGesture {
-                                    if let index = locationStore.selectedLocations.firstIndex(of: selectedLocation) {
-                                        locationStore.selectedLocations.remove(at: index)
-                                    }
-                                }
-                            Spacer()
-                        }
-                        LocationCard(weatherBoxData: $cardWeatherBoxData, location: selectedLocation, isCurrentLocation: .constant(false))
-                            .frame(maxWidth: .infinity, maxHeight: 140)
-                            .listRowSeparator(.hidden)
-                            .onTapGesture {
-                                isModalVisible.toggle()
-                                isTextFieldActive.toggle()
-                            }
-                    }
-                    .listRowSeparator(.hidden)
-                }
-                .onMove(perform: locationStore.moveLocation) // 항목 이동 기능
-                .listRowBackground(Color.seaSky)
-                
                 if isTextFieldActive {
                     ForEach(filteredLocations, id: \.self) { filteredLocation in
                         HStack {
@@ -93,6 +67,32 @@ struct LocationListView: View {
                         .listRowSeparator(.hidden)
                     }
                     .listRowBackground(Color.seaSky)
+                } else {
+                    ForEach(locationStore.selectedLocations, id: \.self) { selectedLocation in
+                        HStack {
+                            if isEditMode {
+                                Image(systemName: "trash.circle.fill")
+                                    .foregroundColor(.red)
+                                    .onTapGesture {
+                                        if let index = locationStore.selectedLocations.firstIndex(of: selectedLocation) {
+                                            locationStore.selectedLocations.remove(at: index)
+                                        }
+                                    }
+                                Spacer()
+                            }
+                            LocationCard(weatherBoxData: $cardWeatherBoxData, location: selectedLocation, isCurrentLocation: .constant(false))
+                                .frame(maxWidth: .infinity, maxHeight: 140)
+                                .listRowSeparator(.hidden)
+                                .onTapGesture {
+                                    isModalVisible.toggle()
+                                    isTextFieldActive.toggle()
+                                }
+                        }
+                        .foregroundColor(.red)
+                        .listRowSeparator(.hidden)
+                    }
+                    .onMove(perform: locationStore.moveLocation) // 항목 이동 기능
+                    .listRowBackground(Color.seaSky)
                 }
             }
             if isTextFieldActive && filteredLocations == [] {
@@ -115,6 +115,9 @@ struct LocationListView: View {
         .overlay {
             // MARK: Navigation Bar
             NavigationBar(searchText: $searchText, isEditMode: $isEditMode, isTextFieldActive: $isTextFieldActive)
+        }
+        .onAppear() {
+            locationStore.loadLocations()
         }
     }
 }
