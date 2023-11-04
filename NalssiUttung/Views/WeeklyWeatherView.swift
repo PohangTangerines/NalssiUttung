@@ -104,7 +104,6 @@ struct WeeklyWeatherView: View {
         let unitGap = 65 / Double(maxTemp - minTemp)
         let highTempOffSet = chartMaxGap - CGFloat( unitGap * Double(nowData.highestTemperature - minTemp) )
         let lowTempOffset = chartMaxGap - CGFloat( unitGap * Double(nowData.lowestTemperature - minTemp) )
-        print("highTempOffSet: \(highTempOffSet), lowTempOffset: \(lowTempOffset)")
 
         return (highTempOffSet, lowTempOffset)
     }
