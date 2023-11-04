@@ -24,7 +24,7 @@ struct LocationListView: View {
     @State private var isEditMode = false // 삭제 모드 활성화 여부를 추적
     @State var isTextFieldActive = false
 
-    //MARK: Modal 관련
+    // MARK: Modal 관련
     @State private var isModalVisible = false
     @State var modalState: ModalState = .isModalViewAndNotContainedContent
 
