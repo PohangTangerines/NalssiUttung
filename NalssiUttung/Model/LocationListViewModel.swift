@@ -49,36 +49,36 @@ extension LocationInfo {
 
         // 제주동부
 
-        LocationInfo(AWSNum: 188, location: "성산", altitude: 20, address: "제주특별자치도 서귀포시 성산읍 신산리", latitude: "33° 23‘ 12“", longitude: "126° 52‘ 48“"),
-        LocationInfo(AWSNum: 862, location: "송당", altitude: 195, address: "제주특별자치도 제주시 구좌읍 송당리", latitude: "33° 28‘ 14“", longitude: "126° 46‘ 45“"),
-        LocationInfo(AWSNum: 861, location: "월정", altitude: 34, address: "제주특별자치도 제주시 구좌읍 월정리", latitude: "33° 33‘ 44“", longitude: "126° 46‘ 41“"),
-        LocationInfo(AWSNum: 781, location: "구좌", altitude: 17, address: "제주특별자치도 제주시 구좌읍 하도리", latitude: "33° 31‘ 11“", longitude: "126° 52‘ 39“"),
-        LocationInfo(AWSNum: 725, location: "우도", altitude: 9, address: "제주특별자치도 제주시 우도면 연평리", latitude: "33° 31‘ 22“", longitude: "126° 57‘ 14“"),
-        LocationInfo(AWSNum: 892, location: "성산수산", altitude: 102, address: "제주특별자치도 서귀포시 성산읍 수산리", latitude: "33° 27‘ 0“", longitude: "126° 51‘ 4“"),
-        LocationInfo(AWSNum: 792, location: "표선", altitude: 80, address: "제주특별자치도 서귀포시 표선면 하천리", latitude: "33° 21‘ 12“", longitude: "126° 49‘ 0“"),
-        LocationInfo(AWSNum: 890, location: "제주가시리", altitude: 275, address: "제주특별자치도 서귀포시 표선면 가시리", latitude: "33° 23‘ 7“", longitude: "126° 44‘ 1“"),
+        LocationInfo(AWSNum: 188, location: "성산", altitude: 20, address: "서귀포시 성산읍 신산리", latitude: "33° 23‘ 12“", longitude: "126° 52‘ 48“"),
+        LocationInfo(AWSNum: 862, location: "송당", altitude: 195, address: "제주시 구좌읍 송당리", latitude: "33° 28‘ 14“", longitude: "126° 46‘ 45“"),
+        LocationInfo(AWSNum: 861, location: "월정", altitude: 34, address: "제주시 구좌읍 월정리", latitude: "33° 33‘ 44“", longitude: "126° 46‘ 41“"),
+        LocationInfo(AWSNum: 781, location: "구좌", altitude: 17, address: "제주시 구좌읍 하도리", latitude: "33° 31‘ 11“", longitude: "126° 52‘ 39“"),
+        LocationInfo(AWSNum: 725, location: "우도", altitude: 9, address: "제주시 우도면 연평리", latitude: "33° 31‘ 22“", longitude: "126° 57‘ 14“"),
+        LocationInfo(AWSNum: 892, location: "성산수산", altitude: 102, address: "서귀포시 성산읍 수산리", latitude: "33° 27‘ 0“", longitude: "126° 51‘ 4“"),
+        LocationInfo(AWSNum: 792, location: "표선", altitude: 80, address: "서귀포시 표선면 하천리", latitude: "33° 21‘ 12“", longitude: "126° 49‘ 0“"),
+        LocationInfo(AWSNum: 890, location: "제주가시리", altitude: 275, address: "서귀포시 표선면 가시리", latitude: "33° 23‘ 7“", longitude: "126° 44‘ 1“"),
 
         // 제주서부
-        LocationInfo(AWSNum: 185, location: "고산", altitude: 71, address: "제주특별자치도 제주시 한경면 고산리", latitude: "33° 17‘ 37“", longitude: "126° 9‘ 46“"),
-        LocationInfo(AWSNum: 779, location: "한림", altitude: 39, address: "제주특별자치도 제주시 한림읍 명월리", latitude: "33° 23‘ 33“", longitude: "126° 15‘ 29“"),
-        LocationInfo(AWSNum: 990, location: "낙천", altitude: 78, address: "제주특별자치도 제주시 한경면 낙천리", latitude: "33° 19‘ 05“", longitude: "126° 13‘ 49“"),
-        LocationInfo(AWSNum: 793, location: "대정", altitude: 3, address: "제주특별자치도 서귀포시 대정읍 일과리", latitude: "33° 14‘ 27“", longitude: "126° 13‘ 34“"),
-        LocationInfo(AWSNum: 855, location: "가파도", altitude: 4, address: "제주특별자치도 서귀포시 대정읍 가파리", latitude: "33° 14‘ 27“", longitude: "126° 13‘ 34“"),
-        LocationInfo(AWSNum: 726, location: "마라도", altitude: 12, address: "제주특별자치도 서귀포시 대정읍 가파리", latitude: "33° 7‘ 19“", longitude: "126° 16‘ 4“"),
+        LocationInfo(AWSNum: 185, location: "고산", altitude: 71, address: "제주시 한경면 고산리", latitude: "33° 17‘ 37“", longitude: "126° 9‘ 46“"),
+        LocationInfo(AWSNum: 779, location: "한림", altitude: 39, address: "제주시 한림읍 명월리", latitude: "33° 23‘ 33“", longitude: "126° 15‘ 29“"),
+        LocationInfo(AWSNum: 990, location: "낙천", altitude: 78, address: "제주시 한경면 낙천리", latitude: "33° 19‘ 05“", longitude: "126° 13‘ 49“"),
+        LocationInfo(AWSNum: 793, location: "대정", altitude: 3, address: "서귀포시 대정읍 일과리", latitude: "33° 14‘ 27“", longitude: "126° 13‘ 34“"),
+        LocationInfo(AWSNum: 855, location: "가파도", altitude: 4, address: "서귀포시 대정읍 가파리", latitude: "33° 14‘ 27“", longitude: "126° 13‘ 34“"),
+        LocationInfo(AWSNum: 726, location: "마라도", altitude: 12, address: "서귀포시 대정읍 가파리", latitude: "33° 7‘ 19“", longitude: "126° 16‘ 4“"),
 
         // 제주산간
-        LocationInfo(AWSNum: 867, location: "삼각봉", altitude: 1503, address: "(산지)제주특별자치도 제주시 오라이동", latitude: "33° 22‘ 36“", longitude: "126° 31‘ 49“"),
-        LocationInfo(AWSNum: 866, location: "한라생태숲", altitude: 588, address: "(산지)제주특별자치도 제주시 용강동", latitude: "33° 25‘ 48“", longitude: "126° 35‘ 51“"),
-        LocationInfo(AWSNum: 753, location: "어리목", altitude: 968, address: "(산지)제주특별자치도 제주시 해안동", latitude: "33° 23‘ 34“", longitude: "126° 29‘ 45“"),
-        LocationInfo(AWSNum: 868, location: "사제비", altitude: 1393, address: "(산지)제주특별자치도 제주시 애월읍 광령리", latitude: "33° 22‘ 33“", longitude: "126° 29‘ 52“"),
-        LocationInfo(AWSNum: 871, location: "윗세오름", altitude: 1676, address: "(산지)제주특별자치도 제주시 애월읍 광령리", latitude: "33° 21‘ 44“", longitude: "126° 31‘ 5“"),
-        LocationInfo(AWSNum: 782, location: "성판악", altitude: 760, address: "(산지)제주특별자치도 제주시 조천읍 교래리", latitude: "33° 23‘ 6“", longitude: "126° 37‘ 9“"),
-        LocationInfo(AWSNum: 965, location: "한라산남벽", altitude: 1576, address: "(산지)제주특별자치도 서귀포시 토평동", latitude: "33° 21‘ 8“", longitude: "126° 31‘ 58“"),
-        LocationInfo(AWSNum: 869, location: "영실", altitude: 1260, address: "(산지)제주특별자치도 서귀포시 하원동", latitude: "33° 20‘ 53“", longitude: "126° 29‘ 47“"),
-        LocationInfo(AWSNum: 870, location: "진달래밭", altitude: 1489, address: "(산지)제주특별자치도 서귀포시 남원읍 하례리", latitude: "33° 22‘ 11“", longitude: "126° 33‘ 20“"),
+        LocationInfo(AWSNum: 867, location: "삼각봉", altitude: 1503, address: "제주시 오라이동", latitude: "33° 22‘ 36“", longitude: "126° 31‘ 49“"),
+        LocationInfo(AWSNum: 866, location: "한라생태숲", altitude: 588, address: "제주시 용강동", latitude: "33° 25‘ 48“", longitude: "126° 35‘ 51“"),
+        LocationInfo(AWSNum: 753, location: "어리목", altitude: 968, address: "제주시 해안동", latitude: "33° 23‘ 34“", longitude: "126° 29‘ 45“"),
+        LocationInfo(AWSNum: 868, location: "사제비", altitude: 1393, address: "제주시 애월읍 광령리", latitude: "33° 22‘ 33“", longitude: "126° 29‘ 52“"),
+        LocationInfo(AWSNum: 871, location: "윗세오름", altitude: 1676, address: "제주시 애월읍 광령리", latitude: "33° 21‘ 44“", longitude: "126° 31‘ 5“"),
+        LocationInfo(AWSNum: 782, location: "성판악", altitude: 760, address: "제주시 조천읍 교래리", latitude: "33° 23‘ 6“", longitude: "126° 37‘ 9“"),
+        LocationInfo(AWSNum: 965, location: "한라산남벽", altitude: 1576, address: "서귀포시 토평동", latitude: "33° 21‘ 8“", longitude: "126° 31‘ 58“"),
+        LocationInfo(AWSNum: 869, location: "영실", altitude: 1260, address: "서귀포시 하원동", latitude: "33° 20‘ 53“", longitude: "126° 29‘ 47“"),
+        LocationInfo(AWSNum: 870, location: "진달래밭", altitude: 1489, address: "서귀포시 남원읍 하례리", latitude: "33° 22‘ 11“", longitude: "126° 33‘ 20“"),
 
         // 추자도
-        LocationInfo(AWSNum: 724, location: "추자도", altitude: 8, address: "제주특별자치도 제주시 추자면 영흥리", latitude: "33° 57‘ 28“", longitude: "126° 18‘ 5“"),
+        LocationInfo(AWSNum: 724, location: "추자도", altitude: 8, address: "제주시 추자면 영흥리", latitude: "33° 57‘ 28“", longitude: "126° 18‘ 5“"),
     ]
 
 }
