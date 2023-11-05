@@ -93,6 +93,7 @@ private struct MainHeader: View {
             case .isModalViewAndNotContainedContent:
                 Button {
                     locationStore.addLocation(location)
+                    locationStore.loadLocations()
                     isModalVisible.toggle()
                     searchText = ""
                     print("userDefault: \(locationStore.selectedLocations)")

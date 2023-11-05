@@ -61,7 +61,6 @@ struct LocationCard: View {
                         .strokeBorder(Color.black, lineWidth: 1.5)
                 )
                 .onAppear() {
-                    print("여기는 card 안임")
                     print("현재 온도: \(weatherBoxData.currentTemperature)°C")
                     print("최고 온도: \(weatherBoxData.highestTemperature)°C")
                     print("최저 온도: \(weatherBoxData.lowestTemperature)°C")

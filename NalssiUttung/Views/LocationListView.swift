@@ -18,6 +18,7 @@ struct LocationListView: View {
     @ObservedObject var locationStore: LocationStore
     
     // MARK: SearchBar 관련
+    @FocusState private var isFocused: Bool
     @State private var searchText = ""
     @State private var isEditMode = false // 삭제 모드 활성화 여부를 추적
     @State var isTextFieldActive = false
@@ -48,6 +49,7 @@ struct LocationListView: View {
                                     // 새로운 뷰 표시
                                     CardModalView(modalState: $modalState, isModalVisible: $isModalVisible, location: filteredLocation, searchText : $searchText)
                                         .onDisappear {
+                                            isFocused = false
                                             isTextFieldActive = false
                                         }
                                 })
@@ -71,7 +73,8 @@ struct LocationListView: View {
                     ForEach(locationStore.selectedLocations, id: \.self) { selectedLocation in
                         HStack {
                             if isEditMode {
-                                Image(systemName: "trash.circle.fill")
+                                Image("deleteButton")
+                                    .frame(maxWidth: 28, maxHeight: 28)
                                     .foregroundColor(.red)
                                     .onTapGesture {
                                         if let index = locationStore.selectedLocations.firstIndex(of: selectedLocation) {
@@ -85,10 +88,27 @@ struct LocationListView: View {
                                 .listRowSeparator(.hidden)
                                 .onTapGesture {
                                     isModalVisible.toggle()
-                                    isTextFieldActive.toggle()
+                                }
+                                .sheet(isPresented: $isModalVisible, content: {
+                                    // 새로운 뷰 표시
+                                    CardModalView(modalState: $modalState, isModalVisible: $isModalVisible, location: selectedLocation, searchText : $searchText)
+                                })
+                                .task {
+                                    if let weatherData = await weatherManager.getWeatherInfoForAddress(address: selectedLocation) {
+                                        self.cardWeatherBoxData = weatherData
+                                        print(self.cardWeatherBoxData)
+                                        print("현재 온도: \(weatherData.currentTemperature)°C")
+                                        print("최고 온도: \(weatherData.highestTemperature)°C")
+                                        print("최저 온도: \(weatherData.lowestTemperature)°C")
+                                        print("날씨 상태: \(weatherData.weatherCondition)")
+                                    } else {
+                                        print("날씨 정보를 가져오지 못했습니다.")
+                                    }
+                                }
+                                .onAppear(){
+                                    print(selectedLocation)
                                 }
                         }
-                        .foregroundColor(.red)
                         .listRowSeparator(.hidden)
                     }
                     .onMove(perform: locationStore.moveLocation) // 항목 이동 기능
@@ -114,7 +134,7 @@ struct LocationListView: View {
         .environment(\.editMode, .constant(isEditMode ? EditMode.active : EditMode.inactive))
         .overlay {
             // MARK: Navigation Bar
-            NavigationBar(searchText: $searchText, isEditMode: $isEditMode, isTextFieldActive: $isTextFieldActive)
+            NavigationBar(searchText: $searchText, isEditMode: $isEditMode, isTextFieldActive: $isTextFieldActive, isFocused: _isFocused)
         }
         .onAppear() {
             locationStore.loadLocations()
