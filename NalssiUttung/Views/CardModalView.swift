@@ -19,7 +19,7 @@ struct CardModalView: View {
     @State var detailedWeatherData: DetailedWeatherData?
     
     // MARK: Modal 관련
-    @Binding var modalState: ModalState
+    @State var modalState: ModalState
     @Binding var isModalVisible: Bool
     @State var location: String
     @Binding var searchText: String
@@ -110,6 +110,6 @@ private struct MainHeader: View {
 
 struct CardModalView_Previews: PreviewProvider {
     static var previews: some View {
-        CardModalView(modalState: .constant(.isModalViewAndNotContainedContent), isModalVisible: .constant(true), location: "제주 공항", searchText: .constant(""))
+        CardModalView(modalState: ModalState.isModalViewAndNotContainedContent, isModalVisible: .constant(true), location: "제주 공항", searchText: .constant(""))
     }
 }
