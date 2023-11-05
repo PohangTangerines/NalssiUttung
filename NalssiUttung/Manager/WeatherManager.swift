@@ -120,8 +120,23 @@ extension WeatherService {
         }
         
         // TODO: force unwrapping handling
-        let sunriseDate = weather.dailyForecast.forecast.first!.sun.sunrise!
-        let sunsetDate = weather.dailyForecast.forecast.first!.sun.sunset!
+        // 일출/일몰 시간이 지나면, 다음 날의 일출/일몰 시간을 표시.
+        var sunriseDate: Date {
+            let todaySunriseDate = weather.dailyForecast.forecast.first!.sun.sunrise!
+            if todaySunriseDate.timeIntervalSinceNow > 0 {
+                return todaySunriseDate
+            } else {
+                return weather.dailyForecast.forecast[1].sun.sunrise!
+            }
+        }
+        var sunsetDate: Date {
+            let todaySunsetDate = weather.dailyForecast.forecast.first!.sun.sunset!
+            if todaySunsetDate.timeIntervalSinceNow > 0 {
+                return todaySunsetDate
+            } else {
+                return weather.dailyForecast.forecast[1].sun.sunset!
+            }
+        }
         
         // sunrise, sunset data append. weatherCondition과 temperature data - dummy.
         hourData.append(DailyWeatherData.SimpleHourData(time: sunriseDate,

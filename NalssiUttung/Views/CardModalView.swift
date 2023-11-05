@@ -33,8 +33,12 @@ struct CardModalView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                MainHeader(weatherBoxData: $weatherBoxData, location: $location, modalState: $modalState, isModalVisible: $isModalVisible, searchText: $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
-                RealTimeWeatherView(dailyWeatherData: $dailyWeatherData, canTransition: .constant(false), isModalVisible: .constant(false))
+                
+                // MARK: 수정?
+//                MainHeader(weatherBoxData: $weatherBoxData, location: $location, modalState: $modalState, isModalVisible: $isModalVisible, searchText: $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
+                MainHeader(weatherBoxData: $weatherBoxData, location: $locationManager.address, modalState: $modalState, isModalVisible: $isModalVisible, searchText: $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
+                
+                RealTimeWeatherView(weatherBoxData: $weatherBoxData, dailyWeatherData: $dailyWeatherData, canTransition: .constant(false), isModalVisible: .constant(false))
                     .transition(.move(edge: .top))
             }
             .padding(.horizontal, 15)
