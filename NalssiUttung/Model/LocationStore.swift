@@ -9,6 +9,8 @@ import SwiftUI
 
 class LocationStore: ObservableObject {
     @Published var selectedLocations: [String] = []
+    @Published var selectedLocationForModal: String = "제주시 용담동"
+    @Published var selectedfilteredLocationForModal: String = "제주시 용담동"
     
     func loadLocations() {
         selectedLocations = UserDefaults.standard.stringArray(forKey: "locations") ?? []
