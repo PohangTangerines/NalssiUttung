@@ -25,6 +25,7 @@ struct CardModalView: View {
     @Binding var searchText: String
     @FocusState var isFocused: Bool
     @Binding var isTextFieldActive: Bool
+    @Binding var isEditMode: Bool
     
     // MARK: User 위치 정보 저장 관련
     @ObservedObject var locationStore = LocationStore()
@@ -32,7 +33,7 @@ struct CardModalView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                MainHeader(weatherBoxData: $weatherBoxData, location: $location, modalState: $modalState, isModalVisible: $isModalVisible, searchText: $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive)
+                MainHeader(weatherBoxData: $weatherBoxData, location: $location, modalState: $modalState, isModalVisible: $isModalVisible, searchText: $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
                 RealTimeWeatherView(dailyWeatherData: $dailyWeatherData, canTransition: .constant(false), isModalVisible: .constant(false))
                     .transition(.move(edge: .top))
             }
@@ -48,11 +49,6 @@ struct CardModalView: View {
                     }
                 }
             }
-            .onAppear(){
-                print("================================================")
-                print(locationManager.location)
-                print(location)
-            }
         }
     }
 }
@@ -65,6 +61,7 @@ private struct MainHeader: View {
     @Binding var searchText: String
     @FocusState var isFocused: Bool
     @Binding var isTextFieldActive: Bool
+    @Binding var isEditMode: Bool
     
     // MARK: User가 선택한 위치 List 관련 값
     @ObservedObject var locationStore = LocationStore()
@@ -74,7 +71,6 @@ private struct MainHeader: View {
         HStack {
             if modalState != .notModalView {
                 Button {
-                    locationStore.removeLocation()
                     isModalVisible.toggle()
                 } label: {
                     Text("취소")
@@ -105,6 +101,7 @@ private struct MainHeader: View {
                     locationStore.loadLocations()
                     isFocused = false
                     isTextFieldActive = false
+                    isEditMode = false
                     isModalVisible.toggle()
                     searchText = ""
                 } label: {
