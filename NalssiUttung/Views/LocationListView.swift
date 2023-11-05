@@ -7,6 +7,7 @@
 import SwiftUI
 import WeatherKit
 
+
 struct LocationListView: View {
     @State var cardWeatherBoxData: WeatherBoxData?
     @Binding var weatherBoxData: WeatherBoxData?
@@ -24,6 +25,7 @@ struct LocationListView: View {
     
     // MARK: Modal 관련
     @State private var isModalVisible = false
+    @State private var selectedLocationForModal: String?
     
     var filteredLocations: [String] {
         return locations.filter { $0.contains(searchText) }
@@ -41,24 +43,22 @@ struct LocationListView: View {
                                 .listRowSeparator(.hidden)
                                 .onTapGesture {
                                     print(filteredLocation)
+                                    selectedLocationForModal = filteredLocation
                                     isModalVisible.toggle()
                                 }
                                 .sheet(isPresented: $isModalVisible, content: {
                                     // 새로운 뷰 표시
-                                    CardModalView(modalState: ModalState.isModalViewAndNotContainedContent, isModalVisible: $isModalVisible, location: filteredLocation, searchText : $searchText)
-                                        .onDisappear {
-                                            isFocused = false
-                                            isTextFieldActive = false
-                                        }
+                                    if let selectedLocationForModal = selectedLocationForModal{
+                                        CardModalView(modalState: ModalState.isModalViewAndNotContainedContent, isModalVisible: $isModalVisible, location: selectedLocationForModal, searchText : $searchText)
+                                            .onDisappear {
+                                                isFocused = false
+                                                isTextFieldActive = false
+                                            }
+                                    }
                                 })
                                 .task {
                                     if let weatherData = await weatherManager.getWeatherInfoForAddress(address: filteredLocation) {
                                         self.cardWeatherBoxData = weatherData
-//                                        print(self.cardWeatherBoxData)
-//                                        print("현재 온도: \(weatherData.currentTemperature)°C")
-//                                        print("최고 온도: \(weatherData.highestTemperature)°C")
-//                                        print("최저 온도: \(weatherData.lowestTemperature)°C")
-//                                        print("날씨 상태: \(weatherData.weatherCondition)")
                                     } else {
                                         print("날씨 정보를 가져오지 못했습니다.")
                                     }
@@ -86,20 +86,21 @@ struct LocationListView: View {
                                 .listRowSeparator(.hidden)
                                 .onTapGesture {
                                     print(selectedLocation)
+                                    selectedLocationForModal = selectedLocation
                                     isModalVisible.toggle()
                                 }
                                 .sheet(isPresented: $isModalVisible, content: {
                                     // 새로운 뷰 표시
-                                    CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isModalVisible, location: selectedLocation, searchText : $searchText)
+                                    if let selectedLocationForModal = selectedLocationForModal{
+                                        CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isModalVisible, location: selectedLocationForModal, searchText : $searchText)
+                                            .onAppear(){
+                                                print(selectedLocationForModal)
+                                            }
+                                    }
                                 })
                                 .task {
                                     if let weatherData = await weatherManager.getWeatherInfoForAddress(address: selectedLocation) {
                                         self.cardWeatherBoxData = weatherData
-//                                        print(self.cardWeatherBoxData)
-//                                        print("현재 온도: \(weatherData.currentTemperature)°C")
-//                                        print("최고 온도: \(weatherData.highestTemperature)°C")
-//                                        print("최저 온도: \(weatherData.lowestTemperature)°C")
-//                                        print("날씨 상태: \(weatherData.weatherCondition)")
                                     } else {
                                         print("날씨 정보를 가져오지 못했습니다.")
                                     }

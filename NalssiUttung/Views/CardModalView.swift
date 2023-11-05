@@ -46,6 +46,11 @@ struct CardModalView: View {
                     }
                 }
             }
+            .onAppear(){
+                print("================================================")
+                print(locationManager.location)
+                print(location)
+            }
         }
     }
 }
@@ -96,7 +101,6 @@ private struct MainHeader: View {
                     locationStore.loadLocations()
                     isModalVisible.toggle()
                     searchText = ""
-                    print("userDefault: \(locationStore.selectedLocations)")
                 } label: {
                     Text("추가")
                         .font(.pretendardSemibold(.body))

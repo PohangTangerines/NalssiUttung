@@ -26,8 +26,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations.last
-//        print("load location")
-
     }
 
     func getLocationAddress(){
