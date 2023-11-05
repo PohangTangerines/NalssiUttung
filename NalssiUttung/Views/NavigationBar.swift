@@ -18,6 +18,7 @@ struct NavigationBar: View {
         VStack {
             HStack {
                 Button(action: {
+                    isTextFieldActive = false
                     dismiss()
                 }){
                     Image(systemName: "chevron.left")
@@ -82,7 +83,7 @@ struct NavigationBar: View {
             if isTextFieldActive{
                 Button(action: {
                     isFocused = false
-                    isTextFieldActive.toggle()
+                    isTextFieldActive = false
                     searchText = ""
                 }, label: {
                     Text("취소")
