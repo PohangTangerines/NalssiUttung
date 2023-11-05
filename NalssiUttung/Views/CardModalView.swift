@@ -23,6 +23,8 @@ struct CardModalView: View {
     @Binding var isModalVisible: Bool
     @State var location: String
     @Binding var searchText: String
+    @FocusState var isFocused: Bool
+    @Binding var isTextFieldActive: Bool
     
     // MARK: User 위치 정보 저장 관련
     @ObservedObject var locationStore = LocationStore()
@@ -30,7 +32,7 @@ struct CardModalView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                MainHeader(weatherBoxData: $weatherBoxData, location: $location, modalState: $modalState, isModalVisible: $isModalVisible, searchText: $searchText)
+                MainHeader(weatherBoxData: $weatherBoxData, location: $location, modalState: $modalState, isModalVisible: $isModalVisible, searchText: $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive)
                 RealTimeWeatherView(dailyWeatherData: $dailyWeatherData, canTransition: .constant(false), isModalVisible: .constant(false))
                     .transition(.move(edge: .top))
             }
@@ -61,6 +63,8 @@ private struct MainHeader: View {
     @Binding var modalState: ModalState
     @Binding var isModalVisible: Bool
     @Binding var searchText: String
+    @FocusState var isFocused: Bool
+    @Binding var isTextFieldActive: Bool
     
     // MARK: User가 선택한 위치 List 관련 값
     @ObservedObject var locationStore = LocationStore()
@@ -99,6 +103,8 @@ private struct MainHeader: View {
                 Button {
                     locationStore.addLocation(location)
                     locationStore.loadLocations()
+                    isFocused = false
+                    isTextFieldActive = false
                     isModalVisible.toggle()
                     searchText = ""
                 } label: {
@@ -111,9 +117,9 @@ private struct MainHeader: View {
         .padding(.top, 7.5).padding(.bottom, 24)
     }
 }
-
-struct CardModalView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardModalView(modalState: ModalState.isModalViewAndNotContainedContent, isModalVisible: .constant(true), location: "제주 공항", searchText: .constant(""))
-    }
-}
+//
+//struct CardModalView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CardModalView(modalState: ModalState.isModalViewAndNotContainedContent, isModalVisible: .constant(true), location: "제주 공항", searchText: .constant(""))
+//    }
+//}
