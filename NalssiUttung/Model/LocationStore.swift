@@ -11,6 +11,7 @@ class LocationStore: ObservableObject {
     @Published var selectedLocations: [String] = []
     @Published var selectedLocationForModal: String = "제주시 용담동"
     @Published var selectedfilteredLocationForModal: String = "제주시 용담동"
+    @Published var currentLocation: String = "제주시 용담동"
     
     func loadLocations() {
         selectedLocations = UserDefaults.standard.stringArray(forKey: "locations") ?? []
@@ -27,11 +28,9 @@ class LocationStore: ObservableObject {
         saveLocations()
     }
     
-    func removeLocation() {
-        if !selectedLocations.isEmpty {
-            selectedLocations.removeLast()
-            saveLocations()
-        }
+    func removeLocation(at index: Int) {
+        selectedLocations.remove(at: index)
+        saveLocations()
     }
     
     func moveLocation(from source: IndexSet, to destination: Int) {
