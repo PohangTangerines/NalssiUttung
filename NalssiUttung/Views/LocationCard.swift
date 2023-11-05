@@ -99,7 +99,7 @@ struct LocationCardScrolled: View {
                             HStack(spacing: 0) {
                                 Text("\(weatherBoxData.currentTemperature)")
                                     .font(.IMHyemin(.title2))
-                                    .tracking(-(Font.DEFontSize.title2.rawValue * 0.1))
+                                    .tracking(-(Font.DEFontSize.title2.rawValue * 0.07))
                                 Text("° 흐림")
                                     .font(.IMHyemin(.title2))
                                     .padding(.leading, -(Font.DEFontSize.title2.rawValue * 0.3))

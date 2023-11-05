@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WeeklyWeatherView: View {
-    let chartMaxGap: Double = 170
+    let chartMaxGap: Double = 90
     @Binding var weeklyWeatherData: WeeklyWeatherData?
     
     var body: some View {
@@ -76,9 +76,9 @@ struct WeeklyWeatherView: View {
                                     // MARK: precipitation
                                     Text("\(data.precipitationChance)")
                                         .font(.pretendardMedium(.caption2))
-                                        .position(x: midX, y: chartMaxGap + 25 + 28)
+                                        .position(x: midX, y: chartMaxGap + 25 + 40)
                                 }
-                            }.frame(maxHeight: 200)
+                            }.frame(maxHeight: 140)
                         }
                     }
                 } // HStack (Box)
@@ -98,13 +98,13 @@ struct WeeklyWeatherView: View {
             // 최소, 최대 온도 비교 및 업데이트
             minTemp = min(minTemp, data.lowestTemperature, data.highestTemperature)
             // 최대 온도 비교 및 업데이트
-            maxTemp = data.highestTemperature
+            maxTemp = max(maxTemp, data.lowestTemperature, data.highestTemperature)
         }
         
-        let unitGap = 52.5 / Double(maxTemp - minTemp)
+        let unitGap = 65 / Double(maxTemp - minTemp)
         let highTempOffSet = chartMaxGap - CGFloat( unitGap * Double(nowData.highestTemperature - minTemp) )
         let lowTempOffset = chartMaxGap - CGFloat( unitGap * Double(nowData.lowestTemperature - minTemp) )
-        
+
         return (highTempOffSet, lowTempOffset)
     }
     
