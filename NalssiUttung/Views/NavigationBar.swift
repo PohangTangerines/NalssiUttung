@@ -11,7 +11,7 @@ struct NavigationBar: View {
     @Binding var searchText: String
     @Binding var isEditMode: Bool
     @Binding var isTextFieldActive: Bool
-    @FocusState private var isFocused: Bool
+    @FocusState var isFocused: Bool
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
