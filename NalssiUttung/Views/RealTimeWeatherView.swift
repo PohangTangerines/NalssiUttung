@@ -28,8 +28,7 @@ struct RealTimeWeatherView: View {
                 ZStack {
                     VStack {
                         HStack {
-                            // TODO: 텍스트 교체
-                            Text("일교차 크난\n고뿔 들리지 않게\n조심합서!")
+                            Text("\(weatherBoxData.weatherCondition.weatherComment())")
                                 .font(.IMHyemin(.title))
                                 .IMHyeminLineHeight(.title, lineHeight: 40)
                             Spacer()
@@ -40,7 +39,7 @@ struct RealTimeWeatherView: View {
                         Spacer().frame(height: 50)
                         HStack {
                             Spacer()
-                            Image("halla")
+                            Image("\(weatherBoxData.weatherCondition.weatherCharacter())")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 280)
