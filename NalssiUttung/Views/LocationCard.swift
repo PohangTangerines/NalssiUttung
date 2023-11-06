@@ -59,6 +59,7 @@ struct LocationCard: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 9)
                         .strokeBorder(Color.black, lineWidth: 1.5)
+                        .contentShape(Rectangle())
                 )
                 .onAppear() {
                     print("현재 온도: \(weatherBoxData.currentTemperature)°C")

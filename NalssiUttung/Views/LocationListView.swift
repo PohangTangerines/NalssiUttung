@@ -25,7 +25,8 @@ struct LocationListView: View {
     @State var isTextFieldActive = false
     
     // MARK: Modal 관련
-    @State private var isModalVisible = false
+    @State private var isSearchModalVisible = false
+    @State private var isSelectedModalVisible = false
     @State private var isCurrentWeatherModalVisible = false
     
     var filteredLocations: [String] {
@@ -59,11 +60,11 @@ struct LocationListView: View {
                         .onTapGesture {
                             print(filteredLocation)
                             locationStore.selectedfilteredLocationForModal = filteredLocation
-                            isModalVisible.toggle()
+                            isSearchModalVisible.toggle()
                         }
-                        .sheet(isPresented: $isModalVisible, content: {
+                        .sheet(isPresented: $isSearchModalVisible, content: {
                             // 새로운 뷰 표시
-                            CardModalView(modalState: ModalState.isModalViewAndNotContainedContent, isModalVisible: $isModalVisible, location: locationStore.selectedfilteredLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
+                            CardModalView(modalState: ModalState.isModalViewAndNotContainedContent, isModalVisible: $isSearchModalVisible, location: locationStore.selectedfilteredLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
                                 .onDisappear(){
                                     isFocused = false
                                 }
@@ -87,10 +88,6 @@ struct LocationListView: View {
         .listStyle(.plain)
         .background(Color.seaSky)
         .scrollContentBackground(.hidden)
-        .environment(\.editMode, .constant(isEditMode ? EditMode.active : EditMode.inactive))
-        .onAppear() {
-            locationStore.loadLocations()
-        }
     }
     private var selectedList: some View{
         List {
@@ -113,10 +110,10 @@ struct LocationListView: View {
                         .listRowSeparator(.hidden)
                         .onTapGesture {
                             locationStore.selectedLocationForModal = selectedLocation
-                            isModalVisible.toggle()
+                            isSelectedModalVisible.toggle()
                         }
-                        .sheet(isPresented: $isModalVisible, content: {
-                            CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isModalVisible, location: locationStore.selectedLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
+                        .sheet(isPresented: $isSelectedModalVisible, content: {
+                            CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isSelectedModalVisible, location: locationStore.selectedLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
                         })
                         .task {
                             if let weatherData = await weatherManager.getWeatherInfoForAddress(address: selectedLocation) {
@@ -124,6 +121,9 @@ struct LocationListView: View {
                             } else {
                                 print("날씨 정보를 가져오지 못했습니다.")
                             }
+                        }
+                        .onAppear(){
+                            print(selectedLocation)
                         }
                 }
                 .listRowSeparator(.hidden)
