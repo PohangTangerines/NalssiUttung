@@ -19,6 +19,7 @@ struct LocationListView: View {
     @ObservedObject var locationStore: LocationStore
     @State var selectedLocations: [String]?
     @State var currnetLocation: String?
+    @State var searchLocation: String?
     
     // MARK: SearchBar 관련
     @FocusState private var isFocused: Bool
@@ -60,10 +61,8 @@ struct LocationListView: View {
                         .frame(maxWidth: .infinity, maxHeight: 140)
                         .listRowSeparator(.hidden)
                         .onTapGesture {
-                            if !isSelectedModalVisible{
-                                print(filteredLocation)
-                                locationStore.selectedfilteredLocationForModal = filteredLocation
-                                isSearchModalVisible = true
+                            if !isSelectedModalVisible && !isCurrentWeatherModalVisible{
+                                getLocation(location: filteredLocation)
                             }
                         }
                         .sheet(isPresented: $isSearchModalVisible, content: {
@@ -74,13 +73,6 @@ struct LocationListView: View {
                                     isSearchModalVisible = false
                                 }
                         })
-                        .task {
-                            if let weatherData = await weatherManager.getWeatherInfoForAddress(address: filteredLocation) {
-                                self.cardWeatherBoxData = weatherData
-                            } else {
-                                print("날씨 정보를 가져오지 못했습니다.")
-                            }
-                        }
                 }
                 .listRowSeparator(.hidden)
             }
@@ -93,6 +85,16 @@ struct LocationListView: View {
         .listStyle(.plain)
         .background(Color.seaSky)
         .scrollContentBackground(.hidden)
+        .task {
+            do{
+                let userList = try await locationStore.loadLocations()
+                selectedLocations = userList
+                print("Success load: \(userList)")
+            } catch{
+                selectedLocations = []
+                print("task error")
+            }
+        }
     }
     private var selectedList: some View{
         List {
@@ -185,6 +187,15 @@ struct LocationListView: View {
     func move(from source: IndexSet, to destination: Int) {
         selectedLocations!.move(fromOffsets: source, toOffset: destination)
         locationStore.saveLocations(come: selectedLocations!)
+    }
+    func getLocation(location: String) {
+        Task{
+            await locationStore.selectedfilteredLocationForModal = location
+            Task{
+                await isSearchModalVisible = true
+            }
+        }
+        
     }
 }
 
