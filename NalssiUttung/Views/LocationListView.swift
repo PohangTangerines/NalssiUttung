@@ -21,13 +21,11 @@ struct LocationListView: View {
     // MARK: SearchBar 관련
     @FocusState private var isFocused: Bool
     @State private var searchText = ""
-    @State private var isEditMode = false // 삭제 모드 활성화 여부를 추적
     @State var isTextFieldActive = false
+    @State var isEditMode = false // 삭제 모드 활성화 여부를 추적
     
     // MARK: Modal 관련
     @State private var isSearchModalVisible = false
-    @State private var isSelectedModalVisible = false
-    @State private var isCurrentWeatherModalVisible = false
     
     var filteredLocations: [String] {
         return locations.filter { $0.contains(searchText) }
@@ -39,7 +37,7 @@ struct LocationListView: View {
             if isTextFieldActive {
                 searchBarList
             } else {
-                selectedList
+                SelectedList(locationStore: locationStore, isTextFieldActive: $isTextFieldActive, searchText: $searchText, isEditMode: $isEditMode)
             }
             if isTextFieldActive && filteredLocations == [] {
                 emptyView
@@ -64,7 +62,7 @@ struct LocationListView: View {
                         }
                         .sheet(isPresented: $isSearchModalVisible, content: {
                             // 새로운 뷰 표시
-                            CardModalView(modalState: ModalState.isModalViewAndNotContainedContent, isModalVisible: $isSearchModalVisible, location: locationStore.selectedfilteredLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
+                            CardModalView(modalState: ModalState.isModalViewAndNotContainedContent, isModalVisible: $isSearchModalVisible, location: locationStore.selectedfilteredLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: .constant(false))
                                 .onDisappear(){
                                     isFocused = false
                                 }
@@ -89,7 +87,32 @@ struct LocationListView: View {
         .background(Color.seaSky)
         .scrollContentBackground(.hidden)
     }
-    private var selectedList: some View{
+    private var emptyView: some View{
+        VStack {
+            Image("donut")
+            Text("검색 결과가 없어요")
+                .font(.IMHyemin(.body))
+        }
+        .background(Color.seaSky)
+    }
+    
+}
+
+
+struct SelectedList: View {
+    @ObservedObject var locationStore: LocationStore
+    @State var cardWeatherBoxData: WeatherBoxData?
+    @Binding var isTextFieldActive: Bool
+    @Binding var searchText: String
+    @Binding var isEditMode: Bool // 삭제 모드 활성화 여부를 추적
+    @State private var isSelectedModalVisible = false
+    @State private var isCurrentWeatherModalVisible = false
+    @FocusState private var isFocused: Bool
+    
+    @ObservedObject var locationManager = LocationManager.shared
+    let weatherManager = WeatherService.shared
+    
+    var body: some View{
         List {
             currentWeatherView
             ForEach(locationStore.selectedLocations, id: \.self) { selectedLocation in
@@ -144,14 +167,7 @@ struct LocationListView: View {
             print(locationStore.selectedLocations)
         }
     }
-    private var emptyView: some View{
-        VStack {
-            Image("donut")
-            Text("검색 결과가 없어요")
-                .font(.IMHyemin(.body))
-        }
-        .background(Color.seaSky)
-    }
+    
     private var currentWeatherView: some View{
         HStack{
             LocationCard(weatherBoxData: $cardWeatherBoxData, location: locationManager.address, isCurrentLocation: .constant(true))
@@ -175,4 +191,3 @@ struct LocationListView: View {
         .listRowBackground(Color.seaSky)
     }
 }
-

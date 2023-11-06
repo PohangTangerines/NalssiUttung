@@ -69,6 +69,15 @@ struct LocationCard: View {
                 }
             } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
+                    .onAppear(){
+                        print("====================")
+                        if let weatherBoxData = weatherBoxData {
+                            print("현재 온도: \(weatherBoxData.currentTemperature)°C")
+                            print("최고 온도: \(weatherBoxData.highestTemperature)°C")
+                            print("최저 온도: \(weatherBoxData.lowestTemperature)°C")
+                            print("날씨 상태: \(weatherBoxData.weatherCondition)")
+                        }
+                    }
             }
         }
     }
