@@ -31,7 +31,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func getLocationAddress(){
         // 위치 업데이트가 발생한 후에 주소 정보를 가져오기 위해 Reverse Geocoding을 사용합니다.
         let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(location!) { (placemarks, error) in
+        geocoder.reverseGeocodeLocation(location ?? CLLocation(latitude: 33, longitude: 126)) { (placemarks, error) in
             if let error = error {
                 print("Reverse geocode error: \(error.localizedDescription)")
                 return
