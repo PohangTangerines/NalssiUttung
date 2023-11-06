@@ -17,6 +17,8 @@ struct LocationListView: View {
     let locations = LocationInfo.Data.map { $0.address }
     
     @ObservedObject var locationStore: LocationStore
+    @State var selectedLocations: [String]?
+    @State var currnetLocation: String?
     
     // MARK: SearchBar 관련
     @FocusState private var isFocused: Bool
@@ -58,15 +60,18 @@ struct LocationListView: View {
                         .frame(maxWidth: .infinity, maxHeight: 140)
                         .listRowSeparator(.hidden)
                         .onTapGesture {
-                            print(filteredLocation)
-                            locationStore.selectedfilteredLocationForModal = filteredLocation
-                            isSearchModalVisible.toggle()
+                            if !isSelectedModalVisible{
+                                print(filteredLocation)
+                                locationStore.selectedfilteredLocationForModal = filteredLocation
+                                isSearchModalVisible = true
+                            }
                         }
                         .sheet(isPresented: $isSearchModalVisible, content: {
                             // 새로운 뷰 표시
                             CardModalView(modalState: ModalState.isModalViewAndNotContainedContent, isModalVisible: $isSearchModalVisible, location: locationStore.selectedfilteredLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
                                 .onDisappear(){
                                     isFocused = false
+                                    isSearchModalVisible = false
                                 }
                         })
                         .task {
@@ -92,15 +97,16 @@ struct LocationListView: View {
     private var selectedList: some View{
         List {
             currentWeatherView
-            ForEach(locationStore.selectedLocations, id: \.self) { selectedLocation in
+            ForEach(selectedLocations ?? [], id: \.self) { selectedLocation in
                 HStack {
                     if isEditMode {
                         Image("deleteButton")
                             .frame(maxWidth: 28, maxHeight: 28)
                             .foregroundColor(.red)
                             .onTapGesture {
-                                if let index = locationStore.selectedLocations.firstIndex(of: selectedLocation) {
-                                    locationStore.removeLocation(at: index)
+                                if let index = selectedLocations!.firstIndex(of: selectedLocation) {
+                                    selectedLocations?.remove(at: index)
+                                    locationStore.saveLocations(come: selectedLocations!)
                                 }
                             }
                         Spacer()
@@ -109,26 +115,24 @@ struct LocationListView: View {
                         .frame(maxWidth: .infinity, maxHeight: 140)
                         .listRowSeparator(.hidden)
                         .onTapGesture {
-                            locationStore.selectedLocationForModal = selectedLocation
-                            isSelectedModalVisible.toggle()
+                            if !isTextFieldActive{
+                                locationStore.selectedLocationForModal = selectedLocation
+                                isSelectedModalVisible = true
+                            }
                         }
                         .sheet(isPresented: $isSelectedModalVisible, content: {
                             CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isSelectedModalVisible, location: locationStore.selectedLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
+                                .onDisappear(){
+                                    isSelectedModalVisible = false
+                                }
                         })
-                        .task {
-                            if let weatherData = await weatherManager.getWeatherInfoForAddress(address: selectedLocation) {
-                                self.cardWeatherBoxData = weatherData
-                            } else {
-                                print("날씨 정보를 가져오지 못했습니다.")
-                            }
-                        }
                         .onAppear(){
                             print(selectedLocation)
                         }
                 }
                 .listRowSeparator(.hidden)
             }
-            .onMove(perform: locationStore.moveLocation) // 항목 이동 기능
+            .onMove(perform: move) // 항목 이동 기능
             .listRowBackground(Color.seaSky)
         }
         .safeAreaInset(edge: .top) {
@@ -139,9 +143,15 @@ struct LocationListView: View {
         .background(Color.seaSky)
         .scrollContentBackground(.hidden)
         .environment(\.editMode, .constant(isEditMode ? EditMode.active : EditMode.inactive))
-        .onAppear() {
-            locationStore.loadLocations()
-            print(locationStore.selectedLocations)
+        .task {
+            do{
+                let userList = try await locationStore.loadLocations()
+                selectedLocations = userList
+                print("Success load: \(userList)")
+            } catch{
+                selectedLocations = []
+                print("task error")
+            }
         }
     }
     private var emptyView: some View{
@@ -158,21 +168,23 @@ struct LocationListView: View {
                 .frame(maxWidth: .infinity, maxHeight: 140)
                 .listRowSeparator(.hidden)
                 .onTapGesture {
-                    isCurrentWeatherModalVisible.toggle()
+                    if !isTextFieldActive{
+                        isCurrentWeatherModalVisible = true
+                    }
                 }
                 .sheet(isPresented: $isCurrentWeatherModalVisible, content: {
                     CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isCurrentWeatherModalVisible, location: locationManager.address, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
+                        .onDisappear(){
+                            isCurrentWeatherModalVisible = false
+                        }
                 })
-                .task {
-                    if let weatherData = await weatherManager.getWeatherInfoForAddress(address: locationManager.address) {
-                        self.cardWeatherBoxData = weatherData
-                    } else {
-                        print("날씨 정보를 가져오지 못했습니다.")
-                    }
-                }
         }
         .listRowSeparator(.hidden)
         .listRowBackground(Color.seaSky)
+    }
+    func move(from source: IndexSet, to destination: Int) {
+        selectedLocations!.move(fromOffsets: source, toOffset: destination)
+        locationStore.saveLocations(come: selectedLocations!)
     }
 }
 
