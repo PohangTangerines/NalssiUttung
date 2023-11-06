@@ -6,69 +6,85 @@
 //
 
 import SwiftUI
+import WeatherKit
 
 struct LocationCard: View {
     @Binding var weatherBoxData: WeatherBoxData?
     @State var location: String
     @Binding var isCurrentLocation: Bool
-
+    
+    let weatherManager = WeatherService.shared
+    
     var body: some View {
         HStack(spacing: 0) {
-            if let weatherBoxData = weatherBoxData {
-                VStack(alignment: .leading, spacing: 0) {
-                    // MARK: Date
-                    HStack {
-                        if isCurrentLocation {
-                            Text("나의 위치")
-                                .font(.pretendardSemibold(.caption))
-                                .font(.system(size: 26))
-                            Spacer()
-                        }
-                        Text("\(location)")
+            VStack(alignment: .leading, spacing: 0) {
+                // MARK: Date
+                HStack {
+                    if isCurrentLocation {
+                        Text("나의 위치")
                             .font(.pretendardSemibold(.caption))
-                            .padding(.trailing, 20)
-                    }
-
-                    HStack(alignment: .top, spacing: 0) {
-                        Image("dayClear")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 60)
-                            .padding(.trailing, 12)
-                            .padding(.top, 9)
-
-                        VStack(alignment: .leading, spacing: 0) {
-                            // MARK: 온도 및 날씨
-                            HStack(spacing: 0) {
-                                Text("\(weatherBoxData.currentTemperature) ")
-                                    .font(.IMHyemin(.title2))
-                                    .tracking(-(Font.DEFontSize.title2.rawValue * 0.1))
-                                Text("° 흐림")
-                                    .font(.IMHyemin(.title2))
-                                    .padding(.leading, -(Font.DEFontSize.title2.rawValue * 0.3))
-                            }.padding(.bottom, 3)
-
-                            // MARK: 최저 최고 온도
-                            Text("최저 \(weatherBoxData.lowestTemperature)° | 최고 \(weatherBoxData.highestTemperature)°")
-                                .font(.pretendardMedium(.footnote))
-                        }.padding(.bottom, 18).padding(.top, 12)
-
+                            .font(.system(size: 26))
                         Spacer()
                     }
-                }.padding(.top, 15).padding(.leading, 15)
+                    Text("\(location)")
+                        .font(.pretendardSemibold(.caption))
+                        .padding(.trailing, 20)
+                }
+                
+                HStack(alignment: .top, spacing: 0) {
+                    Image(weatherBoxData?.weatherCondition.weatherIcon() ?? "")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 60)
+                        .padding(.trailing, 12)
+                        .padding(.top, 9)
+                    
+                    VStack(alignment: .leading, spacing: 0) {
+                        // MARK: 온도 및 날씨
+                        HStack(spacing: 0) {
+                            Text("\(weatherBoxData?.currentTemperature ?? 00)")
+                                .font(.IMHyemin(.title2))
+                                .tracking(-(Font.DEFontSize.title2.rawValue * 0.1))
+                            Text("° 흐림")
+                                .font(.IMHyemin(.title2))
+                                .padding(.leading, -(Font.DEFontSize.title2.rawValue * 0.3))
+                        }.padding(.bottom, 3)
+                        
+                        // MARK: 최저 최고 온도
+                        Text("최저 \(weatherBoxData?.lowestTemperature ?? 00)° | 최고 \(weatherBoxData?.highestTemperature ?? 00)°")
+                            .font(.pretendardMedium(.footnote))
+                    }.padding(.bottom, 18).padding(.top, 12)
+                    
+                    Spacer()
+                }
+            }.padding(.top, 15).padding(.leading, 15)
                 .overlay(
                     RoundedRectangle(cornerRadius: 9)
                         .strokeBorder(Color.black, lineWidth: 1.5)
+                        .contentShape(Rectangle())
                 )
-                .onAppear() {
-                    print("현재 온도: \(weatherBoxData.currentTemperature)°C")
-                    print("최고 온도: \(weatherBoxData.highestTemperature)°C")
-                    print("최저 온도: \(weatherBoxData.lowestTemperature)°C")
-                    print("날씨 상태: \(weatherBoxData.weatherCondition)")
+        }
+        .task {
+            do {
+                if let CLlocation = try await weatherManager.getCLLocationFromAddress(address: location){
+                    if let weather = await weatherManager.getWeather(location: CLlocation) {
+                        self.weatherBoxData = weatherManager.getWeatherBoxData(location: CLlocation, weather: weather)
+                    }
+                    print("LocationCard success CLlocation")
+                    print("현재 온도: \(weatherBoxData?.currentTemperature ?? 00)°C")
+                    print("최고 온도: \(weatherBoxData?.highestTemperature ?? 00)°C")
+                    print("최저 온도: \(weatherBoxData?.lowestTemperature ?? 00)°C")
+                    print("날씨 상태: \(weatherBoxData?.weatherCondition)")
                 }
-            } else {
-                Text("날씨 정보를 가져올 수 없습니다.")
+            } catch {
+                print("Error LocationCard CLlocation")
             }
+                
+//             let weatherData = try await weatherManager.getWeatherInfoForAddress(address: location)
+//                self.weatherBoxData = weatherData
+//            } catch {
+//                print("날씨 정보를 가져오지 못했습니다.")
+//            }
         }
     }
 }

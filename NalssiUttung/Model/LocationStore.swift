@@ -13,29 +13,36 @@ class LocationStore: ObservableObject {
     @Published var selectedfilteredLocationForModal: String = "제주시 용담동"
     @Published var currentLocation: String = "제주시 용담동"
     
-    func loadLocations() {
-        selectedLocations = UserDefaults.standard.stringArray(forKey: "locations") ?? []
+    func loadLocations() async -> [String] {
+        do{
+            if let userDefaultsList = try? await UserDefaults.standard.stringArray(forKey: "locations") ?? []{
+                return userDefaultsList
+            } else{
+                print("fail load data")
+            }
+        } catch{
+            print("UserDefaults error: \(error.localizedDescription)")
+        }
     }
     
-    func saveLocations() {
-        UserDefaults.standard.set(selectedLocations, forKey: "locations")
-        
+    func saveLocations(come list: [String]) {
+        UserDefaults.standard.set(list, forKey: "locations")
     }
     
-    func addLocation(_ location: String) {
-        loadLocations()
-        selectedLocations.append(location)
-        saveLocations()
-    }
-    
-    func removeLocation(at index: Int) {
-        selectedLocations.remove(at: index)
-        saveLocations()
-    }
-    
-    func moveLocation(from source: IndexSet, to destination: Int) {
-        selectedLocations.move(fromOffsets: source, toOffset: destination)
-        saveLocations()
-    }
+//    func addLocation(_ location: String) {
+//        selectedLocations = UserDefaults.standard.stringArray(forKey: "locations") ?? []
+//        selectedLocations.append(location)
+//        saveLocations()
+//    }
+//    
+//    func removeLocation(at index: Int) {
+//        selectedLocations.remove(at: index)
+//        saveLocations()
+//    }
+//    
+//    func moveLocation(from source: IndexSet, to destination: Int) {
+//        selectedLocations.move(fromOffsets: source, toOffset: destination)
+//        saveLocations()
+//    }
     
 }

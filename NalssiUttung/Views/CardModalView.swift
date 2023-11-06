@@ -65,6 +65,7 @@ private struct MainHeader: View {
     @FocusState var isFocused: Bool
     @Binding var isTextFieldActive: Bool
     @Binding var isEditMode: Bool
+    @State var storeList: [String]?
     
     // MARK: User가 선택한 위치 List 관련 값
     @ObservedObject var locationStore = LocationStore()
@@ -74,7 +75,7 @@ private struct MainHeader: View {
         HStack {
             if modalState != .notModalView {
                 Button {
-                    isModalVisible.toggle()
+                    isModalVisible = false
                 } label: {
                     Text("취소")
                         .font(.pretendardSemibold(.body))
@@ -100,17 +101,27 @@ private struct MainHeader: View {
                 EmptyView()
             case .isModalViewAndNotContainedContent:
                 Button {
-                    locationStore.addLocation(location)
-                    locationStore.loadLocations()
+                    locationStore.saveLocations(come: storeList ?? [])
                     isFocused = false
                     isTextFieldActive = false
                     isEditMode = false
-                    isModalVisible.toggle()
+                    isModalVisible = false
                     searchText = ""
                 } label: {
                     Text("추가")
                         .font(.pretendardSemibold(.body))
                         .foregroundColor(.black)
+                }
+                .task{
+                    do {
+                        var list = try await locationStore.loadLocations()
+                        list.append(location)
+                        storeList = list
+                        print(storeList)
+                        print("success storeList in CardModalView")
+                    } catch {
+                        print("fail storeList in CardModalView")
+                    }
                 }
             }
         }
