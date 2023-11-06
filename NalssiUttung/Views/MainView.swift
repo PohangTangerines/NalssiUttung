@@ -28,7 +28,7 @@ struct MainView: View {
     // MARK: Modal 관련
     @State var modalState: ModalState = .notModalView
     @State var isModalVisible: Bool = false
-
+            
     private var dragGesture: some Gesture {
         DragGesture()
             .onChanged { gesture in
@@ -109,6 +109,8 @@ struct MainView: View {
         @Binding var locationText: String
         @Binding var modalState: ModalState
         @Binding var isModalVisible: Bool
+        
+        @ObservedObject var locationStore = LocationStore()
 
         var body: some View {
             ZStack {
@@ -131,7 +133,7 @@ struct MainView: View {
                     Spacer()
                     switch modalState{
                     case .notModalView:
-                        NavigationLink(destination: LocationListView(weatherBoxData: $weatherBoxData, currentLocation: $locationText)) {
+                        NavigationLink(destination: LocationListView(weatherBoxData: $weatherBoxData, locationStore: locationStore)) {
                             Image(systemName: "plus")
                                 .font(.pretendardSemibold(.body))
                                 .foregroundColor(.black)

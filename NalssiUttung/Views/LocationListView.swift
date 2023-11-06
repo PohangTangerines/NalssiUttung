@@ -4,157 +4,174 @@
 //
 //  Created by CHANG JIN LEE on 2023/09/11.
 
-
 import SwiftUI
 import WeatherKit
+
 
 struct LocationListView: View {
     @State var cardWeatherBoxData: WeatherBoxData?
     @Binding var weatherBoxData: WeatherBoxData?
-    @Binding var currentLocation: String
-
+    @ObservedObject var locationManager = LocationManager.shared
+    
     let weatherManager = WeatherService.shared
-    let locations = LocationInfo.Data.map { $0.location }
-
-    // TODO: 새로운 리스트에 값을 저장하면 보여주도록 하기. 지금은 items에 있는 모든 위치를 다 List로 보여주고 있음.
-    @State private var locationData: [String] = []
-    @State private var items = UserDefaults.standard.stringArray(forKey: "items") ?? ["test"]
-
+    let locations = LocationInfo.Data.map { $0.address }
+    
+    @ObservedObject var locationStore: LocationStore
+    
+    // MARK: SearchBar 관련
+    @FocusState private var isFocused: Bool
     @State private var searchText = ""
     @State private var isEditMode = false // 삭제 모드 활성화 여부를 추적
     @State var isTextFieldActive = false
-
+    
     // MARK: Modal 관련
     @State private var isModalVisible = false
-    @State var modalState: ModalState = .isModalViewAndNotContainedContent
-
-    var filteredItems: [String] {
-            if searchText.isEmpty {
-                modalState = .isModalViewAndNotContainedContent
-                return items
+    @State private var isCurrentWeatherModalVisible = false
+    
+    var filteredLocations: [String] {
+        return locations.filter { $0.contains(searchText) }
+    }
+    
+    var body: some View {
+        ZStack {
+            // MARK: Weather Widgets
+            if isTextFieldActive {
+                searchBarList
             } else {
-                modalState = .isModalViewAndContainedContent
-                return items.filter { $0.contains(searchText) }
+                selectedList
+            }
+            if isTextFieldActive && filteredLocations == [] {
+                emptyView
             }
         }
-
-
-    var body: some View {
-        ZStack{
-            // MARK: Weather Widgets
-            List {
-                if !isTextFieldActive {
-                    LocationCard(weatherBoxData: $weatherBoxData, isEditMode: $isEditMode, location: $currentLocation, isCurrentLocation: .constant(true))
+        .overlay {
+            // MARK: Navigation Bar
+            NavigationBar(searchText: $searchText, isEditMode: $isEditMode, isTextFieldActive: $isTextFieldActive, isFocused: _isFocused)
+        }
+    }
+    private var searchBarList : some View {
+        List {
+            ForEach(filteredLocations, id: \.self) { filteredLocation in
+                HStack {
+                    LocationCard(weatherBoxData: $cardWeatherBoxData, location: filteredLocation, isCurrentLocation: .constant(false))
                         .frame(maxWidth: .infinity, maxHeight: 140)
                         .listRowSeparator(.hidden)
-                        .listRowBackground(Color.seaSky)
-                }
-
-                if filteredItems != [] {
-                    ForEach(filteredItems, id: \.self) { item in
-                    HStack {
-                        if isEditMode {
-                            Image(systemName: "trash.circle.fill")
-                                .foregroundColor(.red)
-                                .onTapGesture{
-                                    if let index = items.firstIndex(of: item) {
-                                        items.remove(at: index)
-                                    }
-                                }
-                            Spacer()
+                        .onTapGesture {
+                            print(filteredLocation)
+                            locationStore.selectedfilteredLocationForModal = filteredLocation
+                            isModalVisible.toggle()
                         }
-                        LocationCard(weatherBoxData: $cardWeatherBoxData, isEditMode: $isEditMode, location: .constant(item), isCurrentLocation: .constant(false))
-                            .frame(maxWidth: .infinity, maxHeight: 140)
-                            .listRowSeparator(.hidden)
-                            .task{
-                                if let weatherData = await weatherManager.getWeatherInfoForAddress(address: item) {
-                                    self.cardWeatherBoxData = weatherData
-                                    print(self.cardWeatherBoxData)
-                                    print("현재 온도: \(weatherData.currentTemperature)°C")
-                                    print("최고 온도: \(weatherData.highestTemperature)°C")
-                                    print("최저 온도: \(weatherData.lowestTemperature)°C")
-                                    print("날씨 상태: \(weatherData.weatherCondition)")
-
-                                }else {
-                                    print("날씨 정보를 가져오지 못했습니다.")
+                        .sheet(isPresented: $isModalVisible, content: {
+                            // 새로운 뷰 표시
+                            CardModalView(modalState: ModalState.isModalViewAndNotContainedContent, isModalVisible: $isModalVisible, location: locationStore.selectedfilteredLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
+                                .onDisappear(){
+                                    isFocused = false
+                                }
+                        })
+                        .task {
+                            if let weatherData = await weatherManager.getWeatherInfoForAddress(address: filteredLocation) {
+                                self.cardWeatherBoxData = weatherData
+                            } else {
+                                print("날씨 정보를 가져오지 못했습니다.")
+                            }
+                        }
+                }
+                .listRowSeparator(.hidden)
+            }
+            .listRowBackground(Color.seaSky)
+        }
+        .safeAreaInset(edge: .top) {
+            EmptyView()
+                .frame(maxHeight: 125)
+        }
+        .listStyle(.plain)
+        .background(Color.seaSky)
+        .scrollContentBackground(.hidden)
+        .environment(\.editMode, .constant(isEditMode ? EditMode.active : EditMode.inactive))
+        .onAppear() {
+            locationStore.loadLocations()
+        }
+    }
+    private var selectedList: some View{
+        List {
+            currentWeatherView
+            ForEach(locationStore.selectedLocations, id: \.self) { selectedLocation in
+                HStack {
+                    if isEditMode {
+                        Image("deleteButton")
+                            .frame(maxWidth: 28, maxHeight: 28)
+                            .foregroundColor(.red)
+                            .onTapGesture {
+                                if let index = locationStore.selectedLocations.firstIndex(of: selectedLocation) {
+                                    locationStore.removeLocation(at: index)
                                 }
                             }
+                        Spacer()
                     }
-                    .listRowSeparator(.hidden)
-                }
-                    .onMove(perform: moveItem) // 항목 이동 기능
-                    .listRowBackground(Color.seaSky)
-                }
-            }
-            .onTapGesture {
-                if isTextFieldActive && filteredItems != [] {
-                    isModalVisible.toggle()
-                }
-                                // 항목을 탭할 때 아무런 동작 없음
-            }
-            .safeAreaInset(edge: .top) {
-                EmptyView()
-                    .frame(maxHeight: 125)
-            }
-            .listStyle(.plain)
-            .background(Color.seaSky)
-            .scrollContentBackground(.hidden)
-            .environment(\.editMode, .constant(isEditMode ? EditMode.active : EditMode.inactive))
-            .overlay {
-                // MARK: Navigation Bar
-                NavigationBar(searchText: $searchText, isEditMode: $isEditMode, isTextFieldActive: $isTextFieldActive)
-            }
-            .sheet(isPresented: $isModalVisible, content: {
-                            // 새로운 뷰 표시
-                CardModalView(modalState: $modalState, isModalVisible: $isModalVisible)
-            })
-            .onAppear {
-                // 앱이 시작될 때 UserDefaults에서 항목 불러오기
-                UserDefaults.standard.set(locations, forKey: "items")
-                items = UserDefaults.standard.stringArray(forKey: "items") ?? locations
-                print(items)
-            }
-
-            if filteredItems == []{
-                VStack{
-                    Image("donut")
-                        .background(Color.seaSky)
-                        .safeAreaInset(edge: .top) {
-                            EmptyView()
-                                .frame(maxHeight: 93)
+                    LocationCard(weatherBoxData: $cardWeatherBoxData, location: selectedLocation, isCurrentLocation: .constant(false))
+                        .frame(maxWidth: .infinity, maxHeight: 140)
+                        .listRowSeparator(.hidden)
+                        .onTapGesture {
+                            locationStore.selectedLocationForModal = selectedLocation
+                            isModalVisible.toggle()
                         }
-                    Text("검색 결과가 없어요")
-                        .font(.IMHyemin(.body))
+                        .sheet(isPresented: $isModalVisible, content: {
+                            CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isModalVisible, location: locationStore.selectedLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
+                        })
+                        .task {
+                            if let weatherData = await weatherManager.getWeatherInfoForAddress(address: selectedLocation) {
+                                self.cardWeatherBoxData = weatherData
+                            } else {
+                                print("날씨 정보를 가져오지 못했습니다.")
+                            }
+                        }
                 }
+                .listRowSeparator(.hidden)
             }
+            .onMove(perform: locationStore.moveLocation) // 항목 이동 기능
+            .listRowBackground(Color.seaSky)
+        }
+        .safeAreaInset(edge: .top) {
+            EmptyView()
+                .frame(maxHeight: 125)
+        }
+        .listStyle(.plain)
+        .background(Color.seaSky)
+        .scrollContentBackground(.hidden)
+        .environment(\.editMode, .constant(isEditMode ? EditMode.active : EditMode.inactive))
+        .onAppear() {
+            locationStore.loadLocations()
+        }
+    }
+    private var emptyView: some View{
+        VStack {
+            Image("donut")
+            Text("검색 결과가 없어요")
+                .font(.IMHyemin(.body))
         }
         .background(Color.seaSky)
     }
-
-    // 항목 삭제 함수
-
-        func deleteItem(at offsets: IndexSet) {
-            items.remove(atOffsets: offsets)
-            saveItems() // 항목 삭제 후 UserDefaults에 저장
+    private var currentWeatherView: some View{
+        HStack{
+            LocationCard(weatherBoxData: $cardWeatherBoxData, location: locationManager.address, isCurrentLocation: .constant(false))
+                .frame(maxWidth: .infinity, maxHeight: 140)
+                .listRowSeparator(.hidden)
+                .onTapGesture {
+                    isCurrentWeatherModalVisible.toggle()
+                }
+                .sheet(isPresented: $isCurrentWeatherModalVisible, content: {
+                    CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isCurrentWeatherModalVisible, location: locationManager.address, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
+                })
+                .task {
+                    if let weatherData = await weatherManager.getWeatherInfoForAddress(address: locationManager.address) {
+                        self.cardWeatherBoxData = weatherData
+                    } else {
+                        print("날씨 정보를 가져오지 못했습니다.")
+                    }
+                }
         }
-
-        // 항목 이동 함수
-        func moveItem(from source: IndexSet, to destination: Int) {
-            items.move(fromOffsets: source, toOffset: destination)
-            saveItems() // 항목 이동 후 UserDefaults에 저장
-        }
-
-        // 항목을 UserDefaults에 저장하는 함수
-        func saveItems() {
-            UserDefaults.standard.set(items, forKey: "items")
-        }
+        .listRowSeparator(.hidden)
+        .listRowBackground(Color.seaSky)
+    }
 }
 
-//struct LocationListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationView {
-//            LocationListView()
-//                .preferredColorScheme(.dark)
-//        }
-//    }
-//}

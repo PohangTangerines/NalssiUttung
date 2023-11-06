@@ -11,13 +11,14 @@ struct NavigationBar: View {
     @Binding var searchText: String
     @Binding var isEditMode: Bool
     @Binding var isTextFieldActive: Bool
-    @FocusState private var isFocused: Bool
+    @FocusState var isFocused: Bool
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
+                    isTextFieldActive = false
                     dismiss()
                 }){
                     Image(systemName: "chevron.left")
@@ -33,7 +34,9 @@ struct NavigationBar: View {
                 
                 Button(action: {
                     withAnimation{
-                        self.isEditMode.toggle() // 편집 모드를 토글합니다.
+                        if !isTextFieldActive {
+                            self.isEditMode.toggle() // 편집 모드를 토글합니다.
+                        }
                     }
                 }){
                     Text(isEditMode ? "완료" : "편집")
@@ -42,9 +45,7 @@ struct NavigationBar: View {
                         .frame(maxWidth: 40, maxHeight: 40, alignment: .trailing)
                 }
             }
-
             searchBar
-
         }
         .frame(height: 106, alignment: .top)
         .padding(.horizontal, 20)
@@ -82,7 +83,7 @@ struct NavigationBar: View {
             if isTextFieldActive{
                 Button(action: {
                     isFocused = false
-                    isTextFieldActive.toggle()
+                    isTextFieldActive = false
                     searchText = ""
                 }, label: {
                     Text("취소")

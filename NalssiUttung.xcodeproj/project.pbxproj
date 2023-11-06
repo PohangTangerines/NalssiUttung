@@ -16,6 +16,7 @@
 		03B2F46D2AB09FAA005A5AD4 /* IMHyemin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46C2AB09FAA005A5AD4 /* IMHyemin-Bold.otf */; };
 		03B2F46F2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */; };
 		03B2F4712AB09FDD005A5AD4 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */; };
+		03DD90152AEFCFF100AA072C /* LocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD90142AEFCFF100AA072C /* LocationStore.swift */; };
 		0E7B8A7D2ACC3C52006E1F5E /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B8A7C2ACC3C52006E1F5E /* View+.swift */; };
 		0E7B8A802ACC56D6006E1F5E /* ScrollKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7B8A7F2ACC56D6006E1F5E /* ScrollKit */; };
 		0E7B8A822ACC7111006E1F5E /* MainScrolledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B8A812ACC7111006E1F5E /* MainScrolledView.swift */; };
@@ -67,6 +68,7 @@
 		03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		03B2F4722AB0A063005A5AD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		03DD90142AEFCFF100AA072C /* LocationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStore.swift; sourceTree = "<group>"; };
 		0E7B8A7C2ACC3C52006E1F5E /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		0E7B8A812ACC7111006E1F5E /* MainScrolledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScrolledView.swift; sourceTree = "<group>"; };
 		0E7B8A832ACC7384006E1F5E /* RealTimeWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeWeatherView.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			children = (
 				03B2F4622AB08EB7005A5AD4 /* RealTimeWeather.swift */,
 				7C7E8A042AD57CF000EE5260 /* LocationListViewModel.swift */,
+				03DD90142AEFCFF100AA072C /* LocationStore.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 			files = (
 				036CA6782AB4C3540056C453 /* DailyWeatherView.swift in Sources */,
 				0E7B8A822ACC7111006E1F5E /* MainScrolledView.swift in Sources */,
+				03DD90152AEFCFF100AA072C /* LocationStore.swift in Sources */,
 				036CA6932AB8C54F0056C453 /* DetailedWeatherView.swift in Sources */,
 				03B2F4632AB08EB7005A5AD4 /* RealTimeWeather.swift in Sources */,
 				0E868C262AD4A8BB007D28F8 /* Weather+.swift in Sources */,
@@ -581,6 +585,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NalssiUttung/Preview Content\"";
+				DEVELOPMENT_TEAM = DD63847N69;
 				DEVELOPMENT_TEAM = PAQ92DM7XD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -612,9 +617,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NalssiUttung/NalssiUttung.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NalssiUttung/Preview Content\"";
+				DEVELOPMENT_TEAM = DD63847N69;
 				DEVELOPMENT_TEAM = PAQ92DM7XD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -633,6 +640,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiUttung1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
