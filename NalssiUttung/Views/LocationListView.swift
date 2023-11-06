@@ -141,6 +141,7 @@ struct LocationListView: View {
         .environment(\.editMode, .constant(isEditMode ? EditMode.active : EditMode.inactive))
         .onAppear() {
             locationStore.loadLocations()
+            print(locationStore.selectedLocations)
         }
     }
     private var emptyView: some View{
@@ -153,7 +154,7 @@ struct LocationListView: View {
     }
     private var currentWeatherView: some View{
         HStack{
-            LocationCard(weatherBoxData: $cardWeatherBoxData, location: locationManager.address, isCurrentLocation: .constant(false))
+            LocationCard(weatherBoxData: $cardWeatherBoxData, location: locationManager.address, isCurrentLocation: .constant(true))
                 .frame(maxWidth: .infinity, maxHeight: 140)
                 .listRowSeparator(.hidden)
                 .onTapGesture {
