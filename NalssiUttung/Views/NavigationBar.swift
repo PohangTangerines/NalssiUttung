@@ -4,7 +4,6 @@
 //
 //  Created by CHANG JIN LEE on 2023/09/11.
 
-
 import SwiftUI
 
 struct NavigationBar: View {
@@ -20,7 +19,7 @@ struct NavigationBar: View {
                 Button(action: {
                     isTextFieldActive = false
                     dismiss()
-                }){
+                }) {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 18).weight(.medium))
                         .foregroundColor(Color.basalt)
@@ -33,12 +32,12 @@ struct NavigationBar: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 
                 Button(action: {
-                    withAnimation{
+                    withAnimation {
                         if !isTextFieldActive {
                             self.isEditMode.toggle() // 편집 모드를 토글합니다.
                         }
                     }
-                }){
+                }) {
                     Text(isEditMode ? "완료" : "편집")
                         .font(.system(size: 18).weight(.semibold))
                         .foregroundColor(Color.darkChacoal)
@@ -57,7 +56,7 @@ struct NavigationBar: View {
     }
 
     private var searchBar: some View {
-        HStack{
+        HStack {
             HStack(spacing: 2) {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(Color.darkChacoal)
@@ -80,7 +79,7 @@ struct NavigationBar: View {
                 }
             }
 
-            if isTextFieldActive{
+            if isTextFieldActive {
                 Button(action: {
                     isFocused = false
                     isTextFieldActive = false
