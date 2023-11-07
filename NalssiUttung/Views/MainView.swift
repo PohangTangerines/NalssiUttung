@@ -72,8 +72,8 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                MainHeader(weatherBoxData: $weatherBoxData, locationText: $locationManager.address, modalState: $modalState, isModalVisible: $isModalVisible)
-                    .task {
+                MainHeader(locationText: $locationManager.address, modalState: $modalState, isModalVisible: $isModalVisible)
+                    .task{
                         locationManager.getLocationAddress()
                     }
 
@@ -105,7 +105,6 @@ struct MainView: View {
     }
     
     private struct MainHeader: View {
-        @Binding var weatherBoxData: WeatherBoxData?
         @Binding var locationText: String
         @Binding var modalState: ModalState
         @Binding var isModalVisible: Bool
@@ -133,7 +132,7 @@ struct MainView: View {
                     Spacer()
                     switch modalState {
                     case .notModalView:
-                        NavigationLink(destination: LocationListView(weatherBoxData: $weatherBoxData, locationStore: locationStore)) {
+                        NavigationLink(destination: LocationListView(locationStore: locationStore)) {
                             Image(systemName: "plus")
                                 .font(.pretendardSemibold(.body))
                                 .foregroundColor(.black)

@@ -9,7 +9,8 @@ import SwiftUI
 import WeatherKit
 
 struct LocationCard: View {
-    @Binding var weatherBoxData: WeatherBoxData?
+    @ObservedObject var locationManager = LocationManager.shared
+    @State var weatherBoxData: WeatherBoxData?
     @State var location: String
     @Binding var isCurrentLocation: Bool
     
@@ -23,39 +24,41 @@ struct LocationCard: View {
                     if isCurrentLocation {
                         Text("나의 위치")
                             .font(.pretendardSemibold(.caption))
-                            .font(.system(size: 26))
+                            .font(.system(size: 20))
                         Spacer()
                     }
                     Text("\(location)")
                         .font(.pretendardSemibold(.caption))
+                        .font(.system(size: 14))
                         .padding(.trailing, 20)
                 }
-                
-                HStack(alignment: .top, spacing: 0) {
-                    Image(weatherBoxData?.weatherCondition.weatherIcon() ?? "")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 60)
-                        .padding(.trailing, 12)
-                        .padding(.top, 9)
-                    
-                    VStack(alignment: .leading, spacing: 0) {
-                        // MARK: 온도 및 날씨
-                        HStack(spacing: 0) {
-                            Text("\(weatherBoxData?.currentTemperature ?? 00)")
-                                .font(.IMHyemin(.title2))
-                                .tracking(-(Font.DEFontSize.title2.rawValue * 0.1))
-                            Text("° 흐림")
-                                .font(.IMHyemin(.title2))
-                                .padding(.leading, -(Font.DEFontSize.title2.rawValue * 0.3))
-                        }.padding(.bottom, 3)
+                if let weatherBoxData = weatherBoxData {
+                    HStack(alignment: .top, spacing: 0) {
+                        Image("\(weatherBoxData.weatherCondition.weatherIcon())")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 60)
+                            .padding(.trailing, 12)
+                            .padding(.top, 9)
                         
-                        // MARK: 최저 최고 온도
-                        Text("최저 \(weatherBoxData?.lowestTemperature ?? 00)° | 최고 \(weatherBoxData?.highestTemperature ?? 00)°")
-                            .font(.pretendardMedium(.footnote))
-                    }.padding(.bottom, 18).padding(.top, 12)
-                    
-                    Spacer()
+                        VStack(alignment: .leading, spacing: 0) {
+                            // MARK: 온도 및 날씨
+                            HStack(spacing: 0) {
+                                Text("\(weatherBoxData.currentTemperature)° ")
+                                    .font(.IMHyemin(.title2))
+                                    .tracking(-(Font.DEFontSize.title2.rawValue * 0.1))
+                                Text("\(weatherBoxData.weatherCondition.weatherString())")
+                                    .font(.IMHyemin(.title2))
+                                    .padding(.leading, -(Font.DEFontSize.title2.rawValue * 0.3))
+                            }.padding(.bottom, 3)
+                            
+                            // MARK: 최저 최고 온도
+                            Text("최고 \(weatherBoxData.highestTemperature)° | 최저 \(weatherBoxData.lowestTemperature)°")
+                                .font(.pretendardMedium(.footnote))
+                        }.padding(.bottom, 18).padding(.top, 12)
+                        
+                        Spacer()
+                    }
                 }
             }.padding(.top, 15).padding(.leading, 15)
                 .overlay(
@@ -65,14 +68,36 @@ struct LocationCard: View {
                 )
         }
         .task {
-            do {
-                if let CLlocation = try await weatherManager.getCLLocationFromAddress(address: location) {
-                    if let weather = await weatherManager.getWeather(location: CLlocation) {
-                        self.weatherBoxData = weatherManager.getWeatherBoxData(location: CLlocation, weather: weather)
+            if isCurrentLocation {
+                do {
+                    if let location = locationManager.location {
+                        if let weather = await weatherManager.getWeather(location: location) {
+                            self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
+                        }
+                        print("LocationCard success CLlocation")
+                        print("현재 온도: \(weatherBoxData?.currentTemperature ?? 00)°C")
+                        print("최고 온도: \(weatherBoxData?.highestTemperature ?? 00)°C")
+                        print("최저 온도: \(weatherBoxData?.lowestTemperature ?? 00)°C")
+                        print("날씨 상태: \(weatherBoxData?.weatherCondition)")
                     }
+                } catch {
+                    print("Error LocationCard CLlocation")
                 }
-            } catch {
-                print("Error LocationCard CLlocation")
+            } else {
+                do {
+                    if let CLlocation = locationManager.findCoordinates(address: location){
+                        if let weather = await weatherManager.getWeather(location: CLlocation) {
+                            self.weatherBoxData = weatherManager.getWeatherBoxData(location: CLlocation, weather: weather)
+                        }
+                        print("LocationCard success CLlocation")
+                        print("현재 온도: \(weatherBoxData?.currentTemperature ?? 00)°C")
+                        print("최고 온도: \(weatherBoxData?.highestTemperature ?? 00)°C")
+                        print("최저 온도: \(weatherBoxData?.lowestTemperature ?? 00)°C")
+                        print("날씨 상태: \(weatherBoxData?.weatherCondition)")
+                    }
+                } catch {
+                    print("Error LocationCard CLlocation")
+                }
             }
         }
     }

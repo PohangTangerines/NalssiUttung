@@ -50,4 +50,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
         }
     }
+    
+    func findCoordinates(address val: String) -> CLLocation? {
+        if let location = LocationInfo.Data.first(where: { $0.address == val }) {
+            return CLLocation(latitude: location.latitude, longitude: location.longitude)
+        }
+        return nil
+    }
 }

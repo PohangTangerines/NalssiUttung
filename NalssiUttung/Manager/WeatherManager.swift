@@ -222,6 +222,8 @@ extension WeatherService {
         }
     }
     
+    //MARK: 주소 String을 받아서 CLLocation 객체를 반환하기
+    //ex) "제주시 건입동" -> CLLocation(latitude: 33.5138889, longitude: 126.5294444)
     func getCLLocationFromAddress(address: String) async throws -> CLLocation? {
         let geocoder = CLGeocoder()
         
