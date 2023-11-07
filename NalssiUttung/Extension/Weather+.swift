@@ -128,9 +128,12 @@ extension WeatherCondition {
     }
     
     func weatherCharacter(weatherData: DailyWeatherData) -> String {
+        let sunriseDate = weatherData.weather.dailyForecast.forecast.first!.sun.sunrise!
+        let sunsetDate = weatherData.weather.dailyForecast.forecast.first!.sun.sunset!
+
         switch self {
         case .clear, .mostlyClear :
-            if weatherData.sunriseDate.timeIntervalSinceNow > 0 && weatherData.sunsetDate.timeIntervalSinceNow < 0 {
+            if sunriseDate.timeIntervalSinceNow < 0 && sunsetDate.timeIntervalSinceNow > 0 {
                 return "clearCharacter"
             } else {
                 return "clearNightCharacter"
@@ -138,7 +141,7 @@ extension WeatherCondition {
         case .cloudy :
             return "cloudyCharacter"
         case .partlyCloudy :
-            if weatherData.sunriseDate.timeIntervalSinceNow > 0 && weatherData.sunsetDate.timeIntervalSinceNow < 0 {
+            if sunriseDate.timeIntervalSinceNow < 0 && sunsetDate.timeIntervalSinceNow > 0 {
                 return "partlyCloudyCharacter"
             } else {
                 return "partlyCloudyNightCharacter"
