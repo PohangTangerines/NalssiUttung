@@ -29,12 +29,13 @@ struct CardModalView: View {
     
     // MARK: User 위치 정보 저장 관련
     @ObservedObject var locationStore = LocationStore()
+    @Binding var isCurrentLocation: Bool
     
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
                 
-                MainHeader(weatherBoxData: $weatherBoxData, location: $location, modalState: $modalState, isModalVisible: $isModalVisible, searchText: $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
+                MainHeader(weatherBoxData: $weatherBoxData, location: $location, modalState: $modalState, isModalVisible: $isModalVisible, searchText: $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: $isCurrentLocation)
 //                MainHeader(weatherBoxData: $weatherBoxData, locationText: $locationManager.address, modalState: $modalState, isModalVisible: $isModalVisible)
                 RealTimeWeatherView(weatherBoxData: $weatherBoxData, dailyWeatherData: $dailyWeatherData, canTransition: .constant(false), isModalVisible: .constant(false))
 
@@ -71,6 +72,8 @@ private struct MainHeader: View {
     @ObservedObject var locationStore = LocationStore()
     let locations = LocationInfo.Data.map { $0.location }
     
+    @Binding var isCurrentLocation: Bool
+    
     var body: some View {
         HStack {
             if modalState != .notModalView {
@@ -86,8 +89,10 @@ private struct MainHeader: View {
             HStack {
                 Text("\(location)")
                     .font(.pretendardSemibold(.callout))
-                Image(systemName: "location.fill")
-                    .font(.system(size: 16, weight: .bold))
+                if isCurrentLocation{
+                    Image(systemName: "location.fill")
+                        .font(.system(size: 16, weight: .bold))
+                }
             }
             Spacer()
             switch modalState {

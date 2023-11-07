@@ -67,7 +67,7 @@ struct LocationListView: View {
                         }
                         .sheet(isPresented: $isSearchModalVisible, content: {
                             // 새로운 뷰 표시
-                            CardModalView(modalState: ModalState.isModalViewAndNotContainedContent, isModalVisible: $isSearchModalVisible, location: locationStore.selectedfilteredLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
+                            CardModalView(modalState: ModalState.isModalViewAndNotContainedContent, isModalVisible: $isSearchModalVisible, location: locationStore.selectedfilteredLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: .constant(false))
                                 .onDisappear(){
                                     isFocused = false
                                     isSearchModalVisible = false
@@ -123,7 +123,7 @@ struct LocationListView: View {
                             }
                         }
                         .sheet(isPresented: $isSelectedModalVisible, content: {
-                            CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isSelectedModalVisible, location: locationStore.selectedLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
+                            CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isSelectedModalVisible, location: locationStore.selectedLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: .constant(false))
                                 .onDisappear(){
                                     isSelectedModalVisible = false
                                 }
@@ -175,7 +175,7 @@ struct LocationListView: View {
                     }
                 }
                 .sheet(isPresented: $isCurrentWeatherModalVisible, content: {
-                    CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isCurrentWeatherModalVisible, location: locationManager.address, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
+                    CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isCurrentWeatherModalVisible, location: locationManager.address, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: .constant(true))
                         .onDisappear(){
                             isCurrentWeatherModalVisible = false
                         }
