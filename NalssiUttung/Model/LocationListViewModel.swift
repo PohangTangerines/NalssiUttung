@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ModalState{
+enum ModalState {
     case notModalView
     case isModalViewAndContainedContent
     case isModalViewAndNotContainedContent
@@ -78,7 +78,7 @@ extension LocationInfo {
         LocationInfo(AWSNum: 870, location: "진달래밭", altitude: 1489, address: "서귀포시 남원읍 하례리", latitude: "33° 22‘ 11“", longitude: "126° 33‘ 20“"),
 
         // 추자도
-        LocationInfo(AWSNum: 724, location: "추자도", altitude: 8, address: "제주시 추자면 영흥리", latitude: "33° 57‘ 28“", longitude: "126° 18‘ 5“"),
+        LocationInfo(AWSNum: 724, location: "추자도", altitude: 8, address: "제주시 추자면 영흥리", latitude: "33° 57‘ 28“", longitude: "126° 18‘ 5“")
         
         // == 동 읍 까지만 자른 버전
 //        LocationInfo(AWSNum: 184, location: "제주", altitude: 21, address: "제주시 건입동", latitude: "33° 30‘ 50“", longitude: "126° 31‘ 46“"),
