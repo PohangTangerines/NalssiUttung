@@ -65,6 +65,17 @@ struct NavigationBar: View {
                 TextField("title", text: $searchText, prompt: Text("지역 검색하기").foregroundColor(Color.darkChacoal))
                     .font(.system(size: 18))
                     .focused($isFocused)
+                    .onTapGesture {
+                        withAnimation {
+                            isTextFieldActive = true
+                            UIApplication.shared.sendAction(#selector(UIResponder.becomeFirstResponder), to: nil, from: nil, for: nil)
+                        }
+                    }
+                    .onChange(of: isTextFieldActive) { focused in
+                        if !focused {
+                            searchText = "" // $searchText가 ""이 됨
+                        }
+                    }
 
             }
             .foregroundColor(.secondary)
@@ -74,11 +85,6 @@ struct NavigationBar: View {
             .background(Color.seaSky, in: RoundedRectangle(cornerRadius: 10))
             .overlay(RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.darkChacoal, lineWidth: 2))
-            .onTapGesture {
-                withAnimation {
-                    isTextFieldActive = true
-                }
-            }
 
             if isTextFieldActive{
                 Button(action: {
