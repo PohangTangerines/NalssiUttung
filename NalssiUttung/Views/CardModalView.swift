@@ -22,7 +22,6 @@ struct CardModalView: View {
     @State var modalState: ModalState
     @Binding var isModalVisible: Bool
     @State var location: String
-    @Binding var searchText: String
     @FocusState var isFocused: Bool
     @Binding var isTextFieldActive: Bool
     @Binding var isEditMode: Bool
@@ -35,8 +34,7 @@ struct CardModalView: View {
         NavigationView {
             VStack(spacing: 0) {
                 
-                MainHeader(weatherBoxData: $weatherBoxData, location: $location, modalState: $modalState, isModalVisible: $isModalVisible, searchText: $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: $isCurrentLocation)
-//                MainHeader(weatherBoxData: $weatherBoxData, locationText: $locationManager.address, modalState: $modalState, isModalVisible: $isModalVisible)
+                MainHeader(weatherBoxData: $weatherBoxData, location: $location, modalState: $modalState, isModalVisible: $isModalVisible, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: $isCurrentLocation)
                 RealTimeWeatherView(weatherBoxData: $weatherBoxData, dailyWeatherData: $dailyWeatherData, canTransition: .constant(false), isModalVisible: .constant(false))
 
                     .transition(.move(edge: .top))
@@ -44,12 +42,30 @@ struct CardModalView: View {
             .padding(.horizontal, 15)
             .background(Color.seaSky)
             .task {
-                if let location = locationManager.location {
-                    if let weather = await weatherManager.getWeather(location: location) {
-                        self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
-                        self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
-                        self.weeklyWeatherData = weatherManager.getWeeklyWeatherData(weather: weather)
-                        self.detailedWeatherData = weatherManager.getDetailedWeatherData(weather: weather)
+                if isCurrentLocation {
+                    do {
+                        if let location = locationManager.location {
+                            if let weather = await weatherManager.getWeather(location: location) {
+                                self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
+                                self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
+                            }
+                            print("LocationCard success CLlocation")
+                            print("현재 온도: \(weatherBoxData?.currentTemperature ?? 00)°C")
+                            print("최고 온도: \(weatherBoxData?.highestTemperature ?? 00)°C")
+                            print("최저 온도: \(weatherBoxData?.lowestTemperature ?? 00)°C")
+                            print("날씨 상태: \(weatherBoxData?.weatherCondition)")
+                        }
+                    } catch {
+                        print("Error LocationCard CLlocation")
+                    }
+                } else{
+                    if let CLlocation = locationManager.findCoordinates(address: location){
+                        if let weather = await weatherManager.getWeather(location: CLlocation) {
+                            self.weatherBoxData = weatherManager.getWeatherBoxData(location: CLlocation, weather: weather)
+                            self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
+                            self.weeklyWeatherData = weatherManager.getWeeklyWeatherData(weather: weather)
+                            self.detailedWeatherData = weatherManager.getDetailedWeatherData(weather: weather)
+                        }
                     }
                 }
             }
@@ -62,7 +78,6 @@ private struct MainHeader: View {
     @Binding var location: String
     @Binding var modalState: ModalState
     @Binding var isModalVisible: Bool
-    @Binding var searchText: String
     @FocusState var isFocused: Bool
     @Binding var isTextFieldActive: Bool
     @Binding var isEditMode: Bool
@@ -97,7 +112,7 @@ private struct MainHeader: View {
             Spacer()
             switch modalState {
             case .notModalView:
-                NavigationLink(destination: LocationListView(weatherBoxData: $weatherBoxData, locationStore: locationStore)) {
+                NavigationLink(destination: LocationListView(locationStore: locationStore)) {
                     Image(systemName: "plus")
                         .font(.pretendardSemibold(.body))
                         .foregroundColor(.black)
@@ -111,7 +126,6 @@ private struct MainHeader: View {
                     isTextFieldActive = false
                     isEditMode = false
                     isModalVisible = false
-                    searchText = ""
                 } label: {
                     Text("추가")
                         .font(.pretendardSemibold(.body))

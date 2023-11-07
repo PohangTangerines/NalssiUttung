@@ -9,7 +9,8 @@ import SwiftUI
 import WeatherKit
 
 struct LocationCard: View {
-    @Binding var weatherBoxData: WeatherBoxData?
+    @ObservedObject var locationManager = LocationManager.shared
+    @State var weatherBoxData: WeatherBoxData?
     @State var location: String
     @Binding var isCurrentLocation: Bool
     
@@ -65,26 +66,37 @@ struct LocationCard: View {
                 )
         }
         .task {
-            do {
-                if let CLlocation = try await weatherManager.getCLLocationFromAddress(address: location){
-                    if let weather = await weatherManager.getWeather(location: CLlocation) {
-                        self.weatherBoxData = weatherManager.getWeatherBoxData(location: CLlocation, weather: weather)
+            if isCurrentLocation {
+                do {
+                    if let location = locationManager.location {
+                        if let weather = await weatherManager.getWeather(location: location) {
+                            self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
+                        }
+                        print("LocationCard success CLlocation")
+                        print("현재 온도: \(weatherBoxData?.currentTemperature ?? 00)°C")
+                        print("최고 온도: \(weatherBoxData?.highestTemperature ?? 00)°C")
+                        print("최저 온도: \(weatherBoxData?.lowestTemperature ?? 00)°C")
+                        print("날씨 상태: \(weatherBoxData?.weatherCondition)")
                     }
-                    print("LocationCard success CLlocation")
-                    print("현재 온도: \(weatherBoxData?.currentTemperature ?? 00)°C")
-                    print("최고 온도: \(weatherBoxData?.highestTemperature ?? 00)°C")
-                    print("최저 온도: \(weatherBoxData?.lowestTemperature ?? 00)°C")
-                    print("날씨 상태: \(weatherBoxData?.weatherCondition)")
+                } catch {
+                    print("Error LocationCard CLlocation")
                 }
-            } catch {
-                print("Error LocationCard CLlocation")
+            } else {
+                do {
+                    if let CLlocation = locationManager.findCoordinates(address: location){
+                        if let weather = await weatherManager.getWeather(location: CLlocation) {
+                            self.weatherBoxData = weatherManager.getWeatherBoxData(location: CLlocation, weather: weather)
+                        }
+                        print("LocationCard success CLlocation")
+                        print("현재 온도: \(weatherBoxData?.currentTemperature ?? 00)°C")
+                        print("최고 온도: \(weatherBoxData?.highestTemperature ?? 00)°C")
+                        print("최저 온도: \(weatherBoxData?.lowestTemperature ?? 00)°C")
+                        print("날씨 상태: \(weatherBoxData?.weatherCondition)")
+                    }
+                } catch {
+                    print("Error LocationCard CLlocation")
+                }
             }
-                
-//             let weatherData = try await weatherManager.getWeatherInfoForAddress(address: location)
-//                self.weatherBoxData = weatherData
-//            } catch {
-//                print("날씨 정보를 가져오지 못했습니다.")
-//            }
         }
     }
 }
