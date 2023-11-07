@@ -1,27 +1,15 @@
 {
   "images" : [
     {
-<<<<<<< HEAD
       "filename" : "donut.png",
-=======
-      "filename" : "도넛 1.png",
->>>>>>> a8b3763 ([Fix] 잘못 삭제한 도넛 이미지 재추가)
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-<<<<<<< HEAD
-=======
-      "filename" : "도넛 1@2x.png",
->>>>>>> a8b3763 ([Fix] 잘못 삭제한 도넛 이미지 재추가)
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-<<<<<<< HEAD
-=======
-      "filename" : "도넛 1@3x.png",
->>>>>>> a8b3763 ([Fix] 잘못 삭제한 도넛 이미지 재추가)
       "idiom" : "universal",
       "scale" : "3x"
     }

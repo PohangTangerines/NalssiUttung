@@ -143,7 +143,6 @@ private struct MainHeader: View {
                 }
             }
         }
-        .padding(.top, 30)
-        .padding(.bottom, 27)
+        .padding(.top, 34).padding(.bottom, 24)
     }
 }
