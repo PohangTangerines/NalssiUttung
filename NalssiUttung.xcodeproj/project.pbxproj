@@ -24,7 +24,6 @@
 		0E7DD5CD2AC95F3C00DE28D3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DD5CC2AC95F3C00DE28D3 /* MainView.swift */; };
 		0E868C262AD4A8BB007D28F8 /* Weather+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E868C252AD4A8BB007D28F8 /* Weather+.swift */; };
 		0EB04B612AA6D17900DC0933 /* NalssiUttungApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */; };
-		0EB04B632AA6D17900DC0933 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B622AA6D17900DC0933 /* ContentView.swift */; };
 		0EB04B652AA6D17A00DC0933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EB04B642AA6D17A00DC0933 /* Assets.xcassets */; };
 		0EB04B682AA6D17A00DC0933 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EB04B672AA6D17A00DC0933 /* Preview Assets.xcassets */; };
 		0EB04B722AA6D17A00DC0933 /* NalssiUttungTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B712AA6D17A00DC0933 /* NalssiUttungTests.swift */; };
@@ -76,7 +75,6 @@
 		0E868C252AD4A8BB007D28F8 /* Weather+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Weather+.swift"; sourceTree = "<group>"; };
 		0EB04B5D2AA6D17900DC0933 /* NalssiUttung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NalssiUttung.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiUttungApp.swift; sourceTree = "<group>"; };
-		0EB04B622AA6D17900DC0933 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0EB04B642AA6D17A00DC0933 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0EB04B672AA6D17A00DC0933 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0EB04B6D2AA6D17A00DC0933 /* NalssiUttungTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NalssiUttungTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,7 +215,6 @@
 		7C0D1BD82AAB7E2E00A8BCFF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0EB04B622AA6D17900DC0933 /* ContentView.swift */,
 				7CA9A3C72AAF56FF0051CC25 /* NavigationBar.swift */,
 				7C0D1BDC2AAB7E7400A8BCFF /* LocationCard.swift */,
 				7CA9A3CC2AAF60110051CC25 /* LocationListView.swift */,
@@ -411,7 +408,6 @@
 				03B2F4632AB08EB7005A5AD4 /* RealTimeWeather.swift in Sources */,
 				0E868C262AD4A8BB007D28F8 /* Weather+.swift in Sources */,
 				0E7B8A7D2ACC3C52006E1F5E /* View+.swift in Sources */,
-				0EB04B632AA6D17900DC0933 /* ContentView.swift in Sources */,
 				0EE65AEC2AB6DC690038A32F /* WeatherManager.swift in Sources */,
 				7CA9A3C82AAF56FF0051CC25 /* NavigationBar.swift in Sources */,
 				7C0D1BDD2AAB7E7400A8BCFF /* LocationCard.swift in Sources */,
@@ -586,6 +582,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NalssiUttung/Preview Content\"";
 				DEVELOPMENT_TEAM = DD63847N69;
+				DEVELOPMENT_TEAM = PAQ92DM7XD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NalssiUttung/Info.plist;
@@ -603,6 +600,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiUttung.CJ;
+				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiUttung1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -622,6 +620,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NalssiUttung/Preview Content\"";
 				DEVELOPMENT_TEAM = DD63847N69;
+				DEVELOPMENT_TEAM = PAQ92DM7XD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NalssiUttung/Info.plist;
@@ -639,6 +638,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiUttung.CJ;
+				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiUttung1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

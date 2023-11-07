@@ -230,11 +230,11 @@ extension WeatherService {
         // 주소를 좌표로 변환
         let placemarks = try await geocoder.geocodeAddressString(address)
         
-        if let location = placemarks.first?.location{
+        if let location = placemarks.first?.location {
             // 좌표를 기반으로 날씨 정보 가져오기
             print("success placemarks.first?.location")
             return location
-        } else{
+        } else {
             return nil
         }
     }

@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-enum ModalState{
+enum ModalState {
     case notModalView
     case isModalViewAndContainedContent
     case isModalViewAndNotContainedContent

@@ -114,7 +114,7 @@ struct MainView: View {
         var body: some View {
             ZStack {
                 HStack {
-                    if modalState != .notModalView{
+                    if modalState != .notModalView {
                         Button {
                             isModalVisible.toggle()
                         } label: {
@@ -130,7 +130,7 @@ struct MainView: View {
                 }
                 HStack {
                     Spacer()
-                    switch modalState{
+                    switch modalState {
                     case .notModalView:
                         NavigationLink(destination: LocationListView(locationStore: locationStore)) {
                             Image(systemName: "plus")

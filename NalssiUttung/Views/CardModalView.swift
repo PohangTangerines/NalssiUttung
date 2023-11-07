@@ -130,7 +130,7 @@ private struct MainHeader: View {
                         .font(.pretendardSemibold(.body))
                         .foregroundColor(.black)
                 }
-                .task{
+                .task {
                     do {
                         var list = try await locationStore.loadLocations()
                         list.append(location)
@@ -147,9 +147,3 @@ private struct MainHeader: View {
         .padding(.bottom, 27)
     }
 }
-//
-//struct CardModalView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CardModalView(modalState: ModalState.isModalViewAndNotContainedContent, isModalVisible: .constant(true), location: "제주 공항", searchText: .constant(""))
-//    }
-//}
