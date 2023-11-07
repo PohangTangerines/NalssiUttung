@@ -14,7 +14,7 @@ struct RealTimeWeatherView: View {
     @Binding var isModalVisible: Bool
     
     var body: some View {
-        if let weatherBoxData = weatherBoxData {
+        if let weatherBoxData = weatherBoxData, let dailyWeatherData = dailyWeatherData {
             VStack(spacing: 0) {
                 tempConditionRow
                     .padding(.bottom, 10)
@@ -39,7 +39,7 @@ struct RealTimeWeatherView: View {
                         Spacer().frame(height: 50)
                         HStack {
                             Spacer()
-                            Image("\(weatherBoxData.weatherCondition.weatherCharacter())")
+                            Image("\(weatherBoxData.weatherCondition.weatherCharacter(weatherData: dailyWeatherData))")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 280)

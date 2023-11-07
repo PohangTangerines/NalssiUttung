@@ -14,13 +14,13 @@ class LocationStore: ObservableObject {
     @Published var currentLocation: String = "제주시 용담동"
     
     func loadLocations() async -> [String] {
-        do{
-            if let userDefaultsList = try? await UserDefaults.standard.stringArray(forKey: "locations") ?? []{
+        do {
+            if let userDefaultsList = try? await UserDefaults.standard.stringArray(forKey: "locations") ?? [] {
                 return userDefaultsList
-            } else{
+            } else {
                 print("fail load data")
             }
-        } catch{
+        } catch {
             print("UserDefaults error: \(error.localizedDescription)")
         }
     }

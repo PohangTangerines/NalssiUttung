@@ -7,7 +7,6 @@
 import SwiftUI
 import WeatherKit
 
-
 struct LocationListView: View {
     @State var cardWeatherBoxData: WeatherBoxData?
     @Binding var weatherBoxData: WeatherBoxData?
@@ -61,14 +60,14 @@ struct LocationListView: View {
                         .frame(maxWidth: .infinity, maxHeight: 140)
                         .listRowSeparator(.hidden)
                         .onTapGesture {
-                            if !isSelectedModalVisible && !isCurrentWeatherModalVisible{
+                            if !isSelectedModalVisible && !isCurrentWeatherModalVisible {
                                 getLocation(location: filteredLocation)
                             }
                         }
                         .sheet(isPresented: $isSearchModalVisible, content: {
                             // 새로운 뷰 표시
                             CardModalView(modalState: ModalState.isModalViewAndNotContainedContent, isModalVisible: $isSearchModalVisible, location: locationStore.selectedfilteredLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
-                                .onDisappear(){
+                                .onDisappear {
                                     isFocused = false
                                     isSearchModalVisible = false
                                 }
@@ -86,17 +85,17 @@ struct LocationListView: View {
         .background(Color.seaSky)
         .scrollContentBackground(.hidden)
         .task {
-            do{
+            do {
                 let userList = try await locationStore.loadLocations()
                 selectedLocations = userList
                 print("Success load: \(userList)")
-            } catch{
+            } catch {
                 selectedLocations = []
                 print("task error")
             }
         }
     }
-    private var selectedList: some View{
+    private var selectedList: some View {
         List {
             currentWeatherView
             ForEach(selectedLocations ?? [], id: \.self) { selectedLocation in
@@ -117,18 +116,18 @@ struct LocationListView: View {
                         .frame(maxWidth: .infinity, maxHeight: 140)
                         .listRowSeparator(.hidden)
                         .onTapGesture {
-                            if !isTextFieldActive{
+                            if !isTextFieldActive {
                                 locationStore.selectedLocationForModal = selectedLocation
                                 isSelectedModalVisible = true
                             }
                         }
                         .sheet(isPresented: $isSelectedModalVisible, content: {
                             CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isSelectedModalVisible, location: locationStore.selectedLocationForModal, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
-                                .onDisappear(){
+                                .onDisappear {
                                     isSelectedModalVisible = false
                                 }
                         })
-                        .onAppear(){
+                        .onAppear {
                             print(selectedLocation)
                         }
                 }
@@ -146,17 +145,17 @@ struct LocationListView: View {
         .scrollContentBackground(.hidden)
         .environment(\.editMode, .constant(isEditMode ? EditMode.active : EditMode.inactive))
         .task {
-            do{
+            do {
                 let userList = try await locationStore.loadLocations()
                 selectedLocations = userList
                 print("Success load: \(userList)")
-            } catch{
+            } catch {
                 selectedLocations = []
                 print("task error")
             }
         }
     }
-    private var emptyView: some View{
+    private var emptyView: some View {
         VStack {
             Image("donut")
             Text("검색 결과가 없어요")
@@ -164,19 +163,19 @@ struct LocationListView: View {
         }
         .background(Color.seaSky)
     }
-    private var currentWeatherView: some View{
-        HStack{
+    private var currentWeatherView: some View {
+        HStack {
             LocationCard(weatherBoxData: $cardWeatherBoxData, location: locationManager.address, isCurrentLocation: .constant(true))
                 .frame(maxWidth: .infinity, maxHeight: 140)
                 .listRowSeparator(.hidden)
                 .onTapGesture {
-                    if !isTextFieldActive{
+                    if !isTextFieldActive {
                         isCurrentWeatherModalVisible = true
                     }
                 }
                 .sheet(isPresented: $isCurrentWeatherModalVisible, content: {
                     CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isCurrentWeatherModalVisible, location: locationManager.address, searchText : $searchText, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode)
-                        .onDisappear(){
+                        .onDisappear {
                             isCurrentWeatherModalVisible = false
                         }
                 })
@@ -189,13 +188,12 @@ struct LocationListView: View {
         locationStore.saveLocations(come: selectedLocations!)
     }
     func getLocation(location: String) {
-        Task{
+        Task {
             await locationStore.selectedfilteredLocationForModal = location
-            Task{
+            Task {
                 await isSearchModalVisible = true
             }
         }
         
     }
 }
-
