@@ -54,7 +54,7 @@ struct LocationListView: View {
     }
     private var searchBarList : some View {
         List {
-            ForEach(filteredLocations, id: \.self) { filteredLocation in
+            ForEach(filteredLocations.prefix(10), id: \.self) { filteredLocation in
                 HStack() {
                     if let range = filteredLocation.range(of: searchText, options: .caseInsensitive) {
                         let beforeText = filteredLocation[..<range.lowerBound]
@@ -75,8 +75,15 @@ struct LocationListView: View {
                 .contentShape(Rectangle())
                 .onTapGesture {
                     if !isSelectedModalVisible && !isCurrentWeatherModalVisible{
-                        getLocation(location: filteredLocation)
-                        print("\(filteredLocation)")
+                        locationStore.selectedfilteredLocationForModal = filteredLocation
+                        isSearchModalVisible = true
+                        if let searchLocation = searchLocation, (searchLocation.contains(locationStore.selectedfilteredLocationForModal) || locationManager.address == locationStore.selectedfilteredLocationForModal) {
+                            modalState = .isModalViewAndContainedContent
+                        } else {
+                            modalState = .isModalViewAndNotContainedContent
+                        }
+                        print("searchBarList onTapGesture: \(filteredLocation)")
+                        print("locationStore.selectedfilteredLocationForModal: \(locationStore.selectedfilteredLocationForModal)")
                     }
                 }
                 .sheet(isPresented: $isSearchModalVisible, content: {
@@ -85,20 +92,6 @@ struct LocationListView: View {
                         .onDisappear(){
                             isFocused = false
                             isSearchModalVisible = false
-                        }
-                        .task{
-                            do {
-//                                if (((searchLocation?.contains(locationStore.selectedfilteredLocationForModal)) != nil ) || (locationManager.address == locationStore.selectedfilteredLocationForModal)){
-                                if let searchLocation = searchLocation, (searchLocation.contains(locationStore.selectedfilteredLocationForModal) || locationManager.address == locationStore.selectedfilteredLocationForModal) {
-                                    modalState = .isModalViewAndContainedContent
-                                    print("modalState Success: \(modalState) \(locationStore.selectedfilteredLocationForModal)")
-                                    print("\(searchLocation)")
-                                } else {
-                                    modalState = .isModalViewAndNotContainedContent
-                                }
-                            } catch {
-                                print("modalState Error")
-                            }
                         }
                 })
                 .listRowSeparator(.hidden)
@@ -212,15 +205,6 @@ struct LocationListView: View {
     func move(from source: IndexSet, to destination: Int) {
         selectedLocations!.move(fromOffsets: source, toOffset: destination)
         locationStore.saveLocations(come: selectedLocations!)
-    }
-    func getLocation(location: String) {
-        Task{
-            await locationStore.selectedfilteredLocationForModal = location
-            Task{
-                await isSearchModalVisible = true
-            }
-        }
-        
     }
 }
 

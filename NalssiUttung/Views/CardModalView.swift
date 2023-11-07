@@ -27,7 +27,6 @@ struct CardModalView: View {
     @Binding var isEditMode: Bool
     
     // MARK: User 위치 정보 저장 관련
-    @ObservedObject var locationStore = LocationStore()
     @Binding var isCurrentLocation: Bool
     
     var body: some View {
