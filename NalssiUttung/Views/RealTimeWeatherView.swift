@@ -12,6 +12,7 @@ struct RealTimeWeatherView: View {
     @Binding var dailyWeatherData: DailyWeatherData?
     @Binding var canTransition: Bool
     @Binding var isModalVisible: Bool
+    @State private var gifName: String = "clearCharacter"
     
     var body: some View {
         if let weatherBoxData = weatherBoxData, let dailyWeatherData = dailyWeatherData {
@@ -23,7 +24,8 @@ struct RealTimeWeatherView: View {
                     Text("최고 \(weatherBoxData.highestTemperature)° | 최저 \(weatherBoxData.lowestTemperature)°")
                         .font(.pretendardMedium(.body))
                     Spacer()
-                }.padding(.bottom, 18)
+                }
+                .padding(.bottom, 18)
                 
                 ZStack {
                     VStack {
@@ -36,15 +38,18 @@ struct RealTimeWeatherView: View {
                         Spacer()
                     }
                     VStack {
-                        Spacer().frame(height: 50)
+                        Spacer()
+                            .frame(height: 50)
                         HStack {
                             Spacer()
-                            Image("\(weatherBoxData.weatherCondition.weatherCharacter(weatherData: dailyWeatherData))")
-                                .resizable()
-                                .scaledToFit()
+                            AnimatedGifView(gifName: $gifName)
                                 .frame(width: 280)
                         }
+                        .onAppear {
+                            gifName = weatherBoxData.weatherCondition.weatherCharacter(weatherData: dailyWeatherData)
+                        }
                     }
+                    .padding(12)
                 }
                 
                 DailyWeatherView(dailyWeatherData: $dailyWeatherData)
@@ -56,7 +61,8 @@ struct RealTimeWeatherView: View {
                         .frame(height: 10)
                         .foregroundColor(.black)
                         .background {
-                            Circle().frame(width: 40, height: 40)
+                            Circle()
+                                .frame(width: 40, height: 40)
                                 .foregroundColor(canTransition ? Color.accentBlue : Color.clear)
                         }
                         .padding(.top, 42).padding(.bottom, 21)

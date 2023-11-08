@@ -6,13 +6,23 @@
 //
 
 import SwiftUI
+import Gifu
 
-struct AnimatedGifView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct AnimatedGifView: UIViewRepresentable {
+    @Binding var gifName: String
+    @State private var imageView = GIFImageView(frame: CGRect(x: 0, y: 0, width: 296, height: 260))
+    
+    func makeUIView(context: Context) -> UIView {
+        let uiView = UIView()
+        uiView.addSubview(imageView)
+        return uiView
+    }
+    
+    func updateUIView(_ uiView: UIView, context: Context) {
+        imageView.animate(withGIFNamed: gifName)
     }
 }
 
 #Preview {
-    AnimatedGifView()
+    AnimatedGifView(gifName: .constant("clearCharacter"))
 }
