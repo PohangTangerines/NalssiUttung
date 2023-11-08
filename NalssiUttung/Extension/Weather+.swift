@@ -131,8 +131,7 @@ extension WeatherCondition {
         let sunsetDate = weatherData.weather.dailyForecast.forecast.first!.sun.sunset!
 
         switch self {
-<<<<<<< Updated upstream
-        case .clear, .mostlyClear :
+        case .clear, .mostlyClear, .hot :
             if sunriseDate.timeIntervalSinceNow < 0 && sunsetDate.timeIntervalSinceNow > 0 {
                 return "clearCharacter"
             } else {
@@ -140,22 +139,13 @@ extension WeatherCondition {
             }
         case .cloudy :
             return "cloudyCharacter"
-        case .partlyCloudy :
+        case .partlyCloudy, .mostlyCloudy :
             if sunriseDate.timeIntervalSinceNow < 0 && sunsetDate.timeIntervalSinceNow > 0 {
                 return "partlyCloudyCharacter"
             } else {
                 return "partlyCloudyNightCharacter"
             }
-        case .haze, .foggy :
-=======
-        case .clear, .mostlyClear, .hot :
-            return "clearCharacter"
-        case .cloudy :
-            return "cloudyCharacter"
-        case .partlyCloudy, .mostlyCloudy :
-            return "partlyCloudyCharacter"
         case .haze, .foggy, .blowingDust, .smoky :
->>>>>>> Stashed changes
             return "foggyCharacter"
         case .windy, .breezy :
             return "windyCharacter"
