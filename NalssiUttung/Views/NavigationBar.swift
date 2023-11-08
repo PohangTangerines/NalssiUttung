@@ -64,6 +64,7 @@ struct NavigationBar: View {
                 TextField("title", text: $searchText, prompt: Text("지역 검색하기").foregroundColor(Color.darkChacoal))
                     .font(.system(size: 18))
                     .focused($isFocused)
+                    .contentShape(RoundedRectangle(cornerRadius: 10))
                     .onTapGesture {
                         withAnimation {
                             isTextFieldActive = true
