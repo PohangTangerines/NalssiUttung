@@ -127,12 +127,12 @@ struct LocationCardScrolled: View {
                         VStack(alignment: .leading, spacing: 0) {
                             // MARK: 온도 및 날씨
                             HStack(spacing: 0) {
-                                Text("\(weatherBoxData.currentTemperature)")
+                                Text("\(weatherBoxData.currentTemperature)°")
                                     .font(.IMHyemin(.title2))
                                     .tracking(-(Font.DEFontSize.title2.rawValue * 0.07))
-                                Text("° 흐림")
+                                Text(weatherBoxData.weatherCondition.weatherString())
                                     .font(.IMHyemin(.title2))
-                                    .padding(.leading, -(Font.DEFontSize.title2.rawValue * 0.3))
+//                                    .padding(.leading, -(Font.DEFontSize.title2.rawValue * 0.3))
                             }.padding(.bottom, 3)
                             
                             // MARK: 최저 최고 온도
