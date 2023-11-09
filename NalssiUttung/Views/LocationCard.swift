@@ -152,6 +152,10 @@ struct LocationCardScrolled: View {
             dateFormatter.locale = Locale(identifier: "ko_KR")
             dateFormatter.dateFormat = "M월 d일 E요일"
             self.dateString = dateFormatter.string(from: today)
-        }
+        }.overlay(
+            RoundedRectangle(cornerRadius: 9)
+                .strokeBorder(Color.black, lineWidth: 1.5)
+                .contentShape(Rectangle())
+        )
     }
 }

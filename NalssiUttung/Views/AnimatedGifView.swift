@@ -23,6 +23,6 @@ struct AnimatedGifView: UIViewRepresentable {
     }
 }
 
-#Preview {
-    AnimatedGifView(gifName: .constant("clearCharacter"))
-}
+//#Preview {
+//    AnimatedGifView(gifName: .constant("clearCharacter"))
+//}
