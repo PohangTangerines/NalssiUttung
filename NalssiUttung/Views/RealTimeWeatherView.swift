@@ -32,7 +32,7 @@ struct RealTimeWeatherView: View {
                     // MARK: - 날씨 멘트
                     VStack {
                         HStack {
-                            Text("\(weatherBoxData.weatherCondition.weatherComment())")
+                            Text("\(weatherBoxData.weatherCondition.weatherComment(weatherData: dailyWeatherData))")
                                 .font(.IMHyemin(.title))
                                 .IMHyeminLineHeight(.title, lineHeight: 40)
                             Spacer()
