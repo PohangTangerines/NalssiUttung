@@ -28,7 +28,7 @@ extension LocationInfo {
     static let Data: [LocationInfo] = [
         
         LocationInfo(AWSNum: 184, location: "제주", altitude: 21, address: "제주시 건입동", latitude: 33.5138889, longitude: 126.5294444),
-        LocationInfo(AWSNum: 182, location: "제주(공)", altitude: 27, address: "제주시 용담이동", latitude: 33.8463889, longitude: 126.8205556),
+        LocationInfo(AWSNum: 182, location: "제주(공)", altitude: 27, address: "제주 공항", latitude: 33.8463889, longitude: 126.8205556),
         LocationInfo(AWSNum: 329, location: "산천단", altitude: 377, address: "제주시 아라일동", latitude: 33.4469444, longitude: 126.565),
         LocationInfo(AWSNum: 863, location: "외도", altitude: 53, address: "제주시 외도일동", latitude: 33.4766667, longitude: 126.4313889),
         LocationInfo(AWSNum: 865, location: "오등", altitude: 234, address: "제주시 오등동", latitude: 33.4575, longitude: 126.5219444),

@@ -9,20 +9,12 @@ import SwiftUI
 
 class LocationStore: ObservableObject {
     @Published var selectedLocations: [String] = []
-    @Published var selectedLocationForModal: String = "제주시 용담동"
-    @Published var selectedfilteredLocationForModal: String = "제주시 용담동"
-    @Published var currentLocation: String = "제주시 용담동"
+    @Published var selectedLocationForModal: String = "제주공항"
+    @Published var selectedfilteredLocationForModal: String = "제주공항"
+    @Published var currentLocation: String = "제주공항"
     
-    func loadLocations() async -> [String] {
-        do {
-            if let userDefaultsList = try? await UserDefaults.standard.stringArray(forKey: "locations") ?? [] {
-                return userDefaultsList
-            } else {
-                print("fail load data")
-            }
-        } catch {
-            print("UserDefaults error: \(error.localizedDescription)")
-        }
+    func loadLocations() -> [String] {
+            return UserDefaults.standard.stringArray(forKey: "locations") ?? []
     }
     
     func saveLocations(come list: [String]) {
