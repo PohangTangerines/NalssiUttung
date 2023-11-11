@@ -76,18 +76,19 @@ struct DailyWeatherView: View {
                                         }.zIndex(1)
                                     }
                                 }
-                            }.frame(height: 25)
+                            }
                             
                             Text(temperatureString(time: data.time, temp: data.temperature))
                                 .font(.pretendardMedium(.footnote))
-                                .padding(.top, 15)
-                        }.frame(width: 70)
+                        }
+                        .frame(width: 70)
                     }
                 }
             } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
         }
+        .padding(.vertical, 10.5)
     }
     
     private func getOffsetDot(nowTemp: Int) -> CGFloat {
