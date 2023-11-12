@@ -46,10 +46,10 @@ struct LocationCard: View {
                             HStack(spacing: 0) {
                                 Text("\(weatherBoxData.currentTemperature)° ")
                                     .font(.IMHyemin(.title2))
-                                    .tracking(-(Font.DEFontSize.title2.rawValue * 0.1))
+                                    .tracking(-(Font.FontSize.title2.rawValue * 0.1))
                                 Text("\(weatherBoxData.weatherCondition.weatherString())")
                                     .font(.IMHyemin(.title2))
-                                    .padding(.leading, -(Font.DEFontSize.title2.rawValue * 0.3))
+                                    .padding(.leading, -(Font.FontSize.title2.rawValue * 0.3))
                             }.padding(.bottom, 3)
                             
                             // MARK: 최저 최고 온도
@@ -129,7 +129,7 @@ struct LocationCardScrolled: View {
                             HStack(spacing: 0) {
                                 Text("\(weatherBoxData.currentTemperature)°")
                                     .font(.IMHyemin(.title2))
-                                    .tracking(-(Font.DEFontSize.title2.rawValue * 0.07))
+                                    .tracking(-(Font.FontSize.title2.rawValue * 0.07))
                                 Text(weatherBoxData.weatherCondition.weatherString())
                                     .font(.IMHyemin(.title2))
 //                                    .padding(.leading, -(Font.DEFontSize.title2.rawValue * 0.3))

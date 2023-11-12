@@ -24,11 +24,11 @@ struct MainView: View {
     @State private var canTransition = false
     @State private var viewOffsetY: CGFloat = 0
     @State private var isInitView = true
-
+    
     // MARK: Modal 관련
     @State var modalState: ModalState = .notModalView
     @State var isModalVisible: Bool = false
-            
+    
     private var dragGesture: some Gesture {
         DragGesture()
             .onChanged { gesture in
@@ -71,36 +71,39 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
-                MainHeader(locationText: $locationManager.address, modalState: $modalState, isModalVisible: $isModalVisible)
-                    .task{
-                        locationManager.getLocationAddress()
+            ZStack {
+                Color.seaSky
+                    .ignoresSafeArea()
+                VStack(spacing: 0) {
+                    MainHeader(locationText: $locationManager.address, modalState: $modalState, isModalVisible: $isModalVisible)
+                        .task {
+                            locationManager.getLocationAddress()
+                        }
+                    
+                    if isInitView {
+                        RealTimeWeatherView(weatherBoxData: $weatherBoxData, dailyWeatherData: $dailyWeatherData, canTransition: $canTransition, isModalVisible: .constant(true))
+                            .transition(.move(edge: .top))
+                    } else {
+                        MainScrolledView(weatherBoxData: $weatherBoxData,
+                                         weeklyWeatherData: $weeklyWeatherData,
+                                         detailedWeatherData: $detailedWeatherData)
+                        .transition(.move(edge: .bottom))
                     }
-
-                if isInitView {
-                    RealTimeWeatherView(weatherBoxData: $weatherBoxData, dailyWeatherData: $dailyWeatherData, canTransition: $canTransition, isModalVisible: .constant(true))
-                        .transition(.move(edge: .top))
-                } else {
-                    MainScrolledView(weatherBoxData: $weatherBoxData,
-                                     weeklyWeatherData: $weeklyWeatherData,
-                                     detailedWeatherData: $detailedWeatherData)
-                    .transition(.move(edge: .bottom))
-                }
-
-            }.padding(.horizontal, 15)
-                .gesture(dragGesture)
-                .offset(y: viewOffsetY)
-                .background(Color.seaSky)
-                .task {
-                    if let location = locationManager.location {
-                        if let weather = await weatherManager.getWeather(location: location) {
-                            self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
-                            self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
-                            self.weeklyWeatherData = weatherManager.getWeeklyWeatherData(weather: weather)
-                            self.detailedWeatherData = weatherManager.getDetailedWeatherData(weather: weather)
+                    
+                }.padding(.horizontal, 15)
+                    .gesture(dragGesture)
+                    .offset(y: viewOffsetY)
+                    .task {
+                        if let location = locationManager.location {
+                            if let weather = await weatherManager.getWeather(location: location) {
+                                self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
+                                self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
+                                self.weeklyWeatherData = weatherManager.getWeeklyWeatherData(weather: weather)
+                                self.detailedWeatherData = weatherManager.getDetailedWeatherData(weather: weather)
+                            }
                         }
                     }
-                }
+            }
         }
     }
     
@@ -110,7 +113,7 @@ struct MainView: View {
         @Binding var isModalVisible: Bool
         
         @ObservedObject var locationStore = LocationStore()
-
+        
         var body: some View {
             ZStack {
                 HStack {
@@ -144,9 +147,11 @@ struct MainView: View {
                             .font(.pretendardSemibold(.body))
                             .foregroundColor(.black)
                     }
-
+                    
                 }
-            }.padding(.top, 7.5).padding(.bottom, 24)
+            }
+            .padding(.top, 7.5)
+            .padding(.bottom, 24)
         }
     }
 }

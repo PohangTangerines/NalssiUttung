@@ -13,7 +13,7 @@ extension View {
     ///   - size: Font size. DEFontSize enum값.
     ///   - lineHeight: 설정할 Line Height.
     /// - Returns: LineHeight가 지정된 View를 return.
-    func IMHyeminLineHeight(_ size: Font.DEFontSize, lineHeight: CGFloat) -> some View {
+    func IMHyeminLineHeight(_ size: Font.FontSize, lineHeight: CGFloat) -> some View {
         self.lineSpacing(lineHeight - Font.IMHyeminHeight(size))
             .padding(.vertical, (lineHeight - Font.IMHyeminHeight(size)) / 2)
     }

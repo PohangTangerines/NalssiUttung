@@ -41,7 +41,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 // 주소 정보를 파싱하여 필요한 부분만 추출합니다.
                 if let locality = placemark.locality, let subLocality = placemark.subLocality {
                     if locality != "제주시" {
-                        self.address = "제주시 용담동"
+                        self.address = "제주공항"
                     } else {
                         self.address = "\(locality) \(subLocality)"
                     }
