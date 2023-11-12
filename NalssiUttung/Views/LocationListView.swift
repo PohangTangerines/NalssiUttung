@@ -104,20 +104,20 @@ struct LocationListView: View {
         .listStyle(.plain)
         .background(Color.seaSky)
         .scrollContentBackground(.hidden)
-        .onAppear {
-            let userList = locationStore.loadLocations()
-            selectedLocations = userList
-        }
-//        .task {
-//            do {
-//                let userList = try await locationStore.loadLocations()
-//                searchLocation = userList
-//                print("Success load: \(userList)")
-//            } catch{
-//                searchLocation = []
-//                print("task error")
-//            }
+//        .onAppear {
+//            let userList = locationStore.loadLocations()
+//            selectedLocations = userList
 //        }
+        .task {
+            do {
+                let userList = try await locationStore.loadLocations()
+                searchLocation = userList
+                print("Success load: \(userList)")
+            } catch{
+                searchLocation = []
+                print("task error")
+            }
+        }
     }
     private var selectedList: some View {
         List {
@@ -165,20 +165,20 @@ struct LocationListView: View {
         .background(Color.seaSky)
         .scrollContentBackground(.hidden)
         .environment(\.editMode, .constant(isEditMode ? EditMode.active : EditMode.inactive))
-        .onAppear {
-            let userList = locationStore.loadLocations()
-            selectedLocations = userList
-        }
-//        .task {
-//            do {
-//                let userList = try await locationStore.loadLocations()
-//                selectedLocations = userList
-//                print("Success load: \(userList)")
-//            } catch {
-//                selectedLocations = []
-//                print("task error")
-//            }
+//        .onAppear {
+//            let userList = locationStore.loadLocations()
+//            selectedLocations = userList
 //        }
+        .task {
+            do {
+                let userList = try await locationStore.loadLocations()
+                selectedLocations = userList
+                print("Success load: \(userList)")
+            } catch {
+                selectedLocations = []
+                print("task error")
+            }
+        }
     }
     private var emptyView: some View {
         VStack {
