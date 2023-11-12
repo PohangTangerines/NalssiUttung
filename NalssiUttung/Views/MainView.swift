@@ -29,6 +29,9 @@ struct MainView: View {
     @State var modalState: ModalState = .notModalView
     @State var isModalVisible: Bool = false
     
+    @Binding var showSplash: Bool
+    
+    
     private var dragGesture: some Gesture {
         DragGesture()
             .onChanged { gesture in
@@ -100,6 +103,7 @@ struct MainView: View {
                                 self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
                                 self.weeklyWeatherData = weatherManager.getWeeklyWeatherData(weather: weather)
                                 self.detailedWeatherData = weatherManager.getDetailedWeatherData(weather: weather)
+                                showSplash = false
                             }
                         }
                     }
