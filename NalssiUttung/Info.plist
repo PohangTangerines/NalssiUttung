@@ -8,5 +8,12 @@
 		<string>Pretendard-Medium.otf</string>
 		<string>IMHyemin-Bold.otf</string>
 	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>LaunchScreenBackgroundColor</string>
+		<key>UILaunchScreen</key>
+		<dict/>
+	</dict>
 </dict>
 </plist>
