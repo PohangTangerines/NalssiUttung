@@ -34,5 +34,5 @@
 | <img height="80" alt="달릭" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/55e8b98b-6441-4f00-be6c-b455c9d1a98c"> | [달릭(Darlic, 권다현)](https://github.com/dahyunkwon) | 디자인       |
 | <img height="65" alt="미야" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/fff63600-9f04-49f1-aa7b-df08153d82a1"> | [미야(Miya, 금가경)](https://github.com/ge-um)        | 개발         |
 | <img height="60" alt="젝무" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/fa71eceb-40c6-4d4b-8e9a-029740fc3f1b"> | [젝무(Jeckmu, 이재원)](https://github.com/220v-K)     | 개발         |
-| <img height="75" alt="CJ" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/decc8d6a-6236-409a-8fa9-67150ce1cd89"> | [씨제이(CJ, 창진)](https://github.com/ChangJin-Lee)   | 개발         |
+| <img height="75" alt="CJ" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/decc8d6a-6236-409a-8fa9-67150ce1cd89"> | [씨제이(CJ, 이창진)](https://github.com/ChangJin-Lee)   | 개발         |
 
