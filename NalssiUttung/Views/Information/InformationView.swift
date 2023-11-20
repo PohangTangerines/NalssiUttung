@@ -16,11 +16,11 @@ struct InformationView: View {
             VStack(alignment: .leading, spacing: 0) {
                 // MARK: 소개
                 rowTitle("소개")
-                informationNavigationRow(InformationView(), title: "날씨삼춘을 만든 사람들")
+                informationNavigationRow(MakePeopleView(), title: "날씨삼춘을 만든 사람들")
                 informationNavigationRow(InformationView(), title: "할라프렌즈")
                 
                 // MARK: 정보
-                rowTitle("정보")
+                rowTitle("정보").padding(.top, 6)
                 informationNavigationRow(InformationView(), title: "데이터 리소스")
                 
                 Spacer()
@@ -34,7 +34,7 @@ struct InformationView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(maxWidth: 350)
                     .frame(height: 230)
-            }
+            }.padding(.bottom, 30)
         }.padding(.horizontal, 15)
         .background(Color.seaSky)
             .toolbar(.hidden)
@@ -100,5 +100,6 @@ func informationHeader(_ dismiss: DismissAction, title: String) -> some View {
 struct InformationView_Previews: PreviewProvider {
     static var previews: some View {
         InformationView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
     }
 }
