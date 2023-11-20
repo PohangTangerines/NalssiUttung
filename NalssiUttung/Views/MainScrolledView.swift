@@ -23,11 +23,15 @@ struct MainScrolledView: View {
             Spacer()
             
             // MARK: 날씨삼춘 알아보기 - 만든사람들, WeatherKit 출처
-            HStack {
-                Text("\(Image(systemName: "info.circle.fill"))")
-                Text("날씨삼춘 알아보기").underline()
+            Button {
+                isPresentInformationView.toggle()
+            } label: {
+                HStack {
+                    Text("\(Image(systemName: "info.circle.fill"))")
+                    Text("날씨삼춘 알아보기").underline()
+                }
             }.navigationDestination(isPresented: $isPresentInformationView, destination: {
-                // Navigation
+                InformationView()
             }).foregroundColor(Color.darkChacoal)
                 .font(.IMHyemin(.caption2))
                 .padding(.bottom, 15)
