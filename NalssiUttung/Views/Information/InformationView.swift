@@ -18,11 +18,13 @@ struct InformationView: View {
                     // MARK: 소개
                     rowTitle("소개")
                     informationNavigationRow(MakePeopleView(), title: "날씨삼춘을 만든 사람들")
-                    informationNavigationRow(InformationView(), title: "할라프렌즈")
+                    informationNavigationRow(
+                        WebView(urlToLoad: "https://lateral-donkey-cf6.notion.site/128ecf0613254204aec7d344285d121f?pvs=4"),
+                        title: "할라프렌즈")
                     
                     // MARK: 정보
                     rowTitle("정보").padding(.top, 6)
-                    informationNavigationRow(InformationView(), title: "데이터 리소스")
+                    informationNavigationRow(ResourcesView(), title: "데이터 리소스")
                     
                     Spacer()
                 }

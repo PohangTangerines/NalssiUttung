@@ -17,8 +17,8 @@ struct MakePeopleView: View {
             Image("makePeople")
                 .resizable()
                 .scaledToFit()
-                .aspectRatio(contentMode: .fill)
-                .frame(height: 578)
+                .aspectRatio(contentMode: .fit)
+                .frame(maxHeight: 578)
             
             Spacer()
             
