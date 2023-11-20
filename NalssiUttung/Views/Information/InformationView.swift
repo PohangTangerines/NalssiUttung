@@ -11,33 +11,34 @@ struct InformationView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        VStack(spacing: 0) {
-            informationHeader(dismiss, title: "날씨삼춘 알아보기")
-            VStack(alignment: .leading, spacing: 0) {
-                // MARK: 소개
-                rowTitle("소개")
-                informationNavigationRow(MakePeopleView(), title: "날씨삼춘을 만든 사람들")
-                informationNavigationRow(InformationView(), title: "할라프렌즈")
+        NavigationView {
+            VStack(spacing: 0) {
+                informationHeader(dismiss, title: "날씨삼춘 알아보기")
+                VStack(alignment: .leading, spacing: 0) {
+                    // MARK: 소개
+                    rowTitle("소개")
+                    informationNavigationRow(MakePeopleView(), title: "날씨삼춘을 만든 사람들")
+                    informationNavigationRow(InformationView(), title: "할라프렌즈")
+                    
+                    // MARK: 정보
+                    rowTitle("정보").padding(.top, 6)
+                    informationNavigationRow(InformationView(), title: "데이터 리소스")
+                    
+                    Spacer()
+                }
                 
-                // MARK: 정보
-                rowTitle("정보").padding(.top, 6)
-                informationNavigationRow(InformationView(), title: "데이터 리소스")
-                
-                Spacer()
-            }
-            
-            // MARK: 기여운 캐릭터들
-            VStack(alignment: .center) {
-                Image("hallaFriends")
-                    .resizable()
-                    .scaledToFit()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: 350)
-                    .frame(height: 230)
-            }.padding(.bottom, 30)
-        }.padding(.horizontal, 15)
-        .background(Color.seaSky)
-            .toolbar(.hidden)
+                // MARK: 기여운 캐릭터들
+                VStack(alignment: .center) {
+                    Image("hallaFriends")
+                        .resizable()
+                        .scaledToFit()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(maxWidth: 350)
+                        .frame(height: 230)
+                }.padding(.bottom, 30)
+            }.padding(.horizontal, 15)
+                .background(Color.seaSky)
+        }.toolbar(.hidden)
     }
     
     private func rowTitle(_ title: String) -> some View {
