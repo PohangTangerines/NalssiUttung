@@ -26,13 +26,14 @@
 
 ## 팀원
 
-| <img height="85" alt="린" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/e7358dc1-625c-4aad-b453-b9a33f4853e6"> | [린(Reene, 강나린)](https://github.com/oxoamor)       | PO           |
-| ------------------------------------------------------------ | ----------------------------------------------------- | ------------ |
-| <img height="65" alt="가디" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/133b2d4d-2861-478d-8847-d795f0d2d2a3"> | [가디(Guardy, 김수호)](https://github.com/ssuho)      | 기획, 마케팅 |
-| <img height="70" alt="지구" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/5df26e6e-cdf6-485b-9b24-156b8207b2ab"> | [지구(Jigu, 이지수)](https://github.com/Jisull)       | 기획, PM     |
-| <img height="65" alt="테오" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/b43aaffe-fd9f-4dc3-8f32-d1b14dec3d1c"> | [테오(Theo, 나경빈)](https://github.com/ngbeen)       | 디자인       |
-| <img height="80" alt="달릭" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/55e8b98b-6441-4f00-be6c-b455c9d1a98c"> | [달릭(Darlic, 권다현)](https://github.com/dahyunkwon) | 디자인       |
-| <img height="65" alt="미야" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/fff63600-9f04-49f1-aa7b-df08153d82a1"> | [미야(Miya, 금가경)](https://github.com/ge-um)        | 개발         |
-| <img height="60" alt="젝무" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/fa71eceb-40c6-4d4b-8e9a-029740fc3f1b"> | [젝무(Jeckmu, 이재원)](https://github.com/220v-K)     | 개발         |
-| <img height="75" alt="CJ" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/decc8d6a-6236-409a-8fa9-67150ce1cd89"> | [씨제이(CJ, 이창진)](https://github.com/ChangJin-Lee)   | 개발         |
+| 기여운 아이콘                                                | 닉네임(이름)                                          | 무엇을 했는가! |
+| ------------------------------------------------------------ | ----------------------------------------------------- | -------------- |
+| <img height="85" alt="린" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/e7358dc1-625c-4aad-b453-b9a33f4853e6"> | [린(Reene, 강나린)](https://github.com/oxoamor)       | PO             |
+| <img height="65" alt="가디" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/133b2d4d-2861-478d-8847-d795f0d2d2a3"> | [가디(Guardy, 김수호)](https://github.com/ssuho)      | 기획, 마케팅   |
+| <img height="70" alt="지구" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/5df26e6e-cdf6-485b-9b24-156b8207b2ab"> | [지구(Jigu, 이지수)](https://github.com/Jisull)       | 기획, PM       |
+| <img height="65" alt="테오" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/b43aaffe-fd9f-4dc3-8f32-d1b14dec3d1c"> | [테오(Theo, 나경빈)](https://github.com/ngbeen)       | 디자인         |
+| <img height="80" alt="달릭" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/55e8b98b-6441-4f00-be6c-b455c9d1a98c"> | [달릭(Darlic, 권다현)](https://github.com/dahyunkwon) | 디자인         |
+| <img height="65" alt="미야" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/fff63600-9f04-49f1-aa7b-df08153d82a1"> | [미야(Miya, 금가경)](https://github.com/ge-um)        | 개발           |
+| <img height="60" alt="젝무" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/fa71eceb-40c6-4d4b-8e9a-029740fc3f1b"> | [젝무(Jeckmu, 이재원)](https://github.com/220v-K)     | 개발           |
+| <img height="75" alt="CJ" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/decc8d6a-6236-409a-8fa9-67150ce1cd89"> | [씨제이(CJ, 이창진)](https://github.com/ChangJin-Lee) | 개발           |
 
