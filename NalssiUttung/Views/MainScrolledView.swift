@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct MainScrolledView: View {
-    @State private var isPresentInformationView = false
     @Binding var weatherBoxData: WeatherBoxData?
     @Binding var weeklyWeatherData: WeeklyWeatherData?
     @Binding var detailedWeatherData: DetailedWeatherData?
-
+    
     var body: some View {
-        VStack(spacing: 0) {            
+        VStack(spacing: 0) {
             LocationCardScrolled(weatherBoxData: $weatherBoxData)
             WeeklyWeatherView(weeklyWeatherData: $weeklyWeatherData)
                 .padding(.top, 27)
@@ -23,16 +22,12 @@ struct MainScrolledView: View {
             Spacer()
             
             // MARK: 날씨삼춘 알아보기 - 만든사람들, WeatherKit 출처
-            Button {
-                isPresentInformationView.toggle()
-            } label: {
+            NavigationLink(destination: InformationView()) {
                 HStack {
                     Text("\(Image(systemName: "info.circle.fill"))")
                     Text("날씨삼춘 알아보기").underline()
                 }
-            }.navigationDestination(isPresented: $isPresentInformationView, destination: {
-                InformationView()
-            }).foregroundColor(Color.darkChacoal)
+            }.foregroundColor(Color.darkChacoal)
                 .font(.IMHyemin(.caption2))
                 .padding(.bottom, 15)
             
