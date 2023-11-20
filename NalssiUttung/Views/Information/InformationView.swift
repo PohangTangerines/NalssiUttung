@@ -15,44 +15,50 @@ struct InformationView: View {
             informationHeader(dismiss, title: "날씨삼춘 알아보기")
             VStack(alignment: .leading, spacing: 0) {
                 // MARK: 소개
-                Text("소개").font(.pretendardMedium(.caption2))
-                    .foregroundColor(.darkChacoal)
-                    .padding(.bottom, 12)
-                
-                HStack {
-                    Text("날씨삼춘을 만든 사람들")
-                        .font(.pretendardMedium(.footnote))
-                    Spacer()
-                    chervronRight
-                }
-                divider
-                HStack {
-                    Text("할라프렌즈")
-                        .font(.pretendardMedium(.footnote))
-                    Spacer()
-                    chervronRight
-                }
-                divider
+                rowTitle("소개")
+                informationNavigationRow(InformationView(), title: "날씨삼춘을 만든 사람들")
+                informationNavigationRow(InformationView(), title: "할라프렌즈")
                 
                 // MARK: 정보
-                Text("정보").font(.pretendardMedium(.caption2))
-                    .foregroundColor(.darkChacoal)
-                    .padding(.top, 6)
-                    .padding(.bottom, 12)
+                rowTitle("정보")
+                informationNavigationRow(InformationView(), title: "데이터 리소스")
                 
-                HStack {
-                    Text("데이터 리소스")
-                        .font(.pretendardMedium(.footnote))
-                    Spacer()
-                    chervronRight
-                }
-                
-                // MARK: 기여운 캐릭터들
+                Spacer()
             }
-            Spacer()
+            
+            // MARK: 기여운 캐릭터들
+            VStack(alignment: .center) {
+                Image("hallaFriends")
+                    .resizable()
+                    .scaledToFit()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: 350)
+                    .frame(height: 230)
+            }
         }.padding(.horizontal, 15)
         .background(Color.seaSky)
             .toolbar(.hidden)
+    }
+    
+    private func rowTitle(_ title: String) -> some View {
+        return Text(title).font(.pretendardMedium(.caption2))
+            .foregroundColor(.darkChacoal)
+            .padding(.bottom, 12)
+    }
+    
+    private func informationNavigationRow(_ viewLink: some View, title: String) -> some View {
+        return VStack(spacing: 0) {
+            NavigationLink(destination: viewLink) {
+                HStack {
+                    Text(title)
+                        .font(.pretendardMedium(.footnote))
+                        .foregroundColor(.black)
+                    Spacer()
+                    chervronRight
+                }
+            }
+            divider
+        }
     }
     
     private var chervronRight: some View {
@@ -84,9 +90,15 @@ func informationHeader(_ dismiss: DismissAction, title: String) -> some View {
             Text(title)
                 .font(.pretendardSemibold(.callout))
                 .foregroundColor(Color.black)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                .frame(maxWidth: .infinity, alignment: .center)
             
             Spacer().frame(width: 40)
         }
     }.padding(.top, 7.5).padding(.bottom, 24)
+}
+
+struct InformationView_Previews: PreviewProvider {
+    static var previews: some View {
+        InformationView()
+    }
 }
