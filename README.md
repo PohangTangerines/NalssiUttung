@@ -27,7 +27,7 @@
 ## 팀원
 
 | 기여운 아이콘                                                | 닉네임(이름)                                          | 무엇을 했는가! |
-| ------------------------------------------------------------ | ----------------------------------------------------- | -------------- |
+| :------------------------------------------------------------: | :-----------------------------------------------------: | :--------------: |
 | <img height="85" alt="린" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/e7358dc1-625c-4aad-b453-b9a33f4853e6"> | [린(Reene, 강나린)](https://github.com/oxoamor)       | PO             |
 | <img height="65" alt="가디" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/133b2d4d-2861-478d-8847-d795f0d2d2a3"> | [가디(Guardy, 김수호)](https://github.com/ssuho)      | 기획, 마케팅   |
 | <img height="70" alt="지구" src="https://github.com/PohangTangerines/NalssiUttung/assets/82885362/5df26e6e-cdf6-485b-9b24-156b8207b2ab"> | [지구(Jigu, 이지수)](https://github.com/Jisull)       | 기획, PM       |
