@@ -11,15 +11,26 @@ struct MainScrolledView: View {
     @Binding var weatherBoxData: WeatherBoxData?
     @Binding var weeklyWeatherData: WeeklyWeatherData?
     @Binding var detailedWeatherData: DetailedWeatherData?
-
+    
     var body: some View {
-        VStack(spacing: 0) {            
+        VStack(spacing: 0) {
             LocationCardScrolled(weatherBoxData: $weatherBoxData)
             WeeklyWeatherView(weeklyWeatherData: $weeklyWeatherData)
                 .padding(.top, 27)
-                .padding(.bottom, 30)
+                .padding(.bottom, 20)
             DetailedWeatherView(detailedWeatherData: $detailedWeatherData)
             Spacer()
+            
+            // MARK: 날씨삼춘 알아보기 - 만든사람들, WeatherKit 출처
+            NavigationLink(destination: InformationView()) {
+                HStack {
+                    Text("\(Image(systemName: "info.circle.fill"))")
+                    Text("날씨삼춘 알아보기").underline()
+                }
+            }.foregroundColor(Color.darkChacoal)
+                .font(.IMHyemin(.caption2))
+                .padding(.bottom, 15)
+            
         }.padding(.horizontal, 15).background(Color.seaSky)
     }
 }

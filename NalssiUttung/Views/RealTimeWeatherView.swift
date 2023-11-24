@@ -47,6 +47,7 @@ struct RealTimeWeatherView: View {
                             Spacer()
                             AnimatedGifView(gifName: $gifName)
                                 .scaledToFit()
+                                .aspectRatio(contentMode: .fit)
                                 .frame(width: 280)
                         }
                         .onAppear {
