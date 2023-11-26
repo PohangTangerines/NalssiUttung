@@ -23,8 +23,36 @@ struct InformationView: View {
                         title: "할라프렌즈")
                     
                     // MARK: 정보
-                    rowTitle("정보").padding(.top, 6)
-                    informationNavigationRow(ResourcesView(), title: "데이터 리소스")
+//                    rowTitle("정보").padding(.top, 6)
+//                    informationNavigationRow(ResourcesView(), title: "데이터 리소스")
+                    Spacer().frame(height: 30)
+                    
+                    // MARK: 데이터 리소스
+                    HStack {
+                        Spacer()
+                        VStack(alignment: .center, spacing: 0) {
+                            HStack(alignment: .center, spacing: 0) {
+                                Text("날씨 데이터는  ")
+                                    .font(.IMHyemin(.footnote))
+                                    .foregroundColor(.black)
+                                Image(systemName: "applelogo")
+                                    .font(.system(size: 30))
+                                    .padding(.bottom, 5)
+                                Text(" Weather")
+                                    .font(.system(size: 30, weight: .semibold))
+                            }
+                            
+                            NavigationLink {
+                                WebView(urlToLoad: "https://developer.apple.com/weatherkit/data-source-attribution/")
+                            } label: {
+                                Text("Other Apple Weather data sources")
+                                    .font(.system(size: 15))
+                                    .underline()
+                                    .foregroundColor(.black)
+                            }.padding()
+                        }
+                        Spacer()
+                    }
                     
                     Spacer()
                 }
