@@ -41,7 +41,7 @@
 		0E7DD5CD2AC95F3C00DE28D3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DD5CC2AC95F3C00DE28D3 /* MainView.swift */; };
 		0E868C262AD4A8BB007D28F8 /* Weather+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E868C252AD4A8BB007D28F8 /* Weather+.swift */; };
 		0E9EEFF22B1F8C5700D85EB8 /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EEFF12B1F8C5700D85EB8 /* CGFloat+.swift */; };
-		0E9EEFF42B1F8CAC00D85EB8 /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EEFF32B1F8CAC00D85EB8 /* UIScreen.swift */; };
+		0E9EEFF42B1F8CAC00D85EB8 /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EEFF32B1F8CAC00D85EB8 /* UIScreen+.swift */; };
 		0EAF068A2B0BAB0F00AEA978 /* MakePeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAF06892B0BAB0F00AEA978 /* MakePeopleView.swift */; };
 		0EAF068C2B0BADC200AEA978 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAF068B2B0BADC200AEA978 /* WebView.swift */; };
 		0EAF068E2B0BAF7000AEA978 /* ResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAF068D2B0BAF7000AEA978 /* ResourcesView.swift */; };
@@ -113,7 +113,7 @@
 		0E7DD5CC2AC95F3C00DE28D3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		0E868C252AD4A8BB007D28F8 /* Weather+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Weather+.swift"; sourceTree = "<group>"; };
 		0E9EEFF12B1F8C5700D85EB8 /* CGFloat+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+.swift"; sourceTree = "<group>"; };
-		0E9EEFF32B1F8CAC00D85EB8 /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
+		0E9EEFF32B1F8CAC00D85EB8 /* UIScreen+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+.swift"; sourceTree = "<group>"; };
 		0EAF06892B0BAB0F00AEA978 /* MakePeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePeopleView.swift; sourceTree = "<group>"; };
 		0EAF068B2B0BADC200AEA978 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		0EAF068D2B0BAF7000AEA978 /* ResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesView.swift; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 				0E7B8A7C2ACC3C52006E1F5E /* View+.swift */,
 				0E868C252AD4A8BB007D28F8 /* Weather+.swift */,
 				0E9EEFF12B1F8C5700D85EB8 /* CGFloat+.swift */,
-				0E9EEFF32B1F8CAC00D85EB8 /* UIScreen.swift */,
+				0E9EEFF32B1F8CAC00D85EB8 /* UIScreen+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -216,6 +216,47 @@
 				0EAF068D2B0BAF7000AEA978 /* ResourcesView.swift */,
 			);
 			path = Information;
+			sourceTree = "<group>";
+		};
+		0E9EEFF52B1F8D1A00D85EB8 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				0E7DD5CC2AC95F3C00DE28D3 /* MainView.swift */,
+				0E7B8A812ACC7111006E1F5E /* MainScrolledView.swift */,
+				036CA6772AB4C3540056C453 /* DailyWeatherView.swift */,
+				036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */,
+				036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */,
+				0E7B8A832ACC7384006E1F5E /* RealTimeWeatherView.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		0E9EEFF62B1F8D3800D85EB8 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				0E5D08CC2B00C51F0082C0F6 /* SplashScreenView.swift */,
+				0E5D08CE2B00C5450082C0F6 /* AnimatedSplashGifView.swift */,
+				031F38D52AFBB691002E2EAD /* AnimatedGifView.swift */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
+		0E9EEFF72B1F8D5200D85EB8 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7CA9A3C72AAF56FF0051CC25 /* NavigationBar.swift */,
+				7C0D1BDC2AAB7E7400A8BCFF /* LocationCard.swift */,
+				7C7E8A062AD5867F00EE5260 /* CardModalView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0E9EEFF82B1F8D5E00D85EB8 /* LocationListView */ = {
+			isa = PBXGroup;
+			children = (
+				7CA9A3CC2AAF60110051CC25 /* LocationListView.swift */,
+			);
+			path = LocationListView;
 			sourceTree = "<group>";
 		};
 		0EB04B542AA6D17900DC0933 = {
@@ -294,20 +335,11 @@
 		7C0D1BD82AAB7E2E00A8BCFF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0E9EEFF82B1F8D5E00D85EB8 /* LocationListView */,
+				0E9EEFF72B1F8D5200D85EB8 /* Components */,
+				0E9EEFF62B1F8D3800D85EB8 /* Animation */,
+				0E9EEFF52B1F8D1A00D85EB8 /* MainView */,
 				0E6377392B0B962E00D6477B /* Information */,
-				0E5D08CE2B00C5450082C0F6 /* AnimatedSplashGifView.swift */,
-				0E5D08CC2B00C51F0082C0F6 /* SplashScreenView.swift */,
-				7CA9A3C72AAF56FF0051CC25 /* NavigationBar.swift */,
-				7C0D1BDC2AAB7E7400A8BCFF /* LocationCard.swift */,
-				7CA9A3CC2AAF60110051CC25 /* LocationListView.swift */,
-				036CA6772AB4C3540056C453 /* DailyWeatherView.swift */,
-				036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */,
-				036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */,
-				0E7DD5CC2AC95F3C00DE28D3 /* MainView.swift */,
-				0E7B8A812ACC7111006E1F5E /* MainScrolledView.swift */,
-				7C7E8A062AD5867F00EE5260 /* CardModalView.swift */,
-				0E7B8A832ACC7384006E1F5E /* RealTimeWeatherView.swift */,
-				031F38D52AFBB691002E2EAD /* AnimatedGifView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -507,7 +539,7 @@
 				03B2F4632AB08EB7005A5AD4 /* RealTimeWeather.swift in Sources */,
 				0E868C262AD4A8BB007D28F8 /* Weather+.swift in Sources */,
 				0E7B8A7D2ACC3C52006E1F5E /* View+.swift in Sources */,
-				0E9EEFF42B1F8CAC00D85EB8 /* UIScreen.swift in Sources */,
+				0E9EEFF42B1F8CAC00D85EB8 /* UIScreen+.swift in Sources */,
 				0EE65AEC2AB6DC690038A32F /* WeatherManager.swift in Sources */,
 				0E6377382B0B962900D6477B /* InformationView.swift in Sources */,
 				7CA9A3C82AAF56FF0051CC25 /* NavigationBar.swift in Sources */,
