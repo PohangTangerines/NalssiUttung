@@ -24,22 +24,20 @@ struct LocationCard: View {
                     if isCurrentLocation {
                         Text("나의 위치")
                             .font(.pretendardSemibold(.caption))
-                            .font(.system(size: 20))
                         Spacer()
                     }
                     Text("\(location)")
                         .font(.pretendardSemibold(.caption))
-                        .font(.system(size: 14))
-                        .padding(.trailing, 20)
+                        .padding(.trailing, 20.responsibleWidth)
                 }
                 if let weatherBoxData = weatherBoxData {
                     HStack(alignment: .top, spacing: 0) {
                         Image("\(weatherBoxData.weatherCondition.weatherIcon())")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 60)
-                            .padding(.trailing, 12)
-                            .padding(.top, 9)
+                            .frame(width: 60.responsibleWidth)
+                            .padding(.trailing, 12.responsibleWidth)
+                            .padding(.top, 9.responsibleHeight)
                         
                         VStack(alignment: .leading, spacing: 0) {
                             // MARK: 온도 및 날씨
@@ -55,12 +53,14 @@ struct LocationCard: View {
                             // MARK: 최저 최고 온도
                             Text("최고 \(weatherBoxData.highestTemperature)° | 최저 \(weatherBoxData.lowestTemperature)°")
                                 .font(.pretendardMedium(.footnote))
-                        }.padding(.bottom, 18).padding(.top, 12)
+                        }.padding(.bottom, 18.responsibleHeight)
+                            .padding(.top, 12.responsibleHeight)
                         
                         Spacer()
                     }
                 }
-            }.padding(.top, 15).padding(.leading, 15)
+            }.padding(.top, 15.responsibleHeight)
+                .padding(.leading, 15.responsibleWidth)
                 .overlay(
                     RoundedRectangle(cornerRadius: 9)
                         .strokeBorder(Color.black, lineWidth: 1.5)
@@ -120,9 +120,9 @@ struct LocationCardScrolled: View {
                         Image(weatherBoxData.weatherCondition.weatherIcon())
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 60)
-                            .padding(.trailing, 12)
-                            .padding(.top, 9)
+                            .frame(width: 60.responsibleWidth)
+                            .padding(.trailing, 12.responsibleWidth)
+                            .padding(.top, 9.responsibleHeight)
                         
                         VStack(alignment: .leading, spacing: 0) {
                             // MARK: 온도 및 날씨
@@ -133,16 +133,17 @@ struct LocationCardScrolled: View {
                                 Text(weatherBoxData.weatherCondition.weatherString())
                                     .font(.IMHyemin(.title2))
 //                                    .padding(.leading, -(Font.DEFontSize.title2.rawValue * 0.3))
-                            }.padding(.bottom, 3)
+                            }.padding(.bottom, 3.responsibleHeight)
                             
                             // MARK: 최저 최고 온도
                             Text("최저 \(weatherBoxData.lowestTemperature)° | 최고 \(weatherBoxData.highestTemperature)°")
                                 .font(.pretendardMedium(.footnote))
-                        }.padding(.bottom, 18).padding(.top, 12)
-                        
+                        }.padding(.bottom, 18.responsibleHeight)
+                            .padding(.top, 12.responsibleHeight)
                         Spacer()
                     }
-                }.padding(.top, 15).padding(.leading, 15)
+                }.padding(.top, 15.responsibleHeight)
+                    .padding(.leading, 15.responsibleWidth)
             } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
