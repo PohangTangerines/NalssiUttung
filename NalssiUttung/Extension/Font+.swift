@@ -20,14 +20,15 @@ extension Font {
         case caption2 = 12
     }
     
+    #warning("responsibleWidth로 인한 size 조정이 적절치 않다면 추후 수정")
     static func pretendardSemibold(_ size: FontSize) -> Font {
-        custom("Pretendard-Semibold", size: size.rawValue)
+        custom("Pretendard-Semibold", size: size.rawValue.responsibleWidth)
     }
     static func pretendardMedium(_ size: FontSize) -> Font {
-        custom("Pretendard-Medium", size: size.rawValue)
+        custom("Pretendard-Medium", size: size.rawValue.responsibleWidth)
     }
     static func IMHyemin(_ size: FontSize) -> Font {
-        custom("IMHyemin-Bold", size: size.rawValue)
+        custom("IMHyemin-Bold", size: size.rawValue.responsibleWidth)
     }
     
     /// IMHyemin 폰트에서 lineHeight를 구현할 시 사용할 font's line height.

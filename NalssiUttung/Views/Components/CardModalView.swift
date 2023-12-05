@@ -36,7 +36,7 @@ struct CardModalView: View {
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
                     MainHeader(weatherBoxData: $weatherBoxData, location: $location, modalState: $modalState, isModalVisible: $isModalVisible, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: $isCurrentLocation)
-                    RealTimeWeatherView(weatherBoxData: $weatherBoxData, dailyWeatherData: $dailyWeatherData, canTransition: .constant(false), isModalVisible: .constant(false))
+                    RealTimeWeatherView(weatherBoxData: $weatherBoxData, dailyWeatherData: $dailyWeatherData, canTransition: .constant(false), isModalVisible: .constant(false), isModal: true)
                         .transition(.move(edge: .top))
                 }
                 .padding(.horizontal, 15)
@@ -141,7 +141,7 @@ private struct MainHeader: View {
                 }
             }
         }
-        .padding(.top, 34)
-        .padding(.bottom, 24)
+        .padding(.top, 34.responsibleHeight)
+        .padding(.bottom, 24.responsibleHeight)
     }
 }

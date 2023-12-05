@@ -15,7 +15,7 @@ struct DetailedWeatherView: View {
         VStack(spacing: 0) {
             if let detailedWeatherData = detailedWeatherData {
                 // MARK: 상세 날씨 구분선
-                ScrolledMainViewTextDivider(text: "상세 날씨").padding(.bottom, 15)
+                ScrolledMainViewTextDivider(text: "상세 날씨").padding(.bottom, 15.responsibleHeight)
                 
                 GeometryReader { geometry in
                     // MARK: 강수량 & 바람 & 가시거리
@@ -27,8 +27,8 @@ struct DetailedWeatherView: View {
                         .frame(maxWidth: geometry.size.width/3)
                         Rectangle()
                             .background(Color.black)
-                            .frame(width: 1, height: 132).cornerRadius(10)
-                            .padding(.horizontal, 5)
+                            .frame(width: 1, height: 132.responsibleHeight).cornerRadius(10)
+                            .padding(.horizontal, 5.responsibleWidth)
                         DetailBox(title: "바람",
                                   imageName: "windy",
                                   detailString: "\(detailedWeatherData.windDirection)",
@@ -36,8 +36,8 @@ struct DetailedWeatherView: View {
                         .frame(maxWidth: geometry.size.width/3)
                         Rectangle()
                             .background(Color.black)
-                            .frame(width: 1, height: 132).cornerRadius(10)
-                            .padding(.horizontal, 5)
+                            .frame(width: 1, height: 132.responsibleHeight).cornerRadius(10)
+                            .padding(.horizontal, 5.responsibleWidth)
                         DetailBox(title: "가시거리",
                                   imageName: "visibility",
                                   detailString: " ",
@@ -49,7 +49,7 @@ struct DetailedWeatherView: View {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: 172)
+        .frame(maxWidth: .infinity, maxHeight: 172.responsibleHeight)
     }
     
     // MARK: DetailedWeather Box

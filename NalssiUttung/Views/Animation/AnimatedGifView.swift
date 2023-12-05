@@ -10,7 +10,7 @@ import Gifu
 
 struct AnimatedGifView: UIViewRepresentable {
     @Binding var gifName: String
-    @State private var imageView = GIFImageView(frame: CGRect(x: 0, y: 0, width: 280, height: 280))
+    @State private var imageView = GIFImageView(frame: CGRect(x: 0, y: 0, width: 280.responsibleHeight, height: 280.responsibleHeight))
     
     func makeUIView(context: Context) -> UIView {
         let uiView = UIView()

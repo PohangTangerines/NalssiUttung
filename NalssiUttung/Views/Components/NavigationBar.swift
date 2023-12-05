@@ -16,10 +16,10 @@ struct NavigationBar: View {
     var body: some View {
         VStack {
             HStack {
-                Button(action: {
+                Button {
                     isTextFieldActive = false
                     dismiss()
-                }) {
+                } label: {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 18).weight(.medium))
                         .foregroundColor(Color.basalt)
@@ -27,28 +27,28 @@ struct NavigationBar: View {
                 }
 
                 Text("지역 추가하기")
-                    .font(.system(size: 18).weight(.semibold))
+                    .font(.pretendardSemibold(.callout))
                     .foregroundColor(Color.darkChacoal)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 
-                Button(action: {
+                Button {
                     withAnimation {
                         if !isTextFieldActive {
                             self.isEditMode.toggle() // 편집 모드를 토글합니다.
                         }
                     }
-                }) {
+                } label: {
                     Text(isEditMode ? "완료" : "편집")
-                        .font(.system(size: 18).weight(.semibold))
+                        .font(.pretendardMedium(.callout))
                         .foregroundColor(Color.darkChacoal)
-                        .frame(maxWidth: 40, maxHeight: 40, alignment: .trailing)
+                        .frame(maxWidth: 40.responsibleWidth, maxHeight: 40.responsibleHeight, alignment: .trailing)
                 }
             }
             searchBar
         }
-        .frame(height: 106, alignment: .top)
-        .padding(.horizontal, 20)
-        .padding(.top, 64)
+        .frame(height: 106.responsibleHeight, alignment: .top)
+        .padding(.horizontal, 20.responsibleWidth)
+        .padding(.top, 64.responsibleHeight)
         .background(Color.seaSky)
         .frame(maxHeight: .infinity, alignment: .top)
         .ignoresSafeArea()
@@ -57,12 +57,12 @@ struct NavigationBar: View {
 
     private var searchBar: some View {
         HStack {
-            HStack(spacing: 2) {
+            HStack(spacing: 2.responsibleWidth) {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(Color.darkChacoal)
 
                 TextField("title", text: $searchText, prompt: Text("지역 검색하기").foregroundColor(Color.darkChacoal))
-                    .font(.system(size: 18))
+                    .font(.pretendardMedium(.callout))
                     .focused($isFocused)
                     .contentShape(RoundedRectangle(cornerRadius: 10))
                     .onTapGesture {
@@ -79,9 +79,9 @@ struct NavigationBar: View {
 
             }
             .foregroundColor(.secondary)
-            .padding(.horizontal, 6)
-            .padding(.vertical, 28)
-            .frame(maxHeight: 45, alignment: .leading)
+            .padding(.horizontal, 6.responsibleWidth)
+            .padding(.vertical, 28.responsibleHeight)
+            .frame(maxHeight: 45.responsibleHeight, alignment: .leading)
             .background(Color.seaSky, in: RoundedRectangle(cornerRadius: 10))
             .overlay(RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.darkChacoal, lineWidth: 2))
@@ -93,18 +93,12 @@ struct NavigationBar: View {
                     searchText = ""
                 }, label: {
                     Text("취소")
-                        .font(.system(size: 18).weight(.semibold))
+                        .font(.pretendardSemibold(.callout))
                         .foregroundColor(Color.darkChacoal)
-                        .frame(maxWidth: 40, maxHeight: 40, alignment: .trailing)
+                        .frame(maxWidth: 40.responsibleWidth, maxHeight: 40.responsibleHeight, alignment: .trailing)
                 })
 
             }
         }
-    }
-}
-
-struct NavigationBar_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationBar(searchText: .constant(""), isEditMode: .constant(false), isTextFieldActive: .constant(false))
     }
 }

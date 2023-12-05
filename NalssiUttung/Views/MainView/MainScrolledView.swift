@@ -16,10 +16,13 @@ struct MainScrolledView: View {
         VStack(spacing: 0) {
             LocationCardScrolled(weatherBoxData: $weatherBoxData)
             WeeklyWeatherView(weeklyWeatherData: $weeklyWeatherData)
-                .padding(.top, 27)
-                .padding(.bottom, 20)
-            DetailedWeatherView(detailedWeatherData: $detailedWeatherData)
+                .padding(.top, 27.responsibleHeight)
+                .padding(.bottom, 20.responsibleHeight)
+            
             Spacer()
+            DetailedWeatherView(detailedWeatherData: $detailedWeatherData)
+                .padding(.bottom, 30.responsibleHeight)
+//            Spacer()
             
             // MARK: 날씨삼춘 알아보기 - 만든사람들, WeatherKit 출처
             NavigationLink(destination: InformationView()) {
@@ -29,8 +32,9 @@ struct MainScrolledView: View {
                 }
             }.foregroundColor(Color.darkChacoal)
                 .font(.IMHyemin(.caption2))
-                .padding(.bottom, 15)
+                .padding(.bottom, 15.responsibleHeight)
             
-        }.padding(.horizontal, 15).background(Color.seaSky)
+        }.padding(.horizontal, 15.responsibleWidth)
+            .background(Color.seaSky)
     }
 }
