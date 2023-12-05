@@ -81,7 +81,7 @@ struct MainView: View {
                         }
                     
                     if isInitView {
-                        RealTimeWeatherView(weatherBoxData: $weatherBoxData, dailyWeatherData: $dailyWeatherData, canTransition: $canTransition, isModalVisible: .constant(true))
+                        RealTimeWeatherView(weatherBoxData: $weatherBoxData, dailyWeatherData: $dailyWeatherData, canTransition: $canTransition, isModalVisible: .constant(true), isModal: false)
                             .transition(.move(edge: .top))
                     } else {
                         MainScrolledView(weatherBoxData: $weatherBoxData,

@@ -12,6 +12,8 @@ struct RealTimeWeatherView: View {
     @Binding var dailyWeatherData: DailyWeatherData?
     @Binding var canTransition: Bool
     @Binding var isModalVisible: Bool
+    #warning("isModal 관련 기기대응 추후 수정 요망")
+    let isModal: Bool
     @State private var gifName: String = "clearCharacter"
     
     var body: some View {
@@ -19,15 +21,14 @@ struct RealTimeWeatherView: View {
             VStack(spacing: 0) {
                 VStack(spacing: 0) {
                     tempConditionRow
-                        .padding(.bottom, 10.responsibleHeight)
+                        .padding(.bottom, isModal ? 5.responsibleHeight : 10.responsibleHeight)
                     HStack {
                         Text("최고 \(weatherBoxData.highestTemperature)° | 최저 \(weatherBoxData.lowestTemperature)°")
                             .font(.pretendardMedium(.body))
                         Spacer()
                     }
-                    .padding(.bottom, 18.responsibleHeight)
+                    .padding(.bottom, isModal ? 9.responsibleHeight : 18.responsibleHeight)
                 }
-                Spacer()
                 ZStack {
                     // MARK: - 날씨 멘트
                     VStack {
@@ -56,7 +57,6 @@ struct RealTimeWeatherView: View {
                 }.frame(height: 340.responsibleHeight)
                 VStack {
                     DailyWeatherView(dailyWeatherData: $dailyWeatherData)
-                        .frame(maxHeight: .infinity)
                     if isModalVisible {
                         Image(systemName: "chevron.down")
                             .resizable()
@@ -72,7 +72,7 @@ struct RealTimeWeatherView: View {
                     }
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+           
         }
     }
     

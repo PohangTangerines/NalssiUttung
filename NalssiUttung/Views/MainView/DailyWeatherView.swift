@@ -52,8 +52,8 @@ struct DailyWeatherView: View {
                             Image(weatherIconString(time: data.time, weather: data.weatherCondition))
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-//                                .frame(width: 28.responsibleWidth)
-                                .frame(minWidth: 28.responsibleWidth)
+                                .frame(width: 28.responsibleWidth)
+//                                .frame(minWidth: 28.responsibleWidth)
                                 .padding(.bottom, 15.responsibleHeight)
                             
                             // MARK: Line Chart
