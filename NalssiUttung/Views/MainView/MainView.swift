@@ -150,8 +150,8 @@ struct MainView: View {
                     
                 }
             }
-            .padding(.top, 7.5)
-            .padding(.bottom, 24)
+            .padding(.top, 7.responsibleHeight)
+            .padding(.bottom, 24.responsibleHeight)
         }
     }
 }

@@ -48,12 +48,13 @@ struct DailyWeatherView: View {
                         VStack(spacing: 0) {
                             Text(timeString(time:data.time))
                                 .font(.pretendardMedium(.footnote))
-                                .padding(.bottom, 9)
+                                .padding(.bottom, 9.responsibleHeight)
                             Image(weatherIconString(time: data.time, weather: data.weatherCondition))
                                 .resizable()
-                                .scaledToFit()
-                                .frame(width: 28)
-                                .padding(.bottom, 15)
+                                .aspectRatio(contentMode: .fit)
+//                                .frame(width: 28.responsibleWidth)
+                                .frame(minWidth: 28.responsibleWidth)
+                                .padding(.bottom, 15.responsibleHeight)
                             
                             // MARK: Line Chart
                             GeometryReader { geometry in
@@ -71,7 +72,7 @@ struct DailyWeatherView: View {
                                                 .overlay(
                                                     Circle()
                                                         .stroke(Color.black, lineWidth: 2))
-                                                .frame(width: 8)
+                                                .frame(width: 8.responsibleWidth)
                                                 .position(x: geometry.size.width / 2, y: coorY)
                                         }.zIndex(1)
                                     }
@@ -81,7 +82,7 @@ struct DailyWeatherView: View {
                             Text(temperatureString(time: data.time, temp: data.temperature))
                                 .font(.pretendardMedium(.footnote))
                         }
-                        .frame(width: 70)
+                        .frame(width: 70.responsibleWidth)
                     }
                 }
             } else {

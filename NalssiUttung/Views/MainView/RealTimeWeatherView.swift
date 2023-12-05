@@ -17,15 +17,15 @@ struct RealTimeWeatherView: View {
     var body: some View {
         if let weatherBoxData = weatherBoxData, let dailyWeatherData = dailyWeatherData {
             VStack(spacing: 0) {
-                VStack {
+                VStack(spacing: 0) {
                     tempConditionRow
-                        .padding(.bottom, 10)
+                        .padding(.bottom, 10.responsibleHeight)
                     HStack {
                         Text("최고 \(weatherBoxData.highestTemperature)° | 최저 \(weatherBoxData.lowestTemperature)°")
                             .font(.pretendardMedium(.body))
                         Spacer()
                     }
-                    .padding(.bottom, 18)
+                    .padding(.bottom, 18.responsibleHeight)
                 }
                 Spacer()
                 ZStack {
@@ -39,7 +39,6 @@ struct RealTimeWeatherView: View {
                         }
                         Spacer()
                     }
-                    Spacer()
                     // MARK: - 날씨 캐릭터
                     VStack {
                         Spacer()
@@ -48,15 +47,13 @@ struct RealTimeWeatherView: View {
                             AnimatedGifView(gifName: $gifName)
                                 .scaledToFit()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 280)
+                                .frame(width: 280.responsibleHeight)
                         }
-                        .onAppear {
-                            gifName = weatherBoxData.weatherCondition.weatherCharacter(weatherData: dailyWeatherData)
-                            print(gifName)
-                        }
+                    }.onAppear {
+                        gifName = weatherBoxData.weatherCondition.weatherCharacter(weatherData: dailyWeatherData)
+                        print(gifName)
                     }
-                }
-                .frame(height: 340)
+                }.frame(height: 340.responsibleHeight)
                 VStack {
                     DailyWeatherView(dailyWeatherData: $dailyWeatherData)
                         .frame(maxHeight: .infinity)
@@ -64,14 +61,14 @@ struct RealTimeWeatherView: View {
                         Image(systemName: "chevron.down")
                             .resizable()
                             .scaledToFit()
-                            .frame(height: 10)
+                            .frame(height: 10.responsibleWidth)
                             .foregroundColor(.black)
                             .background {
                                 Circle()
-                                    .frame(width: 40, height: 40)
+                                    .frame(width: 40.responsibleWidth, height: 40.responsibleWidth)
                                     .foregroundColor(canTransition ? Color.accentBlue : Color.clear)
                             }
-                            .padding(.bottom, 21)
+                            .padding(.bottom, 21.responsibleHeight)
                     }
                 }
             }

@@ -20,6 +20,13 @@ extension CGFloat {
             return UIScreen.screenHeight / 844 * self
         }
     }
+    
+    var responsibleWidth: CGFloat {
+        CGFloat(self).deviceDependable(.width)
+    }
+    var responsibleHeight: CGFloat {
+        CGFloat(self).deviceDependable(.height)
+    }
 }
 
 extension Int {
