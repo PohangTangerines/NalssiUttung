@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct WeeklyWeatherView: View {
-    let chartMaxGap: Double = 90.responsibleHeight
     @Binding var weeklyWeatherData: WeeklyWeatherData?
     
     var body: some View {
@@ -39,6 +38,7 @@ struct WeeklyWeatherView: View {
                             GeometryReader { geometry in
                                 let midX = geometry.size.width / 2
                                 ZStack {
+                                    let chartMaxGap: Double = 90.responsibleHeight
                                     let offsetDotPair = getOffsetDot(nowData: data, dayData: weeklyWeatherData.dayData)
                                     let highCoorY = offsetDotPair.first.responsibleHeight
                                     let lowCoorY = offsetDotPair.second.responsibleHeight
@@ -92,6 +92,7 @@ struct WeeklyWeatherView: View {
     }
     
     private func getOffsetDot(nowData: WeeklyWeatherData.DayData, dayData: [WeeklyWeatherData.DayData]) -> (first: CGFloat, second: CGFloat) {
+        let chartMaxGap: Double = 90
         // -100 -> dummy
         var minTemp: Int = 100
         var maxTemp: Int = -100

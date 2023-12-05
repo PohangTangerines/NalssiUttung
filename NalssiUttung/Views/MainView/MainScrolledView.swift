@@ -18,8 +18,11 @@ struct MainScrolledView: View {
             WeeklyWeatherView(weeklyWeatherData: $weeklyWeatherData)
                 .padding(.top, 27.responsibleHeight)
                 .padding(.bottom, 20.responsibleHeight)
-            DetailedWeatherView(detailedWeatherData: $detailedWeatherData)
+            
             Spacer()
+            DetailedWeatherView(detailedWeatherData: $detailedWeatherData)
+                .padding(.bottom, 30.responsibleHeight)
+//            Spacer()
             
             // MARK: 날씨삼춘 알아보기 - 만든사람들, WeatherKit 출처
             NavigationLink(destination: InformationView()) {
