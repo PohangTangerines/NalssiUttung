@@ -39,6 +39,7 @@
 		0E7B8A822ACC7111006E1F5E /* MainScrolledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B8A812ACC7111006E1F5E /* MainScrolledView.swift */; };
 		0E7B8A842ACC7384006E1F5E /* RealTimeWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B8A832ACC7384006E1F5E /* RealTimeWeatherView.swift */; };
 		0E7DD5CD2AC95F3C00DE28D3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DD5CC2AC95F3C00DE28D3 /* MainView.swift */; };
+		0E7E52652B22246000904D00 /* clearCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38F52AFBBD54002E2EAD /* clearCharacter.gif */; };
 		0E868C262AD4A8BB007D28F8 /* Weather+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E868C252AD4A8BB007D28F8 /* Weather+.swift */; };
 		0E9EEFF22B1F8C5700D85EB8 /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EEFF12B1F8C5700D85EB8 /* CGFloat+.swift */; };
 		0E9EEFF42B1F8CAC00D85EB8 /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EEFF32B1F8CAC00D85EB8 /* UIScreen+.swift */; };
@@ -477,6 +478,7 @@
 				031F38ED2AFBBD1C002E2EAD /* windyCharacter.gif in Resources */,
 				031F38F32AFBBD1C002E2EAD /* foggyCharacter.gif in Resources */,
 				031F38EB2AFBBD1C002E2EAD /* snowCharacter.gif in Resources */,
+				0E7E52652B22246000904D00 /* clearCharacter.gif in Resources */,
 				031F38EE2AFBBD1C002E2EAD /* freezingRainCharacter.gif in Resources */,
 				03B2F46F2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf in Resources */,
 				03B2F46D2AB09FAA005A5AD4 /* IMHyemin-Bold.otf in Resources */,
