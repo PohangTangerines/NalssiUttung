@@ -106,14 +106,13 @@ extension WeatherCondition {
         case .cloudy :
             return "이추룩 날씨 흐려졈신디 우산 챙겨 가시냐?"
         case .partlyCloudy, .mostlyCloudy :
-            return "날씨가 산도록 허니 국이 맨도롱 홀 때 호로록 들여 싸붑서"
+            return "하늘이 왁왁해졈시니 비 오려는지도 모르겠쿠다"
         case .haze :
             return ["안개 끼었덴허는데 조심해라","안개 심해지민 와리지말고 들어가랜"].randomElement()!
         case .foggy, .blowingDust, .smoky:
             return "육지 사람들 안개가 이추룩 심한데도 무사 돌아댕기는거?"
         case .windy, .breezy :
             return ["바람 강하니 촐람생이처럼 바당 가지 말앙 들어가 있어라","바람 강하멘 재개재개 들어가라"].randomElement()!
-        
         case .strongStorms, .scatteredThunderstorms, .isolatedThunderstorms, .thunderstorms, .tropicalStorm, .hurricane :
             return "아고게! 벼락털어졈신가?"
         case .rain :
@@ -133,7 +132,8 @@ extension WeatherCondition {
             return ["겨울이여부난 입김이 막 나와부신디","비온덴허니 고뿔 안들리게 맹심허랜"].randomElement()!
             
         default :
-            return "기본 멘트"
+//            return "기본 멘트"
+            return "오늘 날씨 잘도 좋아"
         }
     }
     
