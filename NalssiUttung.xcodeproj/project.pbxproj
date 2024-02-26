@@ -34,7 +34,6 @@
 		0E4F79FF2B8CFFEF0033497B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4F79FE2B8CFFEF0033497B /* SwiftUI.framework */; };
 		0E4F7A022B8CFFEF0033497B /* MiniSamchunBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F7A012B8CFFEF0033497B /* MiniSamchunBundle.swift */; };
 		0E4F7A042B8CFFEF0033497B /* MiniSamchunLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F7A032B8CFFEF0033497B /* MiniSamchunLiveActivity.swift */; };
-		0E4F7A062B8CFFEF0033497B /* MiniSamchun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F7A052B8CFFEF0033497B /* MiniSamchun.swift */; };
 		0E4F7A082B8CFFEF0033497B /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F7A072B8CFFEF0033497B /* AppIntent.swift */; };
 		0E4F7A0A2B8CFFF00033497B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E4F7A092B8CFFF00033497B /* Assets.xcassets */; };
 		0E4F7A0E2B8CFFF00033497B /* MiniSamchunExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0E4F79FA2B8CFFEF0033497B /* MiniSamchunExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -76,6 +75,9 @@
 		0E868C262AD4A8BB007D28F8 /* Weather+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E868C252AD4A8BB007D28F8 /* Weather+.swift */; };
 		0E9EEFF22B1F8C5700D85EB8 /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EEFF12B1F8C5700D85EB8 /* CGFloat+.swift */; };
 		0E9EEFF42B1F8CAC00D85EB8 /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EEFF32B1F8CAC00D85EB8 /* UIScreen+.swift */; };
+		0E9F9BA32B8D2112001C8CF0 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 0E9F9BA22B8D2112001C8CF0 /* Gifu */; };
+		0E9F9BA42B8D21E0001C8CF0 /* AnimatedGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031F38D52AFBB691002E2EAD /* AnimatedGifView.swift */; };
+		0E9F9BA52B8D2203001C8CF0 /* MiniSamchun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F7A052B8CFFEF0033497B /* MiniSamchun.swift */; };
 		0EAF068A2B0BAB0F00AEA978 /* MakePeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAF06892B0BAB0F00AEA978 /* MakePeopleView.swift */; };
 		0EAF068C2B0BADC200AEA978 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAF068B2B0BADC200AEA978 /* WebView.swift */; };
 		0EAF068E2B0BAF7000AEA978 /* ResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAF068D2B0BAF7000AEA978 /* ResourcesView.swift */; };
@@ -209,6 +211,7 @@
 			files = (
 				0E4F79FF2B8CFFEF0033497B /* SwiftUI.framework in Frameworks */,
 				0E4F79FD2B8CFFEF0033497B /* WidgetKit.framework in Frameworks */,
+				0E9F9BA32B8D2112001C8CF0 /* Gifu in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +473,9 @@
 			dependencies = (
 			);
 			name = MiniSamchunExtension;
+			packageProductDependencies = (
+				0E9F9BA22B8D2112001C8CF0 /* Gifu */,
+			);
 			productName = MiniSamchunExtension;
 			productReference = 0E4F79FA2B8CFFEF0033497B /* MiniSamchunExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -680,14 +686,15 @@
 			files = (
 				0E4F7A172B8D0C1F0033497B /* Font+.swift in Sources */,
 				0E4F7A1C2B8D0C2F0033497B /* UIScreen+.swift in Sources */,
+				0E9F9BA52B8D2203001C8CF0 /* MiniSamchun.swift in Sources */,
 				0E4F7A022B8CFFEF0033497B /* MiniSamchunBundle.swift in Sources */,
 				0E4F7A082B8CFFEF0033497B /* AppIntent.swift in Sources */,
 				0E4F7A142B8D04F30033497B /* LocationManager.swift in Sources */,
 				0E4F7A1B2B8D0C2C0033497B /* CGFloat+.swift in Sources */,
 				0E4F7A132B8D04F00033497B /* WeatherManager.swift in Sources */,
 				0E4F7A182B8D0C240033497B /* Color+Palette.swift in Sources */,
-				0E4F7A062B8CFFEF0033497B /* MiniSamchun.swift in Sources */,
 				0E4F7A152B8D05350033497B /* LocationListViewModel.swift in Sources */,
+				0E9F9BA42B8D21E0001C8CF0 /* AnimatedGifView.swift in Sources */,
 				0E4F7A1A2B8D0C2A0033497B /* Weather+.swift in Sources */,
 				0E4F7A192B8D0C270033497B /* View+.swift in Sources */,
 				0E4F7A042B8CFFEF0033497B /* MiniSamchunLiveActivity.swift in Sources */,
@@ -1188,6 +1195,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E7B8A7E2ACC56D6006E1F5E /* XCRemoteSwiftPackageReference "ScrollKit" */;
 			productName = ScrollKit;
+		};
+		0E9F9BA22B8D2112001C8CF0 /* Gifu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 031F38D72AFBB8B6002E2EAD /* XCRemoteSwiftPackageReference "Gifu" */;
+			productName = Gifu;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

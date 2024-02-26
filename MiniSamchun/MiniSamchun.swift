@@ -68,21 +68,39 @@ struct MiniSamchunEntryView : View {
     let weatherManager = WeatherService.shared
     var entry: Provider.Entry
     
+    @State private var gifName: String = "clearCharacter"
+    
     var body: some View {
         if let weather = entry.weather, let location = entry.location {
             let weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
             let dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
+            let imageName = weatherBoxData.weatherCondition.weatherCharacter(weatherData: dailyWeatherData)
             // MARK: 2x2 사이즈
             if family == .systemSmall {
                 VStack {
-                    HStack {
-                        Text("\(weatherBoxData.weatherCondition.weatherComment(weatherData: dailyWeatherData))")
-                            .font(.IMHyemin(.caption))
-                            .IMHyeminLineHeight(.title, lineHeight: 10)
+                    HStack(alignment: .bottom) {
+                        Text("\(weatherBoxData.currentTemperature) ")
+                            .font(.IMHyemin(.title))
+                            .tracking(-(Font.FontSize.title2.rawValue * 0.07))
+                        Text("°")
+                            .font(.IMHyemin(.title))
+                            .padding(.leading, -(Font.FontSize.title2.rawValue * 0.5))
+                        Text("\(weatherBoxData.weatherCondition.weatherString())")
+                            .font(.IMHyemin(.caption2))
+                            .padding(.leading, -10)
                         Spacer()
                     }
+                    HStack {
+                        Spacer()
+                        Image(imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 120.responsibleHeight)
+                            .padding(.trailing, -20)
+                    }
                 }
-                // MARK: 2x4 사이즈
+            // MARK: 2x4 사이즈
             } else if family == .systemMedium {
                 VStack {
                     HStack {
