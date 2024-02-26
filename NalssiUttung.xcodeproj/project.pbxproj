@@ -30,6 +30,39 @@
 		03B2F46F2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */; };
 		03B2F4712AB09FDD005A5AD4 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */; };
 		03DD90152AEFCFF100AA072C /* LocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD90142AEFCFF100AA072C /* LocationStore.swift */; };
+		0E4F79FD2B8CFFEF0033497B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4F79FC2B8CFFEF0033497B /* WidgetKit.framework */; };
+		0E4F79FF2B8CFFEF0033497B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4F79FE2B8CFFEF0033497B /* SwiftUI.framework */; };
+		0E4F7A022B8CFFEF0033497B /* MiniSamchunBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F7A012B8CFFEF0033497B /* MiniSamchunBundle.swift */; };
+		0E4F7A042B8CFFEF0033497B /* MiniSamchunLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F7A032B8CFFEF0033497B /* MiniSamchunLiveActivity.swift */; };
+		0E4F7A062B8CFFEF0033497B /* MiniSamchun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F7A052B8CFFEF0033497B /* MiniSamchun.swift */; };
+		0E4F7A082B8CFFEF0033497B /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F7A072B8CFFEF0033497B /* AppIntent.swift */; };
+		0E4F7A0A2B8CFFF00033497B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E4F7A092B8CFFF00033497B /* Assets.xcassets */; };
+		0E4F7A0E2B8CFFF00033497B /* MiniSamchunExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0E4F79FA2B8CFFEF0033497B /* MiniSamchunExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0E4F7A132B8D04F00033497B /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE65AEB2AB6DC690038A32F /* WeatherManager.swift */; };
+		0E4F7A142B8D04F30033497B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE65AE92AB6D5AD0038A32F /* LocationManager.swift */; };
+		0E4F7A152B8D05350033497B /* LocationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E8A042AD57CF000EE5260 /* LocationListViewModel.swift */; };
+		0E4F7A172B8D0C1F0033497B /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4692AB09F08005A5AD4 /* Font+.swift */; };
+		0E4F7A182B8D0C240033497B /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */; };
+		0E4F7A192B8D0C270033497B /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B8A7C2ACC3C52006E1F5E /* View+.swift */; };
+		0E4F7A1A2B8D0C2A0033497B /* Weather+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E868C252AD4A8BB007D28F8 /* Weather+.swift */; };
+		0E4F7A1B2B8D0C2C0033497B /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EEFF12B1F8C5700D85EB8 /* CGFloat+.swift */; };
+		0E4F7A1C2B8D0C2F0033497B /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EEFF32B1F8CAC00D85EB8 /* UIScreen+.swift */; };
+		0E4F7A1E2B8D16A70033497B /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */; };
+		0E4F7A1F2B8D16A70033497B /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */; };
+		0E4F7A202B8D16A70033497B /* IMHyemin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46C2AB09FAA005A5AD4 /* IMHyemin-Bold.otf */; };
+		0E4F7A212B8D16AE0033497B /* partlyCloudyCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E52AFBBD1B002E2EAD /* partlyCloudyCharacter.gif */; };
+		0E4F7A222B8D16AE0033497B /* clearNightCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E02AFBBD1B002E2EAD /* clearNightCharacter.gif */; };
+		0E4F7A232B8D16AE0033497B /* heavyRainCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E32AFBBD1B002E2EAD /* heavyRainCharacter.gif */; };
+		0E4F7A242B8D16AE0033497B /* thunderstormCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E62AFBBD1C002E2EAD /* thunderstormCharacter.gif */; };
+		0E4F7A252B8D16AE0033497B /* windyCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E12AFBBD1B002E2EAD /* windyCharacter.gif */; };
+		0E4F7A262B8D16AE0033497B /* rainCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38DE2AFBBD1B002E2EAD /* rainCharacter.gif */; };
+		0E4F7A272B8D16AE0033497B /* clearCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38F52AFBBD54002E2EAD /* clearCharacter.gif */; };
+		0E4F7A282B8D16AE0033497B /* splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0E5D08D02B00C5D70082C0F6 /* splash.gif */; };
+		0E4F7A292B8D16AE0033497B /* cloudyCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E42AFBBD1B002E2EAD /* cloudyCharacter.gif */; };
+		0E4F7A2A2B8D16AE0033497B /* foggyCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E72AFBBD1C002E2EAD /* foggyCharacter.gif */; };
+		0E4F7A2B2B8D16AE0033497B /* freezingRainCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E22AFBBD1B002E2EAD /* freezingRainCharacter.gif */; };
+		0E4F7A2C2B8D16AE0033497B /* partlyCloudyNightCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38DC2AFBBD1B002E2EAD /* partlyCloudyNightCharacter.gif */; };
+		0E4F7A2D2B8D16AE0033497B /* snowCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38DF2AFBBD1B002E2EAD /* snowCharacter.gif */; };
 		0E5D08CD2B00C51F0082C0F6 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5D08CC2B00C51F0082C0F6 /* SplashScreenView.swift */; };
 		0E5D08CF2B00C5450082C0F6 /* AnimatedSplashGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5D08CE2B00C5450082C0F6 /* AnimatedSplashGifView.swift */; };
 		0E5D08D12B00C5D70082C0F6 /* splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0E5D08D02B00C5D70082C0F6 /* splash.gif */; };
@@ -63,6 +96,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0E4F7A0C2B8CFFF00033497B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0EB04B552AA6D17900DC0933 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E4F79F92B8CFFEF0033497B;
+			remoteInfo = MiniSamchunExtension;
+		};
 		0EB04B6E2AA6D17A00DC0933 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0EB04B552AA6D17900DC0933 /* Project object */;
@@ -78,6 +118,20 @@
 			remoteInfo = NalssiUttung;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0E4F7A122B8CFFF00033497B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0E4F7A0E2B8CFFF00033497B /* MiniSamchunExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		031F38D52AFBB691002E2EAD /* AnimatedGifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGifView.swift; sourceTree = "<group>"; };
@@ -104,6 +158,16 @@
 		03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		03B2F4722AB0A063005A5AD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		03DD90142AEFCFF100AA072C /* LocationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStore.swift; sourceTree = "<group>"; };
+		0E4F79FA2B8CFFEF0033497B /* MiniSamchunExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MiniSamchunExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E4F79FC2B8CFFEF0033497B /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		0E4F79FE2B8CFFEF0033497B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		0E4F7A012B8CFFEF0033497B /* MiniSamchunBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSamchunBundle.swift; sourceTree = "<group>"; };
+		0E4F7A032B8CFFEF0033497B /* MiniSamchunLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSamchunLiveActivity.swift; sourceTree = "<group>"; };
+		0E4F7A052B8CFFEF0033497B /* MiniSamchun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSamchun.swift; sourceTree = "<group>"; };
+		0E4F7A072B8CFFEF0033497B /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		0E4F7A092B8CFFF00033497B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0E4F7A0B2B8CFFF00033497B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E4F7A1D2B8D102E0033497B /* MiniSamchunExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MiniSamchunExtension.entitlements; sourceTree = "<group>"; };
 		0E5D08CC2B00C51F0082C0F6 /* SplashScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		0E5D08CE2B00C5450082C0F6 /* AnimatedSplashGifView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedSplashGifView.swift; sourceTree = "<group>"; };
 		0E5D08D02B00C5D70082C0F6 /* splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = splash.gif; sourceTree = "<group>"; };
@@ -139,6 +203,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0E4F79F72B8CFFEF0033497B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E4F79FF2B8CFFEF0033497B /* SwiftUI.framework in Frameworks */,
+				0E4F79FD2B8CFFEF0033497B /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0EB04B5A2AA6D17900DC0933 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -209,6 +282,28 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		0E4F79FB2B8CFFEF0033497B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0E4F79FC2B8CFFEF0033497B /* WidgetKit.framework */,
+				0E4F79FE2B8CFFEF0033497B /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0E4F7A002B8CFFEF0033497B /* MiniSamchun */ = {
+			isa = PBXGroup;
+			children = (
+				0E4F7A012B8CFFEF0033497B /* MiniSamchunBundle.swift */,
+				0E4F7A032B8CFFEF0033497B /* MiniSamchunLiveActivity.swift */,
+				0E4F7A052B8CFFEF0033497B /* MiniSamchun.swift */,
+				0E4F7A072B8CFFEF0033497B /* AppIntent.swift */,
+				0E4F7A092B8CFFF00033497B /* Assets.xcassets */,
+				0E4F7A0B2B8CFFF00033497B /* Info.plist */,
+			);
+			path = MiniSamchun;
+			sourceTree = "<group>";
+		};
 		0E6377392B0B962E00D6477B /* Information */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,11 +358,14 @@
 		0EB04B542AA6D17900DC0933 = {
 			isa = PBXGroup;
 			children = (
+				0E4F7A1D2B8D102E0033497B /* MiniSamchunExtension.entitlements */,
 				7CA773DC2AA7949800D70BD3 /* .swiftlint.yml */,
 				0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */,
 				0EB04B5F2AA6D17900DC0933 /* NalssiUttung */,
 				0EB04B702AA6D17A00DC0933 /* NalssiUttungTests */,
 				0EB04B7A2AA6D17A00DC0933 /* NalssiUttungUITests */,
+				0E4F7A002B8CFFEF0033497B /* MiniSamchun */,
+				0E4F79FB2B8CFFEF0033497B /* Frameworks */,
 				0EB04B5E2AA6D17900DC0933 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -278,6 +376,7 @@
 				0EB04B5D2AA6D17900DC0933 /* NalssiUttung.app */,
 				0EB04B6D2AA6D17A00DC0933 /* NalssiUttungTests.xctest */,
 				0EB04B772AA6D17A00DC0933 /* NalssiUttungUITests.xctest */,
+				0E4F79FA2B8CFFEF0033497B /* MiniSamchunExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -358,6 +457,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0E4F79F92B8CFFEF0033497B /* MiniSamchunExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E4F7A0F2B8CFFF00033497B /* Build configuration list for PBXNativeTarget "MiniSamchunExtension" */;
+			buildPhases = (
+				0E4F79F62B8CFFEF0033497B /* Sources */,
+				0E4F79F72B8CFFEF0033497B /* Frameworks */,
+				0E4F79F82B8CFFEF0033497B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MiniSamchunExtension;
+			productName = MiniSamchunExtension;
+			productReference = 0E4F79FA2B8CFFEF0033497B /* MiniSamchunExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		0EB04B5C2AA6D17900DC0933 /* NalssiUttung */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0EB04B812AA6D17A00DC0933 /* Build configuration list for PBXNativeTarget "NalssiUttung" */;
@@ -366,10 +482,12 @@
 				0EB04B5A2AA6D17900DC0933 /* Frameworks */,
 				0EB04B5B2AA6D17900DC0933 /* Resources */,
 				7CA773DB2AA7941D00D70BD3 /* ShellScript */,
+				0E4F7A122B8CFFF00033497B /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0E4F7A0D2B8CFFF00033497B /* PBXTargetDependency */,
 			);
 			name = NalssiUttung;
 			packageProductDependencies = (
@@ -423,9 +541,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					0E4F79F92B8CFFEF0033497B = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
 					0EB04B5C2AA6D17900DC0933 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -459,11 +580,36 @@
 				0EB04B5C2AA6D17900DC0933 /* NalssiUttung */,
 				0EB04B6C2AA6D17A00DC0933 /* NalssiUttungTests */,
 				0EB04B762AA6D17A00DC0933 /* NalssiUttungUITests */,
+				0E4F79F92B8CFFEF0033497B /* MiniSamchunExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0E4F79F82B8CFFEF0033497B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E4F7A262B8D16AE0033497B /* rainCharacter.gif in Resources */,
+				0E4F7A272B8D16AE0033497B /* clearCharacter.gif in Resources */,
+				0E4F7A1F2B8D16A70033497B /* Pretendard-SemiBold.otf in Resources */,
+				0E4F7A2A2B8D16AE0033497B /* foggyCharacter.gif in Resources */,
+				0E4F7A242B8D16AE0033497B /* thunderstormCharacter.gif in Resources */,
+				0E4F7A2D2B8D16AE0033497B /* snowCharacter.gif in Resources */,
+				0E4F7A2C2B8D16AE0033497B /* partlyCloudyNightCharacter.gif in Resources */,
+				0E4F7A222B8D16AE0033497B /* clearNightCharacter.gif in Resources */,
+				0E4F7A232B8D16AE0033497B /* heavyRainCharacter.gif in Resources */,
+				0E4F7A0A2B8CFFF00033497B /* Assets.xcassets in Resources */,
+				0E4F7A252B8D16AE0033497B /* windyCharacter.gif in Resources */,
+				0E4F7A292B8D16AE0033497B /* cloudyCharacter.gif in Resources */,
+				0E4F7A212B8D16AE0033497B /* partlyCloudyCharacter.gif in Resources */,
+				0E4F7A282B8D16AE0033497B /* splash.gif in Resources */,
+				0E4F7A202B8D16A70033497B /* IMHyemin-Bold.otf in Resources */,
+				0E4F7A1E2B8D16A70033497B /* Pretendard-Medium.otf in Resources */,
+				0E4F7A2B2B8D16AE0033497B /* freezingRainCharacter.gif in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0EB04B5B2AA6D17900DC0933 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -528,6 +674,26 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0E4F79F62B8CFFEF0033497B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E4F7A172B8D0C1F0033497B /* Font+.swift in Sources */,
+				0E4F7A1C2B8D0C2F0033497B /* UIScreen+.swift in Sources */,
+				0E4F7A022B8CFFEF0033497B /* MiniSamchunBundle.swift in Sources */,
+				0E4F7A082B8CFFEF0033497B /* AppIntent.swift in Sources */,
+				0E4F7A142B8D04F30033497B /* LocationManager.swift in Sources */,
+				0E4F7A1B2B8D0C2C0033497B /* CGFloat+.swift in Sources */,
+				0E4F7A132B8D04F00033497B /* WeatherManager.swift in Sources */,
+				0E4F7A182B8D0C240033497B /* Color+Palette.swift in Sources */,
+				0E4F7A062B8CFFEF0033497B /* MiniSamchun.swift in Sources */,
+				0E4F7A152B8D05350033497B /* LocationListViewModel.swift in Sources */,
+				0E4F7A1A2B8D0C2A0033497B /* Weather+.swift in Sources */,
+				0E4F7A192B8D0C270033497B /* View+.swift in Sources */,
+				0E4F7A042B8CFFEF0033497B /* MiniSamchunLiveActivity.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0EB04B592AA6D17900DC0933 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -584,6 +750,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0E4F7A0D2B8CFFF00033497B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E4F79F92B8CFFEF0033497B /* MiniSamchunExtension */;
+			targetProxy = 0E4F7A0C2B8CFFF00033497B /* PBXContainerItemProxy */;
+		};
 		0EB04B6F2AA6D17A00DC0933 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0EB04B5C2AA6D17900DC0933 /* NalssiUttung */;
@@ -597,6 +768,75 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0E4F7A102B8CFFF00033497B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MiniSamchunExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PAQ92DM7XD;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MiniSamchun/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MiniSamchun;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiUttung1.MiniSamchun;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0E4F7A112B8CFFF00033497B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MiniSamchunExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PAQ92DM7XD;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MiniSamchun/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MiniSamchun;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiUttung1.MiniSamchun;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		0EB04B7F2AA6D17A00DC0933 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -716,6 +956,7 @@
 		0EB04B822AA6D17A00DC0933 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NalssiUttung/NalssiUttung.entitlements;
@@ -755,6 +996,7 @@
 		0EB04B832AA6D17A00DC0933 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NalssiUttung/NalssiUttung.entitlements;
@@ -870,6 +1112,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0E4F7A0F2B8CFFF00033497B /* Build configuration list for PBXNativeTarget "MiniSamchunExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E4F7A102B8CFFF00033497B /* Debug */,
+				0E4F7A112B8CFFF00033497B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0EB04B582AA6D17900DC0933 /* Build configuration list for PBXProject "NalssiUttung" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
