@@ -7,12 +7,14 @@
 
 import Foundation
 import CoreLocation
+import WidgetKit
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
     
     private var locationManager = CLLocationManager()
-    
+    private let defaults = UserDefaults(suiteName: "group.nalsam")
+
     @Published var location: CLLocation?
     @Published var address: String = ""
 
@@ -25,7 +27,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        location = locations.last
+        self.location = locations.last
+        guard let location = locations.last else { return }
+        let locationData = [location.coordinate.latitude, location.coordinate.longitude]
+        defaults?.set(locationData, forKey: "currentLocation")
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     func getLocationAddress() {
