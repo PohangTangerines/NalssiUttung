@@ -9,20 +9,23 @@ import SwiftUI
 import WidgetKit
 
 struct RealTimeWeatherCharacterWidgetView: View {
+    let data: WeatherWidgetData
+    
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("제주시 애월읍")
+                Text(data.address)
                     .customTextStyle(fontName: .pretendardSemibold, fontSize: 14)
                 HStack(spacing: -7) {
-                    Text("24")
+                    Text("\(formattedTemperature(data.temperature))")
                         .customTextStyle(fontName: .IMHyemin, fontSize: 32, kerning: -6)
                     Text("°")
                         .customTextStyle(fontName: .IMHyemin, fontSize: 32)
                 }
             }
             .offset(x: -20, y: -30)
-            Image("Clear")
+            
+            Image(data.character)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 120)
@@ -30,10 +33,24 @@ struct RealTimeWeatherCharacterWidgetView: View {
         }
         .containerBackground(Color.seaSky, for: .widget)
     }
+    
+    private func formattedTemperature(_ measurement: Measurement<UnitTemperature>) -> String {
+        let value = measurement.value
+        return String(format: "%.0f", value)
+    }
 }
+
 struct RealTimeWeatherCharacterWidgetView_Previews: PreviewProvider {
     static var previews: some View {
-        RealTimeWeatherCharacterWidgetView()
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        Group {
+            RealTimeWeatherCharacterWidgetView(data: .previewData)
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+            
+            // isPlaceholder(true)는 안됨
+            RealTimeWeatherCharacterWidgetView(data: .previewData)
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+                .redacted(reason: .placeholder)
+        }
+        
     }
 }
