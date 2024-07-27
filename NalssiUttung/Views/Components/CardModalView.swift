@@ -85,7 +85,7 @@ private struct MainHeader: View {
     
     // MARK: User가 선택한 위치 List 관련 값
     @ObservedObject var locationStore = LocationStore()
-    let locations = LocationInfo.Data.map { $0.location }
+    let locations = LocationInfo.Data.map { $0.name }
     
     @Binding var isCurrentLocation: Bool
     
