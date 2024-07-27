@@ -31,46 +31,8 @@ extension WeatherWidgetData {
         
         // 현재 날씨 캐릭터
         let condition = weather.currentWeather.condition
-        let sunrise = weather.dailyForecast.forecast.first!.sun.sunrise!
-        let sunset = weather.dailyForecast.forecast.first!.sun.sunrise!
-        let character = getWeatherCharacter(condition: condition, sunrise: sunrise, sunset: sunset)
+        let character = condition.getWeatherCharacter(for: weather)
         
         return WeatherWidgetData(address: address, temperature: temperature, character: character)
-    }
-    
-    static func getWeatherCharacter(condition: WeatherCondition, sunrise: Date, sunset: Date) -> String {
-        // 중복 함수, 데이터 결합도가 높아서 임시로 만들어 둠. 가능하면 refactor
-        switch condition {
-        case .clear, .mostlyClear, .hot :
-            if sunrise.timeIntervalSinceNow < 0 && sunset.timeIntervalSinceNow > 0 {
-                return "clearCharacter"
-            } else {
-                return "clearNightCharacter"
-            }
-        case .cloudy :
-            return "cloudyCharacter"
-        case .partlyCloudy, .mostlyCloudy :
-            if sunrise.timeIntervalSinceNow < 0 && sunset.timeIntervalSinceNow > 0 {
-                return "partlyCloudyCharacter"
-            } else {
-                return "partlyCloudyNightCharacter"
-            }
-        case .haze, .foggy, .blowingDust, .smoky :
-            return "foggyCharacter"
-        case .windy, .breezy :
-            return "windyCharacter"
-        case .strongStorms, .scatteredThunderstorms, .isolatedThunderstorms, .thunderstorms, .tropicalStorm, .hurricane :
-            return "thunderstormCharacter"
-        case .rain, .drizzle, .freezingDrizzle, .sunShowers :
-            return "rainCharacter"
-        case .heavyRain :
-            return "heavyRainCharacter"
-        case .snow, .heavySnow, .blizzard, .blowingSnow, .flurries , .sunFlurries, .frigid, .hail:
-            return "snowCharacter"
-        case .freezingRain, .sleet, .wintryMix :
-            return "freezingRainCharacter"
-        default :
-            return "clearCharacter"
-        }
     }
 }
