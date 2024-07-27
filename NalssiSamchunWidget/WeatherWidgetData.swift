@@ -21,9 +21,9 @@ extension WeatherWidgetData {
 }
 
 extension WeatherWidgetData {
-    static func currentWeather() async throws -> WeatherWidgetData {
-        // 현재 위치 정보, Intent에 따라 변경해줄 거라서 임시값 넣어 둠. 수정 필요.
-        let location = CLLocation(latitude: 33.9577778, longitude: 126.3013889)
+    static func currentWeather(for address: String) async throws -> WeatherWidgetData {
+        // 현재 위치 정보
+        let location = LocationManager.shared.findCoordinates(address: address) ?? CLLocation(latitude: 33.8463889, longitude: 126.8205556)
         
         // 현재 온도
         let weather = try await WeatherService.shared.weather(for: location)
@@ -34,16 +34,6 @@ extension WeatherWidgetData {
         let sunrise = weather.dailyForecast.forecast.first!.sun.sunrise!
         let sunset = weather.dailyForecast.forecast.first!.sun.sunrise!
         let character = getWeatherCharacter(condition: condition, sunrise: sunrise, sunset: sunset)
-        
-        // 현재 지역 이름
-        var address = "제주공항"
-
-        let geocoder = CLGeocoder()
-        let CLPlacemark = try await geocoder.reverseGeocodeLocation(location)
-        
-        if let placemark = CLPlacemark.first, placemark.locality == "제주시" {
-            address = "\(placemark.locality ?? " ") \(placemark.subLocality ?? " ")"
-        }
         
         return WeatherWidgetData(address: address, temperature: temperature, character: character)
     }

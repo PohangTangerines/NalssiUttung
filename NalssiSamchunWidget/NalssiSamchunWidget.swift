@@ -7,34 +7,55 @@
 
 import SwiftUI
 import WidgetKit
+import Foundation
 
-struct Provider: AppIntentTimelineProvider {
+struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent(), weatherData: .placeholderData)
-    }
-
-    func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: configuration, weatherData: .previewData)
+        SimpleEntry(date: Date(), weatherData: .placeholderData)
     }
     
-    func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
-            var entries: [SimpleEntry] = []
-            let currentDate = Date()
-
-            let weatherData = try? await WeatherWidgetData.currentWeather()
+    func address(for configuration: AddressSelectionIntent) -> String {
+        switch configuration.address {
+        case .geonip:
+            return "제주시 건입동"
+        case .jejuAirport:
+            return "제주공항"
+        case .ara1:
+            return "제주시 아라일동"
+        default:
+            return "제주공항"
+        }
+    }
+    
+    func getSnapshot(for configuration: AddressSelectionIntent, in context: Context, completion: @escaping (SimpleEntry) -> Void) {
+        let entry = SimpleEntry(date: Date(), weatherData: .previewData)
+        completion(entry)
+    }
+    
+    func getTimeline(for configuration: AddressSelectionIntent, in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> Void) {
+        let currentDate = Date()
         
+        Task {
+            var entries: [SimpleEntry] = []
+            let address = address(for: configuration)
+            
+            let weatherData = try? await WeatherWidgetData.currentWeather(for: address)
+            let data = weatherData ?? .placeholderData
+            
             for hourOffset in 0..<24 {
                 let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-                let entry = SimpleEntry(date: entryDate, configuration: configuration, weatherData: weatherData ?? .placeholderData)
+                let entry = SimpleEntry(date: entryDate, weatherData: data)
                 entries.append(entry)
+                
             }
-            return Timeline(entries: entries, policy: .atEnd)
+            let timeline = Timeline(entries: entries, policy: .atEnd)
+            completion(timeline)
         }
+    }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let configuration: ConfigurationAppIntent
     let weatherData: WeatherWidgetData
 }
 
@@ -50,7 +71,7 @@ struct NalssiSamchunWidget: Widget {
     let kind: String = "NalssiSamchunWidget"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
+        IntentConfiguration(kind: kind, intent: AddressSelectionIntent.self, provider: Provider()) { entry in
             NalssiSamchunWidgetEntryView(entry: entry)
                 .containerBackground(Color.seaSky, for: .widget)
         }
@@ -58,22 +79,8 @@ struct NalssiSamchunWidget: Widget {
     }
 }
 
-extension ConfigurationAppIntent {
-    fileprivate static var smiley: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "😀"
-        return intent
-    }
-    
-    fileprivate static var starEyes: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "🤩"
-        return intent
-    }
-}
-
 #Preview(as: .systemSmall) {
     NalssiSamchunWidget()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .smiley, weatherData: .previewData)
+    SimpleEntry(date: .now, weatherData: .previewData)
 }

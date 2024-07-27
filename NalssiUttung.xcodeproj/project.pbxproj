@@ -26,7 +26,6 @@
 		039652BD2C480F6F001D23A9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4F79FE2B8CFFEF0033497B /* SwiftUI.framework */; };
 		039652C02C480F6F001D23A9 /* NalssiSamchunWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039652BF2C480F6F001D23A9 /* NalssiSamchunWidgetBundle.swift */; };
 		039652C22C480F6F001D23A9 /* NalssiSamchunWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039652C12C480F6F001D23A9 /* NalssiSamchunWidget.swift */; };
-		039652C42C480F6F001D23A9 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039652C32C480F6F001D23A9 /* AppIntent.swift */; };
 		039652C62C480F70001D23A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 039652C52C480F70001D23A9 /* Assets.xcassets */; };
 		039652CA2C480F70001D23A9 /* NalssiSamchunWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 039652BB2C480F6F001D23A9 /* NalssiSamchunWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		039652D42C48FAAD001D23A9 /* RealTimeWeatherCharacterWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039652D32C48FAAD001D23A9 /* RealTimeWeatherCharacterWidgetView.swift */; };
@@ -40,6 +39,8 @@
 		039652DC2C4909A8001D23A9 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B8A7C2ACC3C52006E1F5E /* View+.swift */; };
 		039652DF2C490F11001D23A9 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039652DE2C490F11001D23A9 /* Text+.swift */; };
 		039652E02C490FA9001D23A9 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039652DE2C490F11001D23A9 /* Text+.swift */; };
+		039FB7F02C550EE500FC96DA /* AddressSelection.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 03EBAE9F2C54FE53003FC9C5 /* AddressSelection.intentdefinition */; };
+		039FB7F22C55348800FC96DA /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE65AE92AB6D5AD0038A32F /* LocationManager.swift */; };
 		03B2F45A2AAF3CCB005A5AD4 /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */; };
 		03B2F4632AB08EB7005A5AD4 /* RealTimeWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4622AB08EB7005A5AD4 /* RealTimeWeather.swift */; };
 		03B2F46A2AB09F08005A5AD4 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4692AB09F08005A5AD4 /* Font+.swift */; };
@@ -53,6 +54,7 @@
 		03C9FB962C524DA200BFD0DA /* LocationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E8A042AD57CF000EE5260 /* LocationListViewModel.swift */; };
 		03DD90152AEFCFF100AA072C /* LocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD90142AEFCFF100AA072C /* LocationStore.swift */; };
 		03EBAE812C528239003FC9C5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4F79FC2B8CFFEF0033497B /* WidgetKit.framework */; };
+		03EBAEA02C54FE53003FC9C5 /* AddressSelection.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 03EBAE9F2C54FE53003FC9C5 /* AddressSelection.intentdefinition */; };
 		0E5D08CD2B00C51F0082C0F6 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5D08CC2B00C51F0082C0F6 /* SplashScreenView.swift */; };
 		0E5D08CF2B00C5450082C0F6 /* AnimatedSplashGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5D08CE2B00C5450082C0F6 /* AnimatedSplashGifView.swift */; };
 		0E5D08D12B00C5D70082C0F6 /* splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0E5D08D02B00C5D70082C0F6 /* splash.gif */; };
@@ -143,11 +145,11 @@
 		039652BB2C480F6F001D23A9 /* NalssiSamchunWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NalssiSamchunWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		039652BF2C480F6F001D23A9 /* NalssiSamchunWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiSamchunWidgetBundle.swift; sourceTree = "<group>"; };
 		039652C12C480F6F001D23A9 /* NalssiSamchunWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiSamchunWidget.swift; sourceTree = "<group>"; };
-		039652C32C480F6F001D23A9 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		039652C52C480F70001D23A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		039652C72C480F70001D23A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		039652D32C48FAAD001D23A9 /* RealTimeWeatherCharacterWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeWeatherCharacterWidgetView.swift; sourceTree = "<group>"; };
 		039652DE2C490F11001D23A9 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
+		039FB7F12C55103D00FC96DA /* NalssiUttungDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NalssiUttungDebug.entitlements; sourceTree = "<group>"; };
 		03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Palette.swift"; sourceTree = "<group>"; };
 		03B2F4622AB08EB7005A5AD4 /* RealTimeWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeWeather.swift; sourceTree = "<group>"; };
 		03B2F4692AB09F08005A5AD4 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		03DD90142AEFCFF100AA072C /* LocationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStore.swift; sourceTree = "<group>"; };
 		03EBAE7F2C528204003FC9C5 /* WeatherKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WeatherKit.framework; path = System/Library/Frameworks/WeatherKit.framework; sourceTree = SDKROOT; };
 		03EBAE8E2C53925F003FC9C5 /* NalssiSamchunWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NalssiSamchunWidgetExtension.entitlements; sourceTree = "<group>"; };
+		03EBAE9F2C54FE53003FC9C5 /* AddressSelection.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = AddressSelection.intentdefinition; sourceTree = "<group>"; };
 		0E4F79FC2B8CFFEF0033497B /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		0E4F79FE2B8CFFEF0033497B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		0E5D08CC2B00C51F0082C0F6 /* SplashScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
@@ -257,8 +260,8 @@
 			children = (
 				039652BF2C480F6F001D23A9 /* NalssiSamchunWidgetBundle.swift */,
 				039652C12C480F6F001D23A9 /* NalssiSamchunWidget.swift */,
+				03EBAE9F2C54FE53003FC9C5 /* AddressSelection.intentdefinition */,
 				039652D32C48FAAD001D23A9 /* RealTimeWeatherCharacterWidgetView.swift */,
-				039652C32C480F6F001D23A9 /* AppIntent.swift */,
 				03C9FB932C50151800BFD0DA /* WeatherWidgetData.swift */,
 				039652C52C480F70001D23A9 /* Assets.xcassets */,
 				039652C72C480F70001D23A9 /* Info.plist */,
@@ -381,6 +384,7 @@
 		0EB04B5F2AA6D17900DC0933 /* NalssiUttung */ = {
 			isa = PBXGroup;
 			children = (
+				039FB7F12C55103D00FC96DA /* NalssiUttungDebug.entitlements */,
 				0EE65AED2AB6DC750038A32F /* NalssiUttung.entitlements */,
 				0EE65AE82AB6D5A10038A32F /* Manager */,
 				7CA9A3CF2AAF64EB0051CC25 /* Model */,
@@ -668,6 +672,8 @@
 			files = (
 				039652D62C49092A001D23A9 /* Font+.swift in Sources */,
 				039652C02C480F6F001D23A9 /* NalssiSamchunWidgetBundle.swift in Sources */,
+				039FB7F22C55348800FC96DA /* LocationManager.swift in Sources */,
+				03EBAEA02C54FE53003FC9C5 /* AddressSelection.intentdefinition in Sources */,
 				039652C22C480F6F001D23A9 /* NalssiSamchunWidget.swift in Sources */,
 				039652DB2C49096E001D23A9 /* UIScreen+.swift in Sources */,
 				039652DC2C4909A8001D23A9 /* View+.swift in Sources */,
@@ -675,7 +681,6 @@
 				039652D52C48FC13001D23A9 /* Color+Palette.swift in Sources */,
 				039652DA2C490960001D23A9 /* CGFloat+.swift in Sources */,
 				039652E02C490FA9001D23A9 /* Text+.swift in Sources */,
-				039652C42C480F6F001D23A9 /* AppIntent.swift in Sources */,
 				03C9FB942C50151800BFD0DA /* WeatherWidgetData.swift in Sources */,
 				03C063AF2C494C630061F503 /* AnimatedGifView.swift in Sources */,
 				03C9FB962C524DA200BFD0DA /* LocationListViewModel.swift in Sources */,
@@ -695,6 +700,7 @@
 				03B2F4632AB08EB7005A5AD4 /* RealTimeWeather.swift in Sources */,
 				0E868C262AD4A8BB007D28F8 /* Weather+.swift in Sources */,
 				0E7B8A7D2ACC3C52006E1F5E /* View+.swift in Sources */,
+				039FB7F02C550EE500FC96DA /* AddressSelection.intentdefinition in Sources */,
 				0E9EEFF42B1F8CAC00D85EB8 /* UIScreen+.swift in Sources */,
 				0EE65AEC2AB6DC690038A32F /* WeatherManager.swift in Sources */,
 				0E6377382B0B962900D6477B /* InformationView.swift in Sources */,
@@ -948,7 +954,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = NalssiUttung/NalssiUttung.entitlements;
+				CODE_SIGN_ENTITLEMENTS = NalssiUttung/NalssiUttungDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
