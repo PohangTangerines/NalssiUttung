@@ -12,6 +12,8 @@ struct RealTimeWeatherCharacterWidgetView: View {
     let data: WeatherWidgetData
     
     var body: some View {
+        // 글자가 두 줄이 되는 경우 생김.
+        // 에셋 바람/글자 두 줄이 되는 경우 생각해 보기
         ZStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text(data.address)
@@ -22,7 +24,9 @@ struct RealTimeWeatherCharacterWidgetView: View {
                     Text("°")
                         .customTextStyle(fontName: .IMHyemin, fontSize: 32)
                 }
+                .offset(x: -3)
             }
+            .padding(.horizontal, 16)
             .offset(x: -20, y: -30)
             .foregroundStyle(.black)
             
@@ -30,7 +34,7 @@ struct RealTimeWeatherCharacterWidgetView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 120)
-                .offset(y: 20)
+                .offset(y: 25)
         }
         .containerBackground(Color.seaSky, for: .widget)
     }
