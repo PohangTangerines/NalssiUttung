@@ -21,8 +21,9 @@ extension WeatherWidgetData {
 }
 
 extension WeatherWidgetData {
-    static func currentWeather(for address: String) async throws -> WeatherWidgetData {
+    static func currentWeather(for address: String?) async throws -> WeatherWidgetData {
         // 현재 위치 정보
+        let address = address ?? "제주공항"
         let location = LocationManager.shared.findCoordinates(address: address) ?? CLLocation(latitude: 33.8463889, longitude: 126.8205556)
         
         // 현재 온도

@@ -21,6 +21,11 @@
 		031F38F22AFBBD1C002E2EAD /* thunderstormCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E62AFBBD1C002E2EAD /* thunderstormCharacter.gif */; };
 		031F38F32AFBBD1C002E2EAD /* foggyCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E72AFBBD1C002E2EAD /* foggyCharacter.gif */; };
 		032DACA02C5538080073FFD2 /* Weather+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E868C252AD4A8BB007D28F8 /* Weather+.swift */; };
+		032DACD02C554E1C0073FFD2 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032DACCF2C554E1C0073FFD2 /* Intents.framework */; };
+		032DACD32C554E1C0073FFD2 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032DACD22C554E1C0073FFD2 /* IntentHandler.swift */; };
+		032DACD72C554E1C0073FFD2 /* IntentHandler.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 032DACCE2C554E1C0073FFD2 /* IntentHandler.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		032DACDB2C554F630073FFD2 /* AddressSelection.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 03EBAE9F2C54FE53003FC9C5 /* AddressSelection.intentdefinition */; };
+		032DACDF2C5551A20073FFD2 /* LocationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E8A042AD57CF000EE5260 /* LocationListViewModel.swift */; };
 		036CA6782AB4C3540056C453 /* DailyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA6772AB4C3540056C453 /* DailyWeatherView.swift */; };
 		036CA6932AB8C54F0056C453 /* DetailedWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */; };
 		036CA69D2AB9598F0056C453 /* WeeklyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */; };
@@ -88,6 +93,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		032DACD52C554E1C0073FFD2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0EB04B552AA6D17900DC0933 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 032DACCD2C554E1B0073FFD2;
+			remoteInfo = IntentHandler;
+		};
 		039652C82C480F70001D23A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0EB04B552AA6D17900DC0933 /* Project object */;
@@ -119,6 +131,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				039652CA2C480F70001D23A9 /* NalssiSamchunWidgetExtension.appex in Embed Foundation Extensions */,
+				032DACD72C554E1C0073FFD2 /* IntentHandler.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +152,10 @@
 		031F38E62AFBBD1C002E2EAD /* thunderstormCharacter.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = thunderstormCharacter.gif; sourceTree = "<group>"; };
 		031F38E72AFBBD1C002E2EAD /* foggyCharacter.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = foggyCharacter.gif; sourceTree = "<group>"; };
 		031F38F52AFBBD54002E2EAD /* clearCharacter.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = clearCharacter.gif; sourceTree = "<group>"; };
+		032DACCE2C554E1C0073FFD2 /* IntentHandler.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IntentHandler.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		032DACCF2C554E1C0073FFD2 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		032DACD22C554E1C0073FFD2 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		032DACD42C554E1C0073FFD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		036CA6772AB4C3540056C453 /* DailyWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherView.swift; sourceTree = "<group>"; };
 		036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedWeatherView.swift; sourceTree = "<group>"; };
 		036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyWeatherView.swift; sourceTree = "<group>"; };
@@ -198,6 +215,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		032DACCB2C554E1B0073FFD2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				032DACD02C554E1C0073FFD2 /* Intents.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		039652B82C480F6F001D23A9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -254,6 +279,15 @@
 			path = GIFImage;
 			sourceTree = "<group>";
 		};
+		032DACD12C554E1C0073FFD2 /* IntentHandler */ = {
+			isa = PBXGroup;
+			children = (
+				032DACD22C554E1C0073FFD2 /* IntentHandler.swift */,
+				032DACD42C554E1C0073FFD2 /* Info.plist */,
+			);
+			path = IntentHandler;
+			sourceTree = "<group>";
+		};
 		039652BE2C480F6F001D23A9 /* NalssiSamchunWidget */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +333,7 @@
 				03EBAE7F2C528204003FC9C5 /* WeatherKit.framework */,
 				0E4F79FC2B8CFFEF0033497B /* WidgetKit.framework */,
 				0E4F79FE2B8CFFEF0033497B /* SwiftUI.framework */,
+				032DACCF2C554E1C0073FFD2 /* Intents.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -364,6 +399,7 @@
 				0EB04B702AA6D17A00DC0933 /* NalssiUttungTests */,
 				0EB04B7A2AA6D17A00DC0933 /* NalssiUttungUITests */,
 				039652BE2C480F6F001D23A9 /* NalssiSamchunWidget */,
+				032DACD12C554E1C0073FFD2 /* IntentHandler */,
 				0E4F79FB2B8CFFEF0033497B /* Frameworks */,
 				0EB04B5E2AA6D17900DC0933 /* Products */,
 			);
@@ -376,6 +412,7 @@
 				0EB04B6D2AA6D17A00DC0933 /* NalssiUttungTests.xctest */,
 				0EB04B772AA6D17A00DC0933 /* NalssiUttungUITests.xctest */,
 				039652BB2C480F6F001D23A9 /* NalssiSamchunWidgetExtension.appex */,
+				032DACCE2C554E1C0073FFD2 /* IntentHandler.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -456,6 +493,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		032DACCD2C554E1B0073FFD2 /* IntentHandler */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 032DACDA2C554E1C0073FFD2 /* Build configuration list for PBXNativeTarget "IntentHandler" */;
+			buildPhases = (
+				032DACCA2C554E1B0073FFD2 /* Sources */,
+				032DACCB2C554E1B0073FFD2 /* Frameworks */,
+				032DACCC2C554E1B0073FFD2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IntentHandler;
+			productName = IntentHandler;
+			productReference = 032DACCE2C554E1C0073FFD2 /* IntentHandler.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		039652BA2C480F6F001D23A9 /* NalssiSamchunWidgetExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 039652CB2C480F70001D23A9 /* Build configuration list for PBXNativeTarget "NalssiSamchunWidgetExtension" */;
@@ -490,6 +544,7 @@
 			);
 			dependencies = (
 				039652C92C480F70001D23A9 /* PBXTargetDependency */,
+				032DACD62C554E1C0073FFD2 /* PBXTargetDependency */,
 			);
 			name = NalssiUttung;
 			packageProductDependencies = (
@@ -546,6 +601,9 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					032DACCD2C554E1B0073FFD2 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
 					039652BA2C480F6F001D23A9 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -583,11 +641,19 @@
 				0EB04B6C2AA6D17A00DC0933 /* NalssiUttungTests */,
 				0EB04B762AA6D17A00DC0933 /* NalssiUttungUITests */,
 				039652BA2C480F6F001D23A9 /* NalssiSamchunWidgetExtension */,
+				032DACCD2C554E1B0073FFD2 /* IntentHandler */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		032DACCC2C554E1B0073FFD2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		039652B92C480F6F001D23A9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -664,6 +730,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		032DACCA2C554E1B0073FFD2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				032DACDB2C554F630073FFD2 /* AddressSelection.intentdefinition in Sources */,
+				032DACD32C554E1C0073FFD2 /* IntentHandler.swift in Sources */,
+				032DACDF2C5551A20073FFD2 /* LocationListViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		039652B72C480F6F001D23A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -743,6 +819,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		032DACD62C554E1C0073FFD2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 032DACCD2C554E1B0073FFD2 /* IntentHandler */;
+			targetProxy = 032DACD52C554E1C0073FFD2 /* PBXContainerItemProxy */;
+		};
 		039652C92C480F70001D23A9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 039652BA2C480F6F001D23A9 /* NalssiSamchunWidgetExtension */;
@@ -761,6 +842,69 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		032DACD82C554E1C0073FFD2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RFZY2ACQ74;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IntentHandler/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IntentHandler;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiSamchun.IntentHandler;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		032DACD92C554E1C0073FFD2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RFZY2ACQ74;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IntentHandler/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IntentHandler;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiSamchun.IntentHandler;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		039652CC2C480F70001D23A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1105,6 +1249,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		032DACDA2C554E1C0073FFD2 /* Build configuration list for PBXNativeTarget "IntentHandler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				032DACD82C554E1C0073FFD2 /* Debug */,
+				032DACD92C554E1C0073FFD2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		039652CB2C480F70001D23A9 /* Build configuration list for PBXNativeTarget "NalssiSamchunWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
