@@ -24,6 +24,7 @@ struct RealTimeWeatherCharacterWidgetView: View {
                 }
             }
             .offset(x: -20, y: -30)
+            .foregroundStyle(.black)
             
             Image(data.character)
                 .resizable()
