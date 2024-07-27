@@ -24,8 +24,10 @@ struct LocationInfo : Codable {
 }
 
 extension LocationInfo {
-    
     // 위도, 경도를 미리 CLLocationDegrees로 변환해야함
+    // 현재 address를 기준으로 위치를 나누므로 중복 주석화.
+    // AWSNum, altitude, name 전부 필요하지 않아 보임.
+    
     static let Data: [LocationInfo] = [
         LocationInfo(AWSNum: 184, name: "제주", altitude: 21, address: "제주시 건입동", latitude: 33.5138889, longitude: 126.5294444),
         LocationInfo(AWSNum: 182, name: "제주(공)", altitude: 27, address: "제주공항", latitude: 33.8463889, longitude: 126.8205556),
@@ -65,14 +67,14 @@ extension LocationInfo {
         LocationInfo(AWSNum: 990, name: "낙천", altitude: 78, address: "제주시 한경면 낙천리", latitude: 33.3180556, longitude: 126.2302778),
         LocationInfo(AWSNum: 793, name: "대정", altitude: 3, address: "서귀포시 대정읍 일과리", latitude: 33.2408333, longitude: 126.2261111),
         LocationInfo(AWSNum: 855, name: "가파도", altitude: 4, address: "서귀포시 대정읍 가파리", latitude: 33.2408333, longitude: 126.2261111),
-        LocationInfo(AWSNum: 726, name: "마라도", altitude: 12, address: "서귀포시 대정읍 가파리", latitude: 33.1227778, longitude: 126.2677778),
+//        LocationInfo(AWSNum: 726, name: "마라도", altitude: 12, address: "서귀포시 대정읍 가파리", latitude: 33.1227778, longitude: 126.2677778),
 
         // 제주산간
         LocationInfo(AWSNum: 867, name: "삼각봉", altitude: 1503, address: "제주시 오라이동", latitude: 33.3766667, longitude: 126.5302778),
         LocationInfo(AWSNum: 866, name: "한라생태숲", altitude: 588, address: "제주시 용강동", latitude: 33.43, longitude: 126.5975),
         LocationInfo(AWSNum: 753, name: "어리목", altitude: 968, address: "제주시 해안동", latitude: 33.3927778, longitude: 126.4958333),
         LocationInfo(AWSNum: 868, name: "사제비", altitude: 1393, address: "제주시 애월읍 광령리", latitude: 33.3758333, longitude: 126.4977778),
-        LocationInfo(AWSNum: 871, name: "윗세오름", altitude: 1676, address: "제주시 애월읍 광령리", latitude: 33.3622222, longitude: 126.5180556),
+//        LocationInfo(AWSNum: 871, name: "윗세오름", altitude: 1676, address: "제주시 애월읍 광령리", latitude: 33.3622222, longitude: 126.5180556),
         LocationInfo(AWSNum: 782, name: "성판악", altitude: 760, address: "제주시 조천읍 교래리", latitude: 33.385, longitude: 126.6191667),
         LocationInfo(AWSNum: 965, name: "한라산남벽", altitude: 1576, address: "서귀포시 토평동", latitude: 33.3522222, longitude: 126.5327778),
         LocationInfo(AWSNum: 869, name: "영실", altitude: 1260, address: "서귀포시 하원동", latitude: 33.3480556, longitude: 126.4963889),
