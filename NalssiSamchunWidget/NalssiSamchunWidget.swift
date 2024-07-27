@@ -14,19 +14,6 @@ struct Provider: IntentTimelineProvider {
         SimpleEntry(date: Date(), weatherData: .placeholderData)
     }
     
-//    func address(for configuration: AddressSelectionIntent) -> String {
-//        switch configuration.address {
-//        case .geonip:
-//            return "제주시 건입동"
-//        case .jejuAirport:
-//            return "제주공항"
-//        case .ara1:
-//            return "제주시 아라일동"
-//        default:
-//            return "제주공항"
-//        }
-//    }
-    
     func getSnapshot(for configuration: AddressSelectionIntent, in context: Context, completion: @escaping (SimpleEntry) -> Void) {
         let entry = SimpleEntry(date: Date(), weatherData: .previewData)
         completion(entry)
@@ -37,7 +24,6 @@ struct Provider: IntentTimelineProvider {
         
         Task {
             var entries: [SimpleEntry] = []
-//            let address = address(for: configuration)
             let address = configuration.location?.displayString
             
             let weatherData = try? await WeatherWidgetData.currentWeather(for: address)
