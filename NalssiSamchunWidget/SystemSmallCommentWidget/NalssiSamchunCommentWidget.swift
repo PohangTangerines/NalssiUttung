@@ -11,7 +11,7 @@ import Foundation
 
 struct WeatherCommentWidgetProvider: IntentTimelineProvider {
     func placeholder(in context: Context) -> WetherCommentWidgetEntry {
-        WetherCommentWidgetEntry(date: Date(), weatherData: .placeholderData)
+        WetherCommentWidgetEntry(date: Date(), weatherData: .previewData)
     }
     
     func getSnapshot(for configuration: AddressSelectionIntent, in context: Context, completion: @escaping (WetherCommentWidgetEntry) -> Void) {
@@ -26,7 +26,7 @@ struct WeatherCommentWidgetProvider: IntentTimelineProvider {
             let address = configuration.location?.displayString
             
             let weatherData = try? await WeatherCommentWidgetData.currentWeather(for: address)
-            let data = weatherData ?? .placeholderData
+            let data = weatherData ?? .failData
             
             for hourOffset in 0..<24 {
                 let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!

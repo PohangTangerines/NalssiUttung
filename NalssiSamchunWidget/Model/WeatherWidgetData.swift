@@ -17,7 +17,8 @@ struct WeatherCharacterWidgetData {
 
 extension WeatherCharacterWidgetData {
     static let previewData = WeatherCharacterWidgetData(address: "제주시 애월읍", temperature: Measurement(value: 24, unit: .celsius), character: "clearCharacter")
-    static let placeholderData = WeatherCharacterWidgetData(address: "--", temperature: Measurement(value: 0, unit: .celsius), character: "clearCharacter")
+    static let failData = WeatherCharacterWidgetData(address: "주소 없음", temperature: Measurement(value: 0, unit: .celsius), character: "")
+    
 }
 
 extension WeatherCharacterWidgetData {
@@ -47,7 +48,7 @@ struct WeatherCommentWidgetData {
 
 extension WeatherCommentWidgetData {
     static let previewData = WeatherCommentWidgetData(address: "제주시 애월읍", temperature: Measurement(value: 24, unit: .celsius), icon: "dayClear", comment: "일교차 크난 고뿔 들리지 않게 조심합서!")
-    static let placeholderData = WeatherCommentWidgetData(address: "--", temperature: Measurement(value: 0, unit: .celsius), icon: "dayClear", comment: "일교차 크난 고뿔 들리지 않게 조심합서!")
+    static let failData = WeatherCommentWidgetData(address: "주소 없음", temperature: Measurement(value: 0, unit: .celsius), icon: "", comment: "날씨 멘트를 불러올 수 없습니다.")
 }
 
 extension WeatherCommentWidgetData {
