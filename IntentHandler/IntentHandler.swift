@@ -21,6 +21,12 @@ class IntentHandler: INExtension, AddressSelectionIntentHandling {
         completion(collection, nil)
     }
     
+    @available(iOS 14.0, macOS 11.0, watchOS 7.0, *)
+    @objc(defaultLocationForAddressSelection:)
+    func defaultLocation(for intent: AddressSelectionIntent) -> Location? {
+        return Location(identifier: "제주(공)", display: "제주공항")
+    }
+    
     override func handler(for intent: INIntent) -> Any {
         // This is the default implementation.  If you want different objects to handle different intents,
         // you can override this and return the handler you want for that particular intent.

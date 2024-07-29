@@ -37,7 +37,7 @@
 					<key>INIntentParameterConfigurable</key>
 					<true/>
 					<key>INIntentParameterDisplayName</key>
-					<string>Location</string>
+					<string>지역</string>
 					<key>INIntentParameterDisplayNameID</key>
 					<string>ERky7K</string>
 					<key>INIntentParameterDisplayPriority</key>
@@ -61,26 +61,6 @@
 							<true/>
 							<key>INIntentParameterPromptDialogType</key>
 							<string>Primary</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>There are ${count} options matching ‘${location}’.</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>DWNv54</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>DisambiguationIntroduction</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>Just to confirm, you wanted ‘${location}’?</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>RSvqEx</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>Confirmation</string>
 						</dict>
 					</array>
 					<key>INIntentParameterSupportsDynamicEnumeration</key>
@@ -108,7 +88,7 @@
 				</array>
 			</dict>
 			<key>INIntentTitle</key>
-			<string>Address Selection</string>
+			<string>지역 선택하기</string>
 			<key>INIntentTitleID</key>
 			<string>uuF0mv</string>
 			<key>INIntentType</key>
