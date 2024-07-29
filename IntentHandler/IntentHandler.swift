@@ -33,5 +33,4 @@ class IntentHandler: INExtension, AddressSelectionIntentHandling {
         
         return self
     }
-    
 }

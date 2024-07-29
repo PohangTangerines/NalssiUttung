@@ -20,9 +20,8 @@ struct Provider: IntentTimelineProvider {
     }
     
     func getTimeline(for configuration: AddressSelectionIntent, in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> Void) {
-        let currentDate = Date()
-        
         Task {
+            let currentDate = Date()
             var entries: [SimpleEntry] = []
             let address = configuration.location?.displayString
             

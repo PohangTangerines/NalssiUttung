@@ -41,7 +41,7 @@ struct RealTimeWeatherCharacterWidgetView: View {
     
     private func formattedTemperature(_ measurement: Measurement<UnitTemperature>) -> String {
         let value = measurement.value
-        return String(format: "%.0f", value)
+        return String(Int(value))
     }
 }
 
