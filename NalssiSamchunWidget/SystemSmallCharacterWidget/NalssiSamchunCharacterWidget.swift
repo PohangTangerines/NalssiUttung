@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 import Foundation
 
-struct Provider: IntentTimelineProvider {
+struct WeatherCharacterWidgetProvider: IntentTimelineProvider {
     func placeholder(in context: Context) -> WetherCharacterWidgetEntry {
         WetherCharacterWidgetEntry(date: Date(), weatherData: .placeholderData)
     }
@@ -46,7 +46,7 @@ struct WetherCharacterWidgetEntry: TimelineEntry {
 }
 
 struct NalssiSamchunCharacterWidgetEntryView : View {
-    var entry: Provider.Entry
+    var entry: WeatherCharacterWidgetProvider.Entry
 
     var body: some View {
         RealTimeWeatherCharacterWidgetView(data: entry.weatherData)
@@ -57,7 +57,7 @@ struct NalssiSamchunCharacterWidget: Widget {
     let kind: String = "NalssiSamchunCharacterWidget"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: AddressSelectionIntent.self, provider: Provider()) { entry in
+        IntentConfiguration(kind: kind, intent: AddressSelectionIntent.self, provider: WeatherCharacterWidgetProvider()) { entry in
             NalssiSamchunCharacterWidgetEntryView(entry: entry)
                 .containerBackground(Color.seaSky, for: .widget)
         }

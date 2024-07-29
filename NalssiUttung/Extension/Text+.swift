@@ -8,10 +8,11 @@
 import SwiftUI
 
 extension Text {
-    func customTextStyle(fontName: FontList, fontSize : CGFloat, kerning: CGFloat? = nil) -> some View {
+    func customTextStyle(fontName: FontList, fontSize : CGFloat, lineHeight: CGFloat = 0, kerning: CGFloat = 0) -> some View {
         self
             .font(.custom(fontName.rawValue, size: fontSize))
-            .kerning((kerning ?? 0) / 10)
+            .kerning((kerning) / 10)
+            .lineSpacing(fontSize / 2 * (lineHeight - 100) / 100)
     }
     
     enum FontList: String {

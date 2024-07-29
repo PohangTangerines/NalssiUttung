@@ -26,6 +26,9 @@
 		032DACD72C554E1C0073FFD2 /* IntentHandler.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 032DACCE2C554E1C0073FFD2 /* IntentHandler.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		032DACDB2C554F630073FFD2 /* AddressSelection.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 03EBAE9F2C54FE53003FC9C5 /* AddressSelection.intentdefinition */; };
 		032DACDF2C5551A20073FFD2 /* LocationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E8A042AD57CF000EE5260 /* LocationListViewModel.swift */; };
+		035D2F6F2C57BDA30024B283 /* RealTimeWeatherCommentWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035D2F6E2C57BDA30024B283 /* RealTimeWeatherCommentWidgetView.swift */; };
+		035D2F702C57BE940024B283 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EB04B642AA6D17A00DC0933 /* Assets.xcassets */; };
+		035D2F722C57BF7B0024B283 /* NalssiSamchunCommentWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035D2F712C57BF7B0024B283 /* NalssiSamchunCommentWidget.swift */; };
 		036CA6782AB4C3540056C453 /* DailyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA6772AB4C3540056C453 /* DailyWeatherView.swift */; };
 		036CA6932AB8C54F0056C453 /* DetailedWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */; };
 		036CA69D2AB9598F0056C453 /* WeeklyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */; };
@@ -156,6 +159,8 @@
 		032DACCF2C554E1C0073FFD2 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		032DACD22C554E1C0073FFD2 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		032DACD42C554E1C0073FFD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		035D2F6E2C57BDA30024B283 /* RealTimeWeatherCommentWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeWeatherCommentWidgetView.swift; sourceTree = "<group>"; };
+		035D2F712C57BF7B0024B283 /* NalssiSamchunCommentWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiSamchunCommentWidget.swift; sourceTree = "<group>"; };
 		036CA6772AB4C3540056C453 /* DailyWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherView.swift; sourceTree = "<group>"; };
 		036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedWeatherView.swift; sourceTree = "<group>"; };
 		036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyWeatherView.swift; sourceTree = "<group>"; };
@@ -288,14 +293,40 @@
 			path = IntentHandler;
 			sourceTree = "<group>";
 		};
+		035D2F732C57C0A70024B283 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				03C9FB932C50151800BFD0DA /* WeatherWidgetData.swift */,
+				03EBAE9F2C54FE53003FC9C5 /* AddressSelection.intentdefinition */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		035D2F742C57C0B90024B283 /* SystemSmallCharacterWidget */ = {
+			isa = PBXGroup;
+			children = (
+				039652C12C480F6F001D23A9 /* NalssiSamchunCharacterWidget.swift */,
+				039652D32C48FAAD001D23A9 /* RealTimeWeatherCharacterWidgetView.swift */,
+			);
+			path = SystemSmallCharacterWidget;
+			sourceTree = "<group>";
+		};
+		035D2F752C57C0F90024B283 /* SystemSmallCommentWidget */ = {
+			isa = PBXGroup;
+			children = (
+				035D2F712C57BF7B0024B283 /* NalssiSamchunCommentWidget.swift */,
+				035D2F6E2C57BDA30024B283 /* RealTimeWeatherCommentWidgetView.swift */,
+			);
+			path = SystemSmallCommentWidget;
+			sourceTree = "<group>";
+		};
 		039652BE2C480F6F001D23A9 /* NalssiSamchunWidget */ = {
 			isa = PBXGroup;
 			children = (
 				039652BF2C480F6F001D23A9 /* NalssiSamchunWidgetBundle.swift */,
-				039652C12C480F6F001D23A9 /* NalssiSamchunCharacterWidget.swift */,
-				03EBAE9F2C54FE53003FC9C5 /* AddressSelection.intentdefinition */,
-				039652D32C48FAAD001D23A9 /* RealTimeWeatherCharacterWidgetView.swift */,
-				03C9FB932C50151800BFD0DA /* WeatherWidgetData.swift */,
+				035D2F752C57C0F90024B283 /* SystemSmallCommentWidget */,
+				035D2F742C57C0B90024B283 /* SystemSmallCharacterWidget */,
+				035D2F732C57C0A70024B283 /* Model */,
 				039652C52C480F70001D23A9 /* Assets.xcassets */,
 				039652C72C480F70001D23A9 /* Info.plist */,
 			);
@@ -662,6 +693,7 @@
 				039652D72C490951001D23A9 /* IMHyemin-Bold.otf in Resources */,
 				03C9FB712C495ABE00BFD0DA /* clearCharacter.gif in Resources */,
 				039652C62C480F70001D23A9 /* Assets.xcassets in Resources */,
+				035D2F702C57BE940024B283 /* Assets.xcassets in Resources */,
 				039652D92C490955001D23A9 /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -749,7 +781,9 @@
 				039FB7F22C55348800FC96DA /* LocationManager.swift in Sources */,
 				03EBAEA02C54FE53003FC9C5 /* AddressSelection.intentdefinition in Sources */,
 				039652C22C480F6F001D23A9 /* NalssiSamchunCharacterWidget.swift in Sources */,
+				035D2F722C57BF7B0024B283 /* NalssiSamchunCommentWidget.swift in Sources */,
 				039652DB2C49096E001D23A9 /* UIScreen+.swift in Sources */,
+				035D2F6F2C57BDA30024B283 /* RealTimeWeatherCommentWidgetView.swift in Sources */,
 				039652DC2C4909A8001D23A9 /* View+.swift in Sources */,
 				039652D42C48FAAD001D23A9 /* RealTimeWeatherCharacterWidgetView.swift in Sources */,
 				039652D52C48FC13001D23A9 /* Color+Palette.swift in Sources */,
