@@ -10,19 +10,19 @@ import WidgetKit
 import Foundation
 
 struct WeatherCharacterWidgetProvider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> WetherCharacterWidgetEntry {
-        WetherCharacterWidgetEntry(date: Date(), weatherData: .previewData)
+    func placeholder(in context: Context) -> WeatherCharacterWidgetEntry {
+        WeatherCharacterWidgetEntry(date: Date(), weatherData: .previewData)
     }
     
-    func getSnapshot(for configuration: AddressSelectionIntent, in context: Context, completion: @escaping (WetherCharacterWidgetEntry) -> Void) {
-        let entry = WetherCharacterWidgetEntry(date: Date(), weatherData: .previewData)
+    func getSnapshot(for configuration: AddressSelectionIntent, in context: Context, completion: @escaping (WeatherCharacterWidgetEntry) -> Void) {
+        let entry = WeatherCharacterWidgetEntry(date: Date(), weatherData: .previewData)
         completion(entry)
     }
     
-    func getTimeline(for configuration: AddressSelectionIntent, in context: Context, completion: @escaping (Timeline<WetherCharacterWidgetEntry>) -> Void) {
+    func getTimeline(for configuration: AddressSelectionIntent, in context: Context, completion: @escaping (Timeline<WeatherCharacterWidgetEntry>) -> Void) {
         Task {
             let currentDate = Date()
-            var entries: [WetherCharacterWidgetEntry] = []
+            var entries: [WeatherCharacterWidgetEntry] = []
             let address = configuration.location?.displayString
             
             let weatherData = try? await WeatherCharacterWidgetData.currentWeather(for: address)
@@ -30,7 +30,7 @@ struct WeatherCharacterWidgetProvider: IntentTimelineProvider {
             
             for hourOffset in 0..<24 {
                 let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-                let entry = WetherCharacterWidgetEntry(date: entryDate, weatherData: data)
+                let entry = WeatherCharacterWidgetEntry(date: entryDate, weatherData: data)
                 entries.append(entry)
                 
             }
@@ -40,7 +40,7 @@ struct WeatherCharacterWidgetProvider: IntentTimelineProvider {
     }
 }
 
-struct WetherCharacterWidgetEntry: TimelineEntry {
+struct WeatherCharacterWidgetEntry: TimelineEntry {
     let date: Date
     let weatherData: WeatherCharacterWidgetData
 }
@@ -68,5 +68,5 @@ struct NalssiSamchunCharacterWidget: Widget {
 #Preview(as: .systemSmall) {
     NalssiSamchunCharacterWidget()
 } timeline: {
-    WetherCharacterWidgetEntry(date: .now, weatherData: .previewData)
+    WeatherCharacterWidgetEntry(date: .now, weatherData: .previewData)
 }
