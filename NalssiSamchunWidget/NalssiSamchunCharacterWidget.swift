@@ -10,27 +10,27 @@ import WidgetKit
 import Foundation
 
 struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), weatherData: .placeholderData)
+    func placeholder(in context: Context) -> WetherCharacterWidgetEntry {
+        WetherCharacterWidgetEntry(date: Date(), weatherData: .placeholderData)
     }
     
-    func getSnapshot(for configuration: AddressSelectionIntent, in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-        let entry = SimpleEntry(date: Date(), weatherData: .previewData)
+    func getSnapshot(for configuration: AddressSelectionIntent, in context: Context, completion: @escaping (WetherCharacterWidgetEntry) -> Void) {
+        let entry = WetherCharacterWidgetEntry(date: Date(), weatherData: .previewData)
         completion(entry)
     }
     
-    func getTimeline(for configuration: AddressSelectionIntent, in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> Void) {
+    func getTimeline(for configuration: AddressSelectionIntent, in context: Context, completion: @escaping (Timeline<WetherCharacterWidgetEntry>) -> Void) {
         Task {
             let currentDate = Date()
-            var entries: [SimpleEntry] = []
+            var entries: [WetherCharacterWidgetEntry] = []
             let address = configuration.location?.displayString
             
-            let weatherData = try? await WeatherWidgetData.currentWeather(for: address)
+            let weatherData = try? await WeatherCharacterWidgetData.currentWeather(for: address)
             let data = weatherData ?? .placeholderData
             
             for hourOffset in 0..<24 {
                 let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-                let entry = SimpleEntry(date: entryDate, weatherData: data)
+                let entry = WetherCharacterWidgetEntry(date: entryDate, weatherData: data)
                 entries.append(entry)
                 
             }
@@ -40,12 +40,12 @@ struct Provider: IntentTimelineProvider {
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct WetherCharacterWidgetEntry: TimelineEntry {
     let date: Date
-    let weatherData: WeatherWidgetData
+    let weatherData: WeatherCharacterWidgetData
 }
 
-struct NalssiSamchunWidgetEntryView : View {
+struct NalssiSamchunCharacterWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
@@ -53,12 +53,12 @@ struct NalssiSamchunWidgetEntryView : View {
     }
 }
 
-struct NalssiSamchunWidget: Widget {
-    let kind: String = "NalssiSamchunWidget"
+struct NalssiSamchunCharacterWidget: Widget {
+    let kind: String = "NalssiSamchunCharacterWidget"
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: AddressSelectionIntent.self, provider: Provider()) { entry in
-            NalssiSamchunWidgetEntryView(entry: entry)
+            NalssiSamchunCharacterWidgetEntryView(entry: entry)
                 .containerBackground(Color.seaSky, for: .widget)
         }
         .supportedFamilies([.systemSmall])
@@ -66,7 +66,7 @@ struct NalssiSamchunWidget: Widget {
 }
 
 #Preview(as: .systemSmall) {
-    NalssiSamchunWidget()
+    NalssiSamchunCharacterWidget()
 } timeline: {
-    SimpleEntry(date: .now, weatherData: .previewData)
+    WetherCharacterWidgetEntry(date: .now, weatherData: .previewData)
 }

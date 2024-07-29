@@ -11,6 +11,6 @@ import SwiftUI
 @main
 struct NalssiSamchunWidgetBundle: WidgetBundle {
     var body: some Widget {
-        NalssiSamchunWidget()
+        NalssiSamchunCharacterWidget()
     }
 }

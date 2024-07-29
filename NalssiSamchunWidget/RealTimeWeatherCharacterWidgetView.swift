@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 struct RealTimeWeatherCharacterWidgetView: View {
-    let data: WeatherWidgetData
+    let data: WeatherCharacterWidgetData
     
     var body: some View {
         // 글자가 두 줄이 되는 경우 생김.
