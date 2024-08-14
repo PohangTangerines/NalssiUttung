@@ -33,7 +33,7 @@ struct RealTimeWeatherView: View {
                     // MARK: - 날씨 멘트
                     VStack {
                         HStack {
-                            Text("\(weatherBoxData.weatherCondition.weatherComment(weatherData: dailyWeatherData))")
+                            Text("\(weatherBoxData.weatherCondition.getWeatherComment(for: dailyWeatherData.weather))")
                                 .font(.IMHyemin(.title))
                                 .IMHyeminLineHeight(.title, lineHeight: 40)
                             Spacer()
@@ -51,7 +51,7 @@ struct RealTimeWeatherView: View {
                                 .frame(width: 280.responsibleHeight)
                         }
                     }.onAppear {
-                        gifName = weatherBoxData.weatherCondition.weatherCharacter(weatherData: dailyWeatherData)
+                        gifName = weatherBoxData.weatherCondition.getWeatherCharacter(for: dailyWeatherData.weather)
                         print(gifName)
                     }
                 }.frame(height: 340.responsibleHeight)
@@ -85,7 +85,7 @@ struct RealTimeWeatherView: View {
                 Text("°")
                     .font(.IMHyemin(.largeTitle))
                     .padding(.leading, -(Font.FontSize.largeTitle2.rawValue * 0.5))
-                Text("\(weatherBoxData.weatherCondition.weatherString())")
+                Text("\(weatherBoxData.weatherCondition.getWeatherString())")
                     .font(.IMHyemin(.title))
                     .padding(.bottom, 13)
                     .padding(.leading, -30)

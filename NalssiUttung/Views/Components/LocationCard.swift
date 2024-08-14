@@ -32,7 +32,7 @@ struct LocationCard: View {
                 }
                 if let weatherBoxData = weatherBoxData {
                     HStack(alignment: .top, spacing: 0) {
-                        Image("\(weatherBoxData.weatherCondition.weatherIcon())")
+                        Image("\(weatherBoxData.weatherCondition.getWeatherIcon())")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 60.responsibleWidth)
@@ -45,7 +45,7 @@ struct LocationCard: View {
                                 Text("\(weatherBoxData.currentTemperature)° ")
                                     .font(.IMHyemin(.title2))
                                     .tracking(-(Font.FontSize.title2.rawValue * 0.1))
-                                Text("\(weatherBoxData.weatherCondition.weatherString())")
+                                Text("\(weatherBoxData.weatherCondition.getWeatherString())")
                                     .font(.IMHyemin(.title2))
                                     .padding(.leading, -(Font.FontSize.title2.rawValue * 0.3))
                             }.padding(.bottom, 3)
@@ -117,7 +117,7 @@ struct LocationCardScrolled: View {
                         .font(.pretendardSemibold(.caption))
                     
                     HStack(alignment: .top, spacing: 0) {
-                        Image(weatherBoxData.weatherCondition.weatherIcon())
+                        Image(weatherBoxData.weatherCondition.getWeatherIcon())
                             .resizable()
                             .scaledToFit()
                             .frame(width: 60.responsibleWidth)
@@ -130,7 +130,7 @@ struct LocationCardScrolled: View {
                                 Text("\(weatherBoxData.currentTemperature)°")
                                     .font(.IMHyemin(.title2))
                                     .tracking(-(Font.FontSize.title2.rawValue * 0.07))
-                                Text(weatherBoxData.weatherCondition.weatherString())
+                                Text(weatherBoxData.weatherCondition.getWeatherString())
                                     .font(.IMHyemin(.title2))
 //                                    .padding(.leading, -(Font.DEFontSize.title2.rawValue * 0.3))
                             }.padding(.bottom, 3.responsibleHeight)

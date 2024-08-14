@@ -20,48 +20,49 @@
 		031F38F12AFBBD1C002E2EAD /* partlyCloudyCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E52AFBBD1B002E2EAD /* partlyCloudyCharacter.gif */; };
 		031F38F22AFBBD1C002E2EAD /* thunderstormCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E62AFBBD1C002E2EAD /* thunderstormCharacter.gif */; };
 		031F38F32AFBBD1C002E2EAD /* foggyCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E72AFBBD1C002E2EAD /* foggyCharacter.gif */; };
+		032DACA02C5538080073FFD2 /* Weather+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E868C252AD4A8BB007D28F8 /* Weather+.swift */; };
+		032DACD02C554E1C0073FFD2 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032DACCF2C554E1C0073FFD2 /* Intents.framework */; };
+		032DACD32C554E1C0073FFD2 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032DACD22C554E1C0073FFD2 /* IntentHandler.swift */; };
+		032DACD72C554E1C0073FFD2 /* IntentHandler.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 032DACCE2C554E1C0073FFD2 /* IntentHandler.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		032DACDB2C554F630073FFD2 /* AddressSelection.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 03EBAE9F2C54FE53003FC9C5 /* AddressSelection.intentdefinition */; };
+		032DACDF2C5551A20073FFD2 /* LocationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E8A042AD57CF000EE5260 /* LocationListViewModel.swift */; };
+		035D2F6F2C57BDA30024B283 /* RealTimeWeatherCommentWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035D2F6E2C57BDA30024B283 /* RealTimeWeatherCommentWidgetView.swift */; };
+		035D2F702C57BE940024B283 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EB04B642AA6D17A00DC0933 /* Assets.xcassets */; };
+		035D2F722C57BF7B0024B283 /* NalssiSamchunCommentWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035D2F712C57BF7B0024B283 /* NalssiSamchunCommentWidget.swift */; };
 		036CA6782AB4C3540056C453 /* DailyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA6772AB4C3540056C453 /* DailyWeatherView.swift */; };
 		036CA6932AB8C54F0056C453 /* DetailedWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */; };
 		036CA69D2AB9598F0056C453 /* WeeklyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */; };
+		039652BD2C480F6F001D23A9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4F79FE2B8CFFEF0033497B /* SwiftUI.framework */; };
+		039652C02C480F6F001D23A9 /* NalssiSamchunWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039652BF2C480F6F001D23A9 /* NalssiSamchunWidgetBundle.swift */; };
+		039652C22C480F6F001D23A9 /* NalssiSamchunCharacterWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039652C12C480F6F001D23A9 /* NalssiSamchunCharacterWidget.swift */; };
+		039652C62C480F70001D23A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 039652C52C480F70001D23A9 /* Assets.xcassets */; };
+		039652CA2C480F70001D23A9 /* NalssiSamchunWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 039652BB2C480F6F001D23A9 /* NalssiSamchunWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		039652D42C48FAAD001D23A9 /* RealTimeWeatherCharacterWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039652D32C48FAAD001D23A9 /* RealTimeWeatherCharacterWidgetView.swift */; };
+		039652D52C48FC13001D23A9 /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */; };
+		039652D62C49092A001D23A9 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4692AB09F08005A5AD4 /* Font+.swift */; };
+		039652D72C490951001D23A9 /* IMHyemin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46C2AB09FAA005A5AD4 /* IMHyemin-Bold.otf */; };
+		039652D82C490953001D23A9 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */; };
+		039652D92C490955001D23A9 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */; };
+		039652DA2C490960001D23A9 /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EEFF12B1F8C5700D85EB8 /* CGFloat+.swift */; };
+		039652DB2C49096E001D23A9 /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EEFF32B1F8CAC00D85EB8 /* UIScreen+.swift */; };
+		039652DC2C4909A8001D23A9 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B8A7C2ACC3C52006E1F5E /* View+.swift */; };
+		039652DF2C490F11001D23A9 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039652DE2C490F11001D23A9 /* Text+.swift */; };
+		039652E02C490FA9001D23A9 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039652DE2C490F11001D23A9 /* Text+.swift */; };
+		039FB7F02C550EE500FC96DA /* AddressSelection.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 03EBAE9F2C54FE53003FC9C5 /* AddressSelection.intentdefinition */; };
+		039FB7F22C55348800FC96DA /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE65AE92AB6D5AD0038A32F /* LocationManager.swift */; };
 		03B2F45A2AAF3CCB005A5AD4 /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */; };
-		03B2F4632AB08EB7005A5AD4 /* RealTimeWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4622AB08EB7005A5AD4 /* RealTimeWeather.swift */; };
 		03B2F46A2AB09F08005A5AD4 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4692AB09F08005A5AD4 /* Font+.swift */; };
 		03B2F46D2AB09FAA005A5AD4 /* IMHyemin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46C2AB09FAA005A5AD4 /* IMHyemin-Bold.otf */; };
 		03B2F46F2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */; };
 		03B2F4712AB09FDD005A5AD4 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */; };
+		03C063AF2C494C630061F503 /* AnimatedGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031F38D52AFBB691002E2EAD /* AnimatedGifView.swift */; };
+		03C063B22C494E000061F503 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 03C063B12C494E000061F503 /* Gifu */; };
+		03C9FB712C495ABE00BFD0DA /* clearCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38F52AFBBD54002E2EAD /* clearCharacter.gif */; };
+		03C9FB942C50151800BFD0DA /* WeatherWidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C9FB932C50151800BFD0DA /* WeatherWidgetData.swift */; };
+		03C9FB962C524DA200BFD0DA /* LocationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E8A042AD57CF000EE5260 /* LocationListViewModel.swift */; };
 		03DD90152AEFCFF100AA072C /* LocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD90142AEFCFF100AA072C /* LocationStore.swift */; };
-		0E4F79FD2B8CFFEF0033497B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4F79FC2B8CFFEF0033497B /* WidgetKit.framework */; };
-		0E4F79FF2B8CFFEF0033497B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4F79FE2B8CFFEF0033497B /* SwiftUI.framework */; };
-		0E4F7A022B8CFFEF0033497B /* MiniSamchunBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F7A012B8CFFEF0033497B /* MiniSamchunBundle.swift */; };
-		0E4F7A042B8CFFEF0033497B /* MiniSamchunLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F7A032B8CFFEF0033497B /* MiniSamchunLiveActivity.swift */; };
-		0E4F7A082B8CFFEF0033497B /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F7A072B8CFFEF0033497B /* AppIntent.swift */; };
-		0E4F7A0A2B8CFFF00033497B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E4F7A092B8CFFF00033497B /* Assets.xcassets */; };
-		0E4F7A0E2B8CFFF00033497B /* MiniSamchunExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0E4F79FA2B8CFFEF0033497B /* MiniSamchunExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0E4F7A132B8D04F00033497B /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE65AEB2AB6DC690038A32F /* WeatherManager.swift */; };
-		0E4F7A142B8D04F30033497B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE65AE92AB6D5AD0038A32F /* LocationManager.swift */; };
-		0E4F7A152B8D05350033497B /* LocationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E8A042AD57CF000EE5260 /* LocationListViewModel.swift */; };
-		0E4F7A172B8D0C1F0033497B /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4692AB09F08005A5AD4 /* Font+.swift */; };
-		0E4F7A182B8D0C240033497B /* Color+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */; };
-		0E4F7A192B8D0C270033497B /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B8A7C2ACC3C52006E1F5E /* View+.swift */; };
-		0E4F7A1A2B8D0C2A0033497B /* Weather+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E868C252AD4A8BB007D28F8 /* Weather+.swift */; };
-		0E4F7A1B2B8D0C2C0033497B /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EEFF12B1F8C5700D85EB8 /* CGFloat+.swift */; };
-		0E4F7A1C2B8D0C2F0033497B /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EEFF32B1F8CAC00D85EB8 /* UIScreen+.swift */; };
-		0E4F7A1E2B8D16A70033497B /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */; };
-		0E4F7A1F2B8D16A70033497B /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */; };
-		0E4F7A202B8D16A70033497B /* IMHyemin-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03B2F46C2AB09FAA005A5AD4 /* IMHyemin-Bold.otf */; };
-		0E4F7A212B8D16AE0033497B /* partlyCloudyCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E52AFBBD1B002E2EAD /* partlyCloudyCharacter.gif */; };
-		0E4F7A222B8D16AE0033497B /* clearNightCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E02AFBBD1B002E2EAD /* clearNightCharacter.gif */; };
-		0E4F7A232B8D16AE0033497B /* heavyRainCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E32AFBBD1B002E2EAD /* heavyRainCharacter.gif */; };
-		0E4F7A242B8D16AE0033497B /* thunderstormCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E62AFBBD1C002E2EAD /* thunderstormCharacter.gif */; };
-		0E4F7A252B8D16AE0033497B /* windyCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E12AFBBD1B002E2EAD /* windyCharacter.gif */; };
-		0E4F7A262B8D16AE0033497B /* rainCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38DE2AFBBD1B002E2EAD /* rainCharacter.gif */; };
-		0E4F7A272B8D16AE0033497B /* clearCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38F52AFBBD54002E2EAD /* clearCharacter.gif */; };
-		0E4F7A282B8D16AE0033497B /* splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0E5D08D02B00C5D70082C0F6 /* splash.gif */; };
-		0E4F7A292B8D16AE0033497B /* cloudyCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E42AFBBD1B002E2EAD /* cloudyCharacter.gif */; };
-		0E4F7A2A2B8D16AE0033497B /* foggyCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E72AFBBD1C002E2EAD /* foggyCharacter.gif */; };
-		0E4F7A2B2B8D16AE0033497B /* freezingRainCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38E22AFBBD1B002E2EAD /* freezingRainCharacter.gif */; };
-		0E4F7A2C2B8D16AE0033497B /* partlyCloudyNightCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38DC2AFBBD1B002E2EAD /* partlyCloudyNightCharacter.gif */; };
-		0E4F7A2D2B8D16AE0033497B /* snowCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38DF2AFBBD1B002E2EAD /* snowCharacter.gif */; };
+		03EBAE812C528239003FC9C5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4F79FC2B8CFFEF0033497B /* WidgetKit.framework */; };
+		03EBAEA02C54FE53003FC9C5 /* AddressSelection.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 03EBAE9F2C54FE53003FC9C5 /* AddressSelection.intentdefinition */; };
 		0E5D08CD2B00C51F0082C0F6 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5D08CC2B00C51F0082C0F6 /* SplashScreenView.swift */; };
 		0E5D08CF2B00C5450082C0F6 /* AnimatedSplashGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5D08CE2B00C5450082C0F6 /* AnimatedSplashGifView.swift */; };
 		0E5D08D12B00C5D70082C0F6 /* splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0E5D08D02B00C5D70082C0F6 /* splash.gif */; };
@@ -75,9 +76,6 @@
 		0E868C262AD4A8BB007D28F8 /* Weather+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E868C252AD4A8BB007D28F8 /* Weather+.swift */; };
 		0E9EEFF22B1F8C5700D85EB8 /* CGFloat+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EEFF12B1F8C5700D85EB8 /* CGFloat+.swift */; };
 		0E9EEFF42B1F8CAC00D85EB8 /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9EEFF32B1F8CAC00D85EB8 /* UIScreen+.swift */; };
-		0E9F9BA32B8D2112001C8CF0 /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 0E9F9BA22B8D2112001C8CF0 /* Gifu */; };
-		0E9F9BA42B8D21E0001C8CF0 /* AnimatedGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031F38D52AFBB691002E2EAD /* AnimatedGifView.swift */; };
-		0E9F9BA52B8D2203001C8CF0 /* MiniSamchun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F7A052B8CFFEF0033497B /* MiniSamchun.swift */; };
 		0EAF068A2B0BAB0F00AEA978 /* MakePeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAF06892B0BAB0F00AEA978 /* MakePeopleView.swift */; };
 		0EAF068C2B0BADC200AEA978 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAF068B2B0BADC200AEA978 /* WebView.swift */; };
 		0EAF068E2B0BAF7000AEA978 /* ResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAF068D2B0BAF7000AEA978 /* ResourcesView.swift */; };
@@ -98,12 +96,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0E4F7A0C2B8CFFF00033497B /* PBXContainerItemProxy */ = {
+		032DACD52C554E1C0073FFD2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0EB04B552AA6D17900DC0933 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 0E4F79F92B8CFFEF0033497B;
-			remoteInfo = MiniSamchunExtension;
+			remoteGlobalIDString = 032DACCD2C554E1B0073FFD2;
+			remoteInfo = IntentHandler;
+		};
+		039652C82C480F70001D23A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0EB04B552AA6D17900DC0933 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 039652BA2C480F6F001D23A9;
+			remoteInfo = NalssiSamchunWidgetExtension;
 		};
 		0EB04B6E2AA6D17A00DC0933 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -128,7 +133,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0E4F7A0E2B8CFFF00033497B /* MiniSamchunExtension.appex in Embed Foundation Extensions */,
+				039652CA2C480F70001D23A9 /* NalssiSamchunWidgetExtension.appex in Embed Foundation Extensions */,
+				032DACD72C554E1C0073FFD2 /* IntentHandler.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,27 +155,36 @@
 		031F38E62AFBBD1C002E2EAD /* thunderstormCharacter.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = thunderstormCharacter.gif; sourceTree = "<group>"; };
 		031F38E72AFBBD1C002E2EAD /* foggyCharacter.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = foggyCharacter.gif; sourceTree = "<group>"; };
 		031F38F52AFBBD54002E2EAD /* clearCharacter.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = clearCharacter.gif; sourceTree = "<group>"; };
+		032DACCE2C554E1C0073FFD2 /* IntentHandler.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IntentHandler.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		032DACCF2C554E1C0073FFD2 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		032DACD22C554E1C0073FFD2 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		032DACD42C554E1C0073FFD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		035D2F6E2C57BDA30024B283 /* RealTimeWeatherCommentWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeWeatherCommentWidgetView.swift; sourceTree = "<group>"; };
+		035D2F712C57BF7B0024B283 /* NalssiSamchunCommentWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiSamchunCommentWidget.swift; sourceTree = "<group>"; };
 		036CA6772AB4C3540056C453 /* DailyWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherView.swift; sourceTree = "<group>"; };
 		036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedWeatherView.swift; sourceTree = "<group>"; };
 		036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyWeatherView.swift; sourceTree = "<group>"; };
+		039652BB2C480F6F001D23A9 /* NalssiSamchunWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NalssiSamchunWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		039652BF2C480F6F001D23A9 /* NalssiSamchunWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiSamchunWidgetBundle.swift; sourceTree = "<group>"; };
+		039652C12C480F6F001D23A9 /* NalssiSamchunCharacterWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiSamchunCharacterWidget.swift; sourceTree = "<group>"; };
+		039652C52C480F70001D23A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		039652C72C480F70001D23A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		039652D32C48FAAD001D23A9 /* RealTimeWeatherCharacterWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeWeatherCharacterWidgetView.swift; sourceTree = "<group>"; };
+		039652DE2C490F11001D23A9 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
+		039FB7F12C55103D00FC96DA /* NalssiUttungDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NalssiUttungDebug.entitlements; sourceTree = "<group>"; };
 		03B2F4592AAF3CCB005A5AD4 /* Color+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Palette.swift"; sourceTree = "<group>"; };
-		03B2F4622AB08EB7005A5AD4 /* RealTimeWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeWeather.swift; sourceTree = "<group>"; };
 		03B2F4692AB09F08005A5AD4 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		03B2F46C2AB09FAA005A5AD4 /* IMHyemin-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IMHyemin-Bold.otf"; sourceTree = "<group>"; };
 		03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		03B2F4722AB0A063005A5AD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		03C9FB932C50151800BFD0DA /* WeatherWidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherWidgetData.swift; sourceTree = "<group>"; };
 		03DD90142AEFCFF100AA072C /* LocationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStore.swift; sourceTree = "<group>"; };
-		0E4F79FA2B8CFFEF0033497B /* MiniSamchunExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MiniSamchunExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		03EBAE7F2C528204003FC9C5 /* WeatherKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WeatherKit.framework; path = System/Library/Frameworks/WeatherKit.framework; sourceTree = SDKROOT; };
+		03EBAE8E2C53925F003FC9C5 /* NalssiSamchunWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NalssiSamchunWidgetExtension.entitlements; sourceTree = "<group>"; };
+		03EBAE9F2C54FE53003FC9C5 /* AddressSelection.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = AddressSelection.intentdefinition; sourceTree = "<group>"; };
 		0E4F79FC2B8CFFEF0033497B /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		0E4F79FE2B8CFFEF0033497B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		0E4F7A012B8CFFEF0033497B /* MiniSamchunBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSamchunBundle.swift; sourceTree = "<group>"; };
-		0E4F7A032B8CFFEF0033497B /* MiniSamchunLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSamchunLiveActivity.swift; sourceTree = "<group>"; };
-		0E4F7A052B8CFFEF0033497B /* MiniSamchun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSamchun.swift; sourceTree = "<group>"; };
-		0E4F7A072B8CFFEF0033497B /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
-		0E4F7A092B8CFFF00033497B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0E4F7A0B2B8CFFF00033497B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0E4F7A1D2B8D102E0033497B /* MiniSamchunExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MiniSamchunExtension.entitlements; sourceTree = "<group>"; };
 		0E5D08CC2B00C51F0082C0F6 /* SplashScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		0E5D08CE2B00C5450082C0F6 /* AnimatedSplashGifView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedSplashGifView.swift; sourceTree = "<group>"; };
 		0E5D08D02B00C5D70082C0F6 /* splash.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = splash.gif; sourceTree = "<group>"; };
@@ -205,13 +220,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0E4F79F72B8CFFEF0033497B /* Frameworks */ = {
+		032DACCB2C554E1B0073FFD2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E4F79FF2B8CFFEF0033497B /* SwiftUI.framework in Frameworks */,
-				0E4F79FD2B8CFFEF0033497B /* WidgetKit.framework in Frameworks */,
-				0E9F9BA32B8D2112001C8CF0 /* Gifu in Frameworks */,
+				032DACD02C554E1C0073FFD2 /* Intents.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		039652B82C480F6F001D23A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				039652BD2C480F6F001D23A9 /* SwiftUI.framework in Frameworks */,
+				03C063B22C494E000061F503 /* Gifu in Frameworks */,
+				03EBAE812C528239003FC9C5 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +284,55 @@
 			path = GIFImage;
 			sourceTree = "<group>";
 		};
+		032DACD12C554E1C0073FFD2 /* IntentHandler */ = {
+			isa = PBXGroup;
+			children = (
+				032DACD22C554E1C0073FFD2 /* IntentHandler.swift */,
+				032DACD42C554E1C0073FFD2 /* Info.plist */,
+			);
+			path = IntentHandler;
+			sourceTree = "<group>";
+		};
+		035D2F732C57C0A70024B283 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				03C9FB932C50151800BFD0DA /* WeatherWidgetData.swift */,
+				03EBAE9F2C54FE53003FC9C5 /* AddressSelection.intentdefinition */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		035D2F742C57C0B90024B283 /* SystemSmallCharacterWidget */ = {
+			isa = PBXGroup;
+			children = (
+				039652C12C480F6F001D23A9 /* NalssiSamchunCharacterWidget.swift */,
+				039652D32C48FAAD001D23A9 /* RealTimeWeatherCharacterWidgetView.swift */,
+			);
+			path = SystemSmallCharacterWidget;
+			sourceTree = "<group>";
+		};
+		035D2F752C57C0F90024B283 /* SystemSmallCommentWidget */ = {
+			isa = PBXGroup;
+			children = (
+				035D2F712C57BF7B0024B283 /* NalssiSamchunCommentWidget.swift */,
+				035D2F6E2C57BDA30024B283 /* RealTimeWeatherCommentWidgetView.swift */,
+			);
+			path = SystemSmallCommentWidget;
+			sourceTree = "<group>";
+		};
+		039652BE2C480F6F001D23A9 /* NalssiSamchunWidget */ = {
+			isa = PBXGroup;
+			children = (
+				039652BF2C480F6F001D23A9 /* NalssiSamchunWidgetBundle.swift */,
+				035D2F752C57C0F90024B283 /* SystemSmallCommentWidget */,
+				035D2F742C57C0B90024B283 /* SystemSmallCharacterWidget */,
+				035D2F732C57C0A70024B283 /* Model */,
+				039652C52C480F70001D23A9 /* Assets.xcassets */,
+				039652C72C480F70001D23A9 /* Info.plist */,
+			);
+			path = NalssiSamchunWidget;
+			sourceTree = "<group>";
+		};
 		03B2F45B2AAF3DDA005A5AD4 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +342,7 @@
 				0E868C252AD4A8BB007D28F8 /* Weather+.swift */,
 				0E9EEFF12B1F8C5700D85EB8 /* CGFloat+.swift */,
 				0E9EEFF32B1F8CAC00D85EB8 /* UIScreen+.swift */,
+				039652DE2C490F11001D23A9 /* Text+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -288,23 +361,12 @@
 		0E4F79FB2B8CFFEF0033497B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				03EBAE7F2C528204003FC9C5 /* WeatherKit.framework */,
 				0E4F79FC2B8CFFEF0033497B /* WidgetKit.framework */,
 				0E4F79FE2B8CFFEF0033497B /* SwiftUI.framework */,
+				032DACCF2C554E1C0073FFD2 /* Intents.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		0E4F7A002B8CFFEF0033497B /* MiniSamchun */ = {
-			isa = PBXGroup;
-			children = (
-				0E4F7A012B8CFFEF0033497B /* MiniSamchunBundle.swift */,
-				0E4F7A032B8CFFEF0033497B /* MiniSamchunLiveActivity.swift */,
-				0E4F7A052B8CFFEF0033497B /* MiniSamchun.swift */,
-				0E4F7A072B8CFFEF0033497B /* AppIntent.swift */,
-				0E4F7A092B8CFFF00033497B /* Assets.xcassets */,
-				0E4F7A0B2B8CFFF00033497B /* Info.plist */,
-			);
-			path = MiniSamchun;
 			sourceTree = "<group>";
 		};
 		0E6377392B0B962E00D6477B /* Information */ = {
@@ -361,13 +423,14 @@
 		0EB04B542AA6D17900DC0933 = {
 			isa = PBXGroup;
 			children = (
-				0E4F7A1D2B8D102E0033497B /* MiniSamchunExtension.entitlements */,
+				03EBAE8E2C53925F003FC9C5 /* NalssiSamchunWidgetExtension.entitlements */,
 				7CA773DC2AA7949800D70BD3 /* .swiftlint.yml */,
 				0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */,
 				0EB04B5F2AA6D17900DC0933 /* NalssiUttung */,
 				0EB04B702AA6D17A00DC0933 /* NalssiUttungTests */,
 				0EB04B7A2AA6D17A00DC0933 /* NalssiUttungUITests */,
-				0E4F7A002B8CFFEF0033497B /* MiniSamchun */,
+				039652BE2C480F6F001D23A9 /* NalssiSamchunWidget */,
+				032DACD12C554E1C0073FFD2 /* IntentHandler */,
 				0E4F79FB2B8CFFEF0033497B /* Frameworks */,
 				0EB04B5E2AA6D17900DC0933 /* Products */,
 			);
@@ -379,7 +442,8 @@
 				0EB04B5D2AA6D17900DC0933 /* NalssiUttung.app */,
 				0EB04B6D2AA6D17A00DC0933 /* NalssiUttungTests.xctest */,
 				0EB04B772AA6D17A00DC0933 /* NalssiUttungUITests.xctest */,
-				0E4F79FA2B8CFFEF0033497B /* MiniSamchunExtension.appex */,
+				039652BB2C480F6F001D23A9 /* NalssiSamchunWidgetExtension.appex */,
+				032DACCE2C554E1C0073FFD2 /* IntentHandler.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -387,6 +451,7 @@
 		0EB04B5F2AA6D17900DC0933 /* NalssiUttung */ = {
 			isa = PBXGroup;
 			children = (
+				039FB7F12C55103D00FC96DA /* NalssiUttungDebug.entitlements */,
 				0EE65AED2AB6DC750038A32F /* NalssiUttung.entitlements */,
 				0EE65AE82AB6D5A10038A32F /* Manager */,
 				7CA9A3CF2AAF64EB0051CC25 /* Model */,
@@ -450,7 +515,6 @@
 		7CA9A3CF2AAF64EB0051CC25 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				03B2F4622AB08EB7005A5AD4 /* RealTimeWeather.swift */,
 				7C7E8A042AD57CF000EE5260 /* LocationListViewModel.swift */,
 				03DD90142AEFCFF100AA072C /* LocationStore.swift */,
 			);
@@ -460,24 +524,41 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0E4F79F92B8CFFEF0033497B /* MiniSamchunExtension */ = {
+		032DACCD2C554E1B0073FFD2 /* IntentHandler */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0E4F7A0F2B8CFFF00033497B /* Build configuration list for PBXNativeTarget "MiniSamchunExtension" */;
+			buildConfigurationList = 032DACDA2C554E1C0073FFD2 /* Build configuration list for PBXNativeTarget "IntentHandler" */;
 			buildPhases = (
-				0E4F79F62B8CFFEF0033497B /* Sources */,
-				0E4F79F72B8CFFEF0033497B /* Frameworks */,
-				0E4F79F82B8CFFEF0033497B /* Resources */,
+				032DACCA2C554E1B0073FFD2 /* Sources */,
+				032DACCB2C554E1B0073FFD2 /* Frameworks */,
+				032DACCC2C554E1B0073FFD2 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = MiniSamchunExtension;
-			packageProductDependencies = (
-				0E9F9BA22B8D2112001C8CF0 /* Gifu */,
+			name = IntentHandler;
+			productName = IntentHandler;
+			productReference = 032DACCE2C554E1C0073FFD2 /* IntentHandler.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		039652BA2C480F6F001D23A9 /* NalssiSamchunWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 039652CB2C480F70001D23A9 /* Build configuration list for PBXNativeTarget "NalssiSamchunWidgetExtension" */;
+			buildPhases = (
+				039652B72C480F6F001D23A9 /* Sources */,
+				039652B82C480F6F001D23A9 /* Frameworks */,
+				039652B92C480F6F001D23A9 /* Resources */,
 			);
-			productName = MiniSamchunExtension;
-			productReference = 0E4F79FA2B8CFFEF0033497B /* MiniSamchunExtension.appex */;
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NalssiSamchunWidgetExtension;
+			packageProductDependencies = (
+				03C063B12C494E000061F503 /* Gifu */,
+			);
+			productName = NalssiSamchunWidgetExtension;
+			productReference = 039652BB2C480F6F001D23A9 /* NalssiSamchunWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		0EB04B5C2AA6D17900DC0933 /* NalssiUttung */ = {
@@ -493,7 +574,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				0E4F7A0D2B8CFFF00033497B /* PBXTargetDependency */,
+				039652C92C480F70001D23A9 /* PBXTargetDependency */,
+				032DACD62C554E1C0073FFD2 /* PBXTargetDependency */,
 			);
 			name = NalssiUttung;
 			packageProductDependencies = (
@@ -550,7 +632,10 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					0E4F79F92B8CFFEF0033497B = {
+					032DACCD2C554E1B0073FFD2 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+					039652BA2C480F6F001D23A9 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
 					0EB04B5C2AA6D17900DC0933 = {
@@ -586,33 +671,30 @@
 				0EB04B5C2AA6D17900DC0933 /* NalssiUttung */,
 				0EB04B6C2AA6D17A00DC0933 /* NalssiUttungTests */,
 				0EB04B762AA6D17A00DC0933 /* NalssiUttungUITests */,
-				0E4F79F92B8CFFEF0033497B /* MiniSamchunExtension */,
+				039652BA2C480F6F001D23A9 /* NalssiSamchunWidgetExtension */,
+				032DACCD2C554E1B0073FFD2 /* IntentHandler */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0E4F79F82B8CFFEF0033497B /* Resources */ = {
+		032DACCC2C554E1B0073FFD2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E4F7A262B8D16AE0033497B /* rainCharacter.gif in Resources */,
-				0E4F7A272B8D16AE0033497B /* clearCharacter.gif in Resources */,
-				0E4F7A1F2B8D16A70033497B /* Pretendard-SemiBold.otf in Resources */,
-				0E4F7A2A2B8D16AE0033497B /* foggyCharacter.gif in Resources */,
-				0E4F7A242B8D16AE0033497B /* thunderstormCharacter.gif in Resources */,
-				0E4F7A2D2B8D16AE0033497B /* snowCharacter.gif in Resources */,
-				0E4F7A2C2B8D16AE0033497B /* partlyCloudyNightCharacter.gif in Resources */,
-				0E4F7A222B8D16AE0033497B /* clearNightCharacter.gif in Resources */,
-				0E4F7A232B8D16AE0033497B /* heavyRainCharacter.gif in Resources */,
-				0E4F7A0A2B8CFFF00033497B /* Assets.xcassets in Resources */,
-				0E4F7A252B8D16AE0033497B /* windyCharacter.gif in Resources */,
-				0E4F7A292B8D16AE0033497B /* cloudyCharacter.gif in Resources */,
-				0E4F7A212B8D16AE0033497B /* partlyCloudyCharacter.gif in Resources */,
-				0E4F7A282B8D16AE0033497B /* splash.gif in Resources */,
-				0E4F7A202B8D16A70033497B /* IMHyemin-Bold.otf in Resources */,
-				0E4F7A1E2B8D16A70033497B /* Pretendard-Medium.otf in Resources */,
-				0E4F7A2B2B8D16AE0033497B /* freezingRainCharacter.gif in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		039652B92C480F6F001D23A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				039652D82C490953001D23A9 /* Pretendard-SemiBold.otf in Resources */,
+				039652D72C490951001D23A9 /* IMHyemin-Bold.otf in Resources */,
+				03C9FB712C495ABE00BFD0DA /* clearCharacter.gif in Resources */,
+				039652C62C480F70001D23A9 /* Assets.xcassets in Resources */,
+				035D2F702C57BE940024B283 /* Assets.xcassets in Resources */,
+				039652D92C490955001D23A9 /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,24 +762,37 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0E4F79F62B8CFFEF0033497B /* Sources */ = {
+		032DACCA2C554E1B0073FFD2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E4F7A172B8D0C1F0033497B /* Font+.swift in Sources */,
-				0E4F7A1C2B8D0C2F0033497B /* UIScreen+.swift in Sources */,
-				0E9F9BA52B8D2203001C8CF0 /* MiniSamchun.swift in Sources */,
-				0E4F7A022B8CFFEF0033497B /* MiniSamchunBundle.swift in Sources */,
-				0E4F7A082B8CFFEF0033497B /* AppIntent.swift in Sources */,
-				0E4F7A142B8D04F30033497B /* LocationManager.swift in Sources */,
-				0E4F7A1B2B8D0C2C0033497B /* CGFloat+.swift in Sources */,
-				0E4F7A132B8D04F00033497B /* WeatherManager.swift in Sources */,
-				0E4F7A182B8D0C240033497B /* Color+Palette.swift in Sources */,
-				0E4F7A152B8D05350033497B /* LocationListViewModel.swift in Sources */,
-				0E9F9BA42B8D21E0001C8CF0 /* AnimatedGifView.swift in Sources */,
-				0E4F7A1A2B8D0C2A0033497B /* Weather+.swift in Sources */,
-				0E4F7A192B8D0C270033497B /* View+.swift in Sources */,
-				0E4F7A042B8CFFEF0033497B /* MiniSamchunLiveActivity.swift in Sources */,
+				032DACDB2C554F630073FFD2 /* AddressSelection.intentdefinition in Sources */,
+				032DACD32C554E1C0073FFD2 /* IntentHandler.swift in Sources */,
+				032DACDF2C5551A20073FFD2 /* LocationListViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		039652B72C480F6F001D23A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				039652D62C49092A001D23A9 /* Font+.swift in Sources */,
+				039652C02C480F6F001D23A9 /* NalssiSamchunWidgetBundle.swift in Sources */,
+				039FB7F22C55348800FC96DA /* LocationManager.swift in Sources */,
+				03EBAEA02C54FE53003FC9C5 /* AddressSelection.intentdefinition in Sources */,
+				039652C22C480F6F001D23A9 /* NalssiSamchunCharacterWidget.swift in Sources */,
+				035D2F722C57BF7B0024B283 /* NalssiSamchunCommentWidget.swift in Sources */,
+				039652DB2C49096E001D23A9 /* UIScreen+.swift in Sources */,
+				035D2F6F2C57BDA30024B283 /* RealTimeWeatherCommentWidgetView.swift in Sources */,
+				039652DC2C4909A8001D23A9 /* View+.swift in Sources */,
+				039652D42C48FAAD001D23A9 /* RealTimeWeatherCharacterWidgetView.swift in Sources */,
+				039652D52C48FC13001D23A9 /* Color+Palette.swift in Sources */,
+				039652DA2C490960001D23A9 /* CGFloat+.swift in Sources */,
+				039652E02C490FA9001D23A9 /* Text+.swift in Sources */,
+				032DACA02C5538080073FFD2 /* Weather+.swift in Sources */,
+				03C9FB942C50151800BFD0DA /* WeatherWidgetData.swift in Sources */,
+				03C063AF2C494C630061F503 /* AnimatedGifView.swift in Sources */,
+				03C9FB962C524DA200BFD0DA /* LocationListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,9 +806,9 @@
 				0E7B8A822ACC7111006E1F5E /* MainScrolledView.swift in Sources */,
 				03DD90152AEFCFF100AA072C /* LocationStore.swift in Sources */,
 				036CA6932AB8C54F0056C453 /* DetailedWeatherView.swift in Sources */,
-				03B2F4632AB08EB7005A5AD4 /* RealTimeWeather.swift in Sources */,
 				0E868C262AD4A8BB007D28F8 /* Weather+.swift in Sources */,
 				0E7B8A7D2ACC3C52006E1F5E /* View+.swift in Sources */,
+				039FB7F02C550EE500FC96DA /* AddressSelection.intentdefinition in Sources */,
 				0E9EEFF42B1F8CAC00D85EB8 /* UIScreen+.swift in Sources */,
 				0EE65AEC2AB6DC690038A32F /* WeatherManager.swift in Sources */,
 				0E6377382B0B962900D6477B /* InformationView.swift in Sources */,
@@ -733,6 +828,7 @@
 				03B2F46A2AB09F08005A5AD4 /* Font+.swift in Sources */,
 				0EE65AEA2AB6D5AD0038A32F /* LocationManager.swift in Sources */,
 				0EAF068A2B0BAB0F00AEA978 /* MakePeopleView.swift in Sources */,
+				039652DF2C490F11001D23A9 /* Text+.swift in Sources */,
 				7C7E8A052AD57CF000EE5260 /* LocationListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -757,10 +853,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0E4F7A0D2B8CFFF00033497B /* PBXTargetDependency */ = {
+		032DACD62C554E1C0073FFD2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0E4F79F92B8CFFEF0033497B /* MiniSamchunExtension */;
-			targetProxy = 0E4F7A0C2B8CFFF00033497B /* PBXContainerItemProxy */;
+			target = 032DACCD2C554E1B0073FFD2 /* IntentHandler */;
+			targetProxy = 032DACD52C554E1C0073FFD2 /* PBXContainerItemProxy */;
+		};
+		039652C92C480F70001D23A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 039652BA2C480F6F001D23A9 /* NalssiSamchunWidgetExtension */;
+			targetProxy = 039652C82C480F70001D23A9 /* PBXContainerItemProxy */;
 		};
 		0EB04B6F2AA6D17A00DC0933 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -775,22 +876,19 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0E4F7A102B8CFFF00033497B /* Debug */ = {
+		032DACD82C554E1C0073FFD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = MiniSamchunExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PAQ92DM7XD;
+				DEVELOPMENT_TEAM = RFZY2ACQ74;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MiniSamchun/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = MiniSamchun;
+				INFOPLIST_FILE = IntentHandler/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IntentHandler;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -800,7 +898,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiUttung1.MiniSamchun;
+				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiSamchun.IntentHandler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
@@ -810,22 +908,19 @@
 			};
 			name = Debug;
 		};
-		0E4F7A112B8CFFF00033497B /* Release */ = {
+		032DACD92C554E1C0073FFD2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = MiniSamchunExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PAQ92DM7XD;
+				DEVELOPMENT_TEAM = RFZY2ACQ74;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MiniSamchun/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = MiniSamchun;
+				INFOPLIST_FILE = IntentHandler/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IntentHandler;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -835,7 +930,76 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiUttung1.MiniSamchun;
+				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiSamchun.IntentHandler;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		039652CC2C480F70001D23A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = NalssiSamchunWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RFZY2ACQ74;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NalssiSamchunWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NalssiSamchunWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiSamchun.Widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		039652CD2C480F70001D23A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = NalssiSamchunWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RFZY2ACQ74;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NalssiSamchunWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NalssiSamchunWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiSamchun.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -966,12 +1130,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = NalssiUttung/NalssiUttung.entitlements;
+				CODE_SIGN_ENTITLEMENTS = NalssiUttung/NalssiUttungDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NalssiUttung/Preview Content\"";
-				DEVELOPMENT_TEAM = PAQ92DM7XD;
+				DEVELOPMENT_TEAM = RFZY2ACQ74;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NalssiUttung/Info.plist;
@@ -988,7 +1152,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.2;
-				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiUttung1;
+				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiSamchun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1011,7 +1175,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NalssiUttung/Preview Content\"";
-				DEVELOPMENT_TEAM = PAQ92DM7XD;
+				DEVELOPMENT_TEAM = RFZY2ACQ74;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NalssiUttung/Info.plist;
@@ -1028,7 +1192,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.2;
-				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiUttung1;
+				PRODUCT_BUNDLE_IDENTIFIER = PoTanz.NalssiSamchun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1119,11 +1283,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0E4F7A0F2B8CFFF00033497B /* Build configuration list for PBXNativeTarget "MiniSamchunExtension" */ = {
+		032DACDA2C554E1C0073FFD2 /* Build configuration list for PBXNativeTarget "IntentHandler" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0E4F7A102B8CFFF00033497B /* Debug */,
-				0E4F7A112B8CFFF00033497B /* Release */,
+				032DACD82C554E1C0073FFD2 /* Debug */,
+				032DACD92C554E1C0073FFD2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		039652CB2C480F70001D23A9 /* Build configuration list for PBXNativeTarget "NalssiSamchunWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				039652CC2C480F70001D23A9 /* Debug */,
+				039652CD2C480F70001D23A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1191,15 +1364,15 @@
 			package = 031F38D72AFBB8B6002E2EAD /* XCRemoteSwiftPackageReference "Gifu" */;
 			productName = Gifu;
 		};
+		03C063B12C494E000061F503 /* Gifu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 031F38D72AFBB8B6002E2EAD /* XCRemoteSwiftPackageReference "Gifu" */;
+			productName = Gifu;
+		};
 		0E7B8A7F2ACC56D6006E1F5E /* ScrollKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0E7B8A7E2ACC56D6006E1F5E /* XCRemoteSwiftPackageReference "ScrollKit" */;
 			productName = ScrollKit;
-		};
-		0E9F9BA22B8D2112001C8CF0 /* Gifu */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 031F38D72AFBB8B6002E2EAD /* XCRemoteSwiftPackageReference "Gifu" */;
-			productName = Gifu;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

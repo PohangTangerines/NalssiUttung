@@ -10,7 +10,7 @@ import WeatherKit
 
 extension WeatherCondition {
     // weatherCondition -> 이미지 에셋 String.
-    func weatherIcon() -> String {
+    func getWeatherIcon() -> String {
         var icon = ""
         
         switch self {
@@ -49,7 +49,7 @@ extension WeatherCondition {
         return icon
     }
     
-    func weatherString() -> String {
+    func getWeatherString() -> String {
         var str = ""
         
         switch self {
@@ -90,15 +90,53 @@ extension WeatherCondition {
         return str
     }
     
-    func weatherComment(weatherData: DailyWeatherData) -> String {
-        let sunriseDate = weatherData.weather.dailyForecast.forecast.first!.sun.sunrise!
-        let sunsetDate = weatherData.weather.dailyForecast.forecast.first!.sun.sunset!
+    func getWeatherCharacter(for weather: Weather) -> String {
+        let sunrise = weather.dailyForecast.forecast.first!.sun.sunrise!
+        let sunset = weather.dailyForecast.forecast.first!.sun.sunset!
+        
+        switch self {
+        case .clear, .mostlyClear, .hot :
+            if sunrise.timeIntervalSinceNow < 0 && sunset.timeIntervalSinceNow > 0 {
+                return "clearCharacter"
+            } else {
+                return "clearNightCharacter"
+            }
+        case .cloudy :
+            return "cloudyCharacter"
+        case .partlyCloudy, .mostlyCloudy :
+            if sunrise.timeIntervalSinceNow < 0 && sunset.timeIntervalSinceNow > 0 {
+                return "partlyCloudyCharacter"
+            } else {
+                return "partlyCloudyNightCharacter"
+            }
+        case .haze, .foggy, .blowingDust, .smoky :
+            return "foggyCharacter"
+        case .windy, .breezy :
+            return "windyCharacter"
+        case .strongStorms, .scatteredThunderstorms, .isolatedThunderstorms, .thunderstorms, .tropicalStorm, .hurricane :
+            return "thunderstormCharacter"
+        case .rain, .drizzle, .freezingDrizzle, .sunShowers :
+            return "rainCharacter"
+        case .heavyRain :
+            return "heavyRainCharacter"
+        case .snow, .heavySnow, .blizzard, .blowingSnow, .flurries , .sunFlurries, .frigid, .hail:
+            return "snowCharacter"
+        case .freezingRain, .sleet, .wintryMix :
+            return "freezingRainCharacter"
+        default :
+            return "clearCharacter"
+        }
+    }
+    
+    func getWeatherComment(for weather: Weather) -> String {
+        let sunrise = weather.dailyForecast.forecast.first!.sun.sunrise!
+        let sunset = weather.dailyForecast.forecast.first!.sun.sunset!
         
         switch self {
         case .hot :
             return ["날씨가 하영 덥수다양. 선풍기영 에어컨 틀고있읍서.","덥고 습해서 죽어지크라.", "아이스크림 녹아블크라, 조물딱 거리지 말앙 빨랑 먹읍써.", "더워부난 바당가서 놀구지하다"].randomElement()!
         case .clear, .mostlyClear :
-            if sunriseDate.timeIntervalSinceNow < 0 && sunsetDate.timeIntervalSinceNow > 0 {
+            if sunrise.timeIntervalSinceNow < 0 && sunset.timeIntervalSinceNow > 0 {
                 return ["오늘 날씨 잘도 좋아", "볕이 과랑과랑허니 선크림 바르고 다니랜", "날씨 촘말로 좋쿠다. 기지않?"].randomElement()!
             } else {
                 return ["밤하늘 촘말로 아꼽다", "제주도 푸릉 밤 그 벨 아래"].randomElement()!
@@ -136,43 +174,43 @@ extension WeatherCondition {
             return "오늘 날씨 잘도 좋아"
         }
     }
-    
-    func weatherCharacter(weatherData: DailyWeatherData) -> String {
-        let sunriseDate = weatherData.weather.dailyForecast.forecast.first!.sun.sunrise!
-        let sunsetDate = weatherData.weather.dailyForecast.forecast.first!.sun.sunset!
-
-        switch self {
-        case .clear, .mostlyClear, .hot :
-            if sunriseDate.timeIntervalSinceNow < 0 && sunsetDate.timeIntervalSinceNow > 0 {
-                return "clearCharacter"
-            } else {
-                return "clearNightCharacter"
-            }
-        case .cloudy :
-            return "cloudyCharacter"
-        case .partlyCloudy, .mostlyCloudy :
-            if sunriseDate.timeIntervalSinceNow < 0 && sunsetDate.timeIntervalSinceNow > 0 {
-                return "partlyCloudyCharacter"
-            } else {
-                return "partlyCloudyNightCharacter"
-            }
-        case .haze, .foggy, .blowingDust, .smoky :
-            return "foggyCharacter"
-        case .windy, .breezy :
-            return "windyCharacter"
-        case .strongStorms, .scatteredThunderstorms, .isolatedThunderstorms, .thunderstorms, .tropicalStorm, .hurricane :
-            return "thunderstormCharacter"
-        case .rain, .drizzle, .freezingDrizzle, .sunShowers :
-            return "rainCharacter"
-        case .heavyRain :
-            return "heavyRainCharacter"
-        case .snow, .heavySnow, .blizzard, .blowingSnow, .flurries , .sunFlurries, .frigid, .hail:
-            return "snowCharacter"
-        case .freezingRain, .sleet, .wintryMix :
-            return "freezingRainCharacter"
-        
-        default :
-            return "clearCharacter"
-        }
-    }
+//    
+//    func weatherCharacter(weatherData: DailyWeatherData) -> String {
+//        let sunriseDate = weatherData.weather.dailyForecast.forecast.first!.sun.sunrise!
+//        let sunsetDate = weatherData.weather.dailyForecast.forecast.first!.sun.sunset!
+//
+//        switch self {
+//        case .clear, .mostlyClear, .hot :
+//            if sunriseDate.timeIntervalSinceNow < 0 && sunsetDate.timeIntervalSinceNow > 0 {
+//                return "clearCharacter"
+//            } else {
+//                return "clearNightCharacter"
+//            }
+//        case .cloudy :
+//            return "cloudyCharacter"
+//        case .partlyCloudy, .mostlyCloudy :
+//            if sunriseDate.timeIntervalSinceNow < 0 && sunsetDate.timeIntervalSinceNow > 0 {
+//                return "partlyCloudyCharacter"
+//            } else {
+//                return "partlyCloudyNightCharacter"
+//            }
+//        case .haze, .foggy, .blowingDust, .smoky :
+//            return "foggyCharacter"
+//        case .windy, .breezy :
+//            return "windyCharacter"
+//        case .strongStorms, .scatteredThunderstorms, .isolatedThunderstorms, .thunderstorms, .tropicalStorm, .hurricane :
+//            return "thunderstormCharacter"
+//        case .rain, .drizzle, .freezingDrizzle, .sunShowers :
+//            return "rainCharacter"
+//        case .heavyRain :
+//            return "heavyRainCharacter"
+//        case .snow, .heavySnow, .blizzard, .blowingSnow, .flurries , .sunFlurries, .frigid, .hail:
+//            return "snowCharacter"
+//        case .freezingRain, .sleet, .wintryMix :
+//            return "freezingRainCharacter"
+//        
+//        default :
+//            return "clearCharacter"
+//        }
+//    }
 }

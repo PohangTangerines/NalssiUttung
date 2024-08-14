@@ -1,0 +1,72 @@
+//
+//  NalssiSamchunWidget.swift
+//  NalssiSamchunWidget
+//
+//  Created by 금가경 on 7/17/24.
+//
+
+import SwiftUI
+import WidgetKit
+import Foundation
+
+struct WeatherCharacterWidgetProvider: IntentTimelineProvider {
+    func placeholder(in context: Context) -> WeatherCharacterWidgetEntry {
+        WeatherCharacterWidgetEntry(date: Date(), weatherData: .previewData)
+    }
+    
+    func getSnapshot(for configuration: AddressSelectionIntent, in context: Context, completion: @escaping (WeatherCharacterWidgetEntry) -> Void) {
+        let entry = WeatherCharacterWidgetEntry(date: Date(), weatherData: .previewData)
+        completion(entry)
+    }
+    
+    func getTimeline(for configuration: AddressSelectionIntent, in context: Context, completion: @escaping (Timeline<WeatherCharacterWidgetEntry>) -> Void) {
+        Task {
+            let currentDate = Date()
+            var entries: [WeatherCharacterWidgetEntry] = []
+            let address = configuration.location?.displayString
+            
+            let weatherData = try? await WeatherCharacterWidgetData.currentWeather(for: address)
+            let data = weatherData ?? .failData
+            
+            for hourOffset in 0..<24 {
+                let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
+                let entry = WeatherCharacterWidgetEntry(date: entryDate, weatherData: data)
+                entries.append(entry)
+                
+            }
+            let timeline = Timeline(entries: entries, policy: .atEnd)
+            completion(timeline)
+        }
+    }
+}
+
+struct WeatherCharacterWidgetEntry: TimelineEntry {
+    let date: Date
+    let weatherData: WeatherCharacterWidgetData
+}
+
+struct NalssiSamchunCharacterWidgetEntryView : View {
+    var entry: WeatherCharacterWidgetProvider.Entry
+
+    var body: some View {
+        RealTimeWeatherCharacterWidgetView(data: entry.weatherData)
+    }
+}
+
+struct NalssiSamchunCharacterWidget: Widget {
+    let kind: String = "NalssiSamchunCharacterWidget"
+
+    var body: some WidgetConfiguration {
+        IntentConfiguration(kind: kind, intent: AddressSelectionIntent.self, provider: WeatherCharacterWidgetProvider()) { entry in
+            NalssiSamchunCharacterWidgetEntryView(entry: entry)
+                .containerBackground(Color.seaSky, for: .widget)
+        }
+        .supportedFamilies([.systemSmall])
+    }
+}
+
+#Preview(as: .systemSmall) {
+    NalssiSamchunCharacterWidget()
+} timeline: {
+    WeatherCharacterWidgetEntry(date: .now, weatherData: .previewData)
+}
