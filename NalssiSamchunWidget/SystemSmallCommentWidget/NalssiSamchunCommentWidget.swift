@@ -61,6 +61,7 @@ struct NalssiSamchunCommentWidget: Widget {
             NalssiSamchunCommentWidgetEntryView(entry: entry)
                 .containerBackground(Color.seaSky, for: .widget)
         }
+        .contentMarginsDisabled()
         .supportedFamilies([.systemSmall])
     }
 }

@@ -27,11 +27,14 @@ struct RealTimeWeatherCommentWidgetView: View {
                     .scaledToFit()
                     .frame(width: 32)
             }
-            Text(data.comment)
-                .customTextStyle(fontName: .IMHyemin, fontSize: 14, lineHeight: 18)
+            HStack {
+                Text(data.comment)
+                    .customTextStyle(fontName: .IMHyemin, fontSize: 14, lineHeight: 18)
+                Spacer()
+            }
+            .frame(maxWidth: .infinity)
         }
         .padding(.horizontal, 16)
-        .offset(x: -15)
         .foregroundStyle(.black)
         .containerBackground(Color.seaSky, for: .widget)
     }

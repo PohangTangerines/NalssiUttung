@@ -47,7 +47,7 @@ struct WeatherCommentWidgetData {
 }
 
 extension WeatherCommentWidgetData {
-    static let previewData = WeatherCommentWidgetData(address: "제주시 애월읍", temperature: Measurement(value: 24, unit: .celsius), icon: "dayClear", comment: "일교차 크난 고뿔 들리지 않게 조심합서!")
+    static let previewData = WeatherCommentWidgetData(address: "제주시 애월읍", temperature: Measurement(value: 24, unit: .celsius), icon: "dayClear", comment: "바람 강하니 촐람생이처럼 바당 가지 말앙 들어가 있어라")
     static let failData = WeatherCommentWidgetData(address: "주소 없음", temperature: Measurement(value: 0, unit: .celsius), icon: "", comment: "날씨 멘트를 불러올 수 없습니다.")
 }
 
