@@ -77,7 +77,7 @@ struct MainView: View {
                 VStack(spacing: 0) {
                     MainHeader(locationText: $locationManager.address, modalState: $modalState, isModalVisible: $isModalVisible)
                         .task {
-                            locationManager.getLocationAddress()
+                            locationManager.updateAddress()
                         }
                     
                     if isInitView {
@@ -94,13 +94,13 @@ struct MainView: View {
                     .gesture(dragGesture)
                     .offset(y: viewOffsetY)
                     .task {
-                        if let location = locationManager.location {
-                            if let weather = await weatherManager.getWeather(location: location) {
-                                self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
-                                self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
-                                self.weeklyWeatherData = weatherManager.getWeeklyWeatherData(weather: weather)
-                                self.detailedWeatherData = weatherManager.getDetailedWeatherData(weather: weather)
-                            }
+                        let location = locationManager.location
+                        
+                        if let weather = await weatherManager.getWeather(location: location) {
+                            self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
+                            self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
+                            self.weeklyWeatherData = weatherManager.getWeeklyWeatherData(weather: weather)
+                            self.detailedWeatherData = weatherManager.getDetailedWeatherData(weather: weather)
                         }
                     }
             }

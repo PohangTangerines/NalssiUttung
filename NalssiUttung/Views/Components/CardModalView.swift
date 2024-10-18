@@ -43,17 +43,17 @@ struct CardModalView: View {
                 .task {
                     if isCurrentLocation {
                         do {
-                            if let location = locationManager.location {
-                                if let weather = await weatherManager.getWeather(location: location) {
-                                    self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
-                                    self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
-                                }
-                                print("LocationCard success CLlocation")
-                                print("현재 온도: \(weatherBoxData?.currentTemperature ?? 00)°C")
-                                print("최고 온도: \(weatherBoxData?.highestTemperature ?? 00)°C")
-                                print("최저 온도: \(weatherBoxData?.lowestTemperature ?? 00)°C")
-                                print("날씨 상태: \(weatherBoxData?.weatherCondition)")
+                            let location = locationManager.location
+                            
+                            if let weather = await weatherManager.getWeather(location: location) {
+                                self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
+                                self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
                             }
+                            print("LocationCard success CLlocation")
+                            print("현재 온도: \(weatherBoxData?.currentTemperature ?? 00)°C")
+                            print("최고 온도: \(weatherBoxData?.highestTemperature ?? 00)°C")
+                            print("최저 온도: \(weatherBoxData?.lowestTemperature ?? 00)°C")
+                            print("날씨 상태: \(weatherBoxData?.weatherCondition)")
                         } catch {
                             print("Error LocationCard CLlocation")
                         }

@@ -14,44 +14,66 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     private var locationManager = CLLocationManager()
     private let defaults = UserDefaults(suiteName: "group.nalsam")
-
-    @Published var location: CLLocation?
+    private let jejuAirportLocation = CLLocation(latitude: 33.5115, longitude: 126.4911)
+    
+    @Published var location: CLLocation {
+        didSet {
+            updateAddress()
+        }
+    }
+    
     @Published var address: String = ""
-
+    
     override private init() {
+        self.location = jejuAirportLocation
         super.init()
         
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
+    }
+    
+    /// 사용자 위치 권한 허가를 받지 못했을 때 기본 위치를 제주공항으로 설정합니다.
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            locationManager.startUpdatingLocation()
+        case .denied, .restricted, .notDetermined:
+            location = jejuAirportLocation
+        @unknown default:
+            break
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.location = locations.last
+        self.location = locations.last ?? jejuAirportLocation
         guard let location = locations.last else { return }
         let locationData = [location.coordinate.latitude, location.coordinate.longitude]
         defaults?.set(locationData, forKey: "currentLocation")
         WidgetCenter.shared.reloadAllTimelines()
     }
-
-    func getLocationAddress() {
-        // 위치 업데이트가 발생한 후에 주소 정보를 가져오기 위해 Reverse Geocoding을 사용합니다.
+    
+    /// 업데이트한 location을 한글 주소로 변경합니다.
+    /// 현재 제주(제주시, 서귀포시)가 아닌 경우 address는 제주공항으로 설정됩니다.
+    func updateAddress() {
         let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(location ?? CLLocation(latitude: 33, longitude: 126)) { (placemarks, error) in
+        
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
             if let error = error {
-                print("Reverse geocode error: \(error.localizedDescription)")
+                print("주소 변환 오류: \(error.localizedDescription)")
                 return
             }
-
-            if let placemark = placemarks?.first {
-                // 주소 정보를 파싱하여 필요한 부분만 추출합니다.
-                if let locality = placemark.locality, let subLocality = placemark.subLocality {
-                    if locality != "제주시" {
-                        self.address = "제주공항"
-                    } else {
-                        self.address = "\(locality) \(subLocality)"
-                    }
-                    print("현재 위치 주소: \(self.address)")
+            
+            if let placemark = placemarks?.first,
+               let locality = placemark.locality,
+               let subLocality = placemark.subLocality {
+                
+                switch (locality, subLocality) {
+                case ("제주시", "용담이동"):
+                    self.address = "제주공항"
+                case ("제주시", _), ("서귀포시", _):
+                    self.address = "\(locality) \(subLocality)"
+                default:
+                    self.address = "제주공항"
                 }
             }
         }
