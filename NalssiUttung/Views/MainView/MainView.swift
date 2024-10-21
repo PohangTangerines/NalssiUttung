@@ -29,6 +29,8 @@ struct MainView: View {
     @State var modalState: ModalState = .notModalView
     @State var isModalVisible: Bool = false
     
+    @ObservedObject var locationStore = LocationStore()
+    
     private var dragGesture: some Gesture {
         DragGesture()
             .onChanged { gesture in
@@ -70,15 +72,16 @@ struct MainView: View {
     }
     
     var body: some View {
+        // TODO: - Toolbar로 전환 후 변경된 레이아웃 수정 필요
         NavigationView {
             ZStack {
                 Color.seaSky
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
-                    MainHeader(locationText: $locationManager.address, modalState: $modalState, isModalVisible: $isModalVisible)
-                        .task {
-                            locationManager.updateAddress()
-                        }
+//                    MainHeader(locationText: $locationManager.address, modalState: $modalState, isModalVisible: $isModalVisible)
+//                        .task {
+//                            locationManager.updateAddress()
+//                        }
                     
                     if isInitView {
                         RealTimeWeatherView(weatherBoxData: $weatherBoxData, dailyWeatherData: $dailyWeatherData, canTransition: $canTransition, isModalVisible: .constant(true), isModal: false)
@@ -90,9 +93,11 @@ struct MainView: View {
                         .transition(.move(edge: .bottom))
                     }
                     
-                }.padding(.horizontal, 15)
+                }
+                .padding(.horizontal, 15)
                     .gesture(dragGesture)
                     .offset(y: viewOffsetY)
+                    .toolbar(content: toolbarContent)
                     .task {
                         let location = locationManager.location
                         
@@ -107,51 +112,50 @@ struct MainView: View {
         }
     }
     
-    private struct MainHeader: View {
-        @Binding var locationText: String
-        @Binding var modalState: ModalState
-        @Binding var isModalVisible: Bool
-        
-        @ObservedObject var locationStore = LocationStore()
-        
-        var body: some View {
-            ZStack {
-                HStack {
-                    if modalState != .notModalView {
-                        Button {
-                            isModalVisible.toggle()
-                        } label: {
-                            Image(systemName: "취소")
-                                .font(.pretendardSemibold(.body))
-                                .foregroundColor(.black)
-                        }
-                    }
-                    Text("\(locationText)")
-                        .font(.pretendardSemibold(.callout))
-                    Image(systemName: "location.fill")
-                        .font(.system(size: 16, weight: .bold))
-                }
-                HStack {
-                    Spacer()
-                    switch modalState {
-                    case .notModalView:
-                        NavigationLink(destination: LocationListView(locationStore: locationStore)) {
-                            Image(systemName: "plus")
-                                .font(.pretendardSemibold(.body))
-                                .foregroundColor(.black)
-                        }
-                    case .isModalViewAndContainedContent:
-                        EmptyView()
-                    case .isModalViewAndNotContainedContent:
-                        Image(systemName: "추가")
-                            .font(.pretendardSemibold(.body))
-                            .foregroundColor(.black)
-                    }
-                    
-                }
-            }
-            .padding(.top, 7.responsibleHeight)
-            .padding(.bottom, 24.responsibleHeight)
-        }
-    }
+//    private struct MainHeader: View {
+//        @Binding var locationText: String
+//        @Binding var modalState: ModalState
+//        @Binding var isModalVisible: Bool
+//        
+//        @ObservedObject var locationStore = LocationStore()
+//        
+//        var body: some View {
+//            ZStack {
+//                HStack {
+//                    if modalState != .notModalView {
+//                        Button {
+//                            isModalVisible.toggle()
+//                        } label: {
+//                            Image(systemName: "취소")
+//                                .font(.pretendardSemibold(.body))
+//                                .foregroundColor(.black)
+//                        }
+//                    }
+//                    Text("\(locationText)")
+//                        .font(.pretendardSemibold(.callout))
+//                    Image(systemName: "location.fill")
+//                        .font(.system(size: 16, weight: .bold))
+//                }
+//                HStack {
+//                    Spacer()
+//                    switch modalState {
+//                    case .notModalView:
+//                        NavigationLink(destination: LocationListView(locationStore: locationStore)) {
+//                            Image(systemName: "plus")
+//                                .font(.pretendardSemibold(.body))
+//                                .foregroundColor(.black)
+//                        }
+//                    case .isModalViewAndContainedContent:
+//                        EmptyView()
+//                    case .isModalViewAndNotContainedContent:
+//                        Image(systemName: "추가")
+//                            .font(.pretendardSemibold(.body))
+//                            .foregroundColor(.black)
+//                    }
+//                }
+//            }
+//            .padding(.top, 7.responsibleHeight)
+//            .padding(.bottom, 24.responsibleHeight)
+//        }
+//    }
 }
