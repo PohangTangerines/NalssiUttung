@@ -34,7 +34,6 @@
 		036CA69D2AB9598F0056C453 /* WeeklyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */; };
 		0384A5ED2CC63C6900A4DA2C /* CurrentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0384A5EC2CC63C6900A4DA2C /* CurrentLocation.swift */; };
 		0384A5EF2CC63CD800A4DA2C /* MainView+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0384A5EE2CC63CD800A4DA2C /* MainView+Toolbar.swift */; };
-		0384A5F12CC63DD700A4DA2C /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0384A5F02CC63DD100A4DA2C /* TestView.swift */; };
 		0384A5F52CC6419000A4DA2C /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0384A5F42CC6419000A4DA2C /* AddButton.swift */; };
 		039652BD2C480F6F001D23A9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4F79FE2B8CFFEF0033497B /* SwiftUI.framework */; };
 		039652C02C480F6F001D23A9 /* NalssiSamchunWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039652BF2C480F6F001D23A9 /* NalssiSamchunWidgetBundle.swift */; };
@@ -170,7 +169,6 @@
 		036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyWeatherView.swift; sourceTree = "<group>"; };
 		0384A5EC2CC63C6900A4DA2C /* CurrentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocation.swift; sourceTree = "<group>"; };
 		0384A5EE2CC63CD800A4DA2C /* MainView+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Toolbar.swift"; sourceTree = "<group>"; };
-		0384A5F02CC63DD100A4DA2C /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		0384A5F42CC6419000A4DA2C /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		039652BB2C480F6F001D23A9 /* NalssiSamchunWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NalssiSamchunWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		039652BF2C480F6F001D23A9 /* NalssiSamchunWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiSamchunWidgetBundle.swift; sourceTree = "<group>"; };
@@ -521,7 +519,6 @@
 		7C0D1BD82AAB7E2E00A8BCFF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0384A5F02CC63DD100A4DA2C /* TestView.swift */,
 				0384A5EB2CC63C5200A4DA2C /* ToolbarContent */,
 				0E9EEFF82B1F8D5E00D85EB8 /* LocationListView */,
 				0E9EEFF72B1F8D5200D85EB8 /* Components */,
@@ -844,7 +841,6 @@
 				036CA69D2AB9598F0056C453 /* WeeklyWeatherView.swift in Sources */,
 				0E5D08CD2B00C51F0082C0F6 /* SplashScreenView.swift in Sources */,
 				03B2F45A2AAF3CCB005A5AD4 /* Color+Palette.swift in Sources */,
-				0384A5F12CC63DD700A4DA2C /* TestView.swift in Sources */,
 				7C7E8A072AD5867F00EE5260 /* CardModalView.swift in Sources */,
 				031F38D62AFBB691002E2EAD /* AnimatedGifView.swift in Sources */,
 				03B2F46A2AB09F08005A5AD4 /* Font+.swift in Sources */,

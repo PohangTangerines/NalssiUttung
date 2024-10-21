@@ -78,11 +78,6 @@ struct MainView: View {
                 Color.seaSky
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
-//                    MainHeader(locationText: $locationManager.address, modalState: $modalState, isModalVisible: $isModalVisible)
-//                        .task {
-//                            locationManager.updateAddress()
-//                        }
-                    
                     if isInitView {
                         RealTimeWeatherView(weatherBoxData: $weatherBoxData, dailyWeatherData: $dailyWeatherData, canTransition: $canTransition, isModalVisible: .constant(true), isModal: false)
                             .transition(.move(edge: .top))
