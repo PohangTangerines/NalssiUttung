@@ -10,7 +10,8 @@ import SwiftUI
 import WeatherKit
 
 enum WeatherUpdateType {
-//    case current
+    //TODO: - 추후 필요한 타입 추가
+    case current
 //    case daily
 //    case weekly
 //    case detailed
@@ -24,27 +25,32 @@ class WeatherManager: ObservableObject {
     @Published var detailedWeather: DetailedWeather?
     
     var weather: Weather?
-    
-    func fetchWeather() async {
+
+    func fetchWeather(with type: WeatherUpdateType) async {
         let location = LocationManager.shared.location
         let weather = try? await WeatherService.shared.weather(for: location)
         self.weather = weather
-        updateWeather(for: .all)
+        updateWeather(with: type)
     }
     
-    func fetchWeather(for location: CLLocation) async {
+    func fetchWeather(for location: CLLocation, with type: WeatherUpdateType) async {
         let weather = try? await WeatherService.shared.weather(for: location)
         self.weather = weather
-        updateWeather(for: .all)
+        updateWeather(with: type)
     }
     
-    private func updateWeather(for type: WeatherUpdateType) {
+    private func updateWeather(with type: WeatherUpdateType) {
         switch type {
-            case .all:
+            
+        case .all:
+        self.updateCurrentWeather()
+        self.updateDailyWeather()
+        self.updateWeeklyWeather()
+        self.updateDetailedWeather()
+            
+        case .current:
             self.updateCurrentWeather()
-            self.updateDailyWeather()
-            self.updateWeeklyWeather()
-            self.updateDetailedWeather()
+            
         }
     }
     
@@ -65,7 +71,6 @@ class WeatherManager: ObservableObject {
                                                  lowestTemperature: lowestTemperature,
                                                  highestTemperature: highestTemperature)
         }
-
     }
     
     private func updateDailyWeather() {
