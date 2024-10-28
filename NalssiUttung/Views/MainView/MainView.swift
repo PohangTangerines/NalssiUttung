@@ -26,9 +26,6 @@ struct MainView: View {
     @State private var isInitView = true
     
     // MARK: Modal 관련
-    @State var modalState: ModalState = .notModalView
-    @State var isModalVisible: Bool = false
-    
     @ObservedObject var locationStore = LocationStore()
     
     private var dragGesture: some Gesture {
@@ -78,6 +75,7 @@ struct MainView: View {
                 Color.seaSky
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
+                    
                     if isInitView {
                         RealTimeWeatherView(weatherBoxData: $weatherBoxData, dailyWeatherData: $dailyWeatherData, canTransition: $canTransition, isModalVisible: .constant(true), isModal: false)
                             .transition(.move(edge: .top))
@@ -94,7 +92,7 @@ struct MainView: View {
                     .offset(y: viewOffsetY)
                     .toolbar(content: toolbarContent)
                     .task {
-                        let location = locationManager.location
+                        let location = locationManager.currentLocation
                         
                         if let weather = await weatherManager.getWeather(location: location) {
                             self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
@@ -106,51 +104,4 @@ struct MainView: View {
             }
         }
     }
-    
-//    private struct MainHeader: View {
-//        @Binding var locationText: String
-//        @Binding var modalState: ModalState
-//        @Binding var isModalVisible: Bool
-//        
-//        @ObservedObject var locationStore = LocationStore()
-//        
-//        var body: some View {
-//            ZStack {
-//                HStack {
-//                    if modalState != .notModalView {
-//                        Button {
-//                            isModalVisible.toggle()
-//                        } label: {
-//                            Image(systemName: "취소")
-//                                .font(.pretendardSemibold(.body))
-//                                .foregroundColor(.black)
-//                        }
-//                    }
-//                    Text("\(locationText)")
-//                        .font(.pretendardSemibold(.callout))
-//                    Image(systemName: "location.fill")
-//                        .font(.system(size: 16, weight: .bold))
-//                }
-//                HStack {
-//                    Spacer()
-//                    switch modalState {
-//                    case .notModalView:
-//                        NavigationLink(destination: LocationListView(locationStore: locationStore)) {
-//                            Image(systemName: "plus")
-//                                .font(.pretendardSemibold(.body))
-//                                .foregroundColor(.black)
-//                        }
-//                    case .isModalViewAndContainedContent:
-//                        EmptyView()
-//                    case .isModalViewAndNotContainedContent:
-//                        Image(systemName: "추가")
-//                            .font(.pretendardSemibold(.body))
-//                            .foregroundColor(.black)
-//                    }
-//                }
-//            }
-//            .padding(.top, 7.responsibleHeight)
-//            .padding(.bottom, 24.responsibleHeight)
-//        }
-//    }
 }

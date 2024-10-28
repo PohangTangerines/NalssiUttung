@@ -35,7 +35,7 @@ struct DailyWeatherView: View {
         } else if time == dailyWeatherData?.sunsetDate {
             return "sunset"
         } else {
-            return "\(weather.getWeatherIcon())"
+            return "\(weather.icon)"
         }
     }
     

@@ -9,44 +9,41 @@ import SwiftUI
 import WeatherKit
 
 extension WeatherCondition {
-    // weatherCondition -> 이미지 에셋 String.
-    func getWeatherIcon() -> String {
-        var icon = ""
-        
+    var icon: String {
         switch self {
         case .blizzard, .heavySnow, .blowingSnow, .wintryMix, .flurries,
                 .freezingDrizzle, .snow, .freezingRain, .sleet, .sunFlurries:
-            icon = "snow"
+            return "snow"
         case .strongStorms, .scatteredThunderstorms, .isolatedThunderstorms, .thunderstorms:
-            icon = "lightning"
+            return "lightning"
         case .hail:
-            icon = "snow"
+            return "snow"
         case .frigid:
-            icon = "dayClear" // 추위 아이콘(추후)
+            return "dayClear" // 추위 아이콘(추후)
         case .hot:
-            icon = "dayClear" // 더위 아이콘(추후)
+            return "dayClear" // 더위 아이콘(추후)
         case .clear, .mostlyClear:
-            icon = "dayClear"
+            return "dayClear"
         case .breezy, .windy:
-            icon = "windy"
+            return "windy"
         case .tropicalStorm:
-            icon = "rainy" // 폭풍 아이콘
+            return "rainy" // 폭풍 아이콘
         case .hurricane:
-            icon = "windy" // 허리케인 아이콘
+            return "windy" // 허리케인 아이콘
         case .heavyRain, .rain, .drizzle, .sunShowers:
-            icon = "rainy"
+            return "rainy"
         case .foggy, .haze, .smoky:
-            icon = "haze"
+            return "haze"
         case .blowingDust:
-            icon = "haze" // 황사
+            return "haze" // 황사
         case .cloudy, .mostlyCloudy:
-            icon = "cloudy"
+            return "cloudy"
         case .partlyCloudy:
-            icon = "partlyCloudy"
+            return "partlyCloudy"
         default:
-            icon = "dayClear"
+            return "dayClear"
+            
         }
-        return icon
     }
     
     func getWeatherString() -> String {
@@ -170,47 +167,7 @@ extension WeatherCondition {
             return ["겨울이여부난 입김이 막 나와부신디","비온덴허니 고뿔 안들리게 맹심허랜"].randomElement()!
             
         default :
-//            return "기본 멘트"
             return "오늘 날씨 잘도 좋아"
         }
     }
-//    
-//    func weatherCharacter(weatherData: DailyWeatherData) -> String {
-//        let sunriseDate = weatherData.weather.dailyForecast.forecast.first!.sun.sunrise!
-//        let sunsetDate = weatherData.weather.dailyForecast.forecast.first!.sun.sunset!
-//
-//        switch self {
-//        case .clear, .mostlyClear, .hot :
-//            if sunriseDate.timeIntervalSinceNow < 0 && sunsetDate.timeIntervalSinceNow > 0 {
-//                return "clearCharacter"
-//            } else {
-//                return "clearNightCharacter"
-//            }
-//        case .cloudy :
-//            return "cloudyCharacter"
-//        case .partlyCloudy, .mostlyCloudy :
-//            if sunriseDate.timeIntervalSinceNow < 0 && sunsetDate.timeIntervalSinceNow > 0 {
-//                return "partlyCloudyCharacter"
-//            } else {
-//                return "partlyCloudyNightCharacter"
-//            }
-//        case .haze, .foggy, .blowingDust, .smoky :
-//            return "foggyCharacter"
-//        case .windy, .breezy :
-//            return "windyCharacter"
-//        case .strongStorms, .scatteredThunderstorms, .isolatedThunderstorms, .thunderstorms, .tropicalStorm, .hurricane :
-//            return "thunderstormCharacter"
-//        case .rain, .drizzle, .freezingDrizzle, .sunShowers :
-//            return "rainCharacter"
-//        case .heavyRain :
-//            return "heavyRainCharacter"
-//        case .snow, .heavySnow, .blizzard, .blowingSnow, .flurries , .sunFlurries, .frigid, .hail:
-//            return "snowCharacter"
-//        case .freezingRain, .sleet, .wintryMix :
-//            return "freezingRainCharacter"
-//        
-//        default :
-//            return "clearCharacter"
-//        }
-//    }
 }

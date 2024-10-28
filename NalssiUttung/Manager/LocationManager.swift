@@ -16,15 +16,18 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let defaults = UserDefaults(suiteName: "group.nalsam")
     private let jejuAirportLocation = CLLocation(latitude: 33.5115, longitude: 126.4911)
     
-    @Published var location: CLLocation {
+    @Published var currentLocation: CLLocation {
         didSet {
-            updateAddress()
+            updateAddress(location: currentLocation)
         }
     }
+    @Published var location: CLLocation
     
+    @Published var currentAddress: String = ""
     @Published var address: String = ""
     
     override private init() {
+        self.currentLocation = jejuAirportLocation
         self.location = jejuAirportLocation
         super.init()
         
@@ -38,14 +41,14 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         case .authorizedWhenInUse, .authorizedAlways:
             locationManager.startUpdatingLocation()
         case .denied, .restricted, .notDetermined:
-            location = jejuAirportLocation
+            currentLocation = jejuAirportLocation
         @unknown default:
             break
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.location = locations.last ?? jejuAirportLocation
+        self.currentLocation = locations.last ?? jejuAirportLocation
         guard let location = locations.last else { return }
         let locationData = [location.coordinate.latitude, location.coordinate.longitude]
         defaults?.set(locationData, forKey: "currentLocation")
@@ -54,7 +57,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     /// 업데이트한 location을 한글 주소로 변경합니다.
     /// 현재 제주(제주시, 서귀포시)가 아닌 경우 address는 제주공항으로 설정됩니다.
-    func updateAddress() {
+    func updateAddress(location: CLLocation) {
         let geocoder = CLGeocoder()
         
         geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
@@ -69,15 +72,16 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 
                 switch (locality, subLocality) {
                 case ("제주시", "용담이동"):
-                    self.address = "제주공항"
+                    self.currentAddress = "제주공항"
                 case ("제주시", _), ("서귀포시", _):
-                    self.address = "\(locality) \(subLocality)"
+                    self.currentAddress = "\(locality) \(subLocality)"
                 default:
-                    self.address = "제주공항"
+                    self.currentAddress = "제주공항"
                 }
             }
         }
     }
+    
     
     func findCoordinates(address val: String) -> CLLocation? {
         if let location = LocationInfo.Data.first(where: { $0.address == val }) {

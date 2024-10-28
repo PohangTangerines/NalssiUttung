@@ -11,7 +11,7 @@ extension MainView {
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
         ToolbarItem(placement: .principal) {
-            CurrentLocation(location: $locationManager.address)
+            CurrentLocation(location: $locationManager.currentAddress)
         }
         
         ToolbarItem(placement: .topBarTrailing) {

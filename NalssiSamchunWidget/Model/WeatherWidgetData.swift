@@ -63,7 +63,7 @@ extension WeatherCommentWidgetData {
         
         // 현재 날씨 아이콘, 멘트
         let condition = weather.currentWeather.condition
-        let icon = condition.getWeatherIcon()
+        let icon = condition.icon
         let comment = condition.getWeatherComment(for: weather)
         
         return WeatherCommentWidgetData(address: address, temperature: temperature, icon: icon, comment: comment)

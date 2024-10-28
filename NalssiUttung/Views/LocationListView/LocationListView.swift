@@ -54,7 +54,7 @@ struct LocationListView: View {
     private var searchBarList : some View {
         List {
             ForEach(filteredLocations.prefix(10), id: \.self) { filteredLocation in
-                HStack() {
+                HStack {
                     if let range = filteredLocation.range(of: searchText, options: .caseInsensitive) {
                         let beforeText = filteredLocation[..<range.lowerBound]
                         let searchText = filteredLocation[range]
@@ -88,7 +88,7 @@ struct LocationListView: View {
                 .sheet(isPresented: $isSearchModalVisible, content: {
                     // 새로운 뷰 표시
                     CardModalView(modalState: modalState ?? ModalState.isModalViewAndNotContainedContent, isModalVisible: $isSearchModalVisible, location: locationStore.selectedfilteredLocationForModal, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: .constant(false))
-                        .onDisappear(){
+                        .onDisappear {
                             isFocused = false
                             isSearchModalVisible = false
                         }
@@ -104,21 +104,12 @@ struct LocationListView: View {
         .listStyle(.plain)
         .background(Color.seaSky)
         .scrollContentBackground(.hidden)
-//        .onAppear {
-//            let userList = locationStore.loadLocations()
-//            selectedLocations = userList
-//        }
         .task {
-            do {
-                let userList = try await locationStore.loadLocations()
-                searchLocation = userList
-                print("Success load: \(userList)")
-            } catch{
-                searchLocation = []
-                print("task error")
-            }
+            let userList = locationStore.loadLocations()
+            searchLocation = userList
         }
     }
+    
     private var selectedList: some View {
         List {
             currentWeatherView
@@ -136,7 +127,7 @@ struct LocationListView: View {
                             }
                         Spacer()
                     }
-                    LocationCard(location: selectedLocation, isCurrentLocation: .constant(false))
+                    WeatherOverview(address: selectedLocation, isCurrentLocation: false)
                         .frame(maxWidth: .infinity, maxHeight: 140)
                         .listRowSeparator(.hidden)
                         .onTapGesture {
@@ -180,6 +171,7 @@ struct LocationListView: View {
             }
         }
     }
+    
     private var emptyView: some View {
         VStack {
             Image("donut")
@@ -188,9 +180,10 @@ struct LocationListView: View {
         }
         .background(Color.seaSky)
     }
+    
     private var currentWeatherView: some View{
         HStack{
-            LocationCard(location: locationManager.address, isCurrentLocation: .constant(true))
+            WeatherOverview(address: locationManager.address, isCurrentLocation: true)
                 .frame(maxWidth: .infinity, maxHeight: 140)
                 .listRowSeparator(.hidden)
                 .onTapGesture {
@@ -199,7 +192,7 @@ struct LocationListView: View {
                     }
                 }
                 .sheet(isPresented: $isCurrentWeatherModalVisible, content: {
-                    CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isCurrentWeatherModalVisible, location: locationManager.address, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: .constant(true))
+                    CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isCurrentWeatherModalVisible, location: locationManager.currentAddress, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: .constant(true))
                         .onDisappear(){
                             isCurrentWeatherModalVisible = false
                         }

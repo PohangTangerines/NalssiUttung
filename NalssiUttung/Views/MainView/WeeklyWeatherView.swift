@@ -28,7 +28,7 @@ struct WeeklyWeatherView: View {
                             Text("\(data.date)")
                                 .font(.pretendardMedium(.caption))
                                 .padding(.bottom, 9.responsibleHeight)
-                            Image(data.weatherCondition.getWeatherIcon())
+                            Image(data.weatherCondition.icon)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(maxWidth: 28.responsibleWidth)
