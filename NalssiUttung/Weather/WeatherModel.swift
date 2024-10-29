@@ -9,7 +9,7 @@ import CoreLocation
 import WeatherKit
 
 struct CurrentWeather {
-    var currentTemperature: Int
+    var temperature: Int
     var weatherCondition: WeatherCondition
     var lowestTemperature: Int
     var highestTemperature: Int

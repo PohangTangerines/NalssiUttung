@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct RealTimeWeatherView: View {
-    @Binding var weatherBoxData: WeatherBoxData?
-    @Binding var dailyWeatherData: DailyWeatherData?
+    @ObservedObject var weatherManager: WeatherManager
     @Binding var canTransition: Bool
     @Binding var isModalVisible: Bool
     #warning("isModal 관련 기기대응 추후 수정 요망")
@@ -17,13 +16,13 @@ struct RealTimeWeatherView: View {
     @State private var gifName: String = "clearCharacter"
     
     var body: some View {
-        if let weatherBoxData = weatherBoxData, let dailyWeatherData = dailyWeatherData {
+        if let currentWeather = weatherManager.currentWeather, let dailyForecast = weatherManager.dailyForecast {
             VStack(spacing: 0) {
                 VStack(spacing: 0) {
                     tempConditionRow
                         .padding(.bottom, isModal ? 5.responsibleHeight : 10.responsibleHeight)
                     HStack {
-                        Text("최고 \(weatherBoxData.highestTemperature)° | 최저 \(weatherBoxData.lowestTemperature)°")
+                        Text("최고 \(currentWeather.highestTemperature)° | 최저 \(currentWeather.lowestTemperature)°")
                             .font(.pretendardMedium(.body))
                         Spacer()
                     }
@@ -33,7 +32,7 @@ struct RealTimeWeatherView: View {
                     // MARK: - 날씨 멘트
                     VStack {
                         HStack {
-                            Text("\(weatherBoxData.weatherCondition.getWeatherComment(for: dailyWeatherData.weather))")
+                            Text("\(currentWeather.weatherCondition.comment(sunrise: dailyForecast.sunrise, sunset: dailyForecast.sunset))")
                                 .font(.IMHyemin(.title))
                                 .IMHyeminLineHeight(.title, lineHeight: 40)
                             Spacer()
@@ -51,12 +50,12 @@ struct RealTimeWeatherView: View {
                                 .frame(width: 280.responsibleHeight)
                         }
                     }.onAppear {
-                        gifName = weatherBoxData.weatherCondition.getWeatherCharacter(for: dailyWeatherData.weather)
+                        gifName = currentWeather.weatherCondition.character(sunrise: dailyForecast.sunrise, sunset: dailyForecast.sunset)
                         print(gifName)
                     }
                 }.frame(height: 340.responsibleHeight)
                 VStack {
-                    DailyWeatherView(dailyWeatherData: $dailyWeatherData)
+                    DailyWeatherView(weatherManager: weatherManager)
                     if isModalVisible {
                         Image(systemName: "chevron.down")
                             .resizable()
@@ -78,14 +77,14 @@ struct RealTimeWeatherView: View {
     
     private var tempConditionRow: some View {
         HStack(alignment: .bottom) {
-            if let weatherBoxData = weatherBoxData {
-                Text("\(weatherBoxData.currentTemperature) ")
+            if let currentWeather = weatherManager.currentWeather {
+                Text("\(currentWeather.temperature) ")
                     .font(.IMHyemin(.largeTitle2))
                     .tracking(-(Font.FontSize.largeTitle.rawValue * 0.07))
                 Text("°")
                     .font(.IMHyemin(.largeTitle))
                     .padding(.leading, -(Font.FontSize.largeTitle2.rawValue * 0.5))
-                Text("\(weatherBoxData.weatherCondition.getWeatherString())")
+                Text("\(currentWeather.weatherCondition.description)")
                     .font(.IMHyemin(.title))
                     .padding(.bottom, 13)
                     .padding(.leading, -30)

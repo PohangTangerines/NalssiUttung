@@ -17,8 +17,6 @@ struct WeatherCharacterWidgetData {
 
 extension WeatherCharacterWidgetData {
     static let previewData = WeatherCharacterWidgetData(address: "제주시 애월읍", temperature: Measurement(value: 24, unit: .celsius), character: "clearCharacter")
-    static let failData = WeatherCharacterWidgetData(address: "주소 없음", temperature: Measurement(value: 0, unit: .celsius), character: "")
-    
 }
 
 extension WeatherCharacterWidgetData {
@@ -33,8 +31,14 @@ extension WeatherCharacterWidgetData {
         
         // 현재 날씨 캐릭터
         let condition = weather.currentWeather.condition
-        let character = condition.getWeatherCharacter(for: weather)
+
+        guard let sunrise = weather.dailyForecast.forecast.first?.sun.sunrise,
+           let sunset = weather.dailyForecast.forecast.first?.sun.sunset else {
+            throw CustomWeatherError.sunEventUnavailable
+        }
         
+        let character = condition.character(sunrise: sunrise, sunset: sunset)
+
         return WeatherCharacterWidgetData(address: address, temperature: temperature, character: character)
     }
 }
@@ -48,7 +52,6 @@ struct WeatherCommentWidgetData {
 
 extension WeatherCommentWidgetData {
     static let previewData = WeatherCommentWidgetData(address: "제주시 애월읍", temperature: Measurement(value: 24, unit: .celsius), icon: "dayClear", comment: "바람 강하니 촐람생이처럼 바당 가지 말앙 들어가 있어라")
-    static let failData = WeatherCommentWidgetData(address: "주소 없음", temperature: Measurement(value: 0, unit: .celsius), icon: "", comment: "날씨 멘트를 불러올 수 없습니다.")
 }
 
 extension WeatherCommentWidgetData {
@@ -64,7 +67,13 @@ extension WeatherCommentWidgetData {
         // 현재 날씨 아이콘, 멘트
         let condition = weather.currentWeather.condition
         let icon = condition.icon
-        let comment = condition.getWeatherComment(for: weather)
+        
+        guard let sunrise = weather.dailyForecast.forecast.first?.sun.sunrise,
+           let sunset = weather.dailyForecast.forecast.first?.sun.sunset else {
+            throw CustomWeatherError.sunEventUnavailable
+        }
+                
+        let comment = condition.comment(sunrise: sunrise, sunset: sunset)
         
         return WeatherCommentWidgetData(address: address, temperature: temperature, icon: icon, comment: comment)
     }

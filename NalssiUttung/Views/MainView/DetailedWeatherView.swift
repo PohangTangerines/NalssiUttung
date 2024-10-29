@@ -9,11 +9,12 @@ import SwiftUI
 import WeatherKit
 
 struct DetailedWeatherView: View {
-    @Binding var detailedWeatherData: DetailedWeatherData?
-
+//    @Binding var detailedWeatherData: DetailedWeatherData?
+    @ObservedObject var weatherManager: WeatherManager
+    
     var body: some View {
         VStack(spacing: 0) {
-            if let detailedWeatherData = detailedWeatherData {
+            if let detailedWeather = weatherManager.detailedWeather {
                 // MARK: 상세 날씨 구분선
                 ScrolledMainViewTextDivider(text: "상세 날씨").padding(.bottom, 15.responsibleHeight)
                 
@@ -22,8 +23,8 @@ struct DetailedWeatherView: View {
                     HStack(spacing: 0) {
                         DetailBox(title: "강수량",
                                   imageName: "precipitation",
-                                  detailString: "\(detailedWeatherData.precipitation)",
-                                  valueString: "\(detailedWeatherData.precipitationAmount)")
+                                  detailString: "\(detailedWeather.precipitation)",
+                                  valueString: "\(detailedWeather.precipitationAmount)")
                         .frame(maxWidth: geometry.size.width/3)
                         Rectangle()
                             .background(Color.black)
@@ -31,8 +32,8 @@ struct DetailedWeatherView: View {
                             .padding(.horizontal, 5.responsibleWidth)
                         DetailBox(title: "바람",
                                   imageName: "windy",
-                                  detailString: "\(detailedWeatherData.windDirection)",
-                                  valueString: "\(detailedWeatherData.windSpeed)")
+                                  detailString: "\(detailedWeather.windDirection)",
+                                  valueString: "\(detailedWeather.windSpeed)")
                         .frame(maxWidth: geometry.size.width/3)
                         Rectangle()
                             .background(Color.black)
@@ -41,7 +42,7 @@ struct DetailedWeatherView: View {
                         DetailBox(title: "가시거리",
                                   imageName: "visibility",
                                   detailString: " ",
-                                  valueString: "\(detailedWeatherData.visibility)")
+                                  valueString: "\(detailedWeather.visibility)")
                         .frame(maxWidth: geometry.size.width/3)
                     }
                 }

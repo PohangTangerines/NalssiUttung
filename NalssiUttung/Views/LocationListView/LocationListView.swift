@@ -9,8 +9,8 @@ import WeatherKit
 
 struct LocationListView: View {
     @ObservedObject var locationManager = LocationManager.shared
+    @StateObject var weatherManager = WeatherManager()
     
-    let weatherManager = WeatherService.shared
     let locations = LocationInfo.Data.map { $0.address }
     
     @ObservedObject var locationStore: LocationStore
@@ -73,7 +73,7 @@ struct LocationListView: View {
                 .frame(maxWidth: .infinity, maxHeight: 140, alignment: .leading)
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    if !isSelectedModalVisible && !isCurrentWeatherModalVisible{
+                    if !isSelectedModalVisible && !isCurrentWeatherModalVisible {
                         locationStore.selectedfilteredLocationForModal = filteredLocation
                         isSearchModalVisible = true
                         if let searchLocation = searchLocation, (searchLocation.contains(locationStore.selectedfilteredLocationForModal) || locationManager.address == locationStore.selectedfilteredLocationForModal) {
@@ -87,7 +87,7 @@ struct LocationListView: View {
                 }
                 .sheet(isPresented: $isSearchModalVisible, content: {
                     // 새로운 뷰 표시
-                    CardModalView(modalState: modalState ?? ModalState.isModalViewAndNotContainedContent, isModalVisible: $isSearchModalVisible, location: locationStore.selectedfilteredLocationForModal, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: .constant(false))
+                    CardModalView(weatherManager: weatherManager, modalState: modalState ?? ModalState.isModalViewAndNotContainedContent, isModalVisible: $isSearchModalVisible, address: locationStore.selectedfilteredLocationForModal, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: .constant(false))
                         .onDisappear {
                             isFocused = false
                             isSearchModalVisible = false
@@ -127,7 +127,7 @@ struct LocationListView: View {
                             }
                         Spacer()
                     }
-                    WeatherOverview(address: selectedLocation, isCurrentLocation: false)
+                    WeatherOverview(weatherManager: weatherManager, address: selectedLocation, isCurrentLocation: false)
                         .frame(maxWidth: .infinity, maxHeight: 140)
                         .listRowSeparator(.hidden)
                         .onTapGesture {
@@ -137,8 +137,8 @@ struct LocationListView: View {
                             }
                         }
                         .sheet(isPresented: $isSelectedModalVisible, content: {
-                            CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isSelectedModalVisible, location: locationStore.selectedLocationForModal, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: .constant(false))
-                                .onDisappear(){
+                            CardModalView(weatherManager: weatherManager, modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isSelectedModalVisible, address: locationStore.selectedLocationForModal, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: .constant(false))
+                                .onDisappear {
                                     isSelectedModalVisible = false
                                 }
                         })
@@ -183,7 +183,7 @@ struct LocationListView: View {
     
     private var currentWeatherView: some View{
         HStack{
-            WeatherOverview(address: locationManager.address, isCurrentLocation: true)
+            WeatherOverview(weatherManager: weatherManager, address: locationManager.address, isCurrentLocation: true)
                 .frame(maxWidth: .infinity, maxHeight: 140)
                 .listRowSeparator(.hidden)
                 .onTapGesture {
@@ -192,8 +192,8 @@ struct LocationListView: View {
                     }
                 }
                 .sheet(isPresented: $isCurrentWeatherModalVisible, content: {
-                    CardModalView(modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isCurrentWeatherModalVisible, location: locationManager.currentAddress, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: .constant(true))
-                        .onDisappear(){
+                    CardModalView(weatherManager: weatherManager, modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isCurrentWeatherModalVisible, address: locationManager.currentAddress, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: .constant(true))
+                        .onDisappear {
                             isCurrentWeatherModalVisible = false
                         }
                 })

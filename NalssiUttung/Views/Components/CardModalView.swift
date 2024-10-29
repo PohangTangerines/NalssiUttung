@@ -11,17 +11,12 @@ import WeatherKit
 struct CardModalView: View {
     // MARK: Weather Data 관련
     @ObservedObject var locationManager = LocationManager.shared
-    let weatherManager = WeatherService.shared
-    
-    @State var weatherBoxData: WeatherBoxData?
-    @State var dailyWeatherData: DailyWeatherData?
-    @State var weeklyWeatherData: WeeklyWeatherData?
-    @State var detailedWeatherData: DetailedWeatherData?
-    
+    @ObservedObject var weatherManager: WeatherManager
+
     // MARK: Modal 관련
     @State var modalState: ModalState
     @Binding var isModalVisible: Bool
-    @State var location: String
+    @State var address: String
     @FocusState var isFocused: Bool
     @Binding var isTextFieldActive: Bool
     @Binding var isEditMode: Bool
@@ -35,25 +30,17 @@ struct CardModalView: View {
                 Color.seaSky
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
-                    MainHeader(weatherBoxData: $weatherBoxData, location: $location, modalState: $modalState, isModalVisible: $isModalVisible, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: $isCurrentLocation)
-                    RealTimeWeatherView(weatherBoxData: $weatherBoxData, dailyWeatherData: $dailyWeatherData, canTransition: .constant(false), isModalVisible: .constant(false), isModal: true)
+                    MainHeader(weatherManager: weatherManager, address: $address, modalState: $modalState, isModalVisible: $isModalVisible, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: $isCurrentLocation)
+                    RealTimeWeatherView(weatherManager: weatherManager, canTransition: .constant(false), isModalVisible: .constant(false), isModal: true)
                         .transition(.move(edge: .top))
                 }
                 .padding(.horizontal, 15)
                 .task {
                     if isCurrentLocation {
-                        let location = locationManager.location
-                        
-                        if let weather = await weatherManager.getWeather(location: location) {
-                            self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
-                            self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
-                        }
+                        await weatherManager.fetchWeather(with: .all)
                     } else {
-                        if let CLlocation = locationManager.findCoordinates(address: location) {
-                            if let weather = await weatherManager.getWeather(location: CLlocation) {
-                                self.weatherBoxData = weatherManager.getWeatherBoxData(location: CLlocation, weather: weather)
-                                self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
-                            }
+                        if let location = locationManager.findCoordinates(address: address) {
+                            await weatherManager.fetchWeather(for: location, with: .current)
                         }
                     }
                 }
@@ -63,8 +50,9 @@ struct CardModalView: View {
 }
 
 private struct MainHeader: View {
-    @Binding var weatherBoxData: WeatherBoxData?
-    @Binding var location: String
+    @ObservedObject var weatherManager: WeatherManager
+    
+    @Binding var address: String
     @Binding var modalState: ModalState
     @Binding var isModalVisible: Bool
     @FocusState var isFocused: Bool
@@ -81,7 +69,7 @@ private struct MainHeader: View {
     var body: some View {
         ZStack {
             HStack {
-                Text("\(location)")
+                Text("\(address)")
                     .font(.pretendardSemibold(.callout))
                 if isCurrentLocation {
                     Image(systemName: "location.fill")
@@ -101,7 +89,7 @@ private struct MainHeader: View {
                 Spacer()
                 switch modalState {
                 case .notModalView:
-                    NavigationLink(destination: LocationListView(locationStore: locationStore)) {
+                    NavigationLink(destination: LocationListView(weatherManager: weatherManager, locationStore: locationStore)) {
                         Image(systemName: "plus")
                             .font(.pretendardSemibold(.body))
                             .foregroundColor(.black)
@@ -122,7 +110,7 @@ private struct MainHeader: View {
                     }
                     .task {
                         var list = locationStore.loadLocations()
-                        list.append(location)
+                        list.append(address)
                         storeList = list
                         print(storeList)
                         print("success storeList in CardModalView")

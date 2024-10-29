@@ -12,12 +12,7 @@ import WeatherKit
 struct MainView: View {
     // MARK: Weather Data 관련
     @ObservedObject var locationManager = LocationManager.shared
-    let weatherManager = WeatherService.shared
-    
-    @State var weatherBoxData: WeatherBoxData?
-    @State var dailyWeatherData: DailyWeatherData?
-    @State var weeklyWeatherData: WeeklyWeatherData?
-    @State var detailedWeatherData: DetailedWeatherData?
+    @StateObject var weatherManager = WeatherManager()
     
     // MARK: View 전환 관련
     @State private var dragOffset: CGSize = .zero
@@ -77,30 +72,21 @@ struct MainView: View {
                 VStack(spacing: 0) {
                     
                     if isInitView {
-                        RealTimeWeatherView(weatherBoxData: $weatherBoxData, dailyWeatherData: $dailyWeatherData, canTransition: $canTransition, isModalVisible: .constant(true), isModal: false)
+                        RealTimeWeatherView(weatherManager: weatherManager, canTransition: $canTransition, isModalVisible: .constant(true), isModal: false)
                             .transition(.move(edge: .top))
                     } else {
-                        MainScrolledView(weatherBoxData: $weatherBoxData,
-                                         weeklyWeatherData: $weeklyWeatherData,
-                                         detailedWeatherData: $detailedWeatherData)
+                        MainScrolledView(weatherManager: weatherManager)
                         .transition(.move(edge: .bottom))
                     }
                     
                 }
                 .padding(.horizontal, 15)
-                    .gesture(dragGesture)
-                    .offset(y: viewOffsetY)
-                    .toolbar(content: toolbarContent)
-                    .task {
-                        let location = locationManager.currentLocation
-                        
-                        if let weather = await weatherManager.getWeather(location: location) {
-                            self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
-                            self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
-                            self.weeklyWeatherData = weatherManager.getWeeklyWeatherData(weather: weather)
-                            self.detailedWeatherData = weatherManager.getDetailedWeatherData(weather: weather)
-                        }
-                    }
+                .gesture(dragGesture)
+                .offset(y: viewOffsetY)
+                .toolbar(content: toolbarContent)
+                .task {
+                    await weatherManager.fetchWeather(with: .all)
+                }
             }
         }
     }

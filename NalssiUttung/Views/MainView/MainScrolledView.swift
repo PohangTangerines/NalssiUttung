@@ -8,19 +8,17 @@
 import SwiftUI
 
 struct MainScrolledView: View {
-    @Binding var weatherBoxData: WeatherBoxData?
-    @Binding var weeklyWeatherData: WeeklyWeatherData?
-    @Binding var detailedWeatherData: DetailedWeatherData?
+    @ObservedObject var weatherManager: WeatherManager
     
     var body: some View {
         VStack(spacing: 0) {
-            LocationCardScrolled(weatherBoxData: $weatherBoxData)
-            WeeklyWeatherView(weeklyWeatherData: $weeklyWeatherData)
+            LocationCardScrolled(weatherManager: weatherManager)
+            WeeklyWeatherView(weatherManager: weatherManager)
                 .padding(.top, 27.responsibleHeight)
                 .padding(.bottom, 20.responsibleHeight)
             
             Spacer()
-            DetailedWeatherView(detailedWeatherData: $detailedWeatherData)
+            DetailedWeatherView(weatherManager: weatherManager)
                 .padding(.bottom, 30.responsibleHeight)
             
             // MARK: 날씨삼춘 알아보기 - 만든사람들, WeatherKit 출처

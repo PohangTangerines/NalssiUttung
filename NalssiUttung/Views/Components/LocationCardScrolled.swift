@@ -7,20 +7,20 @@
 import SwiftUI
 
 struct LocationCardScrolled: View {
-    @Binding var weatherBoxData: WeatherBoxData?
+    @ObservedObject var weatherManager: WeatherManager
     
     @State var dateString: String = ""
     
     var body: some View {
         HStack(spacing: 0) {
-            if let weatherBoxData = weatherBoxData {
+            if let currentWeather = weatherManager.currentWeather {
                 VStack(alignment: .leading, spacing: 0) {
                     // MARK: Date
                     Text("\(dateString)")
                         .font(.pretendardSemibold(.caption))
                     
                     HStack(alignment: .top, spacing: 0) {
-                        Image(weatherBoxData.weatherCondition.icon)
+                        Image(currentWeather.weatherCondition.icon)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 60.responsibleWidth)
@@ -30,16 +30,15 @@ struct LocationCardScrolled: View {
                         VStack(alignment: .leading, spacing: 0) {
                             // MARK: 온도 및 날씨
                             HStack(spacing: 0) {
-                                Text("\(weatherBoxData.currentTemperature)°")
+                                Text("\(currentWeather.temperature)°")
                                     .font(.IMHyemin(.title2))
                                     .tracking(-(Font.FontSize.title2.rawValue * 0.07))
-                                Text(weatherBoxData.weatherCondition.getWeatherString())
+                                Text(currentWeather.weatherCondition.description)
                                     .font(.IMHyemin(.title2))
-                                //                                    .padding(.leading, -(Font.DEFontSize.title2.rawValue * 0.3))
                             }.padding(.bottom, 3.responsibleHeight)
                             
                             // MARK: 최저 최고 온도
-                            Text("최저 \(weatherBoxData.lowestTemperature)° | 최고 \(weatherBoxData.highestTemperature)°")
+                            Text("최저 \(currentWeather.lowestTemperature)° | 최고 \(currentWeather.highestTemperature)°")
                                 .font(.pretendardMedium(.footnote))
                         }.padding(.bottom, 18.responsibleHeight)
                             .padding(.top, 12.responsibleHeight)

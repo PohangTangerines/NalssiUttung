@@ -11,7 +11,7 @@ import WeatherKit
 
 struct WeatherOverview: View {
     @ObservedObject var locationManager = LocationManager.shared
-    @StateObject var weatherManager = WeatherManager()
+    @ObservedObject var weatherManager: WeatherManager
     
     let address: String
     let isCurrentLocation: Bool
@@ -43,10 +43,10 @@ struct WeatherOverview: View {
                         // MARK: 온도 및 날씨
                         VStack(alignment: .leading, spacing: 0) {
                             HStack(spacing: 0) {
-                                Text("\(currentWeather.currentTemperature)° ")
+                                Text("\(currentWeather.temperature)° ")
                                     .font(.IMHyemin(.title2))
                                     .tracking(-(Font.FontSize.title2.rawValue * 0.1))
-                                Text("\(currentWeather.weatherCondition.getWeatherString())")
+                                Text("\(currentWeather.weatherCondition.description)")
                                     .font(.IMHyemin(.title2))
                                     .padding(.leading, -(Font.FontSize.title2.rawValue * 0.3))
                             }
@@ -85,5 +85,5 @@ struct WeatherOverview: View {
 }
 
 #Preview {
-    WeatherOverview(address: "제주시 애월읍", isCurrentLocation: true)
+    WeatherOverview(weatherManager: WeatherManager(), address: "제주시 애월읍", isCurrentLocation: true)
 }

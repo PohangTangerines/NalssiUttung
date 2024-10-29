@@ -25,17 +25,23 @@ struct WeatherCommentWidgetProvider: IntentTimelineProvider {
             var entries: [WeatherCommentWidgetEntry] = []
             let address = configuration.location?.displayString
             
-            let weatherData = try? await WeatherCommentWidgetData.currentWeather(for: address)
-            let data = weatherData ?? .failData
-            
-            for hourOffset in 0..<24 {
-                let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-                let entry = WeatherCommentWidgetEntry(date: entryDate, weatherData: data)
-                entries.append(entry)
+            do {
+                let weatherData = try await WeatherCommentWidgetData.currentWeather(for: address)
+                let data = weatherData
                 
+                for hourOffset in 0..<24 {
+                    let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
+                    let entry = WeatherCommentWidgetEntry(date: entryDate, weatherData: data)
+                    entries.append(entry)
+                    
+                }
+                
+                let timeline = Timeline(entries: entries, policy: .atEnd)
+                completion(timeline)
+                
+            } catch {
+                print("Error: \(error)")
             }
-            let timeline = Timeline(entries: entries, policy: .atEnd)
-            completion(timeline)
         }
     }
 }
