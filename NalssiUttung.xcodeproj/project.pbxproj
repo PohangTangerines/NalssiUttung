@@ -403,6 +403,7 @@
 				0E6377372B0B962900D6477B /* InformationView.swift */,
 				0EAF06892B0BAB0F00AEA978 /* MakePeopleView.swift */,
 				0EAF068D2B0BAF7000AEA978 /* ResourcesView.swift */,
+				0EAF068B2B0BADC200AEA978 /* WebView.swift */,
 			);
 			path = Information;
 			sourceTree = "<group>";
@@ -505,7 +506,6 @@
 			isa = PBXGroup;
 			children = (
 				0EE65AE92AB6D5AD0038A32F /* LocationManager.swift */,
-				0EAF068B2B0BADC200AEA978 /* WebView.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";

@@ -22,7 +22,7 @@ struct WebView: UIViewRepresentable {
         return webView
     }
     
-    //업데이트 ui view
+    // 업데이트 ui view
     func updateUIView(_ uiView: WKWebView, context: UIViewRepresentableContext<WebView>) {
         
     }
