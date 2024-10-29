@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import ScrollKit
 import WeatherKit
 
 struct MainView: View {

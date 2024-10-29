@@ -77,7 +77,6 @@
 		0E5D08D12B00C5D70082C0F6 /* splash.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0E5D08D02B00C5D70082C0F6 /* splash.gif */; };
 		0E6377382B0B962900D6477B /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6377372B0B962900D6477B /* InformationView.swift */; };
 		0E7B8A7D2ACC3C52006E1F5E /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B8A7C2ACC3C52006E1F5E /* View+.swift */; };
-		0E7B8A802ACC56D6006E1F5E /* ScrollKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7B8A7F2ACC56D6006E1F5E /* ScrollKit */; };
 		0E7B8A822ACC7111006E1F5E /* MainScrolledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B8A812ACC7111006E1F5E /* MainScrolledView.swift */; };
 		0E7B8A842ACC7384006E1F5E /* RealTimeWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7B8A832ACC7384006E1F5E /* RealTimeWeatherView.swift */; };
 		0E7DD5CD2AC95F3C00DE28D3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DD5CC2AC95F3C00DE28D3 /* MainView.swift */; };
@@ -91,9 +90,6 @@
 		0EB04B612AA6D17900DC0933 /* NalssiUttungApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */; };
 		0EB04B652AA6D17A00DC0933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EB04B642AA6D17A00DC0933 /* Assets.xcassets */; };
 		0EB04B682AA6D17A00DC0933 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EB04B672AA6D17A00DC0933 /* Preview Assets.xcassets */; };
-		0EB04B722AA6D17A00DC0933 /* NalssiUttungTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B712AA6D17A00DC0933 /* NalssiUttungTests.swift */; };
-		0EB04B7C2AA6D17A00DC0933 /* NalssiUttungUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B7B2AA6D17A00DC0933 /* NalssiUttungUITests.swift */; };
-		0EB04B7E2AA6D17A00DC0933 /* NalssiUttungUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB04B7D2AA6D17A00DC0933 /* NalssiUttungUITestsLaunchTests.swift */; };
 		0EE65AEA2AB6D5AD0038A32F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE65AE92AB6D5AD0038A32F /* LocationManager.swift */; };
 		7C0D1BDD2AAB7E7400A8BCFF /* WeatherOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0D1BDC2AAB7E7400A8BCFF /* WeatherOverview.swift */; };
 		7C7E8A052AD57CF000EE5260 /* LocationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7E8A042AD57CF000EE5260 /* LocationListViewModel.swift */; };
@@ -220,10 +216,7 @@
 		0EB04B642AA6D17A00DC0933 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0EB04B672AA6D17A00DC0933 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0EB04B6D2AA6D17A00DC0933 /* NalssiUttungTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NalssiUttungTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0EB04B712AA6D17A00DC0933 /* NalssiUttungTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiUttungTests.swift; sourceTree = "<group>"; };
 		0EB04B772AA6D17A00DC0933 /* NalssiUttungUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NalssiUttungUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0EB04B7B2AA6D17A00DC0933 /* NalssiUttungUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiUttungUITests.swift; sourceTree = "<group>"; };
-		0EB04B7D2AA6D17A00DC0933 /* NalssiUttungUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiUttungUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0EE65AE92AB6D5AD0038A32F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		0EE65AED2AB6DC750038A32F /* NalssiUttung.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NalssiUttung.entitlements; sourceTree = "<group>"; };
 		7C0D1BDC2AAB7E7400A8BCFF /* WeatherOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherOverview.swift; sourceTree = "<group>"; };
@@ -257,7 +250,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E7B8A802ACC56D6006E1F5E /* ScrollKit in Frameworks */,
 				031F38D92AFBB8B6002E2EAD /* Gifu in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,8 +456,6 @@
 				7CA773DC2AA7949800D70BD3 /* .swiftlint.yml */,
 				0EB04B602AA6D17900DC0933 /* NalssiUttungApp.swift */,
 				0EB04B5F2AA6D17900DC0933 /* NalssiUttung */,
-				0EB04B702AA6D17A00DC0933 /* NalssiUttungTests */,
-				0EB04B7A2AA6D17A00DC0933 /* NalssiUttungUITests */,
 				039652BE2C480F6F001D23A9 /* NalssiSamchunWidget */,
 				032DACD12C554E1C0073FFD2 /* IntentHandler */,
 				0E4F79FB2B8CFFEF0033497B /* Frameworks */,
@@ -509,23 +499,6 @@
 				0EB04B672AA6D17A00DC0933 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		0EB04B702AA6D17A00DC0933 /* NalssiUttungTests */ = {
-			isa = PBXGroup;
-			children = (
-				0EB04B712AA6D17A00DC0933 /* NalssiUttungTests.swift */,
-			);
-			path = NalssiUttungTests;
-			sourceTree = "<group>";
-		};
-		0EB04B7A2AA6D17A00DC0933 /* NalssiUttungUITests */ = {
-			isa = PBXGroup;
-			children = (
-				0EB04B7B2AA6D17A00DC0933 /* NalssiUttungUITests.swift */,
-				0EB04B7D2AA6D17A00DC0933 /* NalssiUttungUITestsLaunchTests.swift */,
-			);
-			path = NalssiUttungUITests;
 			sourceTree = "<group>";
 		};
 		0EE65AE82AB6D5A10038A32F /* Manager */ = {
@@ -617,7 +590,6 @@
 			);
 			name = NalssiUttung;
 			packageProductDependencies = (
-				0E7B8A7F2ACC56D6006E1F5E /* ScrollKit */,
 				031F38D82AFBB8B6002E2EAD /* Gifu */,
 			);
 			productName = NalssiUttung;
@@ -699,7 +671,6 @@
 			);
 			mainGroup = 0EB04B542AA6D17900DC0933;
 			packageReferences = (
-				0E7B8A7E2ACC56D6006E1F5E /* XCRemoteSwiftPackageReference "ScrollKit" */,
 				031F38D72AFBB8B6002E2EAD /* XCRemoteSwiftPackageReference "Gifu" */,
 			);
 			productRefGroup = 0EB04B5E2AA6D17900DC0933 /* Products */;
@@ -883,7 +854,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EB04B722AA6D17A00DC0933 /* NalssiUttungTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -891,8 +861,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EB04B7C2AA6D17A00DC0933 /* NalssiUttungUITests.swift in Sources */,
-				0EB04B7E2AA6D17A00DC0933 /* NalssiUttungUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1173,7 +1141,6 @@
 		0EB04B822AA6D17A00DC0933 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NalssiUttung/NalssiUttungDebug.entitlements;
@@ -1213,7 +1180,6 @@
 		0EB04B832AA6D17A00DC0933 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NalssiUttung/NalssiUttung.entitlements;
@@ -1253,7 +1219,6 @@
 		0EB04B852AA6D17A00DC0933 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1273,7 +1238,6 @@
 		0EB04B862AA6D17A00DC0933 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1293,7 +1257,6 @@
 		0EB04B882AA6D17A00DC0933 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PAQ92DM7XD;
@@ -1311,7 +1274,6 @@
 		0EB04B892AA6D17A00DC0933 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PAQ92DM7XD;
@@ -1394,14 +1356,6 @@
 				minimumVersion = 3.2.2;
 			};
 		};
-		0E7B8A7E2ACC56D6006E1F5E /* XCRemoteSwiftPackageReference "ScrollKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/danielsaidi/ScrollKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1414,11 +1368,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 031F38D72AFBB8B6002E2EAD /* XCRemoteSwiftPackageReference "Gifu" */;
 			productName = Gifu;
-		};
-		0E7B8A7F2ACC56D6006E1F5E /* ScrollKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0E7B8A7E2ACC56D6006E1F5E /* XCRemoteSwiftPackageReference "ScrollKit" */;
-			productName = ScrollKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
