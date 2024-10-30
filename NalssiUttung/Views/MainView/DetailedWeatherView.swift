@@ -9,7 +9,6 @@ import SwiftUI
 import WeatherKit
 
 struct DetailedWeatherView: View {
-//    @Binding var detailedWeatherData: DetailedWeatherData?
     @ObservedObject var weatherManager: WeatherManager
     
     var body: some View {
