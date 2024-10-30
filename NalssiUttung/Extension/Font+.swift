@@ -39,6 +39,4 @@ extension Font {
         
         return font.lineHeight
     }
-    
-    
 }

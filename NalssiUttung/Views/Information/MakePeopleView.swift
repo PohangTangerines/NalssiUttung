@@ -25,13 +25,15 @@ struct MakePeopleView: View {
             VStack {
                 Text("Team Pohang Tangerines")
                 Text("Apple Developer Academy @ POSTECH 2nd")
-            }.font(.pretendardMedium(.caption2))
-                .foregroundColor(.darkChacoal)
-                .padding(.bottom, 30)
+            }
+            .font(.pretendardMedium(.caption2))
+            .foregroundColor(.darkChacoal)
+            .padding(.bottom, 30)
             
-        }.padding(.horizontal, 15)
-            .background(Color.seaSky)
-            .toolbar(.hidden)
+        }
+        .padding(.horizontal, 15)
+        .background(Color.seaSky)
+        .toolbar(.hidden)
     }
 }
 

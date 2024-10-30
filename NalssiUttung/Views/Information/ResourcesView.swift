@@ -32,12 +32,14 @@ struct ResourcesView: View {
                 Text("other data sources")
                     .underline()
                     .foregroundColor(.black)
-            }.padding()
+            }
+            .padding()
             
             Spacer()
-        }.padding(.horizontal, 15)
-            .background(Color.seaSky)
-            .toolbar(.hidden)
+        }
+        .padding(.horizontal, 15)
+        .background(Color.seaSky)
+        .toolbar(.hidden)
     }
 }
 

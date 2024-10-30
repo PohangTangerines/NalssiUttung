@@ -1,10 +1,9 @@
 //
-//  ModalState.swift
+//  LocationInfo.swift
 //  NalssiUttung
 //
 //  Created by 금가경 on 10/30/24.
 //
-
 
 import Foundation
 import CoreLocation

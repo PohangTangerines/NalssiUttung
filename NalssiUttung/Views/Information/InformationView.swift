@@ -21,11 +21,9 @@ struct InformationView: View {
                     informationNavigationRow(
                         WebView(urlToLoad: "https://lateral-donkey-cf6.notion.site/128ecf0613254204aec7d344285d121f?pvs=4"),
                         title: "할라프렌즈")
-                    
-                    // MARK: 정보
-//                    rowTitle("정보").padding(.top, 6)
-//                    informationNavigationRow(ResourcesView(), title: "데이터 리소스")
-                    Spacer().frame(height: 30)
+
+                    Spacer()
+                        .frame(height: 30)
                     
                     // MARK: 데이터 리소스
                     HStack {
@@ -49,11 +47,11 @@ struct InformationView: View {
                                     .font(.system(size: 15))
                                     .underline()
                                     .foregroundColor(.black)
-                            }.padding()
+                            }
+                            .padding()
                         }
                         Spacer()
                     }
-                    
                     Spacer()
                 }
                 
@@ -65,10 +63,13 @@ struct InformationView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(maxWidth: 350)
                         .frame(height: 230)
-                }.padding(.bottom, 30)
-            }.padding(.horizontal, 15)
-                .background(Color.seaSky)
-        }.toolbar(.hidden)
+                }
+                .padding(.bottom, 30)
+            }
+            .padding(.horizontal, 15)
+            .background(Color.seaSky)
+        }
+        .toolbar(.hidden)
     }
     
     private func rowTitle(_ title: String) -> some View {
@@ -123,9 +124,12 @@ func informationHeader(_ dismiss: DismissAction, title: String) -> some View {
                 .foregroundColor(Color.black)
                 .frame(maxWidth: .infinity, alignment: .center)
             
-            Spacer().frame(width: 40)
+            Spacer()
+                .frame(width: 40)
         }
-    }.padding(.top, 7.5).padding(.bottom, 24)
+    }
+    .padding(.top, 7.5)
+    .padding(.bottom, 24)
 }
 
 struct InformationView_Previews: PreviewProvider {

@@ -61,8 +61,6 @@ struct MainInitView: View {
                         .padding(.top, 42).padding(.bottom, 21)
                 }
             }
-        } else {
-            // TODO: 로딩화면
         }
     }
     

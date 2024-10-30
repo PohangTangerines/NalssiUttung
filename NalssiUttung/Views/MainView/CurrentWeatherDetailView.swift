@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainScrolledView: View {
+struct CurrentWeatherDetailView: View {
     @ObservedObject var weatherManager: WeatherManager
     
     var body: some View {
@@ -18,6 +18,7 @@ struct MainScrolledView: View {
                 .padding(.bottom, 20.responsibleHeight)
             
             Spacer()
+            
             DetailedWeatherView(weatherManager: weatherManager)
                 .padding(.bottom, 30.responsibleHeight)
             
@@ -27,11 +28,12 @@ struct MainScrolledView: View {
                     Text("\(Image(systemName: "info.circle.fill"))")
                     Text("날씨삼춘 알아보기").underline()
                 }
-            }.foregroundColor(Color.darkChacoal)
+                .foregroundColor(Color.darkChacoal)
                 .font(.IMHyemin(.caption2))
                 .padding(.bottom, 15.responsibleHeight)
-            
-        }.padding(.horizontal, 15.responsibleWidth)
-            .background(Color.seaSky)
+            }
+        }
+        .padding(.horizontal, 15.responsibleWidth)
+        .background(Color.seaSky)
     }
 }

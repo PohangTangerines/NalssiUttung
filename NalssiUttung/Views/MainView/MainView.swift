@@ -33,7 +33,7 @@ struct MainView: View {
                         CurrentWeatherView(weatherManager: viewModel.weatherManager, canTransition: $viewModel.canTransition, isModalVisible: .constant(true), isModal: false)
                             .transition(.move(edge: .top))
                     case .detail:
-                        MainScrolledView(weatherManager: viewModel.weatherManager)
+                        CurrentWeatherDetailView(weatherManager: viewModel.weatherManager)
                             .transition(.move(edge: .bottom))
                             .transition(.move(edge: .bottom))
                     }
