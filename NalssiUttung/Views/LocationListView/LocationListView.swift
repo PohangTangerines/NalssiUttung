@@ -13,7 +13,7 @@ struct LocationListView: View {
     
     let locations = LocationInfo.Data.map { $0.address }
     
-    @ObservedObject var locationStore: LocationStore
+    @StateObject var locationStore = LocationViewModel()
     @State var selectedLocations: [String]?
     @State var currnetLocation: String?
     @State var searchLocation: [String]?

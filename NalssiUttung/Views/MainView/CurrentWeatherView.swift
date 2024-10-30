@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RealTimeWeatherView: View {
+struct CurrentWeatherView: View {
     @ObservedObject var weatherManager: WeatherManager
     @Binding var canTransition: Bool
     @Binding var isModalVisible: Bool

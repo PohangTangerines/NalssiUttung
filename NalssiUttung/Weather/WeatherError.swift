@@ -12,8 +12,8 @@ enum CustomWeatherError: Error {
     
     var localizedDescription: String {
         switch self {
-            case .sunEventUnavailable:
-            return "일출/일몰 시간을 불러올 수 없습니다."
+        case .sunEventUnavailable:
+        return "일출/일몰 시간을 불러올 수 없습니다."
         }
     }
 }

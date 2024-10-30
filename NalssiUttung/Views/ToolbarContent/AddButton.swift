@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct AddButton: View {
-    @ObservedObject var locationStore = LocationStore()
-
     var body: some View {
-        NavigationLink(destination: LocationListView(locationStore: locationStore)) {
+        NavigationLink(destination: LocationListView()) {
             Image(systemName: "plus")
                 .font(.pretendardSemibold(.body))
                 .foregroundColor(.black)

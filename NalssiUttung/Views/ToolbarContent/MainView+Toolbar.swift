@@ -11,11 +11,11 @@ extension MainView {
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
         ToolbarItem(placement: .principal) {
-            CurrentLocation(location: $locationManager.currentAddress)
+            CurrentLocation(location: $viewModel.locationManager.currentAddress)
         }
         
         ToolbarItem(placement: .topBarTrailing) {
-            AddButton(locationStore: locationStore)
+            AddButton()
         }
     }
 }

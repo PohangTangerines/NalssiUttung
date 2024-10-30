@@ -11,7 +11,7 @@ class IntentHandler: INExtension, AddressSelectionIntentHandling {
     func provideLocationOptionsCollection(for intent: AddressSelectionIntent, with completion: @escaping (INObjectCollection<Location>?, Error?) -> Void) {
         let addresses = LocationInfo.Data.map { location in
             let weatherLocation = Location(
-                identifier: location.name,
+                identifier: location.address,
                 display: location.address
             )
             return weatherLocation

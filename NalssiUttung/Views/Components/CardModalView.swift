@@ -31,7 +31,7 @@ struct CardModalView: View {
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
                     MainHeader(weatherManager: weatherManager, address: $address, modalState: $modalState, isModalVisible: $isModalVisible, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: $isCurrentLocation)
-                    RealTimeWeatherView(weatherManager: weatherManager, canTransition: .constant(false), isModalVisible: .constant(false), isModal: true)
+                    CurrentWeatherView(weatherManager: weatherManager, canTransition: .constant(false), isModalVisible: .constant(false), isModal: true)
                         .transition(.move(edge: .top))
                 }
                 .padding(.horizontal, 15)
@@ -61,7 +61,7 @@ private struct MainHeader: View {
     @State var storeList: [String]?
     
     // MARK: User가 선택한 위치 List 관련 값
-    @ObservedObject var locationStore = LocationStore()
+    @ObservedObject var locationStore = LocationViewModel()
     let locations = LocationInfo.Data.map { $0.name }
     
     @Binding var isCurrentLocation: Bool

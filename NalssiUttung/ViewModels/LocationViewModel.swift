@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class LocationStore: ObservableObject {
+class LocationViewModel: ObservableObject {
     @Published var selectedLocations: [String] = []
     @Published var selectedLocationForModal: String = "제주공항"
     @Published var selectedfilteredLocationForModal: String = "제주공항"

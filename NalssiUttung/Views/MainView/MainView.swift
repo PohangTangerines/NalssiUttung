@@ -9,56 +9,15 @@ import SwiftUI
 import WeatherKit
 
 struct MainView: View {
-    // MARK: Weather Data 관련
-    @ObservedObject var locationManager = LocationManager.shared
-    @StateObject var weatherManager = WeatherManager()
-    
-    // MARK: View 전환 관련
-    @State private var dragOffset: CGSize = .zero
-    @State private var canTransition = false
-    @State private var viewOffsetY: CGFloat = 0
-    @State private var isInitView = true
-    
-    // MARK: Modal 관련
-    @ObservedObject var locationStore = LocationStore()
+    @StateObject var viewModel = MainViewModel()
     
     private var dragGesture: some Gesture {
         DragGesture()
             .onChanged { gesture in
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    if isInitView {
-                        if gesture.translation.height < -100 {
-                            canTransition = true
-                            viewOffsetY = -100
-                        } else {
-                            canTransition = false
-                            viewOffsetY = 0
-                        }
-                    } else {
-                        if gesture.translation.height > 100 {
-                            canTransition = true
-                            viewOffsetY = 100
-                        } else {
-                            canTransition = false
-                            viewOffsetY = 0
-                        }
-                    }
-                }
+                viewModel.handleDragGesture(gesture)
             }
             .onEnded { gesture in
-                withAnimation {
-                    viewOffsetY = 0
-                    canTransition = false
-                    if isInitView {
-                        if gesture.translation.height < -100 {
-                            isInitView = false
-                        }
-                    } else {
-                        if gesture.translation.height > 100 {
-                            isInitView = true
-                        }
-                    }
-                }
+                viewModel.endDragGesture(gesture)
             }
     }
     
@@ -69,22 +28,22 @@ struct MainView: View {
                 Color.seaSky
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
-                    
-                    if isInitView {
-                        RealTimeWeatherView(weatherManager: weatherManager, canTransition: $canTransition, isModalVisible: .constant(true), isModal: false)
+                    switch viewModel.displayedContent {
+                    case .main:
+                        CurrentWeatherView(weatherManager: viewModel.weatherManager, canTransition: $viewModel.canTransition, isModalVisible: .constant(true), isModal: false)
                             .transition(.move(edge: .top))
-                    } else {
-                        MainScrolledView(weatherManager: weatherManager)
-                        .transition(.move(edge: .bottom))
+                    case .detail:
+                        MainScrolledView(weatherManager: viewModel.weatherManager)
+                            .transition(.move(edge: .bottom))
+                            .transition(.move(edge: .bottom))
                     }
-                    
                 }
                 .padding(.horizontal, 15)
                 .gesture(dragGesture)
-                .offset(y: viewOffsetY)
+                .offset(y: viewModel.viewOffsetY)
                 .toolbar(content: toolbarContent)
                 .task {
-                    await weatherManager.fetchWeather(with: .all)
+                    await viewModel.weatherManager.fetchWeather(with: .all)
                 }
             }
         }
