@@ -24,7 +24,6 @@ struct MainView: View {
     }
     
     var body: some View {
-        // TODO: - Toolbar로 전환 후 변경된 레이아웃 수정 필요
         NavigationView {
             ZStack {
                 Color.seaSky

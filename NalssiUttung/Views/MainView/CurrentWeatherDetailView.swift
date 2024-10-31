@@ -33,6 +33,7 @@ struct CurrentWeatherDetailView: View {
                 .padding(.bottom, 15.responsibleHeight)
             }
         }
+        .padding(.top, -25.responsibleHeight)
         .padding(.horizontal, 15.responsibleWidth)
         .background(Color.seaSky)
     }

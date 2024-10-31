@@ -71,7 +71,7 @@ struct CurrentWeatherView: View {
                     }
                 }
             }
-           
+            .padding(.top, -40.responsibleHeight)
         }
     }
     
