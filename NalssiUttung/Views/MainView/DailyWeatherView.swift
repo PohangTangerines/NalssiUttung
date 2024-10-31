@@ -65,9 +65,9 @@ struct DailyWeatherView: View {
     
     private func timeString(time: Date) -> String {
         if [weatherManager.dailyForecast?.sunrise, weatherManager.dailyForecast?.sunset].contains(time) {
-            return dateToDetailTimeString(date: time)
+            return WeatherDataFormatter.timeWithMinutes(from: time)
         } else {
-            return dateToTimeString(date: time)
+            return WeatherDataFormatter.timeWithHourOnly(from: time)
         }
     }
     

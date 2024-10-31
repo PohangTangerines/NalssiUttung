@@ -6,127 +6,100 @@
 //
 import Foundation
 
-// TODO: - WeatherDataFormatter class로 변경 후 Refactor
-func unitTempToInt(temp: Measurement<UnitTemperature>) -> Int {
-    return Int(temp.converted(to: .celsius).value)
-}
-
-func dateToDetailTimeString(date: Date) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "a h:mm"
-    dateFormatter.locale = Locale(identifier:"ko_KR")
+class WeatherDataFormatter {
+    private static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter
+    }()
     
-    return dateFormatter.string(from: date)
-}
-
-func dateToTimeString(date: Date) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "a h시"
-    dateFormatter.locale = Locale(identifier:"ko_KR")
+    private static let measurementFormatter: MeasurementFormatter = {
+        let formatter = MeasurementFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.numberFormatter.maximumFractionDigits = 1
+        return formatter
+    }()
     
-    return dateFormatter.string(from: date)
-}
-
-func dateToDayString(date: Date) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "E"
-    dateFormatter.locale = Locale(identifier:"ko_KR")
-    
-    return dateFormatter.string(from: date)
-}
-
-func dateToString(date: Date) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "M.dd"
-    dateFormatter.locale = Locale(identifier:"ko_KR")
-    
-    return dateFormatter.string(from: date)
-}
-
-func precipitationToKoreanString(_ precipitation: String) -> String {
-    switch precipitation {
-    case "none" :
-        return "없음"
-    case "hail" :
-        return "우박"
-    case "mixed" :
-        return "혼합강우"
-    case "rain" :
-        return "비"
-    case "sleet" :
-        return "진눈깨비"
-    case "snow" :
-        return "눈"
-    default:
-        return "결과 없음"
+    static func celsiusTemperature(from temperature: Measurement<UnitTemperature>) -> Int {
+        return Int(temperature.converted(to: .celsius).value)
     }
-}
-func precipitationChanceDoubleToPercentage(precipitationChance: Double) -> String {
-    return "\(Int(precipitationChance * 100))%"
-}
+    
+    static func timeWithMinutes(from date: Date) -> String {
+        dateFormatter.dateFormat = "a h:mm"
+        return dateFormatter.string(from: date)
 
-func convertToKoreanWindDirection(_ compassDirection: String) -> String {
-    switch compassDirection {
-    case "north" :
-        return "북풍"
-    case "northNortheast" :
-        return "북북동풍"
-    case "northeast" :
-        return "북동풍"
-    case "eastNortheast" :
-        return "동북동풍"
-    case "east" :
-        return "동풍"
-    case "eastSoutheast" :
-        return "동남풍"
-    case "southeast" :
-        return "남동풍"
-    case "southSoutheast" :
-        return "남남동풍"
-    case "south" :
-        return "남풍"
-    case "southSouthwest" :
-        return "남남서풍"
-    case "southwest" :
-        return "남서풍"
-    case "westSouthwest" :
-        return "서남서풍"
-    case "west" :
-        return "서풍"
-    case "westNorthwest" :
-        return "서북서풍"
-    case "northwest" :
-        return "북서풍"
-    case "northNorthwest" :
-        return "북북서"
-    default:
-        return "알 수 없음"
     }
-}
-
-func unitWindSpeedToString(windSpeed: Measurement<UnitSpeed>) -> String {
-    let measurementFormatter = MeasurementFormatter()
-    measurementFormatter.unitOptions = .providedUnit
-    measurementFormatter.locale = Locale(identifier:"ko_KR")
-    measurementFormatter.numberFormatter.maximumFractionDigits = 1
     
-    return measurementFormatter.string(from: windSpeed)
-}
-
-func visibilityUnitLengthToString(visibility: Measurement<UnitLength>) -> String {
-    let measurementFormatter = MeasurementFormatter()
-    measurementFormatter.unitOptions = .naturalScale
-    measurementFormatter.locale = Locale(identifier:"ko_KR")
-    measurementFormatter.numberFormatter.maximumFractionDigits = 0
-
-    return measurementFormatter.string(from: visibility)
-}
-
-func precipitationUnitLengthToString(precipitationAmount: Measurement<UnitLength>) -> String {
-    let measurementFormatter = MeasurementFormatter()
-    measurementFormatter.unitOptions = .providedUnit
-    measurementFormatter.locale = Locale(identifier:"ko_KR")
-    measurementFormatter.numberFormatter.maximumFractionDigits = 1
+    static func timeWithHourOnly(from date: Date) -> String {
+        dateFormatter.dateFormat = "a h시"
+        return dateFormatter.string(from: date)
+    }
     
-    return measurementFormatter.string(from: precipitationAmount)
+    static func dayOfWeek(from date: Date) -> String {
+        dateFormatter.dateFormat = "E"
+        return dateFormatter.string(from: date)
+    }
+    
+    static func monthAndDay(from date: Date) -> String {
+        dateFormatter.dateFormat = "M.dd"
+        return dateFormatter.string(from: date)
+    }
+    
+    static func windSpeed(from windSpeed: Measurement<UnitSpeed>) -> String {
+        measurementFormatter.unitOptions = .providedUnit
+        return measurementFormatter.string(from: windSpeed)
+    }
+    
+    static func visibility(from visibility: Measurement<UnitLength>) -> String {
+        measurementFormatter.unitOptions = .naturalScale
+        measurementFormatter.numberFormatter.maximumFractionDigits = 0
+
+        return measurementFormatter.string(from: visibility)
+    }
+
+    static func precipitationAmount(from precipitationAmount: Measurement<UnitLength>) -> String {
+        measurementFormatter.unitOptions = .providedUnit
+        measurementFormatter.numberFormatter.maximumFractionDigits = 1
+        
+        return measurementFormatter.string(from: precipitationAmount)
+    }
+
+    
+    static func precipitationDescription(from precipitation: String) -> String {
+        switch precipitation {
+        case "none" : return "없음"
+        case "hail" : return "우박"
+        case "mixed" : return "혼합강우"
+        case "rain" : return "비"
+        case "sleet" : return "진눈깨비"
+        case "snow" : return "눈"
+        default: return "결과 없음"
+        }
+    }
+    
+    static func precipitationProbability(from chance: Double) -> String {
+        return "\(Int(chance * 100))%"
+    }
+    
+    static func koreanWindDirection(from compassDirection: String) -> String {
+        switch compassDirection {
+        case "north": return "북풍"
+        case "northNortheast": return "북북동풍"
+        case "northeast": return "북동풍"
+        case "eastNortheast": return "동북동풍"
+        case "east": return "동풍"
+        case "eastSoutheast": return "동남풍"
+        case "southeast": return "남동풍"
+        case "southSoutheast": return "남남동풍"
+        case "south": return "남풍"
+        case "southSouthwest": return "남남서풍"
+        case "southwest": return "남서풍"
+        case "westSouthwest": return "서남서풍"
+        case "west": return "서풍"
+        case "westNorthwest": return "서북서풍"
+        case "northwest": return "북서풍"
+        case "northNorthwest": return "북북서풍"
+        default: return "알 수 없음"
+        }
+    }
 }

@@ -53,13 +53,14 @@ class WeatherManager: ObservableObject {
     private func updateCurrentWeather() {
         guard let weather = weather else { return }
         
-        let currentTemperature = unitTempToInt(temp: weather.currentWeather.temperature)
+        let currentTemperature = WeatherDataFormatter.celsiusTemperature(from: weather.currentWeather.temperature)
+        
         let weatherCondition = weather.currentWeather.condition
         
         guard let first = weather.dailyForecast.forecast.first else { return }
         
-        let lowestTemperature = unitTempToInt(temp: first.lowTemperature)
-        let highestTemperature = unitTempToInt(temp: first.highTemperature)
+        let lowestTemperature = WeatherDataFormatter.celsiusTemperature(from: first.lowTemperature)
+        let highestTemperature = WeatherDataFormatter.celsiusTemperature(from: first.highTemperature)
         
         DispatchQueue.main.async {
             self.currentWeather = CurrentWeather(temperature: currentTemperature,
@@ -83,7 +84,7 @@ class WeatherManager: ObservableObject {
             let condition = hourlyForecast.condition
             
             let temperature = hourlyForecast.temperature
-            let convertedTemperature = unitTempToInt(temp: temperature)
+            let convertedTemperature = WeatherDataFormatter.celsiusTemperature(from: temperature)
             
             hours.append(DailyForecast.Hour(time: time, weatherCondition: condition, temperature: convertedTemperature))
         }
@@ -133,13 +134,13 @@ class WeatherManager: ObservableObject {
         filteredDailyForecast.forEach { dailyForecast in
             let date = dailyForecast.date
             
-            let day = dateToDayString(date: date)
-            let convertedDate = dateToString(date: date)
+            let day = WeatherDataFormatter.dayOfWeek(from: date)
+            let convertedDate = WeatherDataFormatter.monthAndDay(from: date)
             
             let weatherCondition = dailyForecast.condition
-            let lowestTemperature = unitTempToInt(temp: dailyForecast.lowTemperature)
-            let highestTemperature = unitTempToInt(temp: dailyForecast.highTemperature)
-            let precipitationChance = precipitationChanceDoubleToPercentage(precipitationChance: dailyForecast.precipitationChance)
+            let lowestTemperature = WeatherDataFormatter.celsiusTemperature(from: dailyForecast.lowTemperature)
+            let highestTemperature = WeatherDataFormatter.celsiusTemperature(from: dailyForecast.highTemperature)
+            let precipitationChance = WeatherDataFormatter.precipitationProbability(from: dailyForecast.precipitationChance)
             
             days.append(WeeklyForecast.Day(day: day, date: convertedDate, weatherCondition: weatherCondition, lowestTemperature: lowestTemperature, highestTemperature: highestTemperature, precipitationChance: precipitationChance))
         }
@@ -153,24 +154,24 @@ class WeatherManager: ObservableObject {
         guard let weather = weather else { return }
         
         let windDirection = weather.currentWeather.wind.compassDirection
-        let convertedWindDirection = convertToKoreanWindDirection(windDirection.rawValue)
+        let convertedWindDirection = WeatherDataFormatter.koreanWindDirection(from: windDirection.rawValue)
 
         let windSpeed = weather.currentWeather.wind.speed
-        let convertedWindSpeed = unitWindSpeedToString(windSpeed: windSpeed)
+        let convertedWindSpeed = WeatherDataFormatter.windSpeed(from: windSpeed)
         
         // 좋음/꽤 좋음/매우 좋음 등으로 표현하는 가시거리 존재하지 않음.
         let visibility = weather.currentWeather.visibility
-        let convertedVisibility = visibilityUnitLengthToString(visibility: visibility)
+        let convertedVisibility = WeatherDataFormatter.visibility(from: visibility)
         
         // currentWeather에는 강수량이 존재하지 않아, hourlyForecase의 현재 시간 범위의 강수량을 사용.
-        let hourlyForecast = weather.hourlyForecast.forecast.filter { hourlyForecast in (hourlyForecast.date.timeIntervalSinceNow/3600) >= -1 && (hourlyForecast.date.timeIntervalSinceNow/3600) < 0
+        let hourlyForecast = weather.hourlyForecast.forecast.filter { hourlyForecast in (hourlyForecast.date.timeIntervalSinceNow / 3600) >= -1 && (hourlyForecast.date.timeIntervalSinceNow / 3600) < 0
         }.first!
         
         let precipitation = hourlyForecast.precipitation
-        let convertedPrecipitation = precipitationToKoreanString(precipitation.rawValue)
+        let convertedPrecipitation = WeatherDataFormatter.precipitationDescription(from: precipitation.rawValue)
         
         let precipitationAmount = hourlyForecast.precipitationAmount
-        let convertedPrecipitationAmount = precipitationUnitLengthToString(precipitationAmount: precipitationAmount)
+        let convertedPrecipitationAmount = WeatherDataFormatter.precipitationAmount(from: precipitationAmount)
         
         DispatchQueue.main.async {
             self.detailedWeather = DetailedWeather(precipitation: convertedPrecipitation,
