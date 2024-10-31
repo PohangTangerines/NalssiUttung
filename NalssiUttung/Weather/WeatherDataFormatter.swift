@@ -64,7 +64,6 @@ class WeatherDataFormatter {
         return measurementFormatter.string(from: precipitationAmount)
     }
 
-    
     static func precipitationDescription(from precipitation: String) -> String {
         switch precipitation {
         case "none" : return "없음"

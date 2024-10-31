@@ -22,7 +22,7 @@ struct CardModalView: View {
     @Binding var isEditMode: Bool
     
     // MARK: User 위치 정보 저장 관련
-    @Binding var isCurrentLocation: Bool
+    let isCurrentLocation: Bool
     
     var body: some View {
         NavigationView {
@@ -30,7 +30,7 @@ struct CardModalView: View {
                 Color.seaSky
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
-                    MainHeader(weatherManager: weatherManager, address: $address, modalState: $modalState, isModalVisible: $isModalVisible, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: $isCurrentLocation)
+                    MainHeader(weatherManager: weatherManager, address: $address, modalState: $modalState, isModalVisible: $isModalVisible, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: isCurrentLocation)
                     CurrentWeatherView(weatherManager: weatherManager, canTransition: .constant(false), isModalVisible: .constant(false), isModal: true)
                         .transition(.move(edge: .top))
                 }
@@ -64,7 +64,7 @@ private struct MainHeader: View {
     @ObservedObject var locationStore = LocationViewModel()
     let locations = LocationInfo.Data.map { $0.name }
     
-    @Binding var isCurrentLocation: Bool
+    let isCurrentLocation: Bool
     
     var body: some View {
         ZStack {

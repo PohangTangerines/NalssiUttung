@@ -87,7 +87,7 @@ struct LocationListView: View {
                 }
                 .sheet(isPresented: $isSearchModalVisible, content: {
                     // 새로운 뷰 표시
-                    CardModalView(weatherManager: weatherManager, modalState: modalState ?? ModalState.isModalViewAndNotContainedContent, isModalVisible: $isSearchModalVisible, address: locationStore.selectedfilteredLocationForModal, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: .constant(false))
+                    CardModalView(weatherManager: weatherManager, modalState: modalState ?? ModalState.isModalViewAndNotContainedContent, isModalVisible: $isSearchModalVisible, address: locationStore.selectedfilteredLocationForModal, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: false)
                         .onDisappear {
                             isFocused = false
                             isSearchModalVisible = false
@@ -137,7 +137,7 @@ struct LocationListView: View {
                             }
                         }
                         .sheet(isPresented: $isSelectedModalVisible, content: {
-                            CardModalView(weatherManager: weatherManager, modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isSelectedModalVisible, address: locationStore.selectedLocationForModal, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: .constant(false))
+                            CardModalView(weatherManager: weatherManager, modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isSelectedModalVisible, address: locationStore.selectedLocationForModal, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: false)
                                 .onDisappear {
                                     isSelectedModalVisible = false
                                 }
@@ -156,10 +156,6 @@ struct LocationListView: View {
         .background(Color.seaSky)
         .scrollContentBackground(.hidden)
         .environment(\.editMode, .constant(isEditMode ? EditMode.active : EditMode.inactive))
-//        .onAppear {
-//            let userList = locationStore.loadLocations()
-//            selectedLocations = userList
-//        }
         .task {
             do {
                 let userList = try await locationStore.loadLocations()
@@ -192,7 +188,7 @@ struct LocationListView: View {
                     }
                 }
                 .sheet(isPresented: $isCurrentWeatherModalVisible, content: {
-                    CardModalView(weatherManager: weatherManager, modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isCurrentWeatherModalVisible, address: locationManager.currentAddress, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: .constant(true))
+                    CardModalView(weatherManager: weatherManager, modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isCurrentWeatherModalVisible, address: locationManager.currentAddress, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: true)
                         .onDisappear {
                             isCurrentWeatherModalVisible = false
                         }
