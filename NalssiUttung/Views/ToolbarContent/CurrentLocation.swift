@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CurrentLocation: View {
-    @Binding var location: String
+    let location: String
     
     var body: some View {
         HStack {
@@ -21,5 +21,5 @@ struct CurrentLocation: View {
 }
 
 #Preview {
-    CurrentLocation(location: .constant("제주공항"))
+    CurrentLocation(location: "제주공항")
 }

@@ -74,7 +74,7 @@ struct WeatherOverview: View {
         .task {
             // TODO: - UserDefault에 저장하는 값 CLLocation(longitude, latitude)로 바꾸고 findCoordiates 제거
             if isCurrentLocation {
-                await weatherManager.fetchWeather(with: .current)
+                await weatherManager.fetchWeather(for: locationManager.currentLocation, with: .current)
             } else {
                 if let location = locationManager.findCoordinates(address: address) {
                     await weatherManager.fetchWeather(for: location, with: .current)

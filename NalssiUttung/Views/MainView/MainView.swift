@@ -10,6 +10,8 @@ import WeatherKit
 
 struct MainView: View {
     @StateObject var viewModel = MainViewModel()
+    @StateObject var locationManager = LocationManager()
+    @StateObject var weatherManager = WeatherManager()
     
     private var dragGesture: some Gesture {
         DragGesture()
@@ -30,11 +32,10 @@ struct MainView: View {
                 VStack(spacing: 0) {
                     switch viewModel.displayedContent {
                     case .main:
-                        CurrentWeatherView(weatherManager: viewModel.weatherManager, canTransition: $viewModel.canTransition, isModalVisible: .constant(true), isModal: false)
+                        CurrentWeatherView(weatherManager: weatherManager, canTransition: $viewModel.canTransition, isModalVisible: .constant(true), isModal: false)
                             .transition(.move(edge: .top))
                     case .detail:
-                        CurrentWeatherDetailView(weatherManager: viewModel.weatherManager)
-                            .transition(.move(edge: .bottom))
+                        CurrentWeatherDetailView(weatherManager: weatherManager)
                             .transition(.move(edge: .bottom))
                     }
                 }
@@ -43,7 +44,7 @@ struct MainView: View {
                 .offset(y: viewModel.viewOffsetY)
                 .toolbar(content: toolbarContent)
                 .task {
-                    await viewModel.weatherManager.fetchWeather(with: .all)
+                    await weatherManager.fetchWeather(for: locationManager.currentLocation, with: .all)
                 }
             }
         }

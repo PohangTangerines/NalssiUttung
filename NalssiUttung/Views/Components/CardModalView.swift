@@ -37,7 +37,7 @@ struct CardModalView: View {
                 .padding(.horizontal, 15)
                 .task {
                     if isCurrentLocation {
-                        await weatherManager.fetchWeather(with: .all)
+                        await weatherManager.fetchWeather(for: locationManager.currentLocation, with: .all)
                     } else {
                         if let location = locationManager.findCoordinates(address: address) {
                             await weatherManager.fetchWeather(for: location, with: .current)

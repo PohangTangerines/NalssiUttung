@@ -21,14 +21,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             updateAddress(location: currentLocation)
         }
     }
-    @Published var location: CLLocation
     
     @Published var currentAddress: String = ""
-    @Published var address: String = ""
     
-    override private init() {
+    override init() {
         self.currentLocation = jejuAirportLocation
-        self.location = jejuAirportLocation
         super.init()
         
         self.locationManager.delegate = self
@@ -39,7 +36,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:
-            locationManager.startUpdatingLocation()
+            self.locationManager.startUpdatingLocation()
         case .denied, .restricted, .notDetermined:
             currentLocation = jejuAirportLocation
         @unknown default:
@@ -48,8 +45,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.currentLocation = locations.last ?? jejuAirportLocation
         guard let location = locations.last else { return }
+
+        self.currentLocation = location
         let locationData = [location.coordinate.latitude, location.coordinate.longitude]
         defaults?.set(locationData, forKey: "currentLocation")
         WidgetCenter.shared.reloadAllTimelines()

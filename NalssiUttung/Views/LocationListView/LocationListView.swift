@@ -76,7 +76,7 @@ struct LocationListView: View {
                     if !isSelectedModalVisible && !isCurrentWeatherModalVisible {
                         locationStore.selectedfilteredLocationForModal = filteredLocation
                         isSearchModalVisible = true
-                        if let searchLocation = searchLocation, (searchLocation.contains(locationStore.selectedfilteredLocationForModal) || locationManager.address == locationStore.selectedfilteredLocationForModal) {
+                        if let searchLocation = searchLocation, (searchLocation.contains(locationStore.selectedfilteredLocationForModal)) {
                             modalState = .isModalViewAndContainedContent
                         } else {
                             modalState = .isModalViewAndNotContainedContent
@@ -178,8 +178,8 @@ struct LocationListView: View {
     }
     
     private var currentWeatherView: some View{
-        HStack{
-            WeatherOverview(weatherManager: weatherManager, address: locationManager.address, isCurrentLocation: true)
+        HStack {
+            WeatherOverview(weatherManager: weatherManager, address: locationManager.currentAddress, isCurrentLocation: true)
                 .frame(maxWidth: .infinity, maxHeight: 140)
                 .listRowSeparator(.hidden)
                 .onTapGesture {

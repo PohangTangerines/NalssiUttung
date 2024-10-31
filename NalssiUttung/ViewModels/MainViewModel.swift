@@ -8,16 +8,12 @@
 import SwiftUI
 
 class MainViewModel: ObservableObject {
-    // MARK: Weather Data 관련 Property
-    @ObservedObject var locationManager = LocationManager.shared
-    @ObservedObject var weatherManager = WeatherManager()
-    
     // MARK: View 전환, Gesture 관련 Property
     @Published var displayedContent: DisplayedContent = .main
     @Published var dragOffset: CGSize = .zero
     @Published var canTransition = false
     @Published var viewOffsetY: CGFloat = 0
-    
+        
     func handleDragGesture(_ gesture: DragGesture.Value) {
         withAnimation(.easeInOut(duration: 0.5)) {
             switch displayedContent {

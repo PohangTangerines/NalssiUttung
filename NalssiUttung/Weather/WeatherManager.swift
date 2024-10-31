@@ -23,14 +23,8 @@ class WeatherManager: ObservableObject {
     
     var weather: Weather?
 
-    func fetchWeather(with type: WeatherUpdateType) async {
-        let location = LocationManager.shared.location
-        let weather = try? await WeatherService.shared.weather(for: location)
-        self.weather = weather
-        updateWeather(with: type)
-    }
-    
-    func fetchWeather(for location: CLLocation, with type: WeatherUpdateType) async {
+    func fetchWeather(for location: CLLocation?, with type: WeatherUpdateType) async {
+        guard let location else { return }
         let weather = try? await WeatherService.shared.weather(for: location)
         self.weather = weather
         updateWeather(with: type)
