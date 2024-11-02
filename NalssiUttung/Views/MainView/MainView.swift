@@ -19,6 +19,11 @@ struct MainView: View {
     @Binding var isModalPresented: Bool
     @Binding var isTextFieldActive: Bool
     
+    init(mode: WeatherDisplayMode, isModalPresented: Binding<Bool> = .constant(false), isTextFieldActive: Binding<Bool> = .constant(false)) {
+        self.mode = mode
+        _isModalPresented = isModalPresented
+        _isTextFieldActive = isTextFieldActive
+    }
     private var dragGesture: some Gesture {
         DragGesture()
             .onChanged { gesture in

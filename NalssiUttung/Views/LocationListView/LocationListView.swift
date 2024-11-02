@@ -143,7 +143,7 @@ struct LocationListView: View {
                             print(updatedLocation!)
                         }
                         .sheet(isPresented: $isSelectedModalVisible) {
-                            MainView(mode: .modalInList, isModalPresented: $isSelectedModalVisible, isTextFieldActive: $isTextFieldActive)
+                            MainView(mode: .modalInList, isModalPresented: $isSelectedModalVisible)
                                 .onDisappear {
                                     isSelectedModalVisible = false
                                 }
@@ -195,7 +195,7 @@ struct LocationListView: View {
                 }
                 .sheet(isPresented: $isCurrentWeatherModalVisible) {
                     
-                    MainView(mode: .modalInList, isModalPresented: $isCurrentWeatherModalVisible, isTextFieldActive: $isTextFieldActive)
+                    MainView(mode: .modalInList, isModalPresented: $isCurrentWeatherModalVisible)
                         .onDisappear {
                             isCurrentWeatherModalVisible = false
                             locationManager.selectedLocation = nil

@@ -15,7 +15,7 @@ struct NalssiUttungApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                MainView(mode: .regular, isModalPresented: .constant(false), isTextFieldActive: .constant(false))
+                MainView(mode: .regular)
                 SplashScreenView() // 스플래시 뷰
                     .opacity(splashOpacity)
                     .onAppear {
