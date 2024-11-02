@@ -67,7 +67,7 @@ struct WeatherCard: View {
             .padding(.leading, 15.responsibleWidth)
             .overlay(
                 RoundedRectangle(cornerRadius: 9)
-                    .strokeBorder(Color.black, lineWidth: 1.5)
+                    .strokeBorder(Color.black, lineWidth: 2)
                     .contentShape(Rectangle())
             )
         }

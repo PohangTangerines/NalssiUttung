@@ -7,51 +7,49 @@
 
 import SwiftUI
 
+// TODO: - Combine 활용해서 입력 받기
+// TODO: - FocusState 되면 EmptyView 띄우기
 struct SearchBar: View {
-    @StateObject var weatherByLocationViewModel = WeatherByLocationViewModel()
-
+    @ObservedObject var toolbarViewModel: ToolbarViewModel
+    
     var body: some View {
         HStack {
-            HStack(spacing: 2.responsibleWidth) {
+            HStack(spacing: 5.responsibleWidth) {
                 Image(systemName: "magnifyingglass")
-                    .foregroundColor(Color.darkChacoal)
-
-                TextField("title", text: $weatherByLocationViewModel.searchText, prompt: Text("지역 검색하기").foregroundColor(Color.darkChacoal))
-                    .font(.pretendardMedium(.callout))
-                    .contentShape(RoundedRectangle(cornerRadius: 10))
-                    .onTapGesture {
-                        withAnimation {
-                            weatherByLocationViewModel.isTextFieldActive = true
-                            UIApplication.shared.sendAction(#selector(UIResponder.becomeFirstResponder), to: nil, from: nil, for: nil)
-                        }
+                    .foregroundColor(Color.black)
+                
+                TextField("title", text: $toolbarViewModel.searchText, prompt: Text("지역 검색하기")
+                          // TODO: - foregroundColor foregroundStyle로 바꾸기
+                    .foregroundColor(Color.black))
+                .font(.pretendardMedium(.callout))
+                .contentShape(RoundedRectangle(cornerRadius: 10))
+                .onTapGesture {
+                    withAnimation {
+                        toolbarViewModel.isTextFieldActive = true
                     }
-
+                }
             }
-            .foregroundColor(.secondary)
             .padding(.horizontal, 6.responsibleWidth)
             .padding(.vertical, 28.responsibleHeight)
             .frame(maxHeight: 45.responsibleHeight, alignment: .leading)
-            .background(Color.seaSky, in: RoundedRectangle(cornerRadius: 10))
             .overlay(RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.darkChacoal, lineWidth: 2))
-
-            if weatherByLocationViewModel.isTextFieldActive {
-                Button(action: {
-                    weatherByLocationViewModel.isTextFieldActive = false
-                    weatherByLocationViewModel.searchText = ""
-                }, label: {
+                .stroke(Color.black, lineWidth: 2))
+            
+            if toolbarViewModel.isTextFieldActive {
+                Button {
+                    toolbarViewModel.isTextFieldActive = false
+                    toolbarViewModel.searchText = ""
+                } label: {
                     Text("취소")
                         .font(.pretendardSemibold(.callout))
                         .foregroundColor(Color.darkChacoal)
                         .frame(maxWidth: 40.responsibleWidth, maxHeight: 40.responsibleHeight, alignment: .trailing)
-                })
-
+                }
             }
         }
     }
-
 }
 
 #Preview {
-    SearchBar()
+    SearchBar(toolbarViewModel: ToolbarViewModel())
 }

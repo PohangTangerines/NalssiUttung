@@ -32,7 +32,9 @@ extension MainView {
         }
     }
     
+    // TODO: - 추가 시 중복 방지 해결하기
     func updateSelectedAddresses() {
+        
         let locationList = locationViewModel.loadLocations() + [locationManager.selectedAddress]
         locationViewModel.saveLocations(come: locationList)
     }

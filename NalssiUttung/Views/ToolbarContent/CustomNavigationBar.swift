@@ -6,25 +6,36 @@
 //
 import SwiftUI
 
+struct CustomNavigationBarModifier<L: View, P: View, R: View, B: View>: ViewModifier {
+    let leading: L
+    let principal: P
+    let trailing: R
+    let bottom: B
+    
+    func body(content: Content) -> some View {
+        ZStack(alignment: .top) {
+            VStack {
+                VStack {
+                    HStack {
+                        leading
+                        principal
+                        trailing
+                    }
+                    .padding(.bottom, 34.responsibleHeight)
+                    bottom
+                }
+                .navigationBarBackButtonHidden(true)
+                .frame(maxHeight: 84.responsibleHeight)
+                content
+            }
+            .padding(20)
+        }
+
+    }
+}
+
 extension View {
     func customNavigationBar(toolbarViewModel: ToolbarViewModel) -> some View {
-        self
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    NavigationBarBackButton()
-                }
-                
-                ToolbarItem(placement: .principal) {
-                    Text("지역 추가하기")
-                        .font(.pretendardSemibold(.callout))
-                        .foregroundColor(Color.darkChacoal)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                }
-                
-                ToolbarItem(placement: .topBarTrailing) {
-                    EditButton(toolbarViewModel: toolbarViewModel)
-                }
-            }
+        self.modifier(CustomNavigationBarModifier(leading: NavigationBarBackButton(), principal: AddLocationText(), trailing: EditButton(toolbarViewModel: toolbarViewModel), bottom: SearchBar(toolbarViewModel: toolbarViewModel)))
     }
 }

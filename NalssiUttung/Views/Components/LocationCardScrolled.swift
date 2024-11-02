@@ -6,6 +6,7 @@
 //
 import SwiftUI
 
+// TODO: - WeatherCard 재활용하기
 struct LocationCardScrolled: View {
     @ObservedObject var weatherManager: WeatherManager
     

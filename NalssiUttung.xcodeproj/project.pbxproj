@@ -26,6 +26,7 @@
 		0317A1AA2CD6524E00B01F95 /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1A92CD6524E00B01F95 /* EditButton.swift */; };
 		0317A1AC2CD6525400B01F95 /* NavigationBarBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1AB2CD6525400B01F95 /* NavigationBarBackButton.swift */; };
 		0317A1B02CD6534C00B01F95 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1AF2CD6534C00B01F95 /* SearchBar.swift */; };
+		0317A1B42CD6952D00B01F95 /* AddLocationText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1B32CD6952D00B01F95 /* AddLocationText.swift */; };
 		031F38D62AFBB691002E2EAD /* AnimatedGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031F38D52AFBB691002E2EAD /* AnimatedGifView.swift */; };
 		031F38D92AFBB8B6002E2EAD /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 031F38D82AFBB8B6002E2EAD /* Gifu */; };
 		031F38E82AFBBD1C002E2EAD /* partlyCloudyNightCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38DC2AFBBD1B002E2EAD /* partlyCloudyNightCharacter.gif */; };
@@ -110,7 +111,6 @@
 		0EE65AEA2AB6D5AD0038A32F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE65AE92AB6D5AD0038A32F /* LocationManager.swift */; };
 		7C0D1BDD2AAB7E7400A8BCFF /* WeatherCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0D1BDC2AAB7E7400A8BCFF /* WeatherCard.swift */; };
 		7CA773DD2AA7949800D70BD3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7CA773DC2AA7949800D70BD3 /* .swiftlint.yml */; };
-		7CA9A3C82AAF56FF0051CC25 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA9A3C72AAF56FF0051CC25 /* NavigationBar.swift */; };
 		7CA9A3CD2AAF60110051CC25 /* WeatherByLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA9A3CC2AAF60110051CC25 /* WeatherByLocationView.swift */; };
 /* End PBXBuildFile section */
 
@@ -172,6 +172,7 @@
 		0317A1A92CD6524E00B01F95 /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
 		0317A1AB2CD6525400B01F95 /* NavigationBarBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarBackButton.swift; sourceTree = "<group>"; };
 		0317A1AF2CD6534C00B01F95 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		0317A1B32CD6952D00B01F95 /* AddLocationText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationText.swift; sourceTree = "<group>"; };
 		031F38D52AFBB691002E2EAD /* AnimatedGifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGifView.swift; sourceTree = "<group>"; };
 		031F38DC2AFBBD1B002E2EAD /* partlyCloudyNightCharacter.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = partlyCloudyNightCharacter.gif; sourceTree = "<group>"; };
 		031F38DE2AFBBD1B002E2EAD /* rainCharacter.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = rainCharacter.gif; sourceTree = "<group>"; };
@@ -247,7 +248,6 @@
 		0EE65AED2AB6DC750038A32F /* NalssiUttung.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NalssiUttung.entitlements; sourceTree = "<group>"; };
 		7C0D1BDC2AAB7E7400A8BCFF /* WeatherCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCard.swift; sourceTree = "<group>"; };
 		7CA773DC2AA7949800D70BD3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		7CA9A3C72AAF56FF0051CC25 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		7CA9A3CC2AAF60110051CC25 /* WeatherByLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherByLocationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -371,6 +371,7 @@
 				0317A1A92CD6524E00B01F95 /* EditButton.swift */,
 				0317A1AB2CD6525400B01F95 /* NavigationBarBackButton.swift */,
 				0317A1A12CD6191300B01F95 /* CustomNavigationBar.swift */,
+				0317A1B32CD6952D00B01F95 /* AddLocationText.swift */,
 			);
 			path = ToolbarContent;
 			sourceTree = "<group>";
@@ -472,7 +473,6 @@
 		0E9EEFF72B1F8D5200D85EB8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				7CA9A3C72AAF56FF0051CC25 /* NavigationBar.swift */,
 				7C0D1BDC2AAB7E7400A8BCFF /* WeatherCard.swift */,
 				0384A5FA2CCFDD1200A4DA2C /* LocationCardScrolled.swift */,
 				0317A1AF2CD6534C00B01F95 /* SearchBar.swift */,
@@ -872,7 +872,6 @@
 				0E9EEFF42B1F8CAC00D85EB8 /* UIScreen+.swift in Sources */,
 				0384A6032CD0EED300A4DA2C /* WeatherDataFormatter.swift in Sources */,
 				0E6377382B0B962900D6477B /* InformationView.swift in Sources */,
-				7CA9A3C82AAF56FF0051CC25 /* NavigationBar.swift in Sources */,
 				0E9EEFF22B1F8C5700D85EB8 /* CGFloat+.swift in Sources */,
 				7C0D1BDD2AAB7E7400A8BCFF /* WeatherCard.swift in Sources */,
 				0384A5FB2CCFDD1200A4DA2C /* LocationCardScrolled.swift in Sources */,
@@ -897,6 +896,7 @@
 				03B2F45A2AAF3CCB005A5AD4 /* Color+Palette.swift in Sources */,
 				0317A1532CD2661900B01F95 /* DisplayedContent.swift in Sources */,
 				031F38D62AFBB691002E2EAD /* AnimatedGifView.swift in Sources */,
+				0317A1B42CD6952D00B01F95 /* AddLocationText.swift in Sources */,
 				03B2F46A2AB09F08005A5AD4 /* Font+.swift in Sources */,
 				0EE65AEA2AB6D5AD0038A32F /* LocationManager.swift in Sources */,
 				0384A5F52CC6419000A4DA2C /* AddButton.swift in Sources */,

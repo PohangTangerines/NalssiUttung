@@ -8,4 +8,8 @@ import SwiftUI
 
 class ToolbarViewModel: ObservableObject {
     @Published var isEditMode: Bool = false
+    
+    // MARK: - SearchBar 관련 property
+    @Published var searchText: String = ""
+    @Published var isTextFieldActive: Bool = false
 }

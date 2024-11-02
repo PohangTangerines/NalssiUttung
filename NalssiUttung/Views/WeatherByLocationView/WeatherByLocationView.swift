@@ -17,12 +17,6 @@ struct WeatherByLocationView: View {
     @State var currnetLocation: String?
     @State var searchLocation: [String]?
     
-    // MARK: SearchBar 관련
-    @FocusState private var isFocused: Bool
-    @State private var searchText = ""
-//    @State private var weatherByLocationViewModel.isEditMode = false // 삭제 모드 활성화 여부를 추적
-    @State var isTextFieldActive = false
-    
     // MARK: Modal 관련
     @State private var isSearchModalVisible = false
     @State private var isSelectedModalVisible = false
@@ -31,35 +25,31 @@ struct WeatherByLocationView: View {
     @StateObject var toolbarViewModel = ToolbarViewModel()
     
     var filteredLocations: [String] {
-        return locations.filter { $0.contains(searchText) }
+        return locations.filter { $0.contains(toolbarViewModel.searchText) }
     }
     
     var body: some View {
         VStack {
-            SearchBar()
-            ZStack {
-                if isTextFieldActive {
-                    searchBarList
-                } else {
-                    weatherByLocationList
-                }
-                if isTextFieldActive && filteredLocations == [] {
-                    emptyView
-                }
+            if toolbarViewModel.isTextFieldActive {
+                searchBarList
+            } else {
+                weatherByLocationList
+            }
+            if toolbarViewModel.isTextFieldActive && filteredLocations == [] {
+                emptyView
             }
         }
-        .background(Color.seaSky)
+        .padding(.vertical, 20.responsibleWidth)
         .customNavigationBar(toolbarViewModel: toolbarViewModel)
-//        .overlay {
-//            // MARK: Navigation Bar
-//            NavigationBar(searchText: $searchText, isEditMode: $isEditMode, isTextFieldActive: $isTextFieldActive)
-//        }
+        .background(Color.seaSky)
     }
+    
+    // TODO: - 이 뷰에서 분리
     private var searchBarList : some View {
         List {
             ForEach(filteredLocations.prefix(10), id: \.self) { filteredLocation in
                 HStack {
-                    if let range = filteredLocation.range(of: searchText, options: .caseInsensitive) {
+                    if let range = filteredLocation.range(of: toolbarViewModel.searchText, options: .caseInsensitive) {
                         let beforeText = filteredLocation[..<range.lowerBound]
                         let searchText = filteredLocation[range]
                         let afterText = filteredLocation[range.upperBound...]
@@ -74,8 +64,6 @@ struct WeatherByLocationView: View {
                         Text(filteredLocation)
                     }
                 }
-                .frame(maxWidth: .infinity, maxHeight: 140, alignment: .leading)
-                .contentShape(Rectangle())
                 .onTapGesture {
                     if !isSelectedModalVisible && !isCurrentWeatherModalVisible {
                         weatherByLocationViewModel.selectedfilteredLocationForModal = filteredLocation
@@ -89,15 +77,13 @@ struct WeatherByLocationView: View {
                 }
                 .sheet(isPresented: $isSearchModalVisible, content: {
                     if let searchLocation = searchLocation, (searchLocation.contains(weatherByLocationViewModel.selectedfilteredLocationForModal)) {
-                        MainView(mode: .modalInList, isModalPresented: $isSearchModalVisible, isTextFieldActive: $isTextFieldActive)
+                        MainView(mode: .modalInList, isModalPresented: $isSearchModalVisible, isTextFieldActive: $toolbarViewModel.isTextFieldActive)
                             .onDisappear {
-                                isFocused = false
                                 isSearchModalVisible = false
                             }
                     } else {
-                        MainView(mode: .modal, isModalPresented: $isSearchModalVisible, isTextFieldActive: $isTextFieldActive)
+                        MainView(mode: .modal, isModalPresented: $isSearchModalVisible, isTextFieldActive: $toolbarViewModel.isTextFieldActive)
                             .onDisappear {
-                                isFocused = false
                                 isSearchModalVisible = false
                             }
                     }
@@ -106,10 +92,7 @@ struct WeatherByLocationView: View {
                 .listRowSeparator(.hidden)
             }
             .listRowBackground(Color.seaSky)
-        }
-        .safeAreaInset(edge: .top) {
-            EmptyView()
-                .frame(maxHeight: 125)
+            
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
@@ -119,82 +102,84 @@ struct WeatherByLocationView: View {
         }
     }
     
+    // TODO: - 이 뷰에서 분리
     private var weatherByLocationList: some View {
-        List {
-            currentWeatherView
-            ForEach(weatherByLocationViewModel.selectedLocations, id: \.self) { selectedLocation in
-                HStack {
-                    if toolbarViewModel.isEditMode {
-                        Image("deleteButton")
-                            .frame(maxWidth: 28, maxHeight: 28)
-                            .foregroundColor(.red)
+        ScrollView {
+            LazyVStack {
+                currentWeatherView
+                ForEach(weatherByLocationViewModel.selectedLocations, id: \.self) { selectedLocation in
+                    HStack {
+                        if toolbarViewModel.isEditMode {
+                            Image("deleteButton")
+                                .frame(maxWidth: 28, maxHeight: 28)
+                                .foregroundColor(.red)
+                                .onTapGesture {
+                                    if let index = weatherByLocationViewModel.selectedLocations.firstIndex(of: selectedLocation) {
+                                        weatherByLocationViewModel.selectedLocations.remove(at: index)
+                                        weatherByLocationViewModel.saveLocations(come: weatherByLocationViewModel.selectedLocations)
+                                    }
+                                }
+                            Spacer()
+                        }
+                        WeatherCard(weatherManager: weatherManager, address: selectedLocation, isCurrentLocation: false)
+                            .frame(maxWidth: .infinity, maxHeight: 140)
+                            .listRowSeparator(.hidden)
                             .onTapGesture {
-                                if let index = weatherByLocationViewModel.selectedLocations.firstIndex(of: selectedLocation) {
-                                    weatherByLocationViewModel.selectedLocations.remove(at: index)
-                                    weatherByLocationViewModel.saveLocations(come: weatherByLocationViewModel.selectedLocations)
+                                if !toolbarViewModel.isTextFieldActive {
+                                    weatherByLocationViewModel.selectedLocationForModal = selectedLocation
+                                    isSelectedModalVisible = true
                                 }
+                                let updatedLocation = locationManager.findCoordinates(address: selectedLocation)
+                                // TODO: - 강제 언래핑 변경, updatedLocation이 언제 nil이 되는지 다시 확인해보기
+                                locationManager.selectedLocation = updatedLocation!
+                                print(updatedLocation!)
                             }
-                        Spacer()
+                            .sheet(isPresented: $isSelectedModalVisible) {
+                                MainView(mode: .modalInList, isModalPresented: $isSelectedModalVisible)
+                                    .onDisappear {
+                                        isSelectedModalVisible = false
+                                    }
+                            }
                     }
-                    WeatherCard(weatherManager: weatherManager, address: selectedLocation, isCurrentLocation: false)
-                        .frame(maxWidth: .infinity, maxHeight: 140)
-                        .listRowSeparator(.hidden)
-                        .onTapGesture {
-                            if !isTextFieldActive {
-                                weatherByLocationViewModel.selectedLocationForModal = selectedLocation
-                                isSelectedModalVisible = true
-                            }
-                            let updatedLocation = locationManager.findCoordinates(address: selectedLocation)
-                            locationManager.selectedLocation = updatedLocation!
-                            print(updatedLocation!)
-                        }
-                        .sheet(isPresented: $isSelectedModalVisible) {
-                            MainView(mode: .modalInList, isModalPresented: $isSelectedModalVisible)
-                                .onDisappear {
-                                    isSelectedModalVisible = false
-                                }
-                        }
                 }
-                .listRowSeparator(.hidden)
+                .onMove(perform: move) // 항목 이동 기능
             }
-            .onMove(perform: move) // 항목 이동 기능
-            .listRowBackground(Color.seaSky)
-        }
-        .safeAreaInset(edge: .top) {
-            EmptyView()
-                .frame(maxHeight: 125)
-        }
-        .listStyle(.plain)
-        .scrollContentBackground(.hidden)
-        .environment(\.editMode, .constant(toolbarViewModel.isEditMode ? EditMode.active : EditMode.inactive))
-        .task {
-            do {
-                let userList = try await weatherByLocationViewModel.loadLocations()
-                weatherByLocationViewModel.selectedLocations = userList
-                print("Success load: \(userList)")
-            } catch {
-                weatherByLocationViewModel.selectedLocations = []
-                print("task error")
+            .scrollContentBackground(.hidden)
+            .environment(\.editMode, .constant(toolbarViewModel.isEditMode ? EditMode.active : EditMode.inactive))
+            .task {
+                do {
+                    let userList = try await weatherByLocationViewModel.loadLocations()
+                    weatherByLocationViewModel.selectedLocations = userList
+                    print("Success load: \(userList)")
+                } catch {
+                    weatherByLocationViewModel.selectedLocations = []
+                    print("task error")
+                }
             }
         }
     }
     
+    // TODO: - 이 뷰에서 분리
+    // TODO: - 뷰 살짝 위로 올리기
     private var emptyView: some View {
         VStack {
             Image("donut")
             Text("검색 결과가 없어요")
                 .font(.IMHyemin(.body))
+            Spacer()
         }
+        .padding(.bottom, 30)
         .background(Color.seaSky)
     }
     
+    // TODO: - WeatherByLocationList와 통합
     private var currentWeatherView: some View {
         HStack {
             WeatherCard(weatherManager: weatherManager, address: locationManager.currentAddress, isCurrentLocation: true)
                 .frame(maxWidth: .infinity, maxHeight: 140)
                 .listRowSeparator(.hidden)
                 .onTapGesture {
-                    if !isTextFieldActive {
+                    if !toolbarViewModel.isTextFieldActive {
                         isCurrentWeatherModalVisible = true
                     }
                 }
