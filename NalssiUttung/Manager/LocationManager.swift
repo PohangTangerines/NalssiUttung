@@ -18,20 +18,29 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var currentLocation: CLLocation {
         didSet {
-            updateAddress(location: currentLocation)
+            updateAddress(for: .current, location: currentLocation)
+        }
+    }
+
+    @Published var selectedLocation: CLLocation? {
+        didSet {
+            if selectedLocation != nil {
+                updateAddress(for: .selected, location: selectedLocation!)
+            }
         }
     }
     
     @Published var currentAddress: String = ""
+    @Published var selectedAddress: String = ""
     
-    override init() {
+    init(selectedLocation: CLLocation? = nil) {
         self.currentLocation = jejuAirportLocation
         super.init()
         
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
     }
-    
+
     /// 사용자 위치 권한 허가를 받지 못했을 때 기본 위치를 제주공항으로 설정합니다.
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
@@ -53,9 +62,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         WidgetCenter.shared.reloadAllTimelines()
     }
     
+    enum AddressType {
+        case current
+        case selected
+    }
     /// 업데이트한 location을 한글 주소로 변경합니다.
     /// 현재 제주(제주시, 서귀포시)가 아닌 경우 address는 제주공항으로 설정됩니다.
-    func updateAddress(location: CLLocation) {
+    func updateAddress(for type: AddressType, location: CLLocation) {
         let geocoder = CLGeocoder()
         
         geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
@@ -68,17 +81,50 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                let locality = placemark.locality,
                let subLocality = placemark.subLocality {
                 
+                let address: String
                 switch (locality, subLocality) {
                 case ("제주시", "용담이동"):
-                    self.currentAddress = "제주공항"
+                    address = "제주공항"
                 case ("제주시", _), ("서귀포시", _):
-                    self.currentAddress = "\(locality) \(subLocality)"
+                    address = "\(locality) \(subLocality)"
                 default:
-                    self.currentAddress = "제주공항"
+                    address = "제주공항"
+                }
+                
+                switch type {
+                case .current:
+                    self.currentAddress = address
+                case .selected:
+                    self.selectedAddress = address
                 }
             }
         }
     }
+//    
+//    func updateSelectedAddress(location: CLLocation) {
+//        let geocoder = CLGeocoder()
+//        
+//        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+//            if let error = error {
+//                print("주소 변환 오류: \(error.localizedDescription)")
+//                return
+//            }
+//            
+//            if let placemark = placemarks?.first,
+//               let locality = placemark.locality,
+//               let subLocality = placemark.subLocality {
+//                
+//                switch (locality, subLocality) {
+//                case ("제주시", "용담이동"):
+//                    self.selectedAddress = "제주공항"
+//                case ("제주시", _), ("서귀포시", _):
+//                    self.selectedAddress = "\(locality) \(subLocality)"
+//                default:
+//                    self.selectedAddress = "제주공항"
+//                }
+//            }
+//        }
+//    }
     
     // TODO: - UserDefault에 값을 longitude, latitude로 저장해 findCoordinates 함수 삭제하기
     func findCoordinates(address val: String) -> CLLocation? {

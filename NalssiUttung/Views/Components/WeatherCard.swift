@@ -9,7 +9,7 @@ import CoreLocation
 import SwiftUI
 import WeatherKit
 
-struct WeatherOverview: View {
+struct WeatherCard: View {
     @ObservedObject var locationManager = LocationManager.shared
     @ObservedObject var weatherManager: WeatherManager
     
@@ -85,5 +85,5 @@ struct WeatherOverview: View {
 }
 
 #Preview {
-    WeatherOverview(weatherManager: WeatherManager(), address: "제주시 애월읍", isCurrentLocation: true)
+    WeatherCard(weatherManager: WeatherManager(), address: "제주시 애월읍", isCurrentLocation: true)
 }

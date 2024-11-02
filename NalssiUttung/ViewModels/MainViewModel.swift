@@ -13,7 +13,7 @@ class MainViewModel: ObservableObject {
     @Published var dragOffset: CGSize = .zero
     @Published var canTransition = false
     @Published var viewOffsetY: CGFloat = 0
-        
+
     func handleDragGesture(_ gesture: DragGesture.Value) {
         withAnimation(.easeInOut(duration: 0.5)) {
             switch displayedContent {

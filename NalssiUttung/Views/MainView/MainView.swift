@@ -5,13 +5,19 @@
 //  Created by 이재원 on 2023/10/01.
 //
 
+import CoreLocation
 import SwiftUI
 import WeatherKit
 
 struct MainView: View {
     @StateObject var viewModel = MainViewModel()
-    @StateObject var locationManager = LocationManager()
+    @ObservedObject var locationManager = LocationManager.shared
     @StateObject var weatherManager = WeatherManager()
+    @StateObject var locationViewModel = LocationViewModel()
+    
+    let mode: WeatherDisplayMode
+    @Binding var isModalPresented: Bool
+    @Binding var isTextFieldActive: Bool
     
     private var dragGesture: some Gesture {
         DragGesture()
@@ -43,7 +49,11 @@ struct MainView: View {
                 .offset(y: viewModel.viewOffsetY)
                 .toolbar(content: toolbarContent)
                 .task {
-                    await weatherManager.fetchWeather(for: locationManager.currentLocation, with: .all)
+                    if let selectedLocation = locationManager.selectedLocation {
+                        await weatherManager.fetchWeather(for: selectedLocation, with: .all)
+                    } else {
+                        await weatherManager.fetchWeather(for: locationManager.currentLocation, with: .all)
+                    }
                 }
             }
         }

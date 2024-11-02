@@ -14,10 +14,8 @@ struct LocationListView: View {
     let locations = LocationInfo.Data.map { $0.address }
     
     @StateObject var locationStore = LocationViewModel()
-    @State var selectedLocations: [String]?
     @State var currnetLocation: String?
     @State var searchLocation: [String]?
-    @State var modalState: ModalState?
     
     // MARK: SearchBar 관련
     @FocusState private var isFocused: Bool
@@ -76,22 +74,27 @@ struct LocationListView: View {
                     if !isSelectedModalVisible && !isCurrentWeatherModalVisible {
                         locationStore.selectedfilteredLocationForModal = filteredLocation
                         isSearchModalVisible = true
-                        if let searchLocation = searchLocation, (searchLocation.contains(locationStore.selectedfilteredLocationForModal)) {
-                            modalState = .isModalViewAndContainedContent
-                        } else {
-                            modalState = .isModalViewAndNotContainedContent
-                        }
-                        print("searchBarList onTapGesture: \(filteredLocation)")
-                        print("locationStore.selectedfilteredLocationForModal: \(locationStore.selectedfilteredLocationForModal)")
+                        
+                        let updatedLocation = locationManager.findCoordinates(address: filteredLocation)
+                        locationManager.selectedLocation = updatedLocation!
                     }
+                    
                 }
                 .sheet(isPresented: $isSearchModalVisible, content: {
-                    // 새로운 뷰 표시
-                    CardModalView(weatherManager: weatherManager, modalState: modalState ?? ModalState.isModalViewAndNotContainedContent, isModalVisible: $isSearchModalVisible, address: locationStore.selectedfilteredLocationForModal, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: false)
-                        .onDisappear {
-                            isFocused = false
-                            isSearchModalVisible = false
-                        }
+                    if let searchLocation = searchLocation, (searchLocation.contains(locationStore.selectedfilteredLocationForModal)) {
+                        MainView(mode: .modalInList, isModalPresented: $isSearchModalVisible, isTextFieldActive: $isTextFieldActive)
+                            .onDisappear {
+                                isFocused = false
+                                isSearchModalVisible = false
+                            }
+                    } else {
+                        MainView(mode: .modal, isModalPresented: $isSearchModalVisible, isTextFieldActive: $isTextFieldActive)
+                            .onDisappear {
+                                isFocused = false
+                                isSearchModalVisible = false
+                            }
+                    }
+                    
                 })
                 .listRowSeparator(.hidden)
             }
@@ -113,21 +116,21 @@ struct LocationListView: View {
     private var selectedList: some View {
         List {
             currentWeatherView
-            ForEach(selectedLocations ?? [], id: \.self) { selectedLocation in
+            ForEach(locationStore.selectedLocations, id: \.self) { selectedLocation in
                 HStack {
                     if isEditMode {
                         Image("deleteButton")
                             .frame(maxWidth: 28, maxHeight: 28)
                             .foregroundColor(.red)
                             .onTapGesture {
-                                if let index = selectedLocations!.firstIndex(of: selectedLocation) {
-                                    selectedLocations?.remove(at: index)
-                                    locationStore.saveLocations(come: selectedLocations!)
+                                if let index = locationStore.selectedLocations.firstIndex(of: selectedLocation) {
+                                    locationStore.selectedLocations.remove(at: index)
+                                    locationStore.saveLocations(come: locationStore.selectedLocations)
                                 }
                             }
                         Spacer()
                     }
-                    WeatherOverview(weatherManager: weatherManager, address: selectedLocation, isCurrentLocation: false)
+                    WeatherCard(weatherManager: weatherManager, address: selectedLocation, isCurrentLocation: false)
                         .frame(maxWidth: .infinity, maxHeight: 140)
                         .listRowSeparator(.hidden)
                         .onTapGesture {
@@ -135,13 +138,16 @@ struct LocationListView: View {
                                 locationStore.selectedLocationForModal = selectedLocation
                                 isSelectedModalVisible = true
                             }
+                            let updatedLocation = locationManager.findCoordinates(address: selectedLocation)
+                            locationManager.selectedLocation = updatedLocation!
+                            print(updatedLocation!)
                         }
-                        .sheet(isPresented: $isSelectedModalVisible, content: {
-                            CardModalView(weatherManager: weatherManager, modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isSelectedModalVisible, address: locationStore.selectedLocationForModal, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: false)
+                        .sheet(isPresented: $isSelectedModalVisible) {
+                            MainView(mode: .modalInList, isModalPresented: $isSelectedModalVisible, isTextFieldActive: $isTextFieldActive)
                                 .onDisappear {
                                     isSelectedModalVisible = false
                                 }
-                        })
+                        }
                 }
                 .listRowSeparator(.hidden)
             }
@@ -159,10 +165,10 @@ struct LocationListView: View {
         .task {
             do {
                 let userList = try await locationStore.loadLocations()
-                selectedLocations = userList
+                locationStore.selectedLocations = userList
                 print("Success load: \(userList)")
             } catch {
-                selectedLocations = []
+                locationStore.selectedLocations = []
                 print("task error")
             }
         }
@@ -177,9 +183,9 @@ struct LocationListView: View {
         .background(Color.seaSky)
     }
     
-    private var currentWeatherView: some View{
+    private var currentWeatherView: some View {
         HStack {
-            WeatherOverview(weatherManager: weatherManager, address: locationManager.currentAddress, isCurrentLocation: true)
+            WeatherCard(weatherManager: weatherManager, address: locationManager.currentAddress, isCurrentLocation: true)
                 .frame(maxWidth: .infinity, maxHeight: 140)
                 .listRowSeparator(.hidden)
                 .onTapGesture {
@@ -187,19 +193,21 @@ struct LocationListView: View {
                         isCurrentWeatherModalVisible = true
                     }
                 }
-                .sheet(isPresented: $isCurrentWeatherModalVisible, content: {
-                    CardModalView(weatherManager: weatherManager, modalState: ModalState.isModalViewAndContainedContent, isModalVisible: $isCurrentWeatherModalVisible, address: locationManager.currentAddress, isFocused: _isFocused, isTextFieldActive: $isTextFieldActive, isEditMode: $isEditMode, isCurrentLocation: true)
+                .sheet(isPresented: $isCurrentWeatherModalVisible) {
+                    
+                    MainView(mode: .modalInList, isModalPresented: $isCurrentWeatherModalVisible, isTextFieldActive: $isTextFieldActive)
                         .onDisappear {
                             isCurrentWeatherModalVisible = false
+                            locationManager.selectedLocation = nil
                         }
-                })
+                }
         }
         .listRowSeparator(.hidden)
         .listRowBackground(Color.seaSky)
     }
     
     func move(from source: IndexSet, to destination: Int) {
-        selectedLocations!.move(fromOffsets: source, toOffset: destination)
-        locationStore.saveLocations(come: selectedLocations!)
+        locationStore.selectedLocations.move(fromOffsets: source, toOffset: destination)
+        locationStore.saveLocations(come: locationStore.selectedLocations)
     }
 }
