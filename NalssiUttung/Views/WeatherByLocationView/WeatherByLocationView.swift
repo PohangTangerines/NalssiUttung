@@ -7,7 +7,7 @@
 import SwiftUI
 import WeatherKit
 
-struct LocationListView: View {
+struct WeatherByLocationView: View {
     @ObservedObject var locationManager = LocationManager.shared
     @StateObject var weatherManager = WeatherManager()
     
@@ -75,6 +75,7 @@ struct LocationListView: View {
                         locationStore.selectedfilteredLocationForModal = filteredLocation
                         isSearchModalVisible = true
                         
+                        // TODO: - locationManager.selectedLocation 강제 언래핑 문제 해결
                         let updatedLocation = locationManager.findCoordinates(address: filteredLocation)
                         locationManager.selectedLocation = updatedLocation!
                     }

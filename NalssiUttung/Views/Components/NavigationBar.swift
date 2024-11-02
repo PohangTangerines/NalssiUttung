@@ -32,9 +32,9 @@ struct NavigationBar: View {
                 
                 Button {
                     withAnimation {
-                        if !isTextFieldActive {
+//                        if !isTextFieldActive {
                             self.isEditMode.toggle() // 편집 모드를 토글합니다.
-                        }
+//                        }
                     }
                 } label: {
                     Text(isEditMode ? "완료" : "편집")

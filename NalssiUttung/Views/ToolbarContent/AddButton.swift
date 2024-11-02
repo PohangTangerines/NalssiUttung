@@ -16,7 +16,7 @@ struct AddButton: View {
     var body: some View {
         switch mode {
         case .regular:
-            NavigationLink(destination: LocationListView()) {
+            NavigationLink(destination: WeatherByLocationView()) {
                 Image(systemName: "plus")
                     .font(.pretendardSemibold(.body))
                     .foregroundColor(.black)
