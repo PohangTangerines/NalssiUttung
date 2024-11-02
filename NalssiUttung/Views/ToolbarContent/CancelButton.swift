@@ -18,7 +18,7 @@ struct CancelButton: View {
         } label: {
             Text("취소")
                 .font(.pretendardSemibold(.body))
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
         }
     }
 }

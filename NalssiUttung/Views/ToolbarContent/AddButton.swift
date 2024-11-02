@@ -19,7 +19,7 @@ struct AddButton: View {
             NavigationLink(destination: WeatherByLocationView()) {
                 Image(systemName: "plus")
                     .font(.pretendardSemibold(.body))
-                    .foregroundColor(.black)
+                    .foregroundStyle(.black)
             }
         case .modal:
             Button {
@@ -29,7 +29,7 @@ struct AddButton: View {
             } label: {
                 Text("추가")
                     .font(.pretendardSemibold(.body))
-                    .foregroundColor(.black)
+                    .foregroundStyle(.black)
             }
         case .modalInList:
             Spacer()

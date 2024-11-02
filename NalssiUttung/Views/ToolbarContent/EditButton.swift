@@ -20,7 +20,7 @@ struct EditButton: View {
         } label: {
             Text(toolbarViewModel.isEditMode ? "완료" : "편집")
                 .font(.pretendardMedium(.callout))
-                .foregroundColor(Color.black)
+                .foregroundStyle(Color.black)
                 .frame(maxWidth: 40.responsibleWidth, maxHeight: 40.responsibleHeight, alignment: .trailing)
         }
     }

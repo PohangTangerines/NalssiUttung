@@ -16,11 +16,10 @@ struct SearchBar: View {
         HStack {
             HStack(spacing: 5.responsibleWidth) {
                 Image(systemName: "magnifyingglass")
-                    .foregroundColor(Color.black)
+                    .foregroundStyle(Color.black)
                 
                 TextField("title", text: $toolbarViewModel.searchText, prompt: Text("지역 검색하기")
-                          // TODO: - foregroundColor foregroundStyle로 바꾸기
-                    .foregroundColor(Color.black))
+                    .foregroundStyle(Color.black))
                 .font(.pretendardMedium(.callout))
                 .contentShape(RoundedRectangle(cornerRadius: 10))
                 .onTapGesture {
@@ -42,7 +41,7 @@ struct SearchBar: View {
                 } label: {
                     Text("취소")
                         .font(.pretendardSemibold(.callout))
-                        .foregroundColor(Color.darkChacoal)
+                        .foregroundStyle(Color.black)
                         .frame(maxWidth: 40.responsibleWidth, maxHeight: 40.responsibleHeight, alignment: .trailing)
                 }
             }

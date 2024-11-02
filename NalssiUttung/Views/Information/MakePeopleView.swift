@@ -27,7 +27,7 @@ struct MakePeopleView: View {
                 Text("Apple Developer Academy @ POSTECH 2nd")
             }
             .font(.pretendardMedium(.caption2))
-            .foregroundColor(.darkChacoal)
+            .foregroundStyle(Color.darkChacoal)
             .padding(.bottom, 30)
             
         }

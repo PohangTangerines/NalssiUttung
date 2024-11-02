@@ -112,7 +112,7 @@ struct WeatherByLocationView: View {
                         if toolbarViewModel.isEditMode {
                             Image("deleteButton")
                                 .frame(maxWidth: 28, maxHeight: 28)
-                                .foregroundColor(.red)
+                                .foregroundStyle(.red)
                                 .onTapGesture {
                                     if let index = weatherByLocationViewModel.selectedLocations.firstIndex(of: selectedLocation) {
                                         weatherByLocationViewModel.selectedLocations.remove(at: index)

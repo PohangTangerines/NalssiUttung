@@ -16,7 +16,7 @@ struct NavigationBarBackButton: View {
         } label: {
             Image(systemName: "chevron.left")
                 .font(.system(size: 18).weight(.medium))
-                .foregroundColor(Color.black)
+                .foregroundStyle(Color.black)
                 .frame(maxWidth: 40, maxHeight: 40, alignment: .leading)
         }
     }

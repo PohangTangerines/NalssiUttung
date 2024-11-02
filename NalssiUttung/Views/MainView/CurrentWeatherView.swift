@@ -61,11 +61,11 @@ struct CurrentWeatherView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(height: 10.responsibleWidth)
-                            .foregroundColor(.black)
+                            .foregroundStyle(.black)
                             .background {
                                 Circle()
                                     .frame(width: 40.responsibleWidth, height: 40.responsibleWidth)
-                                    .foregroundColor(canTransition ? Color.accentBlue : Color.clear)
+                                    .foregroundStyle(canTransition ? Color.accentBlue : Color.clear)
                             }
                             .padding(.bottom, 21.responsibleHeight)
                     }

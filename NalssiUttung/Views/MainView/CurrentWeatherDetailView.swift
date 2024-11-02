@@ -28,7 +28,7 @@ struct CurrentWeatherDetailView: View {
                     Text("\(Image(systemName: "info.circle.fill"))")
                     Text("날씨삼춘 알아보기").underline()
                 }
-                .foregroundColor(Color.darkChacoal)
+                .foregroundStyle(Color.darkChacoal)
                 .font(.IMHyemin(.caption2))
                 .padding(.bottom, 15.responsibleHeight)
             }

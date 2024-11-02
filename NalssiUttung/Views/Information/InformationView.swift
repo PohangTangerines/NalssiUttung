@@ -32,7 +32,7 @@ struct InformationView: View {
                             HStack(alignment: .center, spacing: 0) {
                                 Text("날씨 데이터는  ")
                                     .font(.IMHyemin(.footnote))
-                                    .foregroundColor(.black)
+                                    .foregroundStyle(.black)
                                 Image(systemName: "applelogo")
                                     .font(.system(size: 30))
                                     .padding(.bottom, 5)
@@ -46,7 +46,7 @@ struct InformationView: View {
                                 Text("Other Apple Weather data sources")
                                     .font(.system(size: 15))
                                     .underline()
-                                    .foregroundColor(.black)
+                                    .foregroundStyle(.black)
                             }
                             .padding()
                         }
@@ -74,7 +74,7 @@ struct InformationView: View {
     
     private func rowTitle(_ title: String) -> some View {
         return Text(title).font(.pretendardMedium(.caption2))
-            .foregroundColor(.darkChacoal)
+            .foregroundStyle(Color.darkChacoal)
             .padding(.bottom, 12)
     }
     
@@ -84,7 +84,7 @@ struct InformationView: View {
                 HStack {
                     Text(title)
                         .font(.pretendardMedium(.footnote))
-                        .foregroundColor(.black)
+                        .foregroundStyle(.black)
                     Spacer()
                     chervronRight
                 }
@@ -96,13 +96,13 @@ struct InformationView: View {
     private var chervronRight: some View {
         Image(systemName: "chevron.right")
             .font(.system(size: 18, weight: .medium))
-            .foregroundColor(Color.black)
+            .foregroundStyle(Color.black)
             .frame(maxWidth: 8, maxHeight: 14)
     }
     
     private var divider: some View {
         Divider()
-            .foregroundColor(.darkChacoal)
+            .foregroundStyle(Color.darkChacoal)
             .frame(height: 0.5)
             .padding(.vertical, 12)
     }
@@ -116,12 +116,12 @@ func informationHeader(_ dismiss: DismissAction, title: String) -> some View {
             } label: {
                 Image(systemName: "chevron.left")
                     .font(.system(size: 18).weight(.medium))
-                    .foregroundColor(Color.black)
+                    .foregroundStyle(Color.black)
                     .frame(maxWidth: 40, maxHeight: 40, alignment: .leading)
             }
             Text(title)
                 .font(.pretendardSemibold(.callout))
-                .foregroundColor(Color.black)
+                .foregroundStyle(Color.black)
                 .frame(maxWidth: .infinity, alignment: .center)
             
             Spacer()
