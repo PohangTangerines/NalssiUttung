@@ -32,7 +32,6 @@ extension MainView {
         }
     }
     
-    
     func updateSelectedAddresses() {
         let locationList = locationViewModel.loadLocations() + [locationManager.selectedAddress]
         locationViewModel.saveLocations(come: locationList)
