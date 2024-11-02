@@ -13,7 +13,7 @@ struct MainView: View {
     @StateObject var viewModel = MainViewModel()
     @ObservedObject var locationManager = LocationManager.shared
     @StateObject var weatherManager = WeatherManager()
-    @StateObject var locationViewModel = LocationViewModel()
+    @StateObject var locationViewModel = WeatherByLocationViewModel()
     
     let mode: WeatherDisplayMode
     @Binding var isModalPresented: Bool
@@ -24,6 +24,7 @@ struct MainView: View {
         _isModalPresented = isModalPresented
         _isTextFieldActive = isTextFieldActive
     }
+    
     private var dragGesture: some Gesture {
         DragGesture()
             .onChanged { gesture in

@@ -13,14 +13,14 @@ struct WeatherByLocationView: View {
     
     let locations = LocationInfo.Data.map { $0.address }
     
-    @StateObject var locationStore = LocationViewModel()
+    @StateObject var weatherByLocationViewModel = WeatherByLocationViewModel()
     @State var currnetLocation: String?
     @State var searchLocation: [String]?
     
     // MARK: SearchBar 관련
     @FocusState private var isFocused: Bool
     @State private var searchText = ""
-    @State private var isEditMode = false // 삭제 모드 활성화 여부를 추적
+//    @State private var weatherByLocationViewModel.isEditMode = false // 삭제 모드 활성화 여부를 추적
     @State var isTextFieldActive = false
     
     // MARK: Modal 관련
@@ -28,26 +28,32 @@ struct WeatherByLocationView: View {
     @State private var isSelectedModalVisible = false
     @State private var isCurrentWeatherModalVisible = false
     
+    @StateObject var toolbarViewModel = ToolbarViewModel()
+    
     var filteredLocations: [String] {
         return locations.filter { $0.contains(searchText) }
     }
     
     var body: some View {
-        ZStack {
-            // MARK: Weather Widgets
-            if isTextFieldActive {
-                searchBarList
-            } else {
-                selectedList
-            }
-            if isTextFieldActive && filteredLocations == [] {
-                emptyView
+        VStack {
+            SearchBar()
+            ZStack {
+                if isTextFieldActive {
+                    searchBarList
+                } else {
+                    weatherByLocationList
+                }
+                if isTextFieldActive && filteredLocations == [] {
+                    emptyView
+                }
             }
         }
-        .overlay {
-            // MARK: Navigation Bar
-            NavigationBar(searchText: $searchText, isEditMode: $isEditMode, isTextFieldActive: $isTextFieldActive)
-        }
+        .background(Color.seaSky)
+        .customNavigationBar(toolbarViewModel: toolbarViewModel)
+//        .overlay {
+//            // MARK: Navigation Bar
+//            NavigationBar(searchText: $searchText, isEditMode: $isEditMode, isTextFieldActive: $isTextFieldActive)
+//        }
     }
     private var searchBarList : some View {
         List {
@@ -72,7 +78,7 @@ struct WeatherByLocationView: View {
                 .contentShape(Rectangle())
                 .onTapGesture {
                     if !isSelectedModalVisible && !isCurrentWeatherModalVisible {
-                        locationStore.selectedfilteredLocationForModal = filteredLocation
+                        weatherByLocationViewModel.selectedfilteredLocationForModal = filteredLocation
                         isSearchModalVisible = true
                         
                         // TODO: - locationManager.selectedLocation 강제 언래핑 문제 해결
@@ -82,7 +88,7 @@ struct WeatherByLocationView: View {
                     
                 }
                 .sheet(isPresented: $isSearchModalVisible, content: {
-                    if let searchLocation = searchLocation, (searchLocation.contains(locationStore.selectedfilteredLocationForModal)) {
+                    if let searchLocation = searchLocation, (searchLocation.contains(weatherByLocationViewModel.selectedfilteredLocationForModal)) {
                         MainView(mode: .modalInList, isModalPresented: $isSearchModalVisible, isTextFieldActive: $isTextFieldActive)
                             .onDisappear {
                                 isFocused = false
@@ -106,27 +112,26 @@ struct WeatherByLocationView: View {
                 .frame(maxHeight: 125)
         }
         .listStyle(.plain)
-        .background(Color.seaSky)
         .scrollContentBackground(.hidden)
         .task {
-            let userList = locationStore.loadLocations()
+            let userList = weatherByLocationViewModel.loadLocations()
             searchLocation = userList
         }
     }
     
-    private var selectedList: some View {
+    private var weatherByLocationList: some View {
         List {
             currentWeatherView
-            ForEach(locationStore.selectedLocations, id: \.self) { selectedLocation in
+            ForEach(weatherByLocationViewModel.selectedLocations, id: \.self) { selectedLocation in
                 HStack {
-                    if isEditMode {
+                    if toolbarViewModel.isEditMode {
                         Image("deleteButton")
                             .frame(maxWidth: 28, maxHeight: 28)
                             .foregroundColor(.red)
                             .onTapGesture {
-                                if let index = locationStore.selectedLocations.firstIndex(of: selectedLocation) {
-                                    locationStore.selectedLocations.remove(at: index)
-                                    locationStore.saveLocations(come: locationStore.selectedLocations)
+                                if let index = weatherByLocationViewModel.selectedLocations.firstIndex(of: selectedLocation) {
+                                    weatherByLocationViewModel.selectedLocations.remove(at: index)
+                                    weatherByLocationViewModel.saveLocations(come: weatherByLocationViewModel.selectedLocations)
                                 }
                             }
                         Spacer()
@@ -136,7 +141,7 @@ struct WeatherByLocationView: View {
                         .listRowSeparator(.hidden)
                         .onTapGesture {
                             if !isTextFieldActive {
-                                locationStore.selectedLocationForModal = selectedLocation
+                                weatherByLocationViewModel.selectedLocationForModal = selectedLocation
                                 isSelectedModalVisible = true
                             }
                             let updatedLocation = locationManager.findCoordinates(address: selectedLocation)
@@ -160,16 +165,15 @@ struct WeatherByLocationView: View {
                 .frame(maxHeight: 125)
         }
         .listStyle(.plain)
-        .background(Color.seaSky)
         .scrollContentBackground(.hidden)
-        .environment(\.editMode, .constant(isEditMode ? EditMode.active : EditMode.inactive))
+        .environment(\.editMode, .constant(toolbarViewModel.isEditMode ? EditMode.active : EditMode.inactive))
         .task {
             do {
-                let userList = try await locationStore.loadLocations()
-                locationStore.selectedLocations = userList
+                let userList = try await weatherByLocationViewModel.loadLocations()
+                weatherByLocationViewModel.selectedLocations = userList
                 print("Success load: \(userList)")
             } catch {
-                locationStore.selectedLocations = []
+                weatherByLocationViewModel.selectedLocations = []
                 print("task error")
             }
         }
@@ -204,11 +208,10 @@ struct WeatherByLocationView: View {
                 }
         }
         .listRowSeparator(.hidden)
-        .listRowBackground(Color.seaSky)
     }
     
     func move(from source: IndexSet, to destination: Int) {
-        locationStore.selectedLocations.move(fromOffsets: source, toOffset: destination)
-        locationStore.saveLocations(come: locationStore.selectedLocations)
+        weatherByLocationViewModel.selectedLocations.move(fromOffsets: source, toOffset: destination)
+        weatherByLocationViewModel.saveLocations(come: weatherByLocationViewModel.selectedLocations)
     }
 }

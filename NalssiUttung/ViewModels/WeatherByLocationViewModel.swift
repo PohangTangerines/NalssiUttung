@@ -7,12 +7,16 @@
 
 import SwiftUI
 
-class LocationViewModel: ObservableObject {
+class WeatherByLocationViewModel: ObservableObject {
     @Published var selectedLocations: [String] = []
     @Published var selectedLocationForModal: String = "제주공항"
     @Published var selectedfilteredLocationForModal: String = "제주공항"
     @Published var currentLocation: String = "제주공항"
     
+    // MARK: - SearchBar 관련 property
+    @Published var searchText: String = ""
+    @Published var isTextFieldActive: Bool = false
+        
     func loadLocations() -> [String] {
             return UserDefaults.standard.stringArray(forKey: "locations") ?? []
     }
