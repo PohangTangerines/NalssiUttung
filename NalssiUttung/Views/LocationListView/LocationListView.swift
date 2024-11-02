@@ -46,7 +46,7 @@ struct LocationListView: View {
         }
         .overlay {
             // MARK: Navigation Bar
-            NavigationBar(searchText: $searchText, isEditMode: $isEditMode, isTextFieldActive: $isTextFieldActive, isFocused: _isFocused)
+            NavigationBar(searchText: $searchText, isEditMode: $isEditMode, isTextFieldActive: $isTextFieldActive)
         }
     }
     private var searchBarList : some View {

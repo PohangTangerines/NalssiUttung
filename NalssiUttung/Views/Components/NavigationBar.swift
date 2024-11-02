@@ -10,7 +10,6 @@ struct NavigationBar: View {
     @Binding var searchText: String
     @Binding var isEditMode: Bool
     @Binding var isTextFieldActive: Bool
-    @FocusState var isFocused: Bool
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
@@ -63,17 +62,11 @@ struct NavigationBar: View {
 
                 TextField("title", text: $searchText, prompt: Text("지역 검색하기").foregroundColor(Color.darkChacoal))
                     .font(.pretendardMedium(.callout))
-                    .focused($isFocused)
                     .contentShape(RoundedRectangle(cornerRadius: 10))
                     .onTapGesture {
                         withAnimation {
                             isTextFieldActive = true
                             UIApplication.shared.sendAction(#selector(UIResponder.becomeFirstResponder), to: nil, from: nil, for: nil)
-                        }
-                    }
-                    .onChange(of: isTextFieldActive) { focused in
-                        if !focused {
-                            searchText = "" // $searchText가 ""이 됨
                         }
                     }
 
@@ -88,7 +81,6 @@ struct NavigationBar: View {
 
             if isTextFieldActive {
                 Button(action: {
-                    isFocused = false
                     isTextFieldActive = false
                     searchText = ""
                 }, label: {
