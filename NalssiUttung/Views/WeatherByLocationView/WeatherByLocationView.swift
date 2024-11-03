@@ -17,7 +17,7 @@ struct WeatherByLocationView: View {
     let locations = LocationInfo.Data.map { $0.address }
     
     @State var currnetLocation: String?
-    @State var searchLocation: [String]?
+    @State var savedLocations: [String]?
     
     var filteredLocations: [String] {
         return locations.filter { $0.contains(toolbarViewModel.searchText) }
@@ -60,15 +60,14 @@ struct WeatherByLocationView: View {
                     }
                 }
                 .onTapGesture {
-                    weatherByLocationViewModel.selectedfilteredLocationForModal = filteredLocation
-                    weatherByLocationViewModel.isModalPresented = true
-                    
                     // TODO: - locationManager.selectedLocation 강제 언래핑 문제 해결
                     let updatedLocation = locationManager.findCoordinates(address: filteredLocation)
                     locationManager.selectedLocation = updatedLocation!
+                    
+                    weatherByLocationViewModel.isModalPresented = true
                 }
                 .sheet(isPresented: $weatherByLocationViewModel.isModalPresented) {
-                    if let searchLocation = searchLocation, (searchLocation.contains(weatherByLocationViewModel.selectedfilteredLocationForModal)) {
+                    if let savedLocations = savedLocations, (savedLocations.contains(filteredLocation)) {
                         MainView(mode: .modalInList, isModalPresented: $weatherByLocationViewModel.isModalPresented, isTextFieldActive: $toolbarViewModel.isTextFieldActive)
                             .onDisappear {
                                 weatherByLocationViewModel.isModalPresented = false
@@ -90,7 +89,7 @@ struct WeatherByLocationView: View {
         .scrollContentBackground(.hidden)
         .task {
             let userList = weatherByLocationViewModel.loadLocations()
-            searchLocation = userList
+            savedLocations = userList
         }
     }
     
