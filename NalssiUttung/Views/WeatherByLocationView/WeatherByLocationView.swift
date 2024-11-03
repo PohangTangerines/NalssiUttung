@@ -13,9 +13,7 @@ struct WeatherByLocationView: View {
     
     @StateObject var weatherByLocationViewModel = WeatherByLocationViewModel()
     @StateObject var toolbarViewModel = ToolbarViewModel()
-        
-    @State var currnetLocation: String?
-    
+
     var body: some View {
         VStack {
             if toolbarViewModel.isTextFieldActive {
@@ -74,7 +72,7 @@ struct WeatherByLocationView: View {
                             }
                     }
                 }
-                .onMove(perform: move) // 항목 이동 기능
+                .onMove(perform: weatherByLocationViewModel.move) // 항목 이동 기능
             }
             .scrollContentBackground(.hidden)
             .environment(\.editMode, .constant(toolbarViewModel.isEditMode ? EditMode.active : EditMode.inactive))
@@ -125,10 +123,5 @@ struct WeatherByLocationView: View {
                 }
         }
         .listRowSeparator(.hidden)
-    }
-    
-    func move(from source: IndexSet, to destination: Int) {
-        weatherByLocationViewModel.savedLocations.move(fromOffsets: source, toOffset: destination)
-        weatherByLocationViewModel.saveLocations(come: weatherByLocationViewModel.savedLocations)
     }
 }

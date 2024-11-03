@@ -37,4 +37,10 @@ class WeatherByLocationViewModel: ObservableObject {
         
         isModalPresented = true
     }
+    
+    // MARK: - 뷰 편집 관련 함수
+    func move(from source: IndexSet, to destination: Int) {
+        savedLocations.move(fromOffsets: source, toOffset: destination)
+        saveLocations(come: savedLocations)
+    }
 }
