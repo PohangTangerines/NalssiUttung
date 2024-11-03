@@ -25,7 +25,7 @@ struct WeatherByLocationView: View {
                 weatherByLocationList
             }
             if toolbarViewModel.isTextFieldActive && toolbarViewModel.filteredLocations == [] {
-                emptyView
+                NoResultView()
             }
         }
         .padding(.vertical, 20.responsibleWidth)
@@ -89,18 +89,7 @@ struct WeatherByLocationView: View {
         }
     }
     
-    // TODO: - 이 뷰에서 분리
-    // TODO: - 뷰 살짝 위로 올리기
-    private var emptyView: some View {
-        VStack {
-            Image("donut")
-            Text("검색 결과가 없어요")
-                .font(.IMHyemin(.body))
-            Spacer()
-        }
-        .padding(.bottom, 30)
-        .background(Color.seaSky)
-    }
+
     
     // TODO: - WeatherByLocationList와 통합
     private var currentWeatherView: some View {

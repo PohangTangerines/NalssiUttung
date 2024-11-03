@@ -28,6 +28,7 @@
 		0317A1B02CD6534C00B01F95 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1AF2CD6534C00B01F95 /* SearchBar.swift */; };
 		0317A1B42CD6952D00B01F95 /* AddLocationText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1B32CD6952D00B01F95 /* AddLocationText.swift */; };
 		0317A1BA2CD7CD3F00B01F95 /* LocationSearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1B92CD7CD3F00B01F95 /* LocationSearchResultView.swift */; };
+		0317A1BE2CD7F59D00B01F95 /* NoResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1BD2CD7F59D00B01F95 /* NoResultView.swift */; };
 		031F38D62AFBB691002E2EAD /* AnimatedGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031F38D52AFBB691002E2EAD /* AnimatedGifView.swift */; };
 		031F38D92AFBB8B6002E2EAD /* Gifu in Frameworks */ = {isa = PBXBuildFile; productRef = 031F38D82AFBB8B6002E2EAD /* Gifu */; };
 		031F38E82AFBBD1C002E2EAD /* partlyCloudyNightCharacter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 031F38DC2AFBBD1B002E2EAD /* partlyCloudyNightCharacter.gif */; };
@@ -175,6 +176,7 @@
 		0317A1AF2CD6534C00B01F95 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		0317A1B32CD6952D00B01F95 /* AddLocationText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationText.swift; sourceTree = "<group>"; };
 		0317A1B92CD7CD3F00B01F95 /* LocationSearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchResultView.swift; sourceTree = "<group>"; };
+		0317A1BD2CD7F59D00B01F95 /* NoResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultView.swift; sourceTree = "<group>"; };
 		031F38D52AFBB691002E2EAD /* AnimatedGifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGifView.swift; sourceTree = "<group>"; };
 		031F38DC2AFBBD1B002E2EAD /* partlyCloudyNightCharacter.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = partlyCloudyNightCharacter.gif; sourceTree = "<group>"; };
 		031F38DE2AFBBD1B002E2EAD /* rainCharacter.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = rainCharacter.gif; sourceTree = "<group>"; };
@@ -486,6 +488,7 @@
 			isa = PBXGroup;
 			children = (
 				7CA9A3CC2AAF60110051CC25 /* WeatherByLocationView.swift */,
+				0317A1BD2CD7F59D00B01F95 /* NoResultView.swift */,
 				0317A1B92CD7CD3F00B01F95 /* LocationSearchResultView.swift */,
 			);
 			path = WeatherByLocationView;
@@ -864,6 +867,7 @@
 				036CA6782AB4C3540056C453 /* DailyWeatherView.swift in Sources */,
 				0384A5F72CC6B4E900A4DA2C /* WeatherManager.swift in Sources */,
 				0E5D08CF2B00C5450082C0F6 /* AnimatedSplashGifView.swift in Sources */,
+				0317A1BE2CD7F59D00B01F95 /* NoResultView.swift in Sources */,
 				0E7B8A822ACC7111006E1F5E /* CurrentWeatherDetailView.swift in Sources */,
 				0317A14F2CD264AF00B01F95 /* MainViewModel.swift in Sources */,
 				0317A1A22CD6191800B01F95 /* CustomNavigationBar.swift in Sources */,
