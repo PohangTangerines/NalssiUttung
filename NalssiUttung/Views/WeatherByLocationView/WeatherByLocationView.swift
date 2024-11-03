@@ -13,84 +13,26 @@ struct WeatherByLocationView: View {
     
     @StateObject var weatherByLocationViewModel = WeatherByLocationViewModel()
     @StateObject var toolbarViewModel = ToolbarViewModel()
-    
-    let locations = LocationInfo.Data.map { $0.address }
-    
+        
     @State var currnetLocation: String?
-    @State var savedLocations: [String]?
-    
-    var filteredLocations: [String] {
-        return locations.filter { $0.contains(toolbarViewModel.searchText) }
-    }
     
     var body: some View {
         VStack {
             if toolbarViewModel.isTextFieldActive {
-                searchBarList
+                LocationSearchResultView(
+                    toolbarViewModel: toolbarViewModel,
+                    weatherByLocationViewModel: weatherByLocationViewModel
+                    )
             } else {
                 weatherByLocationList
             }
-            if toolbarViewModel.isTextFieldActive && filteredLocations == [] {
+            if toolbarViewModel.isTextFieldActive && toolbarViewModel.filteredLocations == [] {
                 emptyView
             }
         }
         .padding(.vertical, 20.responsibleWidth)
         .customNavigationBar(toolbarViewModel: toolbarViewModel)
         .background(Color.seaSky)
-    }
-    
-    // TODO: - 이 뷰에서 분리
-    private var searchBarList : some View {
-        List {
-            ForEach(filteredLocations.prefix(10), id: \.self) { filteredLocation in
-                HStack {
-                    if let range = filteredLocation.range(of: toolbarViewModel.searchText, options: .caseInsensitive) {
-                        let beforeText = filteredLocation[..<range.lowerBound]
-                        let searchText = filteredLocation[range]
-                        let afterText = filteredLocation[range.upperBound...]
-                        
-                        Text(beforeText)
-                        +
-                        Text(searchText)
-                            .bold()
-                        +
-                        Text(afterText)
-                    } else {
-                        Text(filteredLocation)
-                    }
-                }
-                .onTapGesture {
-                    // TODO: - locationManager.selectedLocation 강제 언래핑 문제 해결
-                    let updatedLocation = locationManager.findCoordinates(address: filteredLocation)
-                    locationManager.selectedLocation = updatedLocation!
-                    
-                    weatherByLocationViewModel.isModalPresented = true
-                }
-                .sheet(isPresented: $weatherByLocationViewModel.isModalPresented) {
-                    if let savedLocations = savedLocations, (savedLocations.contains(filteredLocation)) {
-                        MainView(mode: .modalInList, isModalPresented: $weatherByLocationViewModel.isModalPresented, isTextFieldActive: $toolbarViewModel.isTextFieldActive)
-                            .onDisappear {
-                                weatherByLocationViewModel.isModalPresented = false
-                            }
-                    } else {
-                        MainView(mode: .modal, isModalPresented: $weatherByLocationViewModel.isModalPresented, isTextFieldActive: $toolbarViewModel.isTextFieldActive)
-                            .onDisappear {
-                                weatherByLocationViewModel.isModalPresented = false
-                            }
-                    }
-                    
-                }
-                .listRowSeparator(.hidden)
-            }
-            .listRowBackground(Color.seaSky)
-            
-        }
-        .listStyle(.plain)
-        .scrollContentBackground(.hidden)
-        .task {
-            let userList = weatherByLocationViewModel.loadLocations()
-            savedLocations = userList
-        }
     }
     
     // TODO: - 이 뷰에서 분리

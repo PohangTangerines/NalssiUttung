@@ -10,17 +10,35 @@ import SwiftUI
 class WeatherByLocationViewModel: ObservableObject {
     @Published var selectedLocations: [String] = []
     @Published var selectedLocationForModal: String = "제주공항"
-    @Published var selectedfilteredLocationForModal: String = "제주공항"
     @Published var currentLocation: String = "제주공항"
     
+    @ObservedObject var locationManager = LocationManager.shared
+    
     @Published var isModalPresented: Bool = false
-        
+    @Published var savedLocations: [String]? = []
+    
     func loadLocations() -> [String] {
-            return UserDefaults.standard.stringArray(forKey: "locations") ?? []
+        return UserDefaults.standard.stringArray(forKey: "locations") ?? []
     }
     
     func saveLocations(come list: [String]) {
         UserDefaults.standard.set(list, forKey: "locations")
     }
     
+    func updateSavedLocations() {
+        var locationList = loadLocations()
+        
+        // TODO: - 임시 중복방지 상태, LocationInfo 수정 후 삭제하기
+        guard !locationList.contains(locationManager.selectedAddress) else { return }
+        locationList.append(locationManager.selectedAddress)
+        saveLocations(come: locationList)
+    }
+    
+    func updateSelectedLocation(for address: String) {
+        // TODO: - locationManager.selectedLocation 강제 언래핑 문제 해결
+        let updatedLocation = locationManager.findCoordinates(address: address)
+        locationManager.selectedLocation = updatedLocation!
+        
+        isModalPresented = true
+    }
 }
