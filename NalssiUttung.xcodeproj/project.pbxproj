@@ -10,9 +10,6 @@
 		0317A1462CD260F400B01F95 /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1452CD260F400B01F95 /* LocationInfo.swift */; };
 		0317A1472CD260F400B01F95 /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1452CD260F400B01F95 /* LocationInfo.swift */; };
 		0317A1482CD260F400B01F95 /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1452CD260F400B01F95 /* LocationInfo.swift */; };
-		0317A14A2CD261CD00B01F95 /* ModalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1492CD261CD00B01F95 /* ModalState.swift */; };
-		0317A14B2CD261CD00B01F95 /* ModalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1492CD261CD00B01F95 /* ModalState.swift */; };
-		0317A14C2CD261CD00B01F95 /* ModalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1492CD261CD00B01F95 /* ModalState.swift */; };
 		0317A14F2CD264AF00B01F95 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A14E2CD264AF00B01F95 /* MainViewModel.swift */; };
 		0317A1512CD2661900B01F95 /* DisplayedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1502CD265EC00B01F95 /* DisplayedContent.swift */; };
 		0317A1522CD2661900B01F95 /* DisplayedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1502CD265EC00B01F95 /* DisplayedContent.swift */; };
@@ -164,7 +161,6 @@
 
 /* Begin PBXFileReference section */
 		0317A1452CD260F400B01F95 /* LocationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfo.swift; sourceTree = "<group>"; };
-		0317A1492CD261CD00B01F95 /* ModalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalState.swift; sourceTree = "<group>"; };
 		0317A14E2CD264AF00B01F95 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		0317A1502CD265EC00B01F95 /* DisplayedContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayedContent.swift; sourceTree = "<group>"; };
 		0317A1952CD51C5600B01F95 /* WeatherDisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDisplayMode.swift; sourceTree = "<group>"; };
@@ -572,7 +568,6 @@
 			isa = PBXGroup;
 			children = (
 				0317A1452CD260F400B01F95 /* LocationInfo.swift */,
-				0317A1492CD261CD00B01F95 /* ModalState.swift */,
 				0317A1502CD265EC00B01F95 /* DisplayedContent.swift */,
 				0317A1952CD51C5600B01F95 /* WeatherDisplayMode.swift */,
 			);
@@ -823,7 +818,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				032DACDB2C554F630073FFD2 /* AddressSelection.intentdefinition in Sources */,
-				0317A14B2CD261CD00B01F95 /* ModalState.swift in Sources */,
 				0317A1512CD2661900B01F95 /* DisplayedContent.swift in Sources */,
 				0317A1472CD260F400B01F95 /* LocationInfo.swift in Sources */,
 				0317A1972CD51C5600B01F95 /* WeatherDisplayMode.swift in Sources */,
@@ -841,7 +835,6 @@
 				03EBAEA02C54FE53003FC9C5 /* AddressSelection.intentdefinition in Sources */,
 				039652C22C480F6F001D23A9 /* NalssiSamchunCharacterWidget.swift in Sources */,
 				035D2F722C57BF7B0024B283 /* NalssiSamchunCommentWidget.swift in Sources */,
-				0317A14A2CD261CD00B01F95 /* ModalState.swift in Sources */,
 				0317A1982CD51C5600B01F95 /* WeatherDisplayMode.swift in Sources */,
 				0317A1462CD260F400B01F95 /* LocationInfo.swift in Sources */,
 				039652DB2C49096E001D23A9 /* UIScreen+.swift in Sources */,
@@ -896,7 +889,6 @@
 				036CA69D2AB9598F0056C453 /* WeeklyWeatherView.swift in Sources */,
 				0317A1962CD51C5600B01F95 /* WeatherDisplayMode.swift in Sources */,
 				0317A1B02CD6534C00B01F95 /* SearchBar.swift in Sources */,
-				0317A14C2CD261CD00B01F95 /* ModalState.swift in Sources */,
 				0317A1482CD260F400B01F95 /* LocationInfo.swift in Sources */,
 				0317A19A2CD5307800B01F95 /* CancelButton.swift in Sources */,
 				0E5D08CD2B00C51F0082C0F6 /* SplashScreenView.swift in Sources */,

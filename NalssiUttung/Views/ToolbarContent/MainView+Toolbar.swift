@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// TODO: - toolbar 대신 뷰로 변경해서 isModalPresented 떼내기
 extension MainView {
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
