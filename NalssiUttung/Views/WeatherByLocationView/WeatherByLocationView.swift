@@ -11,18 +11,13 @@ struct WeatherByLocationView: View {
     @ObservedObject var locationManager = LocationManager.shared
     @StateObject var weatherManager = WeatherManager()
     
+    @StateObject var weatherByLocationViewModel = WeatherByLocationViewModel()
+    @StateObject var toolbarViewModel = ToolbarViewModel()
+    
     let locations = LocationInfo.Data.map { $0.address }
     
-    @StateObject var weatherByLocationViewModel = WeatherByLocationViewModel()
     @State var currnetLocation: String?
     @State var searchLocation: [String]?
-    
-    // MARK: Modal 관련
-    @State private var isSearchModalVisible = false
-    @State private var isSelectedModalVisible = false
-    @State private var isCurrentWeatherModalVisible = false
-    
-    @StateObject var toolbarViewModel = ToolbarViewModel()
     
     var filteredLocations: [String] {
         return locations.filter { $0.contains(toolbarViewModel.searchText) }
@@ -65,30 +60,27 @@ struct WeatherByLocationView: View {
                     }
                 }
                 .onTapGesture {
-                    if !isSelectedModalVisible && !isCurrentWeatherModalVisible {
-                        weatherByLocationViewModel.selectedfilteredLocationForModal = filteredLocation
-                        isSearchModalVisible = true
-                        
-                        // TODO: - locationManager.selectedLocation 강제 언래핑 문제 해결
-                        let updatedLocation = locationManager.findCoordinates(address: filteredLocation)
-                        locationManager.selectedLocation = updatedLocation!
+                    weatherByLocationViewModel.selectedfilteredLocationForModal = filteredLocation
+                    weatherByLocationViewModel.isModalPresented = true
+                    
+                    // TODO: - locationManager.selectedLocation 강제 언래핑 문제 해결
+                    let updatedLocation = locationManager.findCoordinates(address: filteredLocation)
+                    locationManager.selectedLocation = updatedLocation!
+                }
+                .sheet(isPresented: $weatherByLocationViewModel.isModalPresented) {
+                    if let searchLocation = searchLocation, (searchLocation.contains(weatherByLocationViewModel.selectedfilteredLocationForModal)) {
+                        MainView(mode: .modalInList, isModalPresented: $weatherByLocationViewModel.isModalPresented, isTextFieldActive: $toolbarViewModel.isTextFieldActive)
+                            .onDisappear {
+                                weatherByLocationViewModel.isModalPresented = false
+                            }
+                    } else {
+                        MainView(mode: .modal, isModalPresented: $weatherByLocationViewModel.isModalPresented, isTextFieldActive: $toolbarViewModel.isTextFieldActive)
+                            .onDisappear {
+                                weatherByLocationViewModel.isModalPresented = false
+                            }
                     }
                     
                 }
-                .sheet(isPresented: $isSearchModalVisible, content: {
-                    if let searchLocation = searchLocation, (searchLocation.contains(weatherByLocationViewModel.selectedfilteredLocationForModal)) {
-                        MainView(mode: .modalInList, isModalPresented: $isSearchModalVisible, isTextFieldActive: $toolbarViewModel.isTextFieldActive)
-                            .onDisappear {
-                                isSearchModalVisible = false
-                            }
-                    } else {
-                        MainView(mode: .modal, isModalPresented: $isSearchModalVisible, isTextFieldActive: $toolbarViewModel.isTextFieldActive)
-                            .onDisappear {
-                                isSearchModalVisible = false
-                            }
-                    }
-                    
-                })
                 .listRowSeparator(.hidden)
             }
             .listRowBackground(Color.seaSky)
@@ -127,17 +119,17 @@ struct WeatherByLocationView: View {
                             .onTapGesture {
                                 if !toolbarViewModel.isTextFieldActive {
                                     weatherByLocationViewModel.selectedLocationForModal = selectedLocation
-                                    isSelectedModalVisible = true
+                                    weatherByLocationViewModel.isModalPresented = true
                                 }
                                 let updatedLocation = locationManager.findCoordinates(address: selectedLocation)
                                 // TODO: - 강제 언래핑 변경, updatedLocation이 언제 nil이 되는지 다시 확인해보기
                                 locationManager.selectedLocation = updatedLocation!
                                 print(updatedLocation!)
                             }
-                            .sheet(isPresented: $isSelectedModalVisible) {
-                                MainView(mode: .modalInList, isModalPresented: $isSelectedModalVisible)
+                            .sheet(isPresented: $weatherByLocationViewModel.isModalPresented) {
+                                MainView(mode: .modalInList, isModalPresented: $weatherByLocationViewModel.isModalPresented)
                                     .onDisappear {
-                                        isSelectedModalVisible = false
+                                        weatherByLocationViewModel.isModalPresented = false
                                     }
                             }
                     }
@@ -180,14 +172,14 @@ struct WeatherByLocationView: View {
                 .listRowSeparator(.hidden)
                 .onTapGesture {
                     if !toolbarViewModel.isTextFieldActive {
-                        isCurrentWeatherModalVisible = true
+                        weatherByLocationViewModel.isModalPresented = true
                     }
                 }
-                .sheet(isPresented: $isCurrentWeatherModalVisible) {
+                .sheet(isPresented: $weatherByLocationViewModel.isModalPresented) {
                     
-                    MainView(mode: .modalInList, isModalPresented: $isCurrentWeatherModalVisible)
+                    MainView(mode: .modalInList, isModalPresented: $weatherByLocationViewModel.isModalPresented)
                         .onDisappear {
-                            isCurrentWeatherModalVisible = false
+                            weatherByLocationViewModel.isModalPresented = false
                             locationManager.selectedLocation = nil
                         }
                 }

@@ -12,6 +12,8 @@ class WeatherByLocationViewModel: ObservableObject {
     @Published var selectedLocationForModal: String = "제주공항"
     @Published var selectedfilteredLocationForModal: String = "제주공항"
     @Published var currentLocation: String = "제주공항"
+    
+    @Published var isModalPresented: Bool = false
         
     func loadLocations() -> [String] {
             return UserDefaults.standard.stringArray(forKey: "locations") ?? []
@@ -20,4 +22,5 @@ class WeatherByLocationViewModel: ObservableObject {
     func saveLocations(come list: [String]) {
         UserDefaults.standard.set(list, forKey: "locations")
     }
+    
 }
