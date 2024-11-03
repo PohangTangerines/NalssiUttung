@@ -100,31 +100,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
         }
     }
-//    
-//    func updateSelectedAddress(location: CLLocation) {
-//        let geocoder = CLGeocoder()
-//        
-//        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-//            if let error = error {
-//                print("주소 변환 오류: \(error.localizedDescription)")
-//                return
-//            }
-//            
-//            if let placemark = placemarks?.first,
-//               let locality = placemark.locality,
-//               let subLocality = placemark.subLocality {
-//                
-//                switch (locality, subLocality) {
-//                case ("제주시", "용담이동"):
-//                    self.selectedAddress = "제주공항"
-//                case ("제주시", _), ("서귀포시", _):
-//                    self.selectedAddress = "\(locality) \(subLocality)"
-//                default:
-//                    self.selectedAddress = "제주공항"
-//                }
-//            }
-//        }
-//    }
     
     // TODO: - UserDefault에 값을 longitude, latitude로 저장해 findCoordinates 함수 삭제하기
     func findCoordinates(address val: String) -> CLLocation? {
