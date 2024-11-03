@@ -40,16 +40,16 @@ struct WeatherByLocationView: View {
         ScrollView {
             LazyVStack {
                 currentWeatherView
-                ForEach(weatherByLocationViewModel.selectedLocations, id: \.self) { selectedLocation in
+                ForEach(weatherByLocationViewModel.savedLocations, id: \.self) { selectedLocation in
                     HStack {
                         if toolbarViewModel.isEditMode {
                             Image("deleteButton")
                                 .frame(maxWidth: 28, maxHeight: 28)
                                 .foregroundStyle(.red)
                                 .onTapGesture {
-                                    if let index = weatherByLocationViewModel.selectedLocations.firstIndex(of: selectedLocation) {
-                                        weatherByLocationViewModel.selectedLocations.remove(at: index)
-                                        weatherByLocationViewModel.saveLocations(come: weatherByLocationViewModel.selectedLocations)
+                                    if let index = weatherByLocationViewModel.savedLocations.firstIndex(of: selectedLocation) {
+                                        weatherByLocationViewModel.savedLocations.remove(at: index)
+                                        weatherByLocationViewModel.saveLocations(come: weatherByLocationViewModel.savedLocations)
                                     }
                                 }
                             Spacer()
@@ -59,7 +59,6 @@ struct WeatherByLocationView: View {
                             .listRowSeparator(.hidden)
                             .onTapGesture {
                                 if !toolbarViewModel.isTextFieldActive {
-                                    weatherByLocationViewModel.selectedLocationForModal = selectedLocation
                                     weatherByLocationViewModel.isModalPresented = true
                                 }
                                 let updatedLocation = locationManager.findCoordinates(address: selectedLocation)
@@ -82,10 +81,10 @@ struct WeatherByLocationView: View {
             .task {
                 do {
                     let userList = try await weatherByLocationViewModel.loadLocations()
-                    weatherByLocationViewModel.selectedLocations = userList
+                    weatherByLocationViewModel.savedLocations = userList
                     print("Success load: \(userList)")
                 } catch {
-                    weatherByLocationViewModel.selectedLocations = []
+                    weatherByLocationViewModel.savedLocations = []
                     print("task error")
                 }
             }
@@ -129,7 +128,7 @@ struct WeatherByLocationView: View {
     }
     
     func move(from source: IndexSet, to destination: Int) {
-        weatherByLocationViewModel.selectedLocations.move(fromOffsets: source, toOffset: destination)
-        weatherByLocationViewModel.saveLocations(come: weatherByLocationViewModel.selectedLocations)
+        weatherByLocationViewModel.savedLocations.move(fromOffsets: source, toOffset: destination)
+        weatherByLocationViewModel.saveLocations(come: weatherByLocationViewModel.savedLocations)
     }
 }

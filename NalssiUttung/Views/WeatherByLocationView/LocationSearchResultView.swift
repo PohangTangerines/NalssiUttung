@@ -35,7 +35,7 @@ struct LocationSearchResultView: View {
                     weatherByLocationViewModel.updateSelectedLocation(for: filteredLocation)
                 }
                 .sheet(isPresented: $weatherByLocationViewModel.isModalPresented) {
-                    let mode: WeatherDisplayMode = (weatherByLocationViewModel.savedLocations?.contains(filteredLocation) == true) ? .modalInList : .modal
+                    let mode: WeatherDisplayMode = (weatherByLocationViewModel.savedLocations.contains(filteredLocation) == true) ? .modalInList : .modal
                     MainView(mode: mode, isModalPresented: $weatherByLocationViewModel.isModalPresented, isTextFieldActive: $toolbarViewModel.isTextFieldActive)
                         .onDisappear {
                             weatherByLocationViewModel.isModalPresented = false

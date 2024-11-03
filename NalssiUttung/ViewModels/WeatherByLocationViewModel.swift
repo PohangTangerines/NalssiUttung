@@ -8,14 +8,10 @@
 import SwiftUI
 
 class WeatherByLocationViewModel: ObservableObject {
-    @Published var selectedLocations: [String] = []
-    @Published var selectedLocationForModal: String = "제주공항"
-    @Published var currentLocation: String = "제주공항"
-    
     @ObservedObject var locationManager = LocationManager.shared
     
     @Published var isModalPresented: Bool = false
-    @Published var savedLocations: [String]? = []
+    @Published var savedLocations: [String] = []
     
     func loadLocations() -> [String] {
         return UserDefaults.standard.stringArray(forKey: "locations") ?? []
