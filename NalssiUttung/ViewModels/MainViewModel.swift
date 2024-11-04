@@ -8,8 +8,6 @@
 import SwiftUI
 
 class MainViewModel: ObservableObject {
-//    // MARK: UI 관련 Property
-//    @Published var gifName: String = "cl"
     // MARK: View 전환, Gesture 관련 Property
     @Published var displayedContent: DisplayedContent = .main
     @Published var dragOffset: CGSize = .zero
