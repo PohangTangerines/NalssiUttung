@@ -56,11 +56,18 @@ class WeatherManager: ObservableObject {
         let lowestTemperature = WeatherDataFormatter.celsiusTemperature(from: first.lowTemperature)
         let highestTemperature = WeatherDataFormatter.celsiusTemperature(from: first.highTemperature)
         
+        guard let sunrise = weather.dailyForecast.forecast.first?.sun.sunrise, let sunset = weather.dailyForecast.forecast.first?.sun.sunset else { return }
+        
+        let gifName = weatherCondition.character(sunrise: sunrise, sunset: sunset)
+        let comment = weatherCondition.comment(sunrise: sunrise, sunset: sunset)
+        
         DispatchQueue.main.async {
             self.currentWeather = CurrentWeather(temperature: currentTemperature,
                                                  weatherCondition: weatherCondition,
                                                  lowestTemperature: lowestTemperature,
-                                                 highestTemperature: highestTemperature)
+                                                 highestTemperature: highestTemperature,
+                                                 gifName: gifName,
+                                                 comment: comment)
         }
     }
     

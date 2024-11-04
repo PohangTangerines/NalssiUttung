@@ -13,6 +13,8 @@ struct CurrentWeather {
     var weatherCondition: WeatherCondition
     var lowestTemperature: Int
     var highestTemperature: Int
+    var gifName: String
+    var comment: String
 }
 
 struct DailyForecast {

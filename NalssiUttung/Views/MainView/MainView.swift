@@ -37,29 +37,26 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                Color.seaSky
-                    .ignoresSafeArea()
-                VStack(spacing: 0) {
-                    switch viewModel.displayedContent {
-                    case .main:
-                        CurrentWeatherView(weatherManager: weatherManager, canTransition: $viewModel.canTransition)
-                            .transition(.move(edge: .top))
-                    case .detail:
-                        CurrentWeatherDetailView(weatherManager: weatherManager)
-                            .transition(.move(edge: .bottom))
-                    }
+            VStack {
+                switch viewModel.displayedContent {
+                case .main:
+                    CurrentWeatherView(weatherManager: weatherManager, viewModel: viewModel)
+                        .transition(.move(edge: .top))
+                case .detail:
+                    CurrentWeatherDetailView(weatherManager: weatherManager)
+                        .transition(.move(edge: .bottom))
                 }
-                .padding(.horizontal, 15)
-                .gesture(dragGesture)
-                .offset(y: viewModel.viewOffsetY)
-                .toolbar(content: toolbarContent)
-                .task {
-                    if let selectedLocation = locationManager.selectedLocation {
-                        await weatherManager.fetchWeather(for: selectedLocation, with: .all)
-                    } else {
-                        await weatherManager.fetchWeather(for: locationManager.currentLocation, with: .all)
-                    }
+            }
+            .padding(.horizontal, 20)
+            .background(Color.seaSky)
+            .gesture(dragGesture)
+            .offset(y: viewModel.viewOffsetY)
+            .toolbar(content: toolbarContent)
+            .task {
+                if let selectedLocation = locationManager.selectedLocation {
+                    await weatherManager.fetchWeather(for: selectedLocation, with: .all)
+                } else {
+                    await weatherManager.fetchWeather(for: locationManager.currentLocation, with: .all)
                 }
             }
         }

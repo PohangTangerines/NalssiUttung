@@ -451,11 +451,11 @@
 			isa = PBXGroup;
 			children = (
 				0E7DD5CC2AC95F3C00DE28D3 /* MainView.swift */,
+				0E7B8A832ACC7384006E1F5E /* CurrentWeatherView.swift */,
 				0E7B8A812ACC7111006E1F5E /* CurrentWeatherDetailView.swift */,
 				036CA6772AB4C3540056C453 /* DailyWeatherView.swift */,
 				036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */,
 				036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */,
-				0E7B8A832ACC7384006E1F5E /* CurrentWeatherView.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
