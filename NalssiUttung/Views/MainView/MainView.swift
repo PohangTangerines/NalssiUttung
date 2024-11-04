@@ -48,10 +48,10 @@ struct MainView: View {
                 }
             }
             .padding(.horizontal, 20)
-            .background(Color.seaSky)
             .gesture(dragGesture)
             .offset(y: viewModel.viewOffsetY)
             .toolbar(content: toolbarContent)
+            .background(Color.seaSky)
             .task {
                 if let selectedLocation = locationManager.selectedLocation {
                     await weatherManager.fetchWeather(for: selectedLocation, with: .all)
