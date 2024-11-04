@@ -56,9 +56,10 @@ struct DailyWeatherView: View {
                         .frame(width: 70.responsibleWidth)
                     }
                 }
-            } else {
-                Text("날씨 정보를 가져올 수 없습니다.")
+                .frame(minHeight: 140)
+                
             }
+            
         }
         .padding(.vertical, 10.5)
     }

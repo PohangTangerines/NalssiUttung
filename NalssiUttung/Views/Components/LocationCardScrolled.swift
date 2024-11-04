@@ -45,8 +45,9 @@ struct LocationCardScrolled: View {
                             .padding(.top, 12.responsibleHeight)
                         Spacer()
                     }
-                }.padding(.top, 15.responsibleHeight)
-                    .padding(.leading, 15.responsibleWidth)
+                }
+                .padding(.top, 10.responsibleHeight)
+                .padding(.leading, 15.responsibleWidth)
             } else {
                 Text("날씨 정보를 가져올 수 없습니다.")
             }

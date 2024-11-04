@@ -32,7 +32,7 @@ struct WeeklyWeatherView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(maxWidth: 28.responsibleWidth)
-                                .padding(.bottom, 30.responsibleHeight)
+                                .padding(.bottom, 15.responsibleHeight)
                             
                             // MARK: Line Chart
                             GeometryReader { geometry in

@@ -13,11 +13,10 @@ struct CurrentWeatherDetailView: View {
     var body: some View {
         VStack(spacing: 0) {
             LocationCardScrolled(weatherManager: weatherManager)
+                .padding(.bottom, 30.responsibleHeight)
+
             WeeklyWeatherView(weatherManager: weatherManager)
-                .padding(.top, 27.responsibleHeight)
-                .padding(.bottom, 20.responsibleHeight)
-            
-            Spacer()
+                .padding(.bottom, 100.responsibleHeight)
             
             DetailedWeatherView(weatherManager: weatherManager)
                 .padding(.bottom, 30.responsibleHeight)
@@ -33,7 +32,7 @@ struct CurrentWeatherDetailView: View {
                 .padding(.bottom, 15.responsibleHeight)
             }
         }
-        .padding(.top, -25.responsibleHeight)
+        .padding(.top, -35.responsibleHeight)
         .padding(.horizontal, 15.responsibleWidth)
         .background(Color.seaSky)
     }
