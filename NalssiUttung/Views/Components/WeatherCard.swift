@@ -11,7 +11,8 @@ import WeatherKit
 
 struct WeatherCard: View {
     @ObservedObject var locationManager = LocationManager.shared
-    @ObservedObject var weatherManager: WeatherManager
+//    @ObservedObject var weatherManager: WeatherManager
+    @StateObject var weatherManager = WeatherManager()
     
     let address: String
     let isCurrentLocation: Bool

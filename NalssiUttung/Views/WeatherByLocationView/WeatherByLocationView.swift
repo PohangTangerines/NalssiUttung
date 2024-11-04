@@ -34,7 +34,6 @@ struct WeatherByLocationView: View {
     }
     
     // TODO: - 이 뷰에서 분리
-    // TODO: - 날씨가 전부 동일하게 나오는 문제 해결
     private var weatherByLocationList: some View {
         ScrollView {
             LazyVStack {
@@ -53,7 +52,7 @@ struct WeatherByLocationView: View {
                                 }
                             Spacer()
                         }
-                        WeatherCard(weatherManager: weatherManager, address: selectedLocation, isCurrentLocation: false)
+                        WeatherCard(address: selectedLocation, isCurrentLocation: false)
                             .frame(maxWidth: .infinity, maxHeight: 140)
                             .listRowSeparator(.hidden)
                             .onTapGesture {
@@ -88,9 +87,8 @@ struct WeatherByLocationView: View {
                 }
             }
         }
+        .scrollIndicators(.hidden)
     }
-    
-
     
     // TODO: - WeatherByLocationList와 통합
     private var currentWeatherView: some View {
