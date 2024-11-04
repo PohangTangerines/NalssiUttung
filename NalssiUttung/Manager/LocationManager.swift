@@ -16,7 +16,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let defaults = UserDefaults(suiteName: "group.nalsam")
     private let jejuAirportLocation = CLLocation(latitude: 33.5115, longitude: 126.4911)
     
-    @Published var currentLocation: CLLocation {
+    @Published var currentLocation: CLLocation? {
         didSet {
             updateAddress(for: .current, location: currentLocation)
         }
@@ -24,21 +24,28 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     @Published var selectedLocation: CLLocation? {
         didSet {
-            if selectedLocation != nil {
-                updateAddress(for: .selected, location: selectedLocation!)
-            }
+            updateAddress(for: .selected, location: selectedLocation)
         }
     }
     
     @Published var currentAddress: String = ""
     @Published var selectedAddress: String = ""
     
-    init(selectedLocation: CLLocation? = nil) {
-        self.currentLocation = jejuAirportLocation
+    override init() {
         super.init()
         
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
+        
+        Task {
+            self.currentLocation = await requestCurrentLocation()
+        }
+    }
+    
+    func requestCurrentLocation() async -> CLLocation? {
+        await withCheckedContinuation { _ in
+            self.locationManager.startUpdatingLocation()
+        }
     }
 
     /// 사용자 위치 권한 허가를 받지 못했을 때 기본 위치를 제주공항으로 설정합니다.
@@ -66,9 +73,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         case current
         case selected
     }
+    
     /// 업데이트한 location을 한글 주소로 변경합니다.
     /// 현재 제주(제주시, 서귀포시)가 아닌 경우 address는 제주공항으로 설정됩니다.
-    func updateAddress(for type: AddressType, location: CLLocation) {
+    func updateAddress(for type: AddressType, location: CLLocation?) {
+        guard let location = location else { return }
         let geocoder = CLGeocoder()
         
         geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
