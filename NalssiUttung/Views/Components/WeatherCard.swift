@@ -15,61 +15,17 @@ struct WeatherCard: View {
     
     let address: String
     let isCurrentLocation: Bool
-        
+    
     var body: some View {
-        HStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: 0) {
-                HStack {
-                    if isCurrentLocation {
-                        Text("나의 위치")
-                            .font(.pretendardSemibold(.caption))
-                        Spacer()
-                    }
-                    Text("\(address)")
-                        .font(.pretendardSemibold(.caption))
-                        .padding(.trailing, 20.responsibleWidth)
-                }
-                
-                // TODO: - 기본값 설정해서 뷰 찌그러지는 것 해결
-                if let currentWeather = weatherManager.currentWeather {
-                    HStack(alignment: .top, spacing: 0) {
-                        Image("\(currentWeather.weatherCondition.icon)")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 60.responsibleWidth)
-                            .padding(.trailing, 12.responsibleWidth)
-                            .padding(.top, 9.responsibleHeight)
-                        
-                        // MARK: 온도 및 날씨
-                        VStack(alignment: .leading, spacing: 0) {
-                            HStack(spacing: 0) {
-                                Text("\(currentWeather.temperature)° ")
-                                    .font(.IMHyemin(.title2))
-                                    .tracking(-(Font.FontSize.title2.rawValue * 0.1))
-                                Text("\(currentWeather.weatherCondition.description)")
-                                    .font(.IMHyemin(.title2))
-                                    .padding(.leading, -(Font.FontSize.title2.rawValue * 0.3))
-                            }
-                            .padding(.bottom, 3)
-                            
-                            // MARK: 최저 최고 온도
-                            Text("최고 \(currentWeather.highestTemperature)° | 최저 \(currentWeather.lowestTemperature)°")
-                                .font(.pretendardMedium(.footnote))
-                        }
-                        .padding(.bottom, 18.responsibleHeight)
-                        .padding(.top, 12.responsibleHeight)
-                        
-                        Spacer()
-                    }
-                }
+        Group {
+            switch weatherManager.currentWeather {
+            case .some(let currentWeather):
+                SimpleCurrentWeatherInfo(weather: currentWeather, isCurrentLocation: isCurrentLocation, address: address)
+            case .none:
+                SimpleCurrentWeatherInfo(weather: CurrentWeather.placeholder, isCurrentLocation: isCurrentLocation, address: address)
+                    .redacted(reason: .placeholder)
             }
-            .padding(.top, 15.responsibleHeight)
-            .padding(.leading, 15.responsibleWidth)
-            .overlay(
-                RoundedRectangle(cornerRadius: 9)
-                    .strokeBorder(Color.black, lineWidth: 2)
-                    .contentShape(Rectangle())
-            )
+
         }
         .task {
             // TODO: - UserDefault에 저장하는 값 CLLocation(longitude, latitude)로 바꾸고 findCoordiates 제거
@@ -81,6 +37,64 @@ struct WeatherCard: View {
                 }
             }
         }
+    }
+}
+
+struct SimpleCurrentWeatherInfo: View {
+    let weather: CurrentWeather
+    let isCurrentLocation: Bool
+    let address: String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                if isCurrentLocation {
+                    Text("나의 위치")
+                        .font(.pretendardSemibold(.caption))
+                    Spacer()
+                }
+                Text("\(address)")
+                    .font(.pretendardSemibold(.caption))
+                    .padding(.trailing, 20.responsibleWidth)
+            }
+                        
+            HStack(alignment: .top, spacing: 0) {
+                Image("\(weather.weatherCondition.icon)")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 60.responsibleWidth)
+                    .padding(.trailing, 12.responsibleWidth)
+                    .padding(.top, 9.responsibleHeight)
+                
+                // MARK: 온도 및 날씨
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack(spacing: 0) {
+                        Text("\(weather.temperature)° ")
+                            .font(.IMHyemin(.title2))
+                            .tracking(-(Font.FontSize.title2.rawValue * 0.1))
+                        Text("\(weather.weatherCondition.description)")
+                            .font(.IMHyemin(.title2))
+                            .padding(.leading, -(Font.FontSize.title2.rawValue * 0.3))
+                    }
+                    .padding(.bottom, 3)
+                    
+                    // MARK: 최저 최고 온도
+                    Text("최고 \(weather.highestTemperature)° | 최저 \(weather.lowestTemperature)°")
+                        .font(.pretendardMedium(.footnote))
+                }
+                .padding(.bottom, 18.responsibleHeight)
+                .padding(.top, 12.responsibleHeight)
+                
+                Spacer()
+            }
+        }
+        .padding(.top, 15.responsibleHeight)
+        .padding(.leading, 15.responsibleWidth)
+        .overlay(
+            RoundedRectangle(cornerRadius: 9)
+                .strokeBorder(Color.black, lineWidth: 2)
+                .contentShape(Rectangle())
+        )
     }
 }
 

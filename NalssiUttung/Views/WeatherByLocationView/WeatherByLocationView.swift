@@ -34,6 +34,7 @@ struct WeatherByLocationView: View {
     }
     
     // TODO: - 이 뷰에서 분리
+    // TODO: - 날씨가 전부 동일하게 나오는 문제 해결
     private var weatherByLocationList: some View {
         ScrollView {
             LazyVStack {

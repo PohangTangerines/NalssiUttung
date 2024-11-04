@@ -61,3 +61,13 @@ struct DetailedWeather {
     var windSpeed: String
     var visibility: String
 }
+
+// MARK: - 기본 데이터를 설정합니다. 기본 데이터는 placeholder 형식으로 보여질 예정입니다.
+extension CurrentWeather {
+    static let placeholder: CurrentWeather = CurrentWeather(temperature: 0,
+                                                            weatherCondition: WeatherCondition.clear,
+                                                            lowestTemperature: 0,
+                                                            highestTemperature: 0,
+                                                            gifName: "clearCharacter",
+                                                            comment: "오늘 날씨 잘도 좋아")
+}
