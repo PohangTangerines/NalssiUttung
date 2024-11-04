@@ -43,7 +43,7 @@ struct MainView: View {
                 VStack(spacing: 0) {
                     switch viewModel.displayedContent {
                     case .main:
-                        CurrentWeatherView(weatherManager: weatherManager, canTransition: $viewModel.canTransition, isModalVisible: .constant(true), isModal: false)
+                        CurrentWeatherView(weatherManager: weatherManager, canTransition: $viewModel.canTransition)
                             .transition(.move(edge: .top))
                     case .detail:
                         CurrentWeatherDetailView(weatherManager: weatherManager)

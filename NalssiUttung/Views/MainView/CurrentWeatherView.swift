@@ -10,9 +10,6 @@ import SwiftUI
 struct CurrentWeatherView: View {
     @ObservedObject var weatherManager: WeatherManager
     @Binding var canTransition: Bool
-    @Binding var isModalVisible: Bool
-    #warning("isModal 관련 기기대응 추후 수정 요망")
-    let isModal: Bool
     @State private var gifName: String = "clearCharacter"
     
     var body: some View {
@@ -20,13 +17,13 @@ struct CurrentWeatherView: View {
             VStack(spacing: 0) {
                 VStack(spacing: 0) {
                     tempConditionRow
-                        .padding(.bottom, isModal ? 5.responsibleHeight : 10.responsibleHeight)
+                        .padding(.bottom, 5.responsibleHeight)
                     HStack {
                         Text("최고 \(currentWeather.highestTemperature)° | 최저 \(currentWeather.lowestTemperature)°")
                             .font(.pretendardMedium(.body))
                         Spacer()
                     }
-                    .padding(.bottom, isModal ? 9.responsibleHeight : 18.responsibleHeight)
+                    .padding(.bottom, 15.responsibleHeight)
                 }
                 ZStack {
                     // MARK: - 날씨 멘트
@@ -56,19 +53,17 @@ struct CurrentWeatherView: View {
                 }.frame(height: 340.responsibleHeight)
                 VStack {
                     DailyWeatherView(weatherManager: weatherManager)
-                    if isModalVisible {
-                        Image(systemName: "chevron.down")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 10.responsibleWidth)
-                            .foregroundStyle(.black)
-                            .background {
-                                Circle()
-                                    .frame(width: 40.responsibleWidth, height: 40.responsibleWidth)
-                                    .foregroundStyle(canTransition ? Color.accentBlue : Color.clear)
-                            }
-                            .padding(.bottom, 21.responsibleHeight)
-                    }
+                    Image(systemName: "chevron.down")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 10.responsibleWidth)
+                        .foregroundStyle(.black)
+                        .background {
+                            Circle()
+                                .frame(width: 40.responsibleWidth, height: 40.responsibleWidth)
+                                .foregroundStyle(Color.accentBlue)
+                        }
+                        .padding(.bottom, 21.responsibleHeight)
                 }
             }
             .padding(.top, -40.responsibleHeight)
