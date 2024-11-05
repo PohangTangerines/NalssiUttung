@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct CancelButton: View {
-    @Binding var isModalPresented: Bool
     var mode: WeatherDisplayMode
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         Button {
-            isModalPresented = false
-            print("dismiss")
+            dismiss()
         } label: {
             Text("취소")
                 .font(.pretendardSemibold(.body))
@@ -24,5 +23,5 @@ struct CancelButton: View {
 }
 
 #Preview {
-    CancelButton(isModalPresented: .constant(true), mode: .modal)
+    CancelButton(mode: .modal)
 }

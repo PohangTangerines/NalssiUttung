@@ -65,7 +65,7 @@ struct WeatherByLocationView: View {
                                 print(updatedLocation!)
                             }
                             .sheet(isPresented: $weatherByLocationViewModel.isModalPresented) {
-                                MainView(mode: .modalInList, isModalPresented: $weatherByLocationViewModel.isModalPresented)
+                                MainView(mode: .modalInList)
                                     .onDisappear {
                                         weatherByLocationViewModel.isModalPresented = false
                                     }
@@ -103,7 +103,7 @@ struct WeatherByLocationView: View {
                 }
                 .sheet(isPresented: $weatherByLocationViewModel.isModalPresented) {
                     
-                    MainView(mode: .modalInList, isModalPresented: $weatherByLocationViewModel.isModalPresented)
+                    MainView(mode: .modalInList)
                         .onDisappear {
                             weatherByLocationViewModel.isModalPresented = false
                             locationManager.selectedLocation = nil

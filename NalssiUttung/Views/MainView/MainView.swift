@@ -16,12 +16,10 @@ struct MainView: View {
     @StateObject var weatherByLocationViewModel = WeatherByLocationViewModel()
     
     let mode: WeatherDisplayMode
-    @Binding var isModalPresented: Bool
     @Binding var isTextFieldActive: Bool
     
-    init(mode: WeatherDisplayMode, isModalPresented: Binding<Bool> = .constant(false), isTextFieldActive: Binding<Bool> = .constant(false)) {
+    init(mode: WeatherDisplayMode, isTextFieldActive: Binding<Bool> = .constant(false)) {
         self.mode = mode
-        _isModalPresented = isModalPresented
         _isTextFieldActive = isTextFieldActive
     }
     
@@ -36,7 +34,7 @@ struct MainView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 switch viewModel.displayedContent {
                 case .main:

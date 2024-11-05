@@ -7,13 +7,12 @@
 
 import SwiftUI
 
-// TODO: - toolbar 대신 뷰로 변경해서 isModalPresented 떼내기
 extension MainView {
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             if mode == .modal || mode == .modalInList {
-                CancelButton(isModalPresented: $isModalPresented, mode: mode)
+                CancelButton(mode: mode)
             }
         }
         
@@ -29,7 +28,7 @@ extension MainView {
         }
         
         ToolbarItem(placement: .topBarTrailing) {
-            AddButton(action: weatherByLocationViewModel.updateSavedLocations, mode: mode, isModalPresented: $isModalPresented, isTextFieldActive: $isTextFieldActive)
+            AddButton(action: weatherByLocationViewModel.updateSavedLocations, mode: mode, isTextFieldActive: $isTextFieldActive)
         }
     }
 }

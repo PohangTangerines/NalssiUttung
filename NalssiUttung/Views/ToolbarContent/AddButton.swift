@@ -10,8 +10,8 @@ import SwiftUI
 struct AddButton: View {
     var action: () -> Void = {}
     var mode: WeatherDisplayMode
-    @Binding var isModalPresented: Bool
     @Binding var isTextFieldActive: Bool
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         switch mode {
@@ -24,7 +24,7 @@ struct AddButton: View {
         case .modal:
             Button {
                 action()
-                isModalPresented = false
+                dismiss()
                 isTextFieldActive = false
             } label: {
                 Text("추가")
@@ -38,5 +38,5 @@ struct AddButton: View {
 }
 
 #Preview {
-    AddButton(mode: .modal, isModalPresented: .constant(true), isTextFieldActive: .constant(true))
+    AddButton(mode: .modal, isTextFieldActive: .constant(true))
 }
