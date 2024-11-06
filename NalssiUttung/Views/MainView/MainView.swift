@@ -35,21 +35,27 @@ struct MainView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
+            ZStack {
+                Color.seaSky
+                    .ignoresSafeArea()
                 switch viewModel.displayedContent {
+                    
                 case .main:
                     CurrentWeatherView(weatherManager: weatherManager, viewModel: viewModel)
                         .transition(.move(edge: .top))
+                        .padding(.horizontal, 20)
+                    
                 case .detail:
-                    CurrentWeatherDetailView(weatherManager: weatherManager)
-                        .transition(.move(edge: .bottom))
+                    VStack {
+                        CurrentWeatherDetailView(weatherManager: weatherManager)
+                            .transition(.move(edge: .bottom))
+                            .padding(.horizontal, 20)
+                    }
                 }
             }
-            .padding(.horizontal, 20)
             .gesture(dragGesture)
             .offset(y: viewModel.viewOffsetY)
             .toolbar(content: toolbarContent)
-            .background(Color.seaSky)
             .task {
                 if let selectedLocation = locationManager.selectedLocation {
                     await weatherManager.fetchWeather(for: selectedLocation, with: .all)

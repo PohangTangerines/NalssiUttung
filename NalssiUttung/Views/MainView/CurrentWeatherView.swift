@@ -6,34 +6,39 @@
 //
 
 import SwiftUI
+import WeatherKit
 
 struct CurrentWeatherView: View {
     @ObservedObject var weatherManager: WeatherManager
     @ObservedObject var viewModel: MainViewModel
     
     var body: some View {
-        if let currentWeather = weatherManager.currentWeather {
-            CurrentWeatherInfo(weather: currentWeather)
-            CommentAndCharacter(weather: currentWeather)
-            DailyWeatherView(weatherManager: weatherManager)
-            ScrollDownIndicator(viewModel: viewModel)
+        if let currentWeather = weatherManager.currentWeather, let dailyForecast = weatherManager.dailyForecast {
+            VStack {
+                CurrentWeatherInfo(currentWeather: currentWeather)
+                CommentAndCharacter(currentWeather: currentWeather)
+                DailyForecastView(dailyForecastViewModel: DailyForecastViewModel(dailyForecast: dailyForecast))
+                ScrollDownIndicator(viewModel: viewModel)
+            }
+        } else {
+           Text("날씨를 불러오는 중입니다...")
         }
     }
 }
 
 struct CurrentWeatherInfo: View {
-    let weather: CurrentWeather
+    let currentWeather: CurrentWeather
     
     var body: some View {
         VStack(spacing: 0) {
             HStack(alignment: .bottom) {
-                Text("\(weather.temperature) ")
+                Text("\(currentWeather.temperature) ")
                     .font(.IMHyemin(.largeTitle2))
                     .tracking(-(Font.FontSize.largeTitle.rawValue * 0.07))
                 Text("°")
                     .font(.IMHyemin(.largeTitle))
                     .padding(.leading, -(Font.FontSize.largeTitle2.rawValue * 0.5))
-                Text("\(weather.weatherCondition.description)")
+                Text("\(currentWeather.weatherCondition.description)")
                     .font(.IMHyemin(.title))
                     .padding(.bottom, 13)
                     .padding(.leading, -30)
@@ -41,7 +46,7 @@ struct CurrentWeatherInfo: View {
             }
             .padding(.bottom, 5.responsibleHeight)
             HStack {
-                Text("최고 \(weather.highestTemperature)° | 최저 \(weather.lowestTemperature)°")
+                Text("최고 \(currentWeather.highestTemperature)° | 최저 \(currentWeather.lowestTemperature)°")
                     .font(.pretendardMedium(.body))
                 Spacer()
             }
@@ -52,13 +57,13 @@ struct CurrentWeatherInfo: View {
 }
 
 struct CommentAndCharacter: View {
-    let weather: CurrentWeather
+    let currentWeather: CurrentWeather
     
     var body: some View {
         ZStack {
             VStack {
                 HStack {
-                    Text("\(weather.comment)")
+                    Text("\(currentWeather.comment)")
                         .font(.IMHyemin(.title))
                         .IMHyeminLineHeight(.title, lineHeight: 40)
                     Spacer()
@@ -69,7 +74,7 @@ struct CommentAndCharacter: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    AnimatedGifView(gifName: weather.gifName)
+                    AnimatedGifView(gifName: currentWeather.gifName)
                         .scaledToFit()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 280.responsibleHeight)
@@ -77,23 +82,5 @@ struct CommentAndCharacter: View {
             }
         }
         .frame(height: 340.responsibleHeight)
-    }
-}
-
-struct ScrollDownIndicator: View {
-    @ObservedObject var viewModel: MainViewModel
-    
-    var body: some View {
-        Image(systemName: "chevron.down")
-            .resizable()
-            .scaledToFit()
-            .frame(height: 10.responsibleWidth)
-            .foregroundStyle(.black)
-            .background {
-                Circle()
-                    .frame(width: 40.responsibleWidth, height: 40.responsibleWidth)
-                    .foregroundStyle(viewModel.canTransition ? Color.accentBlue: Color.clear)
-            }
-            .padding(.bottom, 21.responsibleHeight)
     }
 }
