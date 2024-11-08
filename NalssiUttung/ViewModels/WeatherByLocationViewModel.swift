@@ -41,4 +41,8 @@ class WeatherByLocationViewModel: ObservableObject {
         savedLocations.move(fromOffsets: source, toOffset: destination)
         saveLocations(come: savedLocations)
     }
+    
+    func checkIsInList(address: String) -> WeatherDisplayMode {
+        return savedLocations.contains(address) ? .modalInList : .modal
+    }
 }

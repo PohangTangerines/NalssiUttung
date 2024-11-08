@@ -80,6 +80,7 @@ struct WeatherCardLayout: View {
                 .strokeBorder(Color.black, lineWidth: 2)
                 .contentShape(Rectangle())
         )
+        .frame(maxWidth: .infinity, maxHeight: 140)
     }
 }
 

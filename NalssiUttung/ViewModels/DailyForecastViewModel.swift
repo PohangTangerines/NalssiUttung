@@ -27,7 +27,6 @@ class DailyForecastViewModel: ObservableObject {
     init(dailyForecast: DailyForecast) {
         self.dailyForecast = dailyForecast
         formatHourlyWeather()
-        print(formattedHourlyWeathers)
     }
     
     func formatHourlyWeather() {

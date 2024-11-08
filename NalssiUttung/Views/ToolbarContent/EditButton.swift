@@ -15,7 +15,6 @@ struct EditButton: View {
         Button {
             withAnimation {
                 toolbarViewModel.isEditMode.toggle()
-                print(toolbarViewModel.isEditMode)
             }
         } label: {
             Text(toolbarViewModel.isEditMode ? "완료" : "편집")
