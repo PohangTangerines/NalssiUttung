@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LocationSearchResultView: View {
-    @ObservedObject var toolbarViewModel: ToolbarViewModel
+    @EnvironmentObject var toolbarViewModel: ToolbarViewModel
     @ObservedObject var weatherByLocationViewModel: WeatherByLocationViewModel
     
     // TODO: - 뷰 분리 완료, 추후 뷰모델로 분리 필요.
@@ -40,7 +40,7 @@ struct LocationSearchResultView: View {
                 .sheet(isPresented: $weatherByLocationViewModel.isModalPresented) {
                     let mode: WeatherDisplayMode = (weatherByLocationViewModel.savedLocations.contains(filteredLocation) == true) ? .modalInList : .modal
                     
-                    MainView(mode: mode, isTextFieldActive: $toolbarViewModel.isTextFieldActive)
+                    MainView(mode: mode)
                         .onDisappear {
                             weatherByLocationViewModel.isModalPresented = false
                         }
@@ -56,5 +56,5 @@ struct LocationSearchResultView: View {
     }}
 
 #Preview {
-    LocationSearchResultView(toolbarViewModel: ToolbarViewModel(), weatherByLocationViewModel: WeatherByLocationViewModel())
+    LocationSearchResultView(weatherByLocationViewModel: WeatherByLocationViewModel())
 }

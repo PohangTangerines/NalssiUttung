@@ -10,6 +10,7 @@ import SwiftUI
 class WeatherByLocationViewModel: ObservableObject {
     @ObservedObject var locationManager = LocationManager.shared
     
+    // TODO: - 리스트에서 값 선택 시
     @Published var isModalPresented: Bool = false
     @Published var savedLocations: [String] = []
     

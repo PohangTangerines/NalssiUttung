@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct AddButton: View {
+    @EnvironmentObject var toolbarViewModel: ToolbarViewModel
+    @Environment(\.dismiss) var dismiss
+
     var action: () -> Void = {}
     var mode: WeatherDisplayMode
-    @Binding var isTextFieldActive: Bool
-    @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         switch mode {
         case .regular:
@@ -25,7 +26,7 @@ struct AddButton: View {
             Button {
                 action()
                 dismiss()
-                isTextFieldActive = false
+                toolbarViewModel.isTextFieldActive = false
             } label: {
                 Text("추가")
                     .font(.pretendardSemibold(.body))
@@ -38,5 +39,5 @@ struct AddButton: View {
 }
 
 #Preview {
-    AddButton(mode: .modal, isTextFieldActive: .constant(true))
+    AddButton(mode: .modal)
 }

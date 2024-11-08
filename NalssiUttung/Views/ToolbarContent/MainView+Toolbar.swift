@@ -28,7 +28,7 @@ extension MainView {
         }
         
         ToolbarItem(placement: .topBarTrailing) {
-            AddButton(action: weatherByLocationViewModel.updateSavedLocations, mode: mode, isTextFieldActive: $isTextFieldActive)
+            AddButton(action: weatherByLocationViewModel.updateSavedLocations, mode: mode)
         }
     }
 }

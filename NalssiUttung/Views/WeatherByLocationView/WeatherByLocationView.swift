@@ -13,15 +13,12 @@ struct WeatherByLocationView: View {
     @StateObject var weatherManager = WeatherManager()
     
     @StateObject var weatherByLocationViewModel = WeatherByLocationViewModel()
-    @StateObject var toolbarViewModel = ToolbarViewModel()
+    @EnvironmentObject var toolbarViewModel: ToolbarViewModel
 
     var body: some View {
         VStack {
             if toolbarViewModel.isTextFieldActive {
-                LocationSearchResultView(
-                    toolbarViewModel: toolbarViewModel,
-                    weatherByLocationViewModel: weatherByLocationViewModel
-                    )
+                LocationSearchResultView(weatherByLocationViewModel: weatherByLocationViewModel)
             } else {
                 weatherByLocationList
             }

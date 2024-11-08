@@ -10,12 +10,14 @@ import WeatherKit
 
 @main
 struct NalssiUttungApp: App {
+    @StateObject var toolbarViewModel = ToolbarViewModel()
     @State private var splashOpacity: Double = 1.0
 
     var body: some Scene {
         WindowGroup {
             ZStack {
                 MainView(mode: .regular)
+                    .environmentObject(toolbarViewModel)
                 SplashScreenView() // 스플래시 뷰
                     .opacity(splashOpacity)
                     .onAppear {

@@ -16,13 +16,7 @@ struct MainView: View {
     @StateObject var weatherByLocationViewModel = WeatherByLocationViewModel()
     
     let mode: WeatherDisplayMode
-    @Binding var isTextFieldActive: Bool
-    
-    init(mode: WeatherDisplayMode, isTextFieldActive: Binding<Bool> = .constant(false)) {
-        self.mode = mode
-        _isTextFieldActive = isTextFieldActive
-    }
-    
+
     private var dragGesture: some Gesture {
         DragGesture()
             .onChanged { gesture in
