@@ -10,7 +10,6 @@ import SwiftUI
 import WeatherKit
 
 enum WeatherUpdateType {
-    // TODO: - 추후 필요한 타입 추가
     case current
     case all
 }
@@ -35,8 +34,8 @@ class WeatherManager: ObservableObject {
             
         case .all:
         self.updateCurrentWeather()
-        self.updateDailyWeather()
-        self.updateWeeklyWeather()
+        self.updateDailyForecast()
+        self.updateWeeklyForecast()
         self.updateDetailedForecast()
             
         case .current:
@@ -71,7 +70,7 @@ class WeatherManager: ObservableObject {
         }
     }
     
-    private func updateDailyWeather() {
+    private func updateDailyForecast() {
         guard let weather = weather else { return }
         
         let filteredHourlyForecast = weather.hourlyForecast.forecast.filter { hourlyforecast in
@@ -124,7 +123,7 @@ class WeatherManager: ObservableObject {
         }
     }
     
-    private func updateWeeklyWeather() {
+    private func updateWeeklyForecast() {
         guard let weather = weather else { return }
         
         let filteredDailyForecast = weather.dailyForecast.forecast.filter { dayWeather in
