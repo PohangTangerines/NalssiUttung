@@ -27,6 +27,7 @@ struct AddButton: View {
                 action()
                 dismiss()
                 toolbarViewModel.isTextFieldActive = false
+                toolbarViewModel.isModalPresented = false
             } label: {
                 Text("추가")
                     .font(.pretendardSemibold(.body))

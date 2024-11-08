@@ -35,15 +35,12 @@ struct LocationSearchResultView: View {
                 }
                 .onTapGesture {
                     weatherByLocationViewModel.updateSelectedLocation(for: filteredLocation)
-                    weatherByLocationViewModel.isModalPresented = true
+                    toolbarViewModel.isModalPresented = true
                 }
-                .sheet(isPresented: $weatherByLocationViewModel.isModalPresented) {
+                .sheet(isPresented: $toolbarViewModel.isModalPresented) {
                     let mode: WeatherDisplayMode = (weatherByLocationViewModel.savedLocations.contains(filteredLocation) == true) ? .modalInList : .modal
                     
                     MainView(mode: mode)
-                        .onDisappear {
-                            weatherByLocationViewModel.isModalPresented = false
-                        }
                     
                 }
                 .listRowSeparator(.hidden)

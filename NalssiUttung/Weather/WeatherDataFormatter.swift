@@ -51,6 +51,7 @@ class WeatherDataFormatter {
         return dateFormatter.string(from: today)
     }
     
+    // TODO: - 지역 검색 후 지역별 날씨 불러올 때 BAD_ACCESS 문제 해결하기
     static func windSpeed(from windSpeed: Measurement<UnitSpeed>) -> String {
         measurementFormatter.unitOptions = .providedUnit
         return measurementFormatter.string(from: windSpeed)

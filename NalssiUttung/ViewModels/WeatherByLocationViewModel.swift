@@ -11,7 +11,6 @@ class WeatherByLocationViewModel: ObservableObject {
     @ObservedObject var locationManager = LocationManager.shared
     
     // TODO: - 리스트에서 값 선택 시
-    @Published var isModalPresented: Bool = false
     @Published var savedLocations: [String] = []
     
     func loadLocations() -> [String] {
@@ -35,8 +34,6 @@ class WeatherByLocationViewModel: ObservableObject {
         // TODO: - locationManager.selectedLocation 강제 언래핑 문제 해결
         let updatedLocation = locationManager.findCoordinates(address: address)
         locationManager.selectedLocation = updatedLocation!
-        
-        isModalPresented = true
     }
     
     // MARK: - 뷰 편집 관련 함수

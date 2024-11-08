@@ -13,6 +13,9 @@ class ToolbarViewModel: ObservableObject {
     // MARK: - SearchBar 관련 property
     @Published var isTextFieldActive: Bool = false
     
+    // MARK: - Modal 관련 property
+    @Published var isModalPresented: Bool = false
+    
     // TODO: - 추후 ToolbarViewModel 말고 다른 뷰모델로 이동시키기
     @Published var searchText: String = "" {
         didSet {

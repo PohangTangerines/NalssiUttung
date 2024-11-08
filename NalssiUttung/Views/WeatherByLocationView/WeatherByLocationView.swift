@@ -55,18 +55,16 @@ struct WeatherByLocationView: View {
                             .listRowSeparator(.hidden)
                             .onTapGesture {
                                 if !toolbarViewModel.isTextFieldActive {
-                                    weatherByLocationViewModel.isModalPresented = true
+                                    toolbarViewModel.isModalPresented = true
                                 }
-                                let updatedLocation = locationManager.findCoordinates(address: selectedLocation)
+                                
                                 // TODO: - 강제 언래핑 변경, updatedLocation이 언제 nil이 되는지 다시 확인해보기
-                                locationManager.selectedLocation = updatedLocation!
-                                print(updatedLocation!)
+                                let updatedLocation = locationManager.findCoordinates(address: selectedLocation)
+                                locationManager.selectedLocation = updatedLocation
+                                
                             }
-                            .sheet(isPresented: $weatherByLocationViewModel.isModalPresented) {
+                            .sheet(isPresented: $toolbarViewModel.isModalPresented) {
                                 MainView(mode: .modalInList)
-                                    .onDisappear {
-                                        weatherByLocationViewModel.isModalPresented = false
-                                    }
                             }
                     }
                 }
@@ -96,14 +94,13 @@ struct WeatherByLocationView: View {
                 .listRowSeparator(.hidden)
                 .onTapGesture {
                     if !toolbarViewModel.isTextFieldActive {
-                        weatherByLocationViewModel.isModalPresented = true
+                        toolbarViewModel.isModalPresented = true
                     }
                 }
-                .sheet(isPresented: $weatherByLocationViewModel.isModalPresented) {
+                .sheet(isPresented: $toolbarViewModel.isModalPresented) {
                     
                     MainView(mode: .modalInList)
                         .onDisappear {
-                            weatherByLocationViewModel.isModalPresented = false
                             locationManager.selectedLocation = nil
                         }
                 }
