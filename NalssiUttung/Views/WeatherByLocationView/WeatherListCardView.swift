@@ -17,17 +17,24 @@ struct WeatherListCardView: View {
     let isCurrentLocation: Bool
     
     var body: some View {
-        WeatherCardLayout(currentWeather: weatherManager.currentWeather ?? CurrentWeather.placeholder, viewOrigin: .list, address: address, isCurrentLocation: isCurrentLocation)
-            .task {
-                // TODO: - UserDefault에 저장하는 값 CLLocation(longitude, latitude)로 바꾸고 findCoordiates 제거
-                if isCurrentLocation {
-                    await weatherManager.fetchWeather(for: locationManager.currentLocation, with: .current)
-                } else {
-                    if let location = locationManager.findCoordinates(address: address) {
-                        await weatherManager.fetchWeather(for: location, with: .current)
-                    }
+        Group {
+            if let currentWeather = weatherManager.currentWeather {
+                WeatherCardLayout(currentWeather: currentWeather, viewOrigin: .list, address: address, isCurrentLocation: isCurrentLocation)
+            } else {
+                WeatherCardLayout(currentWeather: CurrentWeather.placeholder, viewOrigin: .list, address: address, isCurrentLocation: isCurrentLocation)
+                    .redacted(reason: .placeholder)
+            }
+        }
+        .task {
+            // TODO: - UserDefault에 저장하는 값 CLLocation(longitude, latitude)로 바꾸고 findCoordiates 제거
+            if isCurrentLocation {
+                await weatherManager.fetchWeather(for: locationManager.currentLocation, with: .current)
+            } else {
+                if let location = locationManager.findCoordinates(address: address) {
+                    await weatherManager.fetchWeather(for: location, with: .current)
                 }
             }
+        }
     }
 }
 
