@@ -13,11 +13,12 @@ struct CurrentWeatherView: View {
     @ObservedObject var viewModel: MainViewModel
     
     var body: some View {
-        if let currentWeather = weatherManager.currentWeather, let dailyForecast = weatherManager.dailyForecast {
+        if let currentWeather = weatherManager.currentWeather,
+            let dailyForecast = weatherManager.dailyForecast {
             VStack {
                 CurrentWeatherInfo(currentWeather: currentWeather)
                 CommentAndCharacter(currentWeather: currentWeather)
-                DailyForecastView(dailyForecastViewModel: DailyForecastViewModel(dailyForecast: dailyForecast))
+                DailyForecastView(dailyForecast: dailyForecast)
                 ScrollDownIndicator(viewModel: viewModel)
             }
         } else {

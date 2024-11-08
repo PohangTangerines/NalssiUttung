@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct DailyForecastView: View {
-    @ObservedObject var dailyForecastViewModel: DailyForecastViewModel
+    let dailyForecast: DailyForecast
+    @StateObject var viewModel: DailyForecastViewModel
+    
+    init(dailyForecast: DailyForecast) {
+        self.dailyForecast = dailyForecast
+        _viewModel = StateObject(wrappedValue: DailyForecastViewModel(dailyForecast: dailyForecast))
+    }
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 0) {
-                ForEach(dailyForecastViewModel.formattedHourlyWeathers.indices, id: \.self) { index in
-                    let hourlyWeather = dailyForecastViewModel.formattedHourlyWeathers[index]
+                ForEach(viewModel.formattedHourlyWeathers.indices, id: \.self) { index in
+                    let hourlyWeather = viewModel.formattedHourlyWeathers[index]
                     
                     VStack(spacing: 0) {
                         Text(hourlyWeather.time)
@@ -30,9 +36,9 @@ struct DailyForecastView: View {
                         // TODO: - Line Chart 분리하기
                         GeometryReader { geometry in
                             ZStack {
-                                let coorY = geometry.size.height / 2 + 10 - dailyForecastViewModel.getOffsetDot(nowTemp: Int(hourlyWeather.temperature) ?? 0)
+                                let coorY = geometry.size.height / 2 + 10 - viewModel.getOffsetDot(nowTemp: Int(hourlyWeather.temperature) ?? 0)
                                 
-                                dailyForecastViewModel.getChartLine(index: index, geometry: geometry)
+                                viewModel.getChartLine(index: index, geometry: geometry)
                                     .stroke(Color.black, lineWidth: 2)
                                 
                                 if !hourlyWeather.isSunriseOrSunset {

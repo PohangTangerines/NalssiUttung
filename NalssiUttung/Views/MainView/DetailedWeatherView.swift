@@ -15,7 +15,8 @@ struct DetailedWeatherView: View {
         VStack(spacing: 0) {
             if let detailedWeather = weatherManager.detailedWeather {
                 // MARK: 상세 날씨 구분선
-                ScrolledMainViewTextDivider(text: "상세 날씨").padding(.bottom, 15.responsibleHeight)
+                TextDivider(text: "상세 날씨")
+                    .padding(.bottom, 15.responsibleHeight)
                 
                 GeometryReader { geometry in
                     // MARK: 강수량 & 바람 & 가시거리
@@ -50,6 +51,7 @@ struct DetailedWeatherView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: 172.responsibleHeight)
+        .padding(.bottom, 30.responsibleHeight)
     }
     
     // MARK: DetailedWeather Box
@@ -82,22 +84,3 @@ struct DetailedWeatherView: View {
     }
 }
 
-struct ScrolledMainViewTextDivider: View {
-    let text: String
-    
-    var body: some View {
-        HStack(spacing: 0) {
-            Rectangle()
-                .background(Color.black)
-                .cornerRadius(10)
-                .frame(minWidth: 95.25, maxHeight: 2)
-            Text(text)
-                .font(.IMHyemin(.footnote))
-                .padding(.horizontal, 12)
-            Rectangle()
-                .background(Color.black)
-                .cornerRadius(10)
-                .frame(minWidth: 95.25, maxHeight: 2)
-        }
-    }
-}

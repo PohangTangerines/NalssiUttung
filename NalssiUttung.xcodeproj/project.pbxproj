@@ -47,11 +47,13 @@
 		032DACD32C554E1C0073FFD2 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032DACD22C554E1C0073FFD2 /* IntentHandler.swift */; };
 		032DACD72C554E1C0073FFD2 /* IntentHandler.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 032DACCE2C554E1C0073FFD2 /* IntentHandler.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		032DACDB2C554F630073FFD2 /* AddressSelection.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 03EBAE9F2C54FE53003FC9C5 /* AddressSelection.intentdefinition */; };
+		035A63122CDDCDB1003FC443 /* WeeklyForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035A63112CDDCDA4003FC443 /* WeeklyForecastViewModel.swift */; };
+		035A63142CDDE551003FC443 /* ScrolledMainViewTextDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035A63132CDDE551003FC443 /* ScrolledMainViewTextDivider.swift */; };
 		035D2F6F2C57BDA30024B283 /* RealTimeWeatherCommentWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035D2F6E2C57BDA30024B283 /* RealTimeWeatherCommentWidgetView.swift */; };
 		035D2F702C57BE940024B283 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EB04B642AA6D17A00DC0933 /* Assets.xcassets */; };
 		035D2F722C57BF7B0024B283 /* NalssiSamchunCommentWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035D2F712C57BF7B0024B283 /* NalssiSamchunCommentWidget.swift */; };
 		036CA6932AB8C54F0056C453 /* DetailedWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */; };
-		036CA69D2AB9598F0056C453 /* WeeklyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */; };
+		036CA69D2AB9598F0056C453 /* WeeklyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CA69C2AB9598F0056C453 /* WeeklyForecastView.swift */; };
 		0384A5ED2CC63C6900A4DA2C /* LocationHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0384A5EC2CC63C6900A4DA2C /* LocationHeader.swift */; };
 		0384A5EF2CC63CD800A4DA2C /* MainView+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0384A5EE2CC63CD800A4DA2C /* MainView+Toolbar.swift */; };
 		0384A5F52CC6419000A4DA2C /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0384A5F42CC6419000A4DA2C /* AddButton.swift */; };
@@ -198,10 +200,12 @@
 		032DACCF2C554E1C0073FFD2 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		032DACD22C554E1C0073FFD2 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		032DACD42C554E1C0073FFD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		035A63112CDDCDA4003FC443 /* WeeklyForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyForecastViewModel.swift; sourceTree = "<group>"; };
+		035A63132CDDE551003FC443 /* ScrolledMainViewTextDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrolledMainViewTextDivider.swift; sourceTree = "<group>"; };
 		035D2F6E2C57BDA30024B283 /* RealTimeWeatherCommentWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeWeatherCommentWidgetView.swift; sourceTree = "<group>"; };
 		035D2F712C57BF7B0024B283 /* NalssiSamchunCommentWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NalssiSamchunCommentWidget.swift; sourceTree = "<group>"; };
 		036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedWeatherView.swift; sourceTree = "<group>"; };
-		036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyWeatherView.swift; sourceTree = "<group>"; };
+		036CA69C2AB9598F0056C453 /* WeeklyForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyForecastView.swift; sourceTree = "<group>"; };
 		0384A5EC2CC63C6900A4DA2C /* LocationHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHeader.swift; sourceTree = "<group>"; };
 		0384A5EE2CC63CD800A4DA2C /* MainView+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainView+Toolbar.swift"; sourceTree = "<group>"; };
 		0384A5F42CC6419000A4DA2C /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
@@ -310,6 +314,7 @@
 				0317A14E2CD264AF00B01F95 /* MainViewModel.swift */,
 				0317A1A32CD650B400B01F95 /* ToolbarViewModel.swift */,
 				0317A1C32CDB8EFD00B01F95 /* DailyForecastViewModel.swift */,
+				035A63112CDDCDA4003FC443 /* WeeklyForecastViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -463,7 +468,7 @@
 				0E7B8A832ACC7384006E1F5E /* CurrentWeatherView.swift */,
 				0E7B8A812ACC7111006E1F5E /* CurrentWeatherDetailView.swift */,
 				0317A1C52CDBA84F00B01F95 /* DailyForecastView.swift */,
-				036CA69C2AB9598F0056C453 /* WeeklyWeatherView.swift */,
+				036CA69C2AB9598F0056C453 /* WeeklyForecastView.swift */,
 				036CA6922AB8C54F0056C453 /* DetailedWeatherView.swift */,
 			);
 			path = MainView;
@@ -485,6 +490,7 @@
 				03BF61FB2CDDBD61000E25CB /* WeatherCardLayout.swift */,
 				0317A1AF2CD6534C00B01F95 /* SearchBar.swift */,
 				0317A1C12CDB850A00B01F95 /* ScrollDownIndicator.swift */,
+				035A63132CDDE551003FC443 /* ScrolledMainViewTextDivider.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -873,6 +879,7 @@
 				0317A1C62CDBA84F00B01F95 /* DailyForecastView.swift in Sources */,
 				0384A5F72CC6B4E900A4DA2C /* WeatherManager.swift in Sources */,
 				0E5D08CF2B00C5450082C0F6 /* AnimatedSplashGifView.swift in Sources */,
+				035A63142CDDE551003FC443 /* ScrolledMainViewTextDivider.swift in Sources */,
 				0317A1BE2CD7F59D00B01F95 /* NoResultView.swift in Sources */,
 				0E7B8A822ACC7111006E1F5E /* CurrentWeatherDetailView.swift in Sources */,
 				0317A14F2CD264AF00B01F95 /* MainViewModel.swift in Sources */,
@@ -900,7 +907,7 @@
 				0317A1AA2CD6524E00B01F95 /* EditButton.swift in Sources */,
 				0EAF068C2B0BADC200AEA978 /* WebView.swift in Sources */,
 				0E7DD5CD2AC95F3C00DE28D3 /* MainView.swift in Sources */,
-				036CA69D2AB9598F0056C453 /* WeeklyWeatherView.swift in Sources */,
+				036CA69D2AB9598F0056C453 /* WeeklyForecastView.swift in Sources */,
 				0317A1962CD51C5600B01F95 /* WeatherDisplayMode.swift in Sources */,
 				0317A1B02CD6534C00B01F95 /* SearchBar.swift in Sources */,
 				0317A1482CD260F400B01F95 /* LocationInfo.swift in Sources */,
@@ -908,6 +915,7 @@
 				0E5D08CD2B00C51F0082C0F6 /* SplashScreenView.swift in Sources */,
 				0384A5F92CCFC91200A4DA2C /* WeatherModel.swift in Sources */,
 				03B2F45A2AAF3CCB005A5AD4 /* Color+Palette.swift in Sources */,
+				035A63122CDDCDB1003FC443 /* WeeklyForecastViewModel.swift in Sources */,
 				0317A1532CD2661900B01F95 /* DisplayedContent.swift in Sources */,
 				031F38D62AFBB691002E2EAD /* AnimatedGifView.swift in Sources */,
 				0317A1B42CD6952D00B01F95 /* AddLocationText.swift in Sources */,
