@@ -30,6 +30,7 @@ struct CustomNavigationBarModifier<L: View, P: View, R: View, B: View>: ViewModi
                 .frame(maxHeight: 84.responsibleHeight)
                 content
             }
+            .padding(.top, 15)
             .padding(20)
         }
 

@@ -17,7 +17,6 @@ struct NavigationBarBackButton: View {
             Image(systemName: "chevron.left")
                 .font(.system(size: 18).weight(.medium))
                 .foregroundStyle(Color.black)
-//                .frame(maxWidth: 40, maxHeight: 40, alignment: .leading)
         }
     }
 }

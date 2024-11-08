@@ -10,12 +10,7 @@ import SwiftUI
 struct WeeklyForecastView: View {
     let weeklyForecast: WeeklyForecast
     @StateObject var viewModel = WeeklyForecastViewModel()
-//
-//    init(weeklyForecast: WeeklyForecast) {
-//        self.weeklyForecast = weeklyForecast
-//        _viewModel = StateObject(wrappedValue: WeeklyForecastViewModel(weeklyForecast: weeklyForecast))
-//    }
-//    
+
     var body: some View {
         VStack(spacing: 0) {
             TextDivider(text: "주간 날씨")
@@ -86,11 +81,13 @@ struct WeeklyForecastView: View {
                                     .font(.pretendardMedium(.caption2))
                                     .position(x: midX, y: chartMaxGap + 25.responsibleHeight + 40.responsibleHeight)
                             }
-                        }.frame(maxHeight: 140.responsibleHeight)
+                        }
+                        .frame(maxHeight: 140.responsibleHeight)
                     }
                 }
             }
         }
         .padding(.bottom, 60.responsibleHeight)
+        .offset(y: -25.responsibleHeight)
     }
 }

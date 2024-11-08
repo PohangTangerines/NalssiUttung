@@ -12,7 +12,6 @@ struct AddLocationText: View {
         Text("지역 추가하기")
             .font(.pretendardSemibold(.callout))
             .foregroundStyle(Color.black)
-//            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
 }
 
