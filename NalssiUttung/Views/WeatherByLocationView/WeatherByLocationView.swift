@@ -1,4 +1,12 @@
 //
+//  WeatherByLocationView.swift
+//  NalssiUttung
+//
+//  Created by 금가경 on 11/8/24.
+//
+
+
+//
 //  LocationListView.swift
 //  NalssiUttung
 //
@@ -52,7 +60,7 @@ struct WeatherByLocationView: View {
                                 }
                             Spacer()
                         }
-                        WeatherCard(address: selectedLocation, isCurrentLocation: false)
+                        WeatherListCardView(address: selectedLocation, isCurrentLocation: false)
                             .frame(maxWidth: .infinity, maxHeight: 140)
                             .listRowSeparator(.hidden)
                             .onTapGesture {
@@ -93,7 +101,7 @@ struct WeatherByLocationView: View {
     // TODO: - WeatherByLocationList와 통합
     private var currentWeatherView: some View {
         HStack {
-            WeatherCard(weatherManager: weatherManager, address: locationManager.currentAddress, isCurrentLocation: true)
+            WeatherListCardView(weatherManager: weatherManager, address: locationManager.currentAddress, isCurrentLocation: true)
                 .frame(maxWidth: .infinity, maxHeight: 140)
                 .listRowSeparator(.hidden)
                 .onTapGesture {

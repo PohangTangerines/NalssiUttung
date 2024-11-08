@@ -37,14 +37,18 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
         
-        Task {
-            self.currentLocation = await requestCurrentLocation()
+        DispatchQueue.main.async {
+            Task {
+                self.currentLocation = await self.requestCurrentLocation()
+            }
         }
+ 
     }
     
     func requestCurrentLocation() async -> CLLocation? {
-        await withCheckedContinuation { _ in
+        await withCheckedContinuation { continuation in
             self.locationManager.startUpdatingLocation()
+            continuation.resume(returning: self.locationManager.location)
         }
     }
 

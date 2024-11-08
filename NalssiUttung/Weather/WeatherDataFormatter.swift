@@ -45,6 +45,12 @@ class WeatherDataFormatter {
         return dateFormatter.string(from: date)
     }
     
+    static func monthDayAndDayOfWeek() -> String {
+        let today = Date()
+        dateFormatter.dateFormat = "M월 d일 E요일"
+        return dateFormatter.string(from: today)
+    }
+    
     static func windSpeed(from windSpeed: Measurement<UnitSpeed>) -> String {
         measurementFormatter.unitOptions = .providedUnit
         return measurementFormatter.string(from: windSpeed)
