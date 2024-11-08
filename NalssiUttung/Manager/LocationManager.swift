@@ -36,13 +36,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
-        
-        DispatchQueue.main.async {
-            Task {
-                self.currentLocation = await self.requestCurrentLocation()
-            }
-        }
- 
     }
     
     func requestCurrentLocation() async -> CLLocation? {

@@ -51,6 +51,8 @@ struct MainView: View {
             .offset(y: viewModel.viewOffsetY)
             .toolbar(content: toolbarContent)
             .task {
+                locationManager.currentLocation = await locationManager.requestCurrentLocation()
+                
                 if let selectedLocation = locationManager.selectedLocation {
                     await weatherManager.fetchWeather(for: selectedLocation, with: .all)
                 } else {
