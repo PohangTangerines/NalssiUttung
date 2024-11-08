@@ -348,6 +348,16 @@
 			path = IntentHandler;
 			sourceTree = "<group>";
 		};
+		035A63152CDDEFA4003FC443 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				03B2F46C2AB09FAA005A5AD4 /* IMHyemin-Bold.otf */,
+				03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */,
+				03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		035D2F732C57C0A70024B283 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,10 +441,8 @@
 		03B2F46B2AB09F89005A5AD4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				035A63152CDDEFA4003FC443 /* Font */,
 				031F38F42AFBBD40002E2EAD /* GIFImage */,
-				03B2F46C2AB09FAA005A5AD4 /* IMHyemin-Bold.otf */,
-				03B2F46E2AB09FD3005A5AD4 /* Pretendard-SemiBold.otf */,
-				03B2F4702AB09FDD005A5AD4 /* Pretendard-Medium.otf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

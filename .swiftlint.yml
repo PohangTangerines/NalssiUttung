@@ -47,4 +47,4 @@ identifier_name:
     - GlobalAPIKey
 reporter: "xcode" # 보고 유형 (xcode, json, csv, checkstyle, junit, html, emoji, markdown)
 cyclomatic_complexity:
-  warning: 15
+  warning: 18

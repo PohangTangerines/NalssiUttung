@@ -88,4 +88,3 @@ class WeeklyForecastViewModel: ObservableObject {
         return (highPath, lowPath)
     }
 }
-

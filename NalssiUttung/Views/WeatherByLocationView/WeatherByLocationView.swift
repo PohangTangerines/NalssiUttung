@@ -5,13 +5,6 @@
 //  Created by 금가경 on 11/8/24.
 //
 
-
-//
-//  LocationListView.swift
-//  NalssiUttung
-//
-//  Created by CHANG JIN LEE on 2023/09/11.
-
 import SwiftUI
 import WeatherKit
 
