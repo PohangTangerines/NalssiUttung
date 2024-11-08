@@ -54,7 +54,7 @@ struct WeeklyForecast {
     }
 }
 
-struct DetailedWeather {
+struct DetailedForecast {
     var precipitation: String
     var precipitationAmount: String
     var windDirection: String

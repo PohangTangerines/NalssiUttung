@@ -19,7 +19,7 @@ class WeatherManager: ObservableObject {
     @Published var currentWeather: CurrentWeather?
     @Published var dailyForecast: DailyForecast?
     @Published var weeklyForecast: WeeklyForecast?
-    @Published var detailedWeather: DetailedWeather?
+    @Published var detailedForecast: DetailedForecast?
     
     var weather: Weather?
 
@@ -37,7 +37,7 @@ class WeatherManager: ObservableObject {
         self.updateCurrentWeather()
         self.updateDailyWeather()
         self.updateWeeklyWeather()
-        self.updateDetailedWeather()
+        self.updateDetailedForecast()
             
         case .current:
             self.updateCurrentWeather()
@@ -151,7 +151,7 @@ class WeatherManager: ObservableObject {
         }
     }
     
-    private func updateDetailedWeather() {
+    private func updateDetailedForecast() {
         guard let weather = weather else { return }
         
         let windDirection = weather.currentWeather.wind.compassDirection
@@ -175,7 +175,7 @@ class WeatherManager: ObservableObject {
         let convertedPrecipitationAmount = WeatherDataFormatter.precipitationAmount(from: precipitationAmount)
         
         DispatchQueue.main.async {
-            self.detailedWeather = DetailedWeather(precipitation: convertedPrecipitation,
+            self.detailedForecast = DetailedForecast(precipitation: convertedPrecipitation,
                                                    precipitationAmount: convertedPrecipitationAmount,
                                                    windDirection: convertedWindDirection,
                                                    windSpeed: convertedWindSpeed,

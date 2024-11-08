@@ -41,8 +41,8 @@ struct WeatherCardLayout: View {
                             .padding(.trailing, 20.responsibleWidth)
                     }
                 }
-                
             }
+            
             HStack(alignment: .top, spacing: 0) {
                 Image("\(currentWeather.weatherCondition.icon)")
                     .resizable()

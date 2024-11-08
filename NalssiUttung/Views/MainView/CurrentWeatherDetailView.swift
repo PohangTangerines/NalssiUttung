@@ -13,14 +13,15 @@ struct CurrentWeatherDetailView: View {
     
     var body: some View {
         if let currentWeather = weatherManager.currentWeather,
-            let weeklyForecast = weatherManager.weeklyForecast {
+           let weeklyForecast = weatherManager.weeklyForecast,
+           let detailedForecast = weatherManager.detailedForecast {
             VStack(spacing: 0) {
                 WeatherCardLayout(currentWeather: currentWeather, viewOrigin: .main)
                     .padding(.bottom, 30.responsibleHeight)
 
                 WeeklyForecastView(weeklyForecast: weeklyForecast)
                 
-                DetailedWeatherView(weatherManager: weatherManager)
+                DetailedForecastView(detailedForecast: detailedForecast)
                 
                 NavigationLink(destination: InformationView()) {
                     InformationLabel()
