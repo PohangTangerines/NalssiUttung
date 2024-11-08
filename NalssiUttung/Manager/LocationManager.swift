@@ -42,6 +42,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         await withCheckedContinuation { continuation in
             self.locationManager.startUpdatingLocation()
             continuation.resume(returning: self.locationManager.location)
+            self.locationManager.stopUpdatingLocation()
         }
     }
 
