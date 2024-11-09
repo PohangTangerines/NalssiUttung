@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-// TODO: - Combine 활용해서 입력 받기
-// TODO: - FocusState 되면 EmptyView 띄우기
 struct SearchBar: View {
     @ObservedObject var toolbarViewModel: ToolbarViewModel
+    @FocusState var isFocused: Bool
     
     var body: some View {
         HStack {
@@ -18,13 +17,17 @@ struct SearchBar: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(Color.black)
                 
-                TextField("title", text: $toolbarViewModel.searchText, prompt: Text("지역 검색하기")
-                    .foregroundStyle(Color.black))
+                TextField("title",
+                          text: $toolbarViewModel.searchText,
+                          prompt: Text("지역 검색하기")
+                    .foregroundStyle(Color.black)
+                )
                 .font(.pretendardMedium(.callout))
                 .contentShape(RoundedRectangle(cornerRadius: 10))
+                .focused($isFocused)
                 .onTapGesture {
                     withAnimation {
-                        toolbarViewModel.isTextFieldActive = true
+                        isFocused = true
                     }
                 }
             }
@@ -34,16 +37,21 @@ struct SearchBar: View {
             .overlay(RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.black, lineWidth: 2))
             
-            if toolbarViewModel.isTextFieldActive {
+            if isFocused {
                 Button {
-                    toolbarViewModel.isTextFieldActive = false
-                    toolbarViewModel.searchText = ""
+                    isFocused = false
                 } label: {
                     Text("취소")
                         .font(.pretendardSemibold(.callout))
                         .foregroundStyle(Color.black)
                         .frame(maxWidth: 40.responsibleWidth, maxHeight: 40.responsibleHeight, alignment: .trailing)
                 }
+            }
+        }
+        .onChange(of: isFocused) { _, newValue in
+            withAnimation {
+                toolbarViewModel.isTextFieldActive = newValue
+                toolbarViewModel.searchText = ""
             }
         }
     }

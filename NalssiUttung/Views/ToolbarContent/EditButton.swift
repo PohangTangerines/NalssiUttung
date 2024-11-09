@@ -10,6 +10,7 @@ import SwiftUI
 struct EditButton: View {
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
     
+    // TODO: - 완료버튼 안누르면 수정 반영 안되도록 하기
     var body: some View {
         if !toolbarViewModel.isTextFieldActive {
             Button {

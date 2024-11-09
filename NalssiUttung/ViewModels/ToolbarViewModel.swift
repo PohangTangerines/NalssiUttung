@@ -11,7 +11,7 @@ class ToolbarViewModel: ObservableObject {
     @Published var isEditMode: Bool = false
     
     // MARK: - SearchBar 관련 property
-    @Published var isTextFieldActive: Bool = false
+    @Published var isTextFieldActive: Bool = false 
     
     // MARK: - Modal 관련 property
     @Published var isModalPresented: Bool = false

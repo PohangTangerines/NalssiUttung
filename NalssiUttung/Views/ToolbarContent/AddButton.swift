@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddButton: View {
+    // TODO: - 왜 dismiss와 isModalPresented가 둘다?
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
     @Environment(\.dismiss) var dismiss
 
@@ -28,6 +29,7 @@ struct AddButton: View {
                 dismiss()
                 toolbarViewModel.isTextFieldActive = false
                 toolbarViewModel.isModalPresented = false
+                dismissKeyboard()
             } label: {
                 Text("추가")
                     .font(.pretendardSemibold(.body))
@@ -36,6 +38,10 @@ struct AddButton: View {
         case .modalInList:
             Spacer()
         }
+    }
+    
+    private func dismissKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 

@@ -38,6 +38,7 @@ struct LocationSearchResultView: View {
                     toolbarViewModel.isModalPresented = true
                 }
                 .sheet(isPresented: $toolbarViewModel.isModalPresented) {
+                    // TODO: - 추가되지 않는 지역 추가버튼 안 뜨는 문제 해결
                     let mode: WeatherDisplayMode = (weatherByLocationViewModel.savedLocations.contains(filteredLocation) == true) ? .modalInList : .modal
                     
                     MainView(mode: mode)
