@@ -1,5 +1,5 @@
 //
-//  WeatherByLocationListView.swift
+//  LocalizedWeatherListView.swift
 //  NalssiUttung
 //
 //  Created by 금가경 on 11/8/24.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct WeatherByLocationListView: View {
+struct LocalizedWeatherListView: View {
     @ObservedObject var locationManager = LocationManager.shared
     @StateObject var weatherManager = WeatherManager()
     
-    @ObservedObject var weatherByLocationViewModel: LocalizedWeatherViewModel
+    @ObservedObject var localizedWeatherViewModel: LocalizedWeatherViewModel
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
     
     var body: some View {
@@ -19,16 +19,16 @@ struct WeatherByLocationListView: View {
             LazyVStack {
                 WeatherListCardView(weatherManager: weatherManager, address: locationManager.currentAddress, isCurrentLocation: true, mode: .modalInList)
                 
-                ForEach(weatherByLocationViewModel.savedLocations, id: \.self) { selectedLocation in
+                ForEach(localizedWeatherViewModel.savedLocations, id: \.self) { selectedLocation in
                     HStack {
                         if toolbarViewModel.isEditMode {
                             Image("deleteButton")
                                 .frame(maxWidth: 28, maxHeight: 28)
                                 .foregroundStyle(.red)
                                 .onTapGesture {
-                                    if let index = weatherByLocationViewModel.savedLocations.firstIndex(of: selectedLocation) {
-                                        weatherByLocationViewModel.savedLocations.remove(at: index)
-                                        weatherByLocationViewModel.saveLocations(come: weatherByLocationViewModel.savedLocations)
+                                    if let index = localizedWeatherViewModel.savedLocations.firstIndex(of: selectedLocation) {
+                                        localizedWeatherViewModel.savedLocations.remove(at: index)
+                                        localizedWeatherViewModel.saveLocations(come: localizedWeatherViewModel.savedLocations)
                                     }
                                 }
                             Spacer()
@@ -36,12 +36,12 @@ struct WeatherByLocationListView: View {
                         WeatherListCardView(address: selectedLocation, isCurrentLocation: false, mode: .modalInList)
                     }
                 }
-                .onMove(perform: weatherByLocationViewModel.move) // 항목 이동 기능
+                .onMove(perform: localizedWeatherViewModel.move) // 항목 이동 기능
             }
             .environment(\.editMode, .constant(toolbarViewModel.isEditMode ? EditMode.active : EditMode.inactive))
             .task {
-                let userList = weatherByLocationViewModel.loadLocations()
-                weatherByLocationViewModel.savedLocations = userList
+                let userList = localizedWeatherViewModel.loadLocations()
+                localizedWeatherViewModel.savedLocations = userList
             }
         }
     }

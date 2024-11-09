@@ -13,7 +13,7 @@ struct MainView: View {
     @StateObject var viewModel = MainViewModel()
     @ObservedObject var locationManager = LocationManager.shared
     @StateObject var weatherManager = WeatherManager()
-    @StateObject var weatherByLocationViewModel = LocalizedWeatherViewModel()
+    @StateObject var localizedWeatherViewModel = LocalizedWeatherViewModel()
     
     let mode: WeatherDisplayMode
 
