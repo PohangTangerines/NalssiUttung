@@ -1,5 +1,5 @@
 //
-//  WeatherByLocationView.swift
+//  LocalizedWeatherView.swift
 //  NalssiUttung
 //
 //  Created by 금가경 on 11/8/24.
@@ -8,16 +8,16 @@
 import SwiftUI
 import WeatherKit
 
-struct WeatherByLocationView: View {
-    @StateObject var weatherByLocationViewModel = WeatherByLocationViewModel()
+struct LocalizedWeatherView: View {
+    @StateObject var localizedWeatherViewModel = LocalizedWeatherViewModel()
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
 
     var body: some View {
         VStack {
             if toolbarViewModel.isTextFieldActive {
-                LocationSearchResultView(weatherByLocationViewModel: weatherByLocationViewModel)
+                LocationSearchResultView(localizedWeatherViewModel: localizedWeatherViewModel)
             } else {
-                WeatherByLocationListView(weatherByLocationViewModel: weatherByLocationViewModel)
+                WeatherByLocationListView(weatherByLocationViewModel: localizedWeatherViewModel)
             }
             if toolbarViewModel.isTextFieldActive && toolbarViewModel.filteredLocations == [] {
                 NoResultView()

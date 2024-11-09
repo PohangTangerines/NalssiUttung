@@ -18,7 +18,7 @@ struct AddButton: View {
     var body: some View {
         switch mode {
         case .regular:
-            NavigationLink(destination: WeatherByLocationView()) {
+            NavigationLink(destination: LocalizedWeatherView()) {
                 Image(systemName: "plus")
                     .font(.pretendardSemibold(.body))
                     .foregroundStyle(.black)

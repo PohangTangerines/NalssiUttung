@@ -11,7 +11,7 @@ struct WeatherByLocationListView: View {
     @ObservedObject var locationManager = LocationManager.shared
     @StateObject var weatherManager = WeatherManager()
     
-    @ObservedObject var weatherByLocationViewModel: WeatherByLocationViewModel
+    @ObservedObject var weatherByLocationViewModel: LocalizedWeatherViewModel
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
     
     var body: some View {
