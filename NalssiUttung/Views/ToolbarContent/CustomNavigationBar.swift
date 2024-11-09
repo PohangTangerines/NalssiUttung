@@ -40,6 +40,6 @@ struct CustomNavigationBarModifier<L: View, P: View, R: View, B: View>: ViewModi
 // TODO: - 슬라이딩 하면 pop하도록 조정
 extension View {
     func customNavigationBar(toolbarViewModel: ToolbarViewModel) -> some View {
-        self.modifier(CustomNavigationBarModifier(leading: NavigationBarBackButton(), principal: AddLocationText(), trailing: EditButton(toolbarViewModel: toolbarViewModel), bottom: SearchBar(toolbarViewModel: toolbarViewModel)))
+        self.modifier(CustomNavigationBarModifier(leading: NavigationBarBackButton(), principal: AddLocationText(), trailing: EditButton(), bottom: SearchBar(toolbarViewModel: toolbarViewModel)))
     }
 }

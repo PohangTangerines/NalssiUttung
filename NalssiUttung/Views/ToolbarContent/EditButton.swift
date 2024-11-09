@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditButton: View {
-    @ObservedObject var toolbarViewModel = ToolbarViewModel()
+    @EnvironmentObject var toolbarViewModel: ToolbarViewModel
     
     var body: some View {
         if !toolbarViewModel.isTextFieldActive {

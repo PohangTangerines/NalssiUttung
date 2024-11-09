@@ -33,7 +33,7 @@ class WeatherByLocationViewModel: ObservableObject {
     func updateSelectedLocation(for address: String) {
         // TODO: - locationManager.selectedLocation 강제 언래핑 문제 해결
         let updatedLocation = locationManager.findCoordinates(address: address)
-        locationManager.selectedLocation = updatedLocation!
+        locationManager.selectedLocation = updatedLocation
     }
     
     // MARK: - 뷰 편집 관련 함수

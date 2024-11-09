@@ -50,7 +50,8 @@ struct LocationSearchResultView: View {
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-    }}
+    }
+}
 
 #Preview {
     LocationSearchResultView(weatherByLocationViewModel: WeatherByLocationViewModel())
