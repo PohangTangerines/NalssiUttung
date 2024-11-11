@@ -14,37 +14,39 @@ struct WeatherListCardView: View {
     @ObservedObject var locationManager = LocationManager.shared
     @StateObject var weatherManager = WeatherManager()
     
-    let address: String
+    let locationInfo: LocationInfo?
     let isCurrentLocation: Bool
-    let mode: WeatherDisplayMode
     
     var body: some View {
         Group {
             if let currentWeather = weatherManager.currentWeather {
-                WeatherCardLayout(currentWeather: currentWeather, viewOrigin: .list, address: address, isCurrentLocation: isCurrentLocation)
+                WeatherCardLayout(currentWeather: currentWeather, viewOrigin: .list, address: locationInfo?.address, isCurrentLocation: isCurrentLocation)
             } else {
-                WeatherCardLayout(currentWeather: CurrentWeather.placeholder, viewOrigin: .list, address: address, isCurrentLocation: isCurrentLocation)
+                WeatherCardLayout(currentWeather: CurrentWeather.placeholder, viewOrigin: .list, address: locationInfo?.address, isCurrentLocation: isCurrentLocation)
                     .redacted(reason: .placeholder)
             }
         }
+        .padding(.bottom, 15.responsibleHeight)
+
         .onTapGesture {
-            // TODO: - 강제 언래핑 변경, updatedLocation이 언제 nil이 되는지 다시 확인해보기
-            let updatedLocation = locationManager.findCoordinates(address: address)
-            locationManager.selectedLocation = updatedLocation
+            if let locationInfo = locationInfo {
+                let updatedLocation = CLLocation(latitude: locationInfo.latitude, longitude: locationInfo.longitude)
+                locationManager.selectedLocation = updatedLocation
+            } else {
+                print("No location info")
+            }
             toolbarViewModel.isModalPresented = true
         }
         .sheet(isPresented: $toolbarViewModel.isModalPresented) {
-            MainView(mode: mode)
-                .onDisappear {
-                    locationManager.selectedLocation = nil
-                }
+            MainView(mode: .modalInList)
         }
         .task {
-            // TODO: - UserDefault에 저장하는 값 CLLocation(longitude, latitude)로 바꾸고 findCoordiates 제거
             if isCurrentLocation {
                 await weatherManager.fetchWeather(for: locationManager.currentLocation, with: .current)
             } else {
-                if let location = locationManager.findCoordinates(address: address) {
+                if let locationInfo = locationInfo {
+                    let location = CLLocation(latitude: locationInfo.latitude,
+                                              longitude: locationInfo.longitude)
                     await weatherManager.fetchWeather(for: location, with: .current)
                 }
             }
@@ -53,5 +55,6 @@ struct WeatherListCardView: View {
 }
 
 #Preview {
-    WeatherListCardView(weatherManager: WeatherManager(), address: "제주시 애월읍", isCurrentLocation: true, mode: .modal)
+    WeatherListCardView(weatherManager: WeatherManager(), locationInfo: LocationInfo.Data[0], isCurrentLocation: true)
+        .environmentObject(ToolbarViewModel())
 }

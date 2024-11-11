@@ -11,8 +11,9 @@ struct AddButton: View {
     // TODO: - 왜 dismiss와 isModalPresented가 둘다?
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
     @Environment(\.dismiss) var dismiss
-
-    var action: () -> Void = {}
+    private let coreDataStack = CoreDataStack.shared
+    
+    var locationInfo: LocationInfo?
     var mode: WeatherDisplayMode
 
     var body: some View {
@@ -25,7 +26,7 @@ struct AddButton: View {
             }
         case .modal:
             Button {
-                action()
+                coreDataStack.saveLocation(location: locationInfo)
                 dismiss()
                 toolbarViewModel.isTextFieldActive = false
                 toolbarViewModel.isModalPresented = false

@@ -9,8 +9,8 @@ import SwiftUI
 import WeatherKit
 
 struct LocalizedWeatherView: View {
-    @StateObject var localizedWeatherViewModel = LocalizedWeatherViewModel()
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
+    @StateObject var localizedWeatherViewModel = LocalizedWeatherViewModel()
 
     var body: some View {
         VStack {

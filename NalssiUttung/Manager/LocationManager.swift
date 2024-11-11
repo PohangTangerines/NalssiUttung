@@ -28,9 +28,16 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    @Published var currentAddress: String = ""
+    @Published var currentAddress: String = "" {
+        didSet {
+            self.currentLocationInfo = findLocation(for: currentAddress)
+        }
+    }
     @Published var selectedAddress: String = ""
     
+    // TODO: - 변수를 각각 두는 대신 LocationInfo로 리팩토링하기
+    @Published var currentLocationInfo: LocationInfo?
+            
     override init() {
         super.init()
         
@@ -108,11 +115,15 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    // TODO: - UserDefault에 값을 longitude, latitude로 저장해 findCoordinates 함수 삭제하기
-    func findCoordinates(address val: String) -> CLLocation? {
-        if let location = LocationInfo.Data.first(where: { $0.address == val }) {
-            return CLLocation(latitude: location.latitude, longitude: location.longitude)
-        }
-        return nil
+    func findLocation(for address: String) -> LocationInfo? {
+        return LocationInfo.Data.first(where: { $0.address == address })
     }
+    
+    func updateSelectedLocation(for address: String) {
+        if let updatedLocation = findLocation(for: address) {
+            self.selectedLocation = CLLocation(latitude: updatedLocation.latitude,
+                                                          longitude: updatedLocation.longitude)
+        }
+    }
+
 }

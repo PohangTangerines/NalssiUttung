@@ -6,43 +6,37 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 class LocalizedWeatherViewModel: ObservableObject {
+    // TODO: - private let으로 변경?
     @ObservedObject var locationManager = LocationManager.shared
+    private let coreDataStack = CoreDataStack.shared
     
-    // TODO: - 리스트에서 값 선택 시
-    @Published var savedLocations: [String] = []
-    
-    func loadLocations() -> [String] {
-        return UserDefaults.standard.stringArray(forKey: "locations") ?? []
+    @Published var savedLocations: [LocationInfo] = []
+    @Published var mode: WeatherDisplayMode = .modal
+
+    func loadLocations() {
+        self.savedLocations = coreDataStack.fetchAllLocations()
     }
     
-    func saveLocations(come list: [String]) {
-        UserDefaults.standard.set(list, forKey: "locations")
+    func saveLocation(location: LocationInfo?) {
+        guard let location else { return }
+        coreDataStack.saveLocation(location: location)
+        loadLocations()
     }
     
-    func updateSavedLocations() {
-        var locationList = loadLocations()
-        
-        // TODO: - 임시 중복방지 상태, LocationInfo 수정 후 삭제하기
-        guard !locationList.contains(locationManager.selectedAddress) else { return }
-        locationList.append(locationManager.selectedAddress)
-        saveLocations(come: locationList)
+    func determineWeatherDisplayMode(for location: String) {
+        self.mode = coreDataStack.isLocationExist(for: location) ? .modalInList : .modal
     }
     
-    func updateSelectedLocation(for address: String) {
-        // TODO: - locationManager.selectedLocation 강제 언래핑 문제 해결
-        let updatedLocation = locationManager.findCoordinates(address: address)
-        locationManager.selectedLocation = updatedLocation
+    func deleteLocation(at index: Int) {
+        let locationToRemove = savedLocations[index]
+        coreDataStack.deleteLocation(locationToRemove)
+        savedLocations.remove(at: index)
     }
-    
-    // MARK: - 뷰 편집 관련 함수
+
     func move(from source: IndexSet, to destination: Int) {
         savedLocations.move(fromOffsets: source, toOffset: destination)
-        saveLocations(come: savedLocations)
-    }
-    
-    func checkIsInList(address: String) -> WeatherDisplayMode {
-        return savedLocations.contains(address) ? .modalInList : .modal
     }
 }

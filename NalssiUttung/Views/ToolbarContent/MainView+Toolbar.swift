@@ -8,6 +8,7 @@
 import SwiftUI
 
 extension MainView {
+    // TODO: - toolbar MainView에서 분리해서 ToolbarViewModel로 분리할지 고민해 보기.
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
@@ -28,7 +29,7 @@ extension MainView {
         }
         
         ToolbarItem(placement: .topBarTrailing) {
-            AddButton(action: localizedWeatherViewModel.updateSavedLocations, mode: mode)
+            AddButton(locationInfo: locationManager.findLocation(for: locationManager.selectedAddress), mode: mode)
         }
     }
 }

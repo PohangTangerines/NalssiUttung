@@ -15,34 +15,43 @@ struct LocalizedWeatherListView: View {
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
     
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                WeatherListCardView(weatherManager: weatherManager, address: locationManager.currentAddress, isCurrentLocation: true, mode: .modalInList)
-                
-                ForEach(localizedWeatherViewModel.savedLocations, id: \.self) { selectedLocation in
-                    HStack {
-                        if toolbarViewModel.isEditMode {
-                            Image("deleteButton")
-                                .frame(maxWidth: 28, maxHeight: 28)
-                                .foregroundStyle(.red)
-                                .onTapGesture {
-                                    if let index = localizedWeatherViewModel.savedLocations.firstIndex(of: selectedLocation) {
-                                        localizedWeatherViewModel.savedLocations.remove(at: index)
-                                        localizedWeatherViewModel.saveLocations(come: localizedWeatherViewModel.savedLocations)
-                                    }
+        List {
+            // TODO: - WeatherListCardView 리팩토링
+            WeatherListCardView(weatherManager: weatherManager, locationInfo: locationManager.currentLocationInfo, isCurrentLocation: true)
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
+            
+            ForEach(localizedWeatherViewModel.savedLocations) { savedLocation in
+                HStack {
+                    if toolbarViewModel.isEditMode {
+                        Image("deleteButton")
+                            .frame(maxWidth: 28, maxHeight: 28)
+                            .foregroundStyle(.red)
+                            .onTapGesture {
+                                if let index = localizedWeatherViewModel.savedLocations.firstIndex(where: { $0.id == savedLocation.id }) {
+                                    localizedWeatherViewModel.deleteLocation(at: index)
                                 }
-                            Spacer()
-                        }
-                        WeatherListCardView(address: selectedLocation, isCurrentLocation: false, mode: .modalInList)
+                            }
+                        Spacer()
                     }
+                    WeatherListCardView(locationInfo: savedLocation, isCurrentLocation: false)
                 }
-                .onMove(perform: localizedWeatherViewModel.move) // 항목 이동 기능
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
             }
-            .environment(\.editMode, .constant(toolbarViewModel.isEditMode ? EditMode.active : EditMode.inactive))
-            .task {
-                let userList = localizedWeatherViewModel.loadLocations()
-                localizedWeatherViewModel.savedLocations = userList
-            }
+            .onMove(perform: localizedWeatherViewModel.move)
+        }
+        .listStyle(.plain)
+        .scrollIndicators(.hidden)
+        .environment(\.editMode, .constant(toolbarViewModel.isEditMode ? EditMode.active : EditMode.inactive))
+        .task {
+            // TODO: - savedLocation 변경 값이 뷰에 반영되지 않아서 뷰를 불러올때마다 받아오도록 함. 추후 제거할 수 있으면 제거
+            localizedWeatherViewModel.loadLocations()
         }
     }
+}
+
+#Preview {
+    LocalizedWeatherView()
+        .environmentObject(ToolbarViewModel())
 }
