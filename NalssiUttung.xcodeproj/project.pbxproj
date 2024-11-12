@@ -512,7 +512,7 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		0E9EEFF82B1F8D5E00D85EB8 /* WeatherByLocationView */ = {
+		0E9EEFF82B1F8D5E00D85EB8 /* LocalizedWeatherView */ = {
 			isa = PBXGroup;
 			children = (
 				0317A1BD2CD7F59D00B01F95 /* NoResultView.swift */,
@@ -521,7 +521,7 @@
 				7C0D1BDC2AAB7E7400A8BCFF /* WeatherListCardView.swift */,
 				035A63162CDE3974003FC443 /* LocalizedWeatherListView.swift */,
 			);
-			path = WeatherByLocationView;
+			path = LocalizedWeatherView;
 			sourceTree = "<group>";
 		};
 		0EB04B542AA6D17900DC0933 = {
@@ -590,7 +590,7 @@
 			isa = PBXGroup;
 			children = (
 				0384A5EB2CC63C5200A4DA2C /* ToolbarContent */,
-				0E9EEFF82B1F8D5E00D85EB8 /* WeatherByLocationView */,
+				0E9EEFF82B1F8D5E00D85EB8 /* LocalizedWeatherView */,
 				0E9EEFF72B1F8D5200D85EB8 /* Components */,
 				0E9EEFF52B1F8D1A00D85EB8 /* MainView */,
 				0E9EEFF62B1F8D3800D85EB8 /* Animation */,
