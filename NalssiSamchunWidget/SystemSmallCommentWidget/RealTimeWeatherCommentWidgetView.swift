@@ -12,8 +12,6 @@ struct RealTimeWeatherCommentWidgetView: View {
     let data: WeatherCommentWidgetData
     
     var body: some View {
-        // 글자가 두 줄이 되는 경우 생김.
-        // 에셋 바람/글자 두 줄이 되는 경우 생각해 보기
         VStack(alignment: .leading, spacing: 4) {
             Text(data.address)
                 .customTextStyle(fontName: .pretendardSemibold, fontSize: 14)
