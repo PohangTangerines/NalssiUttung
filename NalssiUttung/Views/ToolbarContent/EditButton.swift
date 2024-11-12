@@ -15,13 +15,7 @@ struct EditButton: View {
         if !toolbarViewModel.isTextFieldActive, !localizedWeatherViewModel.savedLocations.isEmpty {
             Button {
                 withAnimation {
-                    if toolbarViewModel.isEditMode {
-                        localizedWeatherViewModel.saveOrderInCoreData()
-                        localizedWeatherViewModel.deleteLocationsInCoreData()
-                    } else {
-                        localizedWeatherViewModel.revertChanges()
-                    }
-                    toolbarViewModel.isEditMode.toggle()
+                    saveUpdates()
                 }
             } label: {
                 Text(toolbarViewModel.isEditMode ? "완료" : "편집")
@@ -29,6 +23,16 @@ struct EditButton: View {
                     .foregroundStyle(Color.black)
             }
         }
+    }
+    
+    func saveUpdates() {
+        if toolbarViewModel.isEditMode {
+            localizedWeatherViewModel.saveOrderInCoreData()
+            localizedWeatherViewModel.deleteLocationsInCoreData()
+        } else {
+            localizedWeatherViewModel.revertChanges()
+        }
+        toolbarViewModel.isEditMode.toggle()
     }
 }
 

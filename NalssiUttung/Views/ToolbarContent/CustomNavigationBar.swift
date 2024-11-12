@@ -12,6 +12,9 @@ struct CustomNavigationBarModifier<L: View, P: View, R: View, B: View>: ViewModi
     let trailing: R
     let bottom: B
     
+    @State private var dragOffset: CGFloat = 0
+    @Environment(\.dismiss) var dismiss
+    
     func body(content: Content) -> some View {
         ZStack(alignment: .top) {
             VStack {
@@ -30,17 +33,30 @@ struct CustomNavigationBarModifier<L: View, P: View, R: View, B: View>: ViewModi
                 .navigationBarBackButtonHidden(true)
                 .frame(maxHeight: 84.responsibleHeight)
                 content
+                    .gesture(DragGesture()
+                        .onChanged { value in
+                            dragOffset = value.translation.width
+                        }
+                        .onEnded { _ in
+                            if dragOffset > 50 {
+                                dismiss()
+                            }
+                            dragOffset = 0
+                        }
+                    )
             }
             .padding(.top, 15)
             .padding(20)
         }
-
     }
 }
 
-// TODO: - 슬라이딩 하면 pop하도록 조정
+/// customNavigationBar를 구현했습니다. 아래에 SearchBar를 달고싶었는데, toolbar로는 구현이 불가능해서 따로 구현했습니다.
 extension View {
     func customNavigationBar(toolbarViewModel: ToolbarViewModel, localizedWeatherViewModel: LocalizedWeatherViewModel) -> some View {
-        self.modifier(CustomNavigationBarModifier(leading: NavigationBarBackButton(), principal: AddLocationText(), trailing: EditButton(localizedWeatherViewModel: localizedWeatherViewModel), bottom: SearchBar(toolbarViewModel: toolbarViewModel)))
+        self.modifier(CustomNavigationBarModifier(leading: NavigationBarBackButton(),
+                                                  principal: AddLocationText(),
+                                                  trailing: EditButton(localizedWeatherViewModel: localizedWeatherViewModel),
+                                                  bottom: SearchBar(toolbarViewModel: toolbarViewModel)))
     }
 }
