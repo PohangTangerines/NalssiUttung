@@ -45,7 +45,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.locationManager.requestWhenInUseAuthorization()
     }
     
-
     /// 사용자 위치 권한 허가를 받지 못했을 때 기본 위치를 제주공항으로 설정합니다.
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
@@ -125,8 +124,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func updateSelectedLocation(for address: String) {
         if let updatedLocation = findLocation(for: address) {
-            self.selectedLocation = CLLocation(latitude: updatedLocation.latitude,
-                                                          longitude: updatedLocation.longitude)
+            self.selectedLocation = CLLocation(latitude: updatedLocation.coordinate.latitude,
+                                               longitude: updatedLocation.coordinate.longitude)
         }
     }
 

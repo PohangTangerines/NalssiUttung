@@ -30,7 +30,7 @@ struct WeatherListCardView: View {
 
         .onTapGesture {
             if let locationInfo = locationInfo {
-                let updatedLocation = CLLocation(latitude: locationInfo.latitude, longitude: locationInfo.longitude)
+                let updatedLocation = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)
                 locationManager.selectedLocation = updatedLocation
             } else {
                 print("No location info")
@@ -44,8 +44,8 @@ struct WeatherListCardView: View {
                 await weatherManager.fetchWeather(for: locationManager.currentLocation, with: .current)
             } else {
                 if let locationInfo = locationInfo {
-                    let location = CLLocation(latitude: locationInfo.latitude,
-                                              longitude: locationInfo.longitude)
+                    let location = CLLocation(latitude: locationInfo.coordinate.latitude,
+                                              longitude: locationInfo.coordinate.longitude)
                     await weatherManager.fetchWeather(for: location, with: .current)
                 }
             }

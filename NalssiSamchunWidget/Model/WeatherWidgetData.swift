@@ -26,7 +26,7 @@ extension WeatherCharacterWidgetData {
         guard let locationInfo: LocationInfo = LocationManager.shared.findLocation(for: address) else {
             throw CustomWeatherError.noLocationInfo
         }
-        let location = CLLocation(latitude: locationInfo.latitude, longitude: locationInfo.longitude)
+        let location = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)
         
         // 현재 온도
         let weather = try await WeatherService.shared.weather(for: location)
@@ -65,7 +65,7 @@ extension WeatherCommentWidgetData {
         guard let locationInfo = LocationManager.shared.findLocation(for: address) else {
             throw CustomWeatherError.noLocationInfo
         }
-        let location = CLLocation(latitude: locationInfo.latitude, longitude: locationInfo.longitude)
+        let location = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)
         
         // 현재 온도
         let weather = try await WeatherService.shared.weather(for: location)

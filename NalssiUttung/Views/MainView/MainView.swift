@@ -10,6 +10,7 @@ import SwiftUI
 import WeatherKit
 
 struct MainView: View {
+    // TODO: - locationManager와 weatherManager 어떻게 전달할지 고민해 보기.
     @StateObject var viewModel = MainViewModel()
     @ObservedObject var locationManager = LocationManager.shared
     @StateObject var weatherManager = WeatherManager()

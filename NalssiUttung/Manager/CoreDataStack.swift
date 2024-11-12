@@ -54,8 +54,8 @@ extension CoreDataStack {
         let locationValues: [String: Any] = [
             "name": location.name,
             "address": location.address,
-            "latitude": location.latitude,
-            "longitude": location.longitude,
+            "latitude": location.coordinate.latitude,
+            "longitude": location.coordinate.longitude,
             "order": count
         ]
         
@@ -78,8 +78,8 @@ extension CoreDataStack {
                 LocationInfo(
                     name: $0.value(forKey: "name") as? String ?? "",
                     address: $0.value(forKey: "address") as? String ?? "",
-                    latitude: $0.value(forKey: "latitude") as? Double ?? 0.0,
-                    longitude: $0.value(forKey: "longitude") as? Double ?? 0.0
+                    coordinate: Coordinate(latitude: $0.value(forKey: "latitude") as? Double ?? 0.0,
+                                           longitude: $0.value(forKey: "longitude") as? Double ?? 0.0)
                 )
             }
         } catch {

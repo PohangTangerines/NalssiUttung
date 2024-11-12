@@ -10,10 +10,14 @@ import CoreLocation
 
 struct LocationInfo: Codable, Hashable, Identifiable {
     var id = UUID()
-    var name: String
-    var address: String
-    var latitude: Double
-    var longitude: Double
+    let name: String
+    let address: String
+    let coordinate: Coordinate
+}
+
+struct Coordinate: Codable, Hashable {
+    let latitude: Double
+    let longitude: Double
 }
 
 extension LocationInfo {
@@ -23,36 +27,36 @@ extension LocationInfo {
         // MARK: - 위 리스트 중 뚜렷한 관광지가 없는 동은 제외했습니다. 관광지가 있어 새로 추가된 동도 있습니다.
         
         // MARK: - 제주시 동
-        LocationInfo(name: "제주공항", address: "제주공항", latitude: 33.507873, longitude: 126.493116),
-        LocationInfo(name: "국립제주박물관", address: "제주시 건입동", latitude: 33.512524, longitude: 126.549911),
-        LocationInfo(name: "신비의도로", address: "제주시 노형동", latitude: 33.451005, longitude: 126.487605),
-        LocationInfo(name: "마방목지", address: "제주시 용강동", latitude: 33.427484, longitude: 126.604008),
+        LocationInfo(name: "제주공항", address: "제주공항", coordinate: Coordinate(latitude: 33.507873, longitude: 126.493116)),
+        LocationInfo(name: "국립제주박물관", address: "제주시 건입동", coordinate: Coordinate(latitude: 33.512524, longitude: 126.549911)),
+        LocationInfo(name: "신비의도로", address: "제주시 노형동", coordinate: Coordinate(latitude: 33.451005, longitude: 126.487605)),
+        LocationInfo(name: "마방목지", address: "제주시 용강동", coordinate: Coordinate(latitude: 33.427484, longitude: 126.604008)),
 
         // MARK: - 제주시 읍
-        LocationInfo(name: "비자림", address: "제주시 구좌읍", latitude: 33.488306, longitude: 126.808039),
-        LocationInfo(name: "새별오름", address: "제주시 애월읍", latitude: 33.366737, longitude: 126.358031),
-        LocationInfo(name: "함덕해수욕장", address: "제주시 조천읍", latitude: 33.543214, longitude: 126.669512),
-        LocationInfo(name: "협재해수욕장", address: "제주시 한림읍", latitude: 33.393849, longitude: 126.238928),
+        LocationInfo(name: "비자림", address: "제주시 구좌읍", coordinate: Coordinate(latitude: 33.488306, longitude: 126.808039)),
+        LocationInfo(name: "새별오름", address: "제주시 애월읍", coordinate: Coordinate(latitude: 33.366737, longitude: 126.358031)),
+        LocationInfo(name: "함덕해수욕장", address: "제주시 조천읍", coordinate: Coordinate(latitude: 33.543214, longitude: 126.669512)),
+        LocationInfo(name: "협재해수욕장", address: "제주시 한림읍", coordinate: Coordinate(latitude: 33.393849, longitude: 126.238928)),
         
         // MARK: - 제주시 면
-        LocationInfo(name: "우도", address: "제주시 우도면", latitude: 33.502323, longitude: 126.956813),
-        LocationInfo(name: "추자도", address: "제주시 추자면", latitude: 33.951988, longitude: 126.306709),
-        LocationInfo(name: "제주현대미술관", address: "제주시 한경면", latitude: 33.33828, longitude: 126.265802),
+        LocationInfo(name: "우도", address: "제주시 우도면", coordinate: Coordinate(latitude: 33.502323, longitude: 126.956813)),
+        LocationInfo(name: "추자도", address: "제주시 추자면", coordinate: Coordinate(latitude: 33.951988, longitude: 126.306709)),
+        LocationInfo(name: "제주현대미술관", address: "제주시 한경면", coordinate: Coordinate(latitude: 33.33828, longitude: 126.265802)),
         
         // MARK: - 서귀포시 동
-        LocationInfo(name: "정방폭포", address: "서귀포시 동홍동", latitude: 33.24457, longitude: 126.573327),
-        LocationInfo(name: "한라산", address: "서귀포시 서호동", latitude: 33.2591667, longitude: 126.5175),
-        LocationInfo(name: "여미지식물원", address: "서귀포시 색달동", latitude: 33.252417, longitude: 126.414441),
-        LocationInfo(name: "이중섭미술관", address: "서귀포시 서귀동", latitude: 33.245795, longitude: 126.564866),
+        LocationInfo(name: "정방폭포", address: "서귀포시 동홍동", coordinate: Coordinate(latitude: 33.24457, longitude: 126.573327)),
+        LocationInfo(name: "한라산", address: "서귀포시 서호동", coordinate: Coordinate(latitude: 33.2591667, longitude: 126.5175)),
+        LocationInfo(name: "여미지식물원", address: "서귀포시 색달동", coordinate: Coordinate(latitude: 33.252417, longitude: 126.414441)),
+        LocationInfo(name: "이중섭미술관", address: "서귀포시 서귀동", coordinate: Coordinate(latitude: 33.245795, longitude: 126.564866)),
         
         // MARK: - 서귀포시 읍
-        LocationInfo(name: "동백수목원", address: "서귀포시 남원읍", latitude: 33.261678, longitude: 126.639459),
-        LocationInfo(name: "섭지코지", address: "서귀포시 성산읍", latitude: 33.425165, longitude: 126.930742),
-        LocationInfo(name: "가파도", address: "서귀포시 대정읍", latitude: 33.170157, longitude: 126.270455),
+        LocationInfo(name: "동백수목원", address: "서귀포시 남원읍", coordinate: Coordinate(latitude: 33.261678, longitude: 126.639459)),
+        LocationInfo(name: "섭지코지", address: "서귀포시 성산읍", coordinate: Coordinate(latitude: 33.425165, longitude: 126.930742)),
+        LocationInfo(name: "가파도", address: "서귀포시 대정읍", coordinate: Coordinate(latitude: 33.170157, longitude: 126.270455)),
 
         // MARK: - 서귀포시 면
-        LocationInfo(name: "오설록티뮤지엄", address: "서귀포시 안덕면", latitude: 33.305817, longitude: 126.289463),
-        LocationInfo(name: "보롬왓", address: "서귀포시 표선면", latitude: 33.3533333, longitude: 126.8166667)
+        LocationInfo(name: "오설록티뮤지엄", address: "서귀포시 안덕면", coordinate: Coordinate(latitude: 33.305817, longitude: 126.289463)),
+        LocationInfo(name: "보롬왓", address: "서귀포시 표선면", coordinate: Coordinate(latitude: 33.3533333, longitude: 126.8166667))
     ]
 }
 
