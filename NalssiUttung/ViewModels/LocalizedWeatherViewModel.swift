@@ -38,5 +38,11 @@ class LocalizedWeatherViewModel: ObservableObject {
 
     func move(from source: IndexSet, to destination: Int) {
         savedLocations.move(fromOffsets: source, toOffset: destination)
+        
+        for (index, locationInfo) in savedLocations.enumerated() {
+            coreDataStack.updateOrder(locationInfo.address, with: index)
+        }
+        
+        coreDataStack.save()
     }
 }

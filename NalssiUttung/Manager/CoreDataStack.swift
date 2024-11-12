@@ -49,12 +49,14 @@ extension CoreDataStack {
         }
         
         let locationEntity = NSEntityDescription.insertNewObject(forEntityName: entityName, into: context)
+        let count = count()
         
         let locationValues: [String: Any] = [
             "name": location.name,
             "address": location.address,
             "latitude": location.latitude,
-            "longitude": location.longitude
+            "longitude": location.longitude,
+            "order": count
         ]
         
         for (key, value) in locationValues {
@@ -66,6 +68,9 @@ extension CoreDataStack {
     
     func fetchAllLocations() -> [LocationInfo] {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+        
+        let sortDescriptor = NSSortDescriptor(key: "order", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
         
         do {
             let result = try context.fetch(fetchRequest)
@@ -111,6 +116,32 @@ extension CoreDataStack {
         }
         
         save()
+    }
+    
+    func count() -> Int {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entityName)
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            return results.count
+        } catch {
+            print("Failed to fetch LocationInfo: \(error.localizedDescription)")
+            return 0
+        }
+    }
+    
+    func updateOrder(_ address: String, with index: Int) {
+        let fetchRequest: NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: entityName)
+        fetchRequest.predicate = NSPredicate(format: "address == %@", address)
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let object = results.first {
+                object.setValue(index, forKey: "order")
+            }
+        } catch {
+            print("Failed to update order.")
+        }
     }
 
     #if DEBUG
