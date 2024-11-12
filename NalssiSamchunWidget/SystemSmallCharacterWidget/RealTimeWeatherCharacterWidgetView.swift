@@ -17,7 +17,7 @@ struct RealTimeWeatherCharacterWidgetView: View {
                 Text(data.address)
                     .customTextStyle(fontName: .pretendardSemibold, fontSize: 14)
                 HStack(spacing: -7) {
-                    Text("\(formattedTemperature(data.temperature))")
+                    Text("\(WeatherDataFormatter.celsiusTemperature(from: data.temperature))")
                         .customTextStyle(fontName: .IMHyemin, fontSize: 32, kerning: -6)
                     Text("°")
                         .customTextStyle(fontName: .IMHyemin, fontSize: 32)
@@ -37,11 +37,6 @@ struct RealTimeWeatherCharacterWidgetView: View {
         }
         .containerBackground(Color.seaSky, for: .widget)
     }
-    
-    private func formattedTemperature(_ measurement: Measurement<UnitTemperature>) -> String {
-        let value = measurement.value
-        return String(Int(value))
-    }
 }
 
 struct RealTimeWeatherCharacterWidgetView_Previews: PreviewProvider {
@@ -55,6 +50,5 @@ struct RealTimeWeatherCharacterWidgetView_Previews: PreviewProvider {
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .redacted(reason: .placeholder)
         }
-        
     }
 }

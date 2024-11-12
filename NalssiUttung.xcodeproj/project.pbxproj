@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030C56532CE2FFA90072CBD8 /* WeatherDataFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0384A6022CD0EED300A4DA2C /* WeatherDataFormatter.swift */; };
 		0317A1462CD260F400B01F95 /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1452CD260F400B01F95 /* LocationInfo.swift */; };
 		0317A1472CD260F400B01F95 /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1452CD260F400B01F95 /* LocationInfo.swift */; };
 		0317A1482CD260F400B01F95 /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0317A1452CD260F400B01F95 /* LocationInfo.swift */; };
@@ -871,6 +872,7 @@
 				039652D62C49092A001D23A9 /* Font+.swift in Sources */,
 				035A631F2CE1BB6C003FC443 /* CoreDataStack.swift in Sources */,
 				039652C02C480F6F001D23A9 /* NalssiSamchunWidgetBundle.swift in Sources */,
+				030C56532CE2FFA90072CBD8 /* WeatherDataFormatter.swift in Sources */,
 				039FB7F22C55348800FC96DA /* LocationManager.swift in Sources */,
 				03EBAEA02C54FE53003FC9C5 /* AddressSelection.intentdefinition in Sources */,
 				039652C22C480F6F001D23A9 /* NalssiSamchunCharacterWidget.swift in Sources */,
