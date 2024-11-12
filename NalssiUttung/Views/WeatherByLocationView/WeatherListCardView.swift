@@ -35,10 +35,9 @@ struct WeatherListCardView: View {
             } else {
                 print("No location info")
             }
-            toolbarViewModel.isModalPresented = true
-        }
-        .sheet(isPresented: $toolbarViewModel.isModalPresented) {
-            MainView(mode: .modalInList, viewOrigin: .list)
+            if !toolbarViewModel.isModalPresented { // 현재 true가 아닌 경우만 설정
+                toolbarViewModel.isModalPresented = true
+            }
         }
         .task {
             if isCurrentLocation {

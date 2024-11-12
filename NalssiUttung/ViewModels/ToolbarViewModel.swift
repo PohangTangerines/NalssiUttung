@@ -22,6 +22,7 @@ class ToolbarViewModel: ObservableObject {
             filterLocations()
         }
     }
+    
     @Published var filteredLocations: [String] = []
     
     private var allLocations: [String] = LocationInfo.Data.map { $0.address }

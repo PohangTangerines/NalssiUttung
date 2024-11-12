@@ -45,6 +45,9 @@ struct LocalizedWeatherListView: View {
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
+        .sheet(isPresented: $toolbarViewModel.isModalPresented) {
+            MainView(mode: .modalInList, viewOrigin: .list)
+        }
         .environment(\.editMode, .constant(toolbarViewModel.isEditMode ? EditMode.active : EditMode.inactive))
         .task {
             // TODO: - savedLocation 변경 값이 뷰에 반영되지 않아서 뷰를 불러올때마다 받아오도록 함. 추후 제거할 수 있으면 제거
