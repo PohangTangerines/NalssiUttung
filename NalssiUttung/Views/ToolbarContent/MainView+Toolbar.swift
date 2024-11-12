@@ -18,10 +18,13 @@ extension MainView {
         }
         
         ToolbarItem(placement: .principal) {
-            if locationManager.selectedLocation == nil || locationManager.isCurrentLocation {
-                LocationHeader(location: locationManager.currentAddress, isCurrentLocation: true)
+            // TODO: - isCurrentLocation으로 리팩토링
+            if locationManager.selectedAddress == "" || locationManager.isCurrentLocation {
+                LocationHeader(location: locationManager.currentAddress,
+                               isCurrentLocation: true)
             } else {
-                LocationHeader(location: locationManager.selectedAddress, isCurrentLocation: false)
+                LocationHeader(location: locationManager.selectedAddress,
+                               isCurrentLocation: false)
             }
         }
         

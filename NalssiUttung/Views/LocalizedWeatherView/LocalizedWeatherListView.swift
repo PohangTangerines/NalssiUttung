@@ -9,7 +9,6 @@ import SwiftUI
 
 struct LocalizedWeatherListView: View {
     @ObservedObject var locationManager = LocationManager.shared
-    @StateObject var weatherManager = WeatherManager()
     
     @ObservedObject var localizedWeatherViewModel: LocalizedWeatherViewModel
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
@@ -17,8 +16,7 @@ struct LocalizedWeatherListView: View {
     var body: some View {
         List {
             Group {
-                // TODO: - WeatherListCardView 리팩토링
-                WeatherListCardView(weatherManager: weatherManager, locationInfo: locationManager.currentLocationInfo, isCurrentLocation: true)
+                WeatherListCardView(locationInfo: locationManager.currentLocationInfo, isCurrentLocation: true)
                     .listRowInsets(EdgeInsets())
                     .listRowBackground(Color.clear)
                 ForEach(localizedWeatherViewModel.savedLocations) { savedLocation in

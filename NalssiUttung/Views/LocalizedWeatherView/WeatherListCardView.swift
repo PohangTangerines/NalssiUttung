@@ -20,9 +20,13 @@ struct WeatherListCardView: View {
     var body: some View {
         Group {
             if let currentWeather = weatherManager.currentWeather {
-                WeatherCardLayout(currentWeather: currentWeather, viewOrigin: .list, address: locationInfo?.address, isCurrentLocation: isCurrentLocation)
+                WeatherCardLayout(currentWeather: currentWeather,
+                                  viewOrigin: .list,
+                                  address: locationInfo?.address,
+                                  isCurrentLocation: isCurrentLocation)
             } else {
-                WeatherCardLayout(currentWeather: CurrentWeather.placeholder, viewOrigin: .list, address: locationInfo?.address, isCurrentLocation: isCurrentLocation)
+                WeatherCardLayout(currentWeather: CurrentWeather.placeholder,
+                                  viewOrigin: .list)
                     .redacted(reason: .placeholder)
             }
         }
@@ -39,7 +43,7 @@ struct WeatherListCardView: View {
             }
         }
         .task {
-            if isCurrentLocation {
+            if locationManager.isCurrentLocation {
                 await weatherManager.fetchWeather(for: locationManager.currentLocation, with: .current)
             } else {
                 if let locationInfo = locationInfo {

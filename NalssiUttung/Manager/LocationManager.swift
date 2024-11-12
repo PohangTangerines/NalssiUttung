@@ -9,6 +9,7 @@ import Foundation
 import CoreLocation
 import WidgetKit
 
+// TODO: - 왜 currentAddress를 3번? 4번씩 설정?
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
     
@@ -30,13 +31,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var currentAddress: String = "" {
         didSet {
             self.currentLocationInfo = findLocation(for: currentAddress)
-            print(currentAddress)
+            print("currentAddress: \(currentAddress)")
         }
     }
     
     @Published var selectedAddress: String = "" {
         didSet {
-            print(selectedAddress)
+            print("selectedAddress: \(selectedAddress)")
         }
     }
     
@@ -46,7 +47,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     var isCurrentLocation: Bool {
         return currentAddress == selectedAddress
     }
-            
+
     override init() {
         super.init()
         
