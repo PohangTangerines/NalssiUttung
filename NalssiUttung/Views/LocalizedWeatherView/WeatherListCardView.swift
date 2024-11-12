@@ -27,7 +27,6 @@ struct WeatherListCardView: View {
             }
         }
         .padding(.bottom, 15.responsibleHeight)
-
         .onTapGesture {
             if let locationInfo = locationInfo {
                 let updatedLocation = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)

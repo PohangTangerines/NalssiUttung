@@ -18,11 +18,10 @@ extension MainView {
         }
         
         ToolbarItem(placement: .principal) {
-            if locationManager.selectedLocation != nil {
-                LocationHeader(location: locationManager.selectedAddress, isCurrentLocation: false)
-
-            } else {
+            if locationManager.selectedLocation == nil || locationManager.isCurrentLocation {
                 LocationHeader(location: locationManager.currentAddress, isCurrentLocation: true)
+            } else {
+                LocationHeader(location: locationManager.selectedAddress, isCurrentLocation: false)
             }
         }
         

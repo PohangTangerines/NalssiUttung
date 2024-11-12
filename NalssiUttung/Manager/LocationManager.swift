@@ -13,7 +13,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
     
     private var locationManager = CLLocationManager()
-    private let defaults = UserDefaults(suiteName: "group.nalsam")
     private let jejuAirportLocation = CLLocation(latitude: 33.5115, longitude: 126.4911)
     
     @Published var currentLocation: CLLocation? {
@@ -21,7 +20,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             updateAddress(for: .current, location: currentLocation)
         }
     }
-
+    
     @Published var selectedLocation: CLLocation? {
         didSet {
             updateAddress(for: .selected, location: selectedLocation)
@@ -31,12 +30,22 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var currentAddress: String = "" {
         didSet {
             self.currentLocationInfo = findLocation(for: currentAddress)
+            print(currentAddress)
         }
     }
-    @Published var selectedAddress: String = ""
+    
+    @Published var selectedAddress: String = "" {
+        didSet {
+            print(selectedAddress)
+        }
+    }
     
     // TODO: - 변수를 각각 두는 대신 LocationInfo로 리팩토링하기
     @Published var currentLocationInfo: LocationInfo?
+    
+    var isCurrentLocation: Bool {
+        return currentAddress == selectedAddress
+    }
             
     override init() {
         super.init()
