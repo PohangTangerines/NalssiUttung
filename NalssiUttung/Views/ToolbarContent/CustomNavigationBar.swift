@@ -16,12 +16,13 @@ struct CustomNavigationBarModifier<L: View, P: View, R: View, B: View>: ViewModi
         ZStack(alignment: .top) {
             VStack {
                 VStack {
-                    HStack(alignment: .center) {
-                        leading
-                        Spacer()
+                    ZStack {
                         principal
-                        Spacer()
-                        trailing
+                        HStack(alignment: .center) {
+                            leading
+                            Spacer()
+                            trailing
+                        }
                     }
                     .padding(.bottom, 34.responsibleHeight)
                     bottom
