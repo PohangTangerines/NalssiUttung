@@ -45,13 +45,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.locationManager.requestWhenInUseAuthorization()
     }
     
-    func requestCurrentLocation() async -> CLLocation? {
-        await withCheckedContinuation { continuation in
-            self.locationManager.startUpdatingLocation()
-            continuation.resume(returning: self.locationManager.location)
-            self.locationManager.stopUpdatingLocation()
-        }
-    }
 
     /// 사용자 위치 권한 허가를 받지 못했을 때 기본 위치를 제주공항으로 설정합니다.
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -66,12 +59,23 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
+        guard let location = locations.last else {
+            print("location is nil")
+            return
+        }
 
         self.currentLocation = location
-        let locationData = [location.coordinate.latitude, location.coordinate.longitude]
-        defaults?.set(locationData, forKey: "currentLocation")
+        self.locationManager.stopUpdatingLocation()
         WidgetCenter.shared.reloadAllTimelines()
+    }
+    
+    /// 현재 위치를 요청합니다.
+    func requestCurrentLocation() async -> CLLocation? {
+        await withCheckedContinuation { continuation in
+            self.locationManager.startUpdatingLocation()
+            continuation.resume(returning: self.locationManager.location)
+            self.locationManager.stopUpdatingLocation()
+        }
     }
     
     enum AddressType {

@@ -21,9 +21,13 @@ class WeatherManager: ObservableObject {
     @Published var detailedForecast: DetailedForecast?
     
     var weather: Weather?
-
+    
+    // TODO: - optional 제거
     func fetchWeather(for location: CLLocation?, with type: WeatherUpdateType) async {
-        guard let location else { return }
+        guard let location else {
+            print("no location for fetch weather.")
+            return
+        }
         let weather = try? await WeatherService.shared.weather(for: location)
         self.weather = weather
         updateWeather(with: type)

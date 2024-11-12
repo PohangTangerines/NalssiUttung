@@ -14,6 +14,7 @@ struct LocalizedWeatherListView: View {
     @ObservedObject var localizedWeatherViewModel: LocalizedWeatherViewModel
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
     
+    // TODO: - LIST 밑의 선 지우기
     var body: some View {
         List {
             // TODO: - WeatherListCardView 리팩토링
@@ -38,6 +39,7 @@ struct LocalizedWeatherListView: View {
                 }
                 .listRowInsets(EdgeInsets())
                 .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
             }
             .onMove(perform: localizedWeatherViewModel.move)
         }

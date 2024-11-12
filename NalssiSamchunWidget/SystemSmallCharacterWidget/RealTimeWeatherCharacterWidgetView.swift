@@ -14,6 +14,8 @@ struct RealTimeWeatherCharacterWidgetView: View {
     var body: some View {
         // 글자가 두 줄이 되는 경우 생김.
         // 에셋 바람/글자 두 줄이 되는 경우 생각해 보기
+        
+        // TODO: - 캐릭터 살짝 오른쪽으로 땡기기
         ZStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text(data.address)

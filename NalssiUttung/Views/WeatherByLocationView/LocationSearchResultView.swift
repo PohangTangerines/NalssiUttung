@@ -39,7 +39,7 @@ struct LocationSearchResultView: View {
                     toolbarViewModel.isModalPresented = true
                 }
                 .sheet(isPresented: $toolbarViewModel.isModalPresented) {
-                    MainView(mode: localizedWeatherViewModel.mode)
+                    MainView(mode: localizedWeatherViewModel.mode, viewOrigin: .list)
                 }
                 .listRowSeparator(.hidden)
             }

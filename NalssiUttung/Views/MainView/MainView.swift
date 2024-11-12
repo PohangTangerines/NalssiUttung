@@ -16,6 +16,7 @@ struct MainView: View {
     @StateObject var localizedWeatherViewModel = LocalizedWeatherViewModel()
     
     let mode: WeatherDisplayMode
+    let viewOrigin: ViewOrigin
 
     private var dragGesture: some Gesture {
         DragGesture()
@@ -51,11 +52,10 @@ struct MainView: View {
             .offset(y: viewModel.viewOffsetY)
             .toolbar(content: toolbarContent)
             .task {
-                locationManager.currentLocation = await locationManager.requestCurrentLocation()
-                
-                if let selectedLocation = locationManager.selectedLocation {
-                    await weatherManager.fetchWeather(for: selectedLocation, with: .all)
-                } else {
+                switch viewOrigin {
+                case .list: await weatherManager.fetchWeather(for: locationManager.selectedLocation, with: .all)
+                case .main:
+                    locationManager.currentLocation = await locationManager.requestCurrentLocation()
                     await weatherManager.fetchWeather(for: locationManager.currentLocation, with: .all)
                 }
             }

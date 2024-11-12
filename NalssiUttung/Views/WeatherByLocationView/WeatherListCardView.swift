@@ -38,7 +38,7 @@ struct WeatherListCardView: View {
             toolbarViewModel.isModalPresented = true
         }
         .sheet(isPresented: $toolbarViewModel.isModalPresented) {
-            MainView(mode: .modalInList)
+            MainView(mode: .modalInList, viewOrigin: .list)
         }
         .task {
             if isCurrentLocation {

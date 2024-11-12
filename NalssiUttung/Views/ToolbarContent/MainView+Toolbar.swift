@@ -20,9 +20,7 @@ extension MainView {
         ToolbarItem(placement: .principal) {
             if locationManager.selectedLocation != nil {
                 LocationHeader(location: locationManager.selectedAddress, isCurrentLocation: false)
-                    .onDisappear {
-                        locationManager.selectedLocation = nil
-                    }
+
             } else {
                 LocationHeader(location: locationManager.currentAddress, isCurrentLocation: true)
             }

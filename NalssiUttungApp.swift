@@ -16,7 +16,7 @@ struct NalssiUttungApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                MainView(mode: .regular)
+                MainView(mode: .regular, viewOrigin: .main)
                     .environmentObject(toolbarViewModel)
                 SplashScreenView()
                     .opacity(splashOpacity)
