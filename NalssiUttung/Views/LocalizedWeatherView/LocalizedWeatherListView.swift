@@ -14,7 +14,6 @@ struct LocalizedWeatherListView: View {
     @ObservedObject var localizedWeatherViewModel: LocalizedWeatherViewModel
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
     
-    // TODO: - LIST 밑의 선 지우기
     var body: some View {
         List {
             // TODO: - WeatherListCardView 리팩토링
@@ -43,7 +42,7 @@ struct LocalizedWeatherListView: View {
             .onMove(perform: localizedWeatherViewModel.move)
         }
         .listStyle(.plain)
-        .scrollIndicators(.hidden)
+        .scrollIndicators(.never)
         .sheet(isPresented: $toolbarViewModel.isModalPresented) {
             MainView(mode: .modalInList, viewOrigin: .list)
         }

@@ -11,6 +11,7 @@ struct SearchBar: View {
     @ObservedObject var toolbarViewModel: ToolbarViewModel
     @FocusState var isFocused: Bool
     
+    // TODO: - 키보드 등장할 때마다 오류 발생. FocusState 자체의 문제로 추정
     var body: some View {
         HStack {
             HStack(spacing: 5.responsibleWidth) {

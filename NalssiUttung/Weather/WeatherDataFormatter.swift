@@ -51,8 +51,6 @@ class WeatherDataFormatter {
         return dateFormatter.string(from: today)
     }
     
-
-    
     static func windSpeed(from windSpeed: Measurement<UnitSpeed>) -> String {
         measurementFormatter.unitOptions = .providedUnit
         return measurementFormatter.string(from: windSpeed)

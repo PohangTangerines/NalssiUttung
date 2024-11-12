@@ -19,7 +19,7 @@ struct InformationView: View {
                     rowTitle("소개")
                     informationNavigationRow(MakePeopleView(), title: "날씨삼춘을 만든 사람들")
                     informationNavigationRow(
-                        WebView(urlToLoad: "https://lateral-donkey-cf6.notion.site/128ecf0613254204aec7d344285d121f?pvs=4"),
+                        WebView(urlToLoad: "https://guaardy.notion.site/128ecf0613254204aec7d344285d121f"),
                         title: "할라프렌즈")
 
                     Spacer()

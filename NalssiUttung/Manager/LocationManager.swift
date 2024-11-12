@@ -88,7 +88,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let location = location else { return }
         let geocoder = CLGeocoder()
         
-        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+        geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
             if let error = error {
                 print("주소 변환 오류: \(error.localizedDescription)")
                 return
@@ -110,9 +110,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 
                 switch type {
                 case .current:
-                    self.currentAddress = address
+                    self?.currentAddress = address
                 case .selected:
-                    self.selectedAddress = address
+                    self?.selectedAddress = address
                 }
             }
         }
