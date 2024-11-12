@@ -13,10 +13,14 @@ class LocalizedWeatherViewModel: ObservableObject {
     private let coreDataStack = CoreDataStack.shared
     
     @Published var savedLocations: [LocationInfo] = []
+    @Published var originalSavedLocations: [LocationInfo] = []
+    @Published var deletedLocations: [LocationInfo] = []
+    
     @Published var mode: WeatherDisplayMode = .modal
 
     func loadLocations() {
         self.savedLocations = coreDataStack.fetchAllLocations()
+        self.originalSavedLocations = self.savedLocations
     }
     
     func saveLocation(location: LocationInfo?) {
@@ -29,19 +33,31 @@ class LocalizedWeatherViewModel: ObservableObject {
         self.mode = coreDataStack.isLocationExist(for: location) ? .modalInList : .modal
     }
     
-    func deleteLocation(at index: Int) {
-        let locationToRemove = savedLocations[index]
-        coreDataStack.deleteLocation(locationToRemove)
-        savedLocations.remove(at: index)
+    func deleteLocationIfexist(for location: LocationInfo) {
+        if let index = savedLocations.firstIndex(where: { $0.id == location.id }) {
+            let locationToRemove = savedLocations[index]
+            savedLocations.remove(at: index)
+            deletedLocations.append(locationToRemove)
+        }
+    }
+    
+    func deleteLocationsInCoreData() {
+        coreDataStack.deleteLocations(deletedLocations)
     }
 
     func move(from source: IndexSet, to destination: Int) {
         savedLocations.move(fromOffsets: source, toOffset: destination)
-        
+    }
+    
+    func saveOrderInCoreData() {
         for (index, locationInfo) in savedLocations.enumerated() {
             coreDataStack.updateOrder(locationInfo.address, with: index)
         }
         
         coreDataStack.save()
+    }
+    
+    func revertChanges() {
+        self.savedLocations = originalSavedLocations
     }
 }

@@ -9,12 +9,18 @@ import SwiftUI
 
 struct EditButton: View {
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
+    @ObservedObject var localizedWeatherViewModel: LocalizedWeatherViewModel
     
-    // TODO: - 완료버튼 안누르면 수정 반영 안되도록 하기
     var body: some View {
-        if !toolbarViewModel.isTextFieldActive {
+        if !toolbarViewModel.isTextFieldActive, !localizedWeatherViewModel.savedLocations.isEmpty {
             Button {
                 withAnimation {
+                    if toolbarViewModel.isEditMode {
+                        localizedWeatherViewModel.saveOrderInCoreData()
+                        localizedWeatherViewModel.deleteLocationsInCoreData()
+                    } else {
+                        localizedWeatherViewModel.revertChanges()
+                    }
                     toolbarViewModel.isEditMode.toggle()
                 }
             } label: {
@@ -27,5 +33,5 @@ struct EditButton: View {
 }
 
 #Preview {
-    EditButton()
+    EditButton(localizedWeatherViewModel: LocalizedWeatherViewModel())
 }

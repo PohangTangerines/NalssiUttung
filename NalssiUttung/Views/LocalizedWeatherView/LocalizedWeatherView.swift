@@ -24,7 +24,7 @@ struct LocalizedWeatherView: View {
             }
         }
         .padding(.vertical, 20.responsibleWidth)
-        .customNavigationBar(toolbarViewModel: toolbarViewModel)
+        .customNavigationBar(toolbarViewModel: toolbarViewModel, localizedWeatherViewModel: localizedWeatherViewModel)
         .background(Color.seaSky)
     }
 }

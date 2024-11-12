@@ -101,9 +101,12 @@ extension CoreDataStack {
         }
     }
     
-    func deleteLocation(_ location: LocationInfo) {
+    func deleteLocations(_ locations: [LocationInfo]) {
+        
         let fetchRequest: NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: entityName)
-        fetchRequest.predicate = NSPredicate(format: "address == %@", location.address)
+        let addresses = locations.map { $0.address }
+
+        fetchRequest.predicate = NSPredicate(format: "address IN %@", addresses)
         
         do {
             let results = try context.fetch(fetchRequest)

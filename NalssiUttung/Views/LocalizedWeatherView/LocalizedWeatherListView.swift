@@ -16,33 +16,33 @@ struct LocalizedWeatherListView: View {
     
     var body: some View {
         List {
-            // TODO: - WeatherListCardView 리팩토링
-            WeatherListCardView(weatherManager: weatherManager, locationInfo: locationManager.currentLocationInfo, isCurrentLocation: true)
-                .listRowInsets(EdgeInsets())
-                .listRowBackground(Color.clear)
-            
-            ForEach(localizedWeatherViewModel.savedLocations) { savedLocation in
-                HStack {
-                    if toolbarViewModel.isEditMode {
-                        Image("deleteButton")
-                            .frame(maxWidth: 28, maxHeight: 28)
-                            .foregroundStyle(.red)
-                            .onTapGesture {
-                                if let index = localizedWeatherViewModel.savedLocations.firstIndex(where: { $0.id == savedLocation.id }) {
-                                    localizedWeatherViewModel.deleteLocation(at: index)
-                                }
+            Group {
+                // TODO: - WeatherListCardView 리팩토링
+                WeatherListCardView(weatherManager: weatherManager, locationInfo: locationManager.currentLocationInfo, isCurrentLocation: true)
+                    .listRowInsets(EdgeInsets())
+                    .listRowBackground(Color.clear)
+                ForEach(localizedWeatherViewModel.savedLocations) { savedLocation in
+                    HStack {
+                        if toolbarViewModel.isEditMode {
+                            Button {
+                                localizedWeatherViewModel.deleteLocationIfexist(for: savedLocation)
+                            } label: {
+                                Image("deleteButton")
+                                    .frame(maxWidth: 28, maxHeight: 28)
+                                    .foregroundStyle(.red)
                             }
+                        }
+                        WeatherListCardView(locationInfo: savedLocation, isCurrentLocation: false)
                     }
-                    WeatherListCardView(locationInfo: savedLocation, isCurrentLocation: false)
+                    .listRowInsets(EdgeInsets())
+                    .listRowBackground(Color.clear)
                 }
-                .listRowInsets(EdgeInsets())
-                .listRowBackground(Color.clear)
-                .listRowSeparator(.hidden)
+                .onMove(perform: localizedWeatherViewModel.move)
             }
-            .onMove(perform: localizedWeatherViewModel.move)
+            .listRowSeparator(.hidden)
+            .scrollIndicators(.never)
         }
         .listStyle(.plain)
-        .scrollIndicators(.never)
         .sheet(isPresented: $toolbarViewModel.isModalPresented) {
             MainView(mode: .modalInList, viewOrigin: .list)
         }
