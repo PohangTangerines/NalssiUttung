@@ -81,7 +81,7 @@ struct WeatherCardLayout: View {
                 .contentShape(Rectangle())
         )
         .frame(maxWidth: .infinity, maxHeight: 140)
-
+        .padding(.trailing, 5.responsibleWidth)
     }
 }
 

@@ -33,7 +33,6 @@ struct LocalizedWeatherListView: View {
                                     localizedWeatherViewModel.deleteLocation(at: index)
                                 }
                             }
-                        Spacer()
                     }
                     WeatherListCardView(locationInfo: savedLocation, isCurrentLocation: false)
                 }
