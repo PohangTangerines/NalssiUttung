@@ -19,17 +19,19 @@ extension MainView {
         
         ToolbarItem(placement: .principal) {
             // TODO: - isCurrentLocation으로 리팩토링
-            if locationManager.selectedAddress == "" || locationManager.isCurrentLocation {
-                LocationHeader(location: locationManager.currentAddress,
+            if weatherLocationManager.selectedLocation == nil {
+                LocationHeader(address: LocationManager.shared.currentAddress,
                                isCurrentLocation: true)
             } else {
-                LocationHeader(location: locationManager.selectedAddress,
-                               isCurrentLocation: false)
+                if let address = weatherLocationManager.selectedAddress {
+                    LocationHeader(address: address,
+                                   isCurrentLocation: false)
+                }
             }
         }
         
         ToolbarItem(placement: .topBarTrailing) {
-            AddButton(locationInfo: locationManager.findLocation(for: locationManager.selectedAddress), mode: mode)
+            AddButton(locationInfo: LocationManager.shared.findLocation(for: LocationManager.shared.selectedAddress), mode: mode)
         }
     }
 }

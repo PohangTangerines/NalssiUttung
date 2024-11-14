@@ -9,12 +9,12 @@ import SwiftUI
 import WeatherKit
 
 struct CurrentWeatherView: View {
-    @ObservedObject var weatherManager: WeatherManager
+    @ObservedObject var weatherLocationManager: WeatherLocationManager
     @ObservedObject var viewModel: MainViewModel
     
     var body: some View {
-        if let currentWeather = weatherManager.currentWeather,
-            let dailyForecast = weatherManager.dailyForecast {
+        if let currentWeather = weatherLocationManager.currentWeather,
+            let dailyForecast = weatherLocationManager.dailyForecast {
             VStack {
                 CurrentWeatherInfo(currentWeather: currentWeather)
                 CommentAndCharacter(currentWeather: currentWeather)

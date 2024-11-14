@@ -7,56 +7,42 @@
 
 import CoreLocation
 import SwiftUI
-import WeatherKit
 
 struct WeatherListCardView: View {
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
     @ObservedObject var locationManager = LocationManager.shared
-    @StateObject var weatherManager = WeatherManager()
+    @StateObject var weatherLocationManager = WeatherLocationManager()
     
     let locationInfo: LocationInfo?
+    // TODO: - isCurrentLocation 없앨 수 있을지 고민해 보기.
     let isCurrentLocation: Bool
     
     var body: some View {
         Group {
-            if let currentWeather = weatherManager.currentWeather {
+            if let currentWeather = weatherLocationManager.currentWeather {
                 WeatherCardLayout(currentWeather: currentWeather,
                                   viewOrigin: .list,
-                                  address: locationInfo?.address,
-                                  isCurrentLocation: isCurrentLocation)
+                                  address: locationInfo?.address ?? locationManager.currentAddress)
             } else {
                 WeatherCardLayout(currentWeather: CurrentWeather.placeholder,
-                                  viewOrigin: .list)
+                                  viewOrigin: .list, address: "")
                     .redacted(reason: .placeholder)
             }
         }
         .padding(.bottom, 15.responsibleHeight)
-        .onTapGesture {
-            if let locationInfo = locationInfo {
-                let updatedLocation = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)
-                locationManager.selectedLocation = updatedLocation
-            } else {
-                print("No location info")
-            }
-            if !toolbarViewModel.isModalPresented { // 현재 true가 아닌 경우만 설정
-                toolbarViewModel.isModalPresented = true
-            }
-        }
         .task {
-            if locationManager.isCurrentLocation {
-                await weatherManager.fetchWeather(for: locationManager.currentLocation, with: .current)
+            if let locationInfo = locationInfo {
+                weatherLocationManager.selectedLocation = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)
+                print("selectedLocation is \(weatherLocationManager.selectedLocation!)")
             } else {
-                if let locationInfo = locationInfo {
-                    let location = CLLocation(latitude: locationInfo.coordinate.latitude,
-                                              longitude: locationInfo.coordinate.longitude)
-                    await weatherManager.fetchWeather(for: location, with: .current)
-                }
+                print("No location Info")
             }
+            await weatherLocationManager.fetchWeather(with: .current)
         }
     }
 }
 
 #Preview {
-    WeatherListCardView(weatherManager: WeatherManager(), locationInfo: LocationInfo.Data[0], isCurrentLocation: true)
+    WeatherListCardView(weatherLocationManager: WeatherLocationManager(), locationInfo: LocationInfo.Data[0], isCurrentLocation: true)
         .environmentObject(ToolbarViewModel())
 }

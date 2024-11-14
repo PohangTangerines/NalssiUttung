@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct LocalizedWeatherListView: View {
     @ObservedObject var locationManager = LocationManager.shared
     
     @ObservedObject var localizedWeatherViewModel: LocalizedWeatherViewModel
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
+    @State var isCurrentLocation: Bool = false
     
     var body: some View {
         List {
@@ -19,6 +21,10 @@ struct LocalizedWeatherListView: View {
                 WeatherListCardView(locationInfo: locationManager.currentLocationInfo, isCurrentLocation: true)
                     .listRowInsets(EdgeInsets())
                     .listRowBackground(Color.clear)
+                    .onTapGesture {
+                        toolbarViewModel.isModalPresented = true
+                        isCurrentLocation = true
+                    }
                 ForEach(localizedWeatherViewModel.savedLocations) { savedLocation in
                     HStack {
                         if toolbarViewModel.isEditMode {
@@ -31,6 +37,14 @@ struct LocalizedWeatherListView: View {
                             }
                         }
                         WeatherListCardView(locationInfo: savedLocation, isCurrentLocation: false)
+                            .onTapGesture {
+                                let location = CLLocation(latitude: savedLocation.coordinate.latitude,
+                                                          longitude: savedLocation.coordinate.longitude)
+                                localizedWeatherViewModel.selectedLocation = location
+                                
+                                isCurrentLocation = false
+                                toolbarViewModel.isModalPresented = true
+                            }
                     }
                     .listRowInsets(EdgeInsets())
                     .listRowBackground(Color.clear)
@@ -42,7 +56,7 @@ struct LocalizedWeatherListView: View {
         }
         .listStyle(.plain)
         .sheet(isPresented: $toolbarViewModel.isModalPresented) {
-            MainView(mode: .modalInList, viewOrigin: .list)
+            MainView(location: localizedWeatherViewModel.selectedLocation, mode: .modalInList)
         }
         .environment(\.editMode, .constant(toolbarViewModel.isEditMode ? EditMode.active : EditMode.inactive))
         .task {

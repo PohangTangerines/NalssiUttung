@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct LocationHeader: View {
-    let location: String
+    let address: String
     let isCurrentLocation: Bool
     
     var body: some View {
         HStack {
-            Text("\(location)")
+            Text("\(address)")
                 .font(.pretendardSemibold(.callout))
             
             if isCurrentLocation {
@@ -25,5 +25,5 @@ struct LocationHeader: View {
 }
 
 #Preview {
-    LocationHeader(location: "제주공항", isCurrentLocation: true)
+    LocationHeader(address: "제주공항", isCurrentLocation: true)
 }

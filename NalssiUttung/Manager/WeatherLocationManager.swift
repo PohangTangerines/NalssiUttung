@@ -14,22 +14,61 @@ enum WeatherUpdateType {
     case all
 }
 
-class WeatherManager: ObservableObject {
+class WeatherLocationManager: ObservableObject {
+    var selectedLocation: CLLocation? {
+        didSet {
+            Task {
+                await fetchWeather(with: .all)
+                await updateSelectedAddress()
+            }
+        }
+    }
+    @Published var selectedAddress: String?
+    var weather: Weather?
+    
     @Published var currentWeather: CurrentWeather?
     @Published var dailyForecast: DailyForecast?
     @Published var weeklyForecast: WeeklyForecast?
     @Published var detailedForecast: DetailedForecast?
     
-    var weather: Weather?
-    
-    // TODO: - optional 제거
-    func fetchWeather(for location: CLLocation?, with type: WeatherUpdateType) async {
-        guard let location else {
-            print("no location for fetch weather.")
-            return
+    @MainActor
+    private func updateSelectedAddress() async {
+        guard let selectedLocation else { return }
+        
+        do {
+            selectedAddress = try await LocationManager.shared.getAddress(from: selectedLocation)
+        } catch {
+            print("주소 변환 오류: \(error)")
         }
-        let weather = try? await WeatherService.shared.weather(for: location)
-        self.weather = weather
+    }
+
+    /// 선택한 location이 있는 경우에는 선택된 location을 바탕으로 날씨를 업데이트합니다.
+    /// 없는 경우에는 현재 위치 바탕으로 날씨를 업데이트합니다.
+    func fetchWeather(with type: WeatherUpdateType) async {
+        if let selectedLocation = selectedLocation {
+            print("선택된 위치\(selectedLocation)로 날씨 데이터를 가져옵니다.")
+            
+            do {
+                self.weather = try await WeatherService.shared.weather(for: selectedLocation)
+            } catch {
+                print("현재 날씨 정보를 불러오는 데 실패했습니다.")
+            }
+        } else {
+            print("현재 위치로 날씨 데이터를 가져옵니다.")
+            await LocationManager.shared.updateCurrentLocation()
+            
+            guard let currentLocation = LocationManager.shared.currentLocation else {
+                print("현재 위치를 업데이트하는 데 실패했습니다.")
+                return
+            }
+            
+            do {
+                self.weather = try await WeatherService.shared.weather(for: currentLocation)
+            } catch {
+                print("현재 날씨 정보를 불러오는 데 실패했습니다.")
+            }
+        }
+
         updateWeather(with: type)
     }
     
@@ -45,21 +84,34 @@ class WeatherManager: ObservableObject {
         case .current:
             self.updateCurrentWeather()
         }
+        print("성공적으로 데이터를 업데이트했습니다.")
+        print("currentWeather is \(String(describing: currentWeather))")
+
     }
     
     private func updateCurrentWeather() {
-        guard let weather = weather else { return }
+        guard let weather = weather else {
+            print(CustomWeatherError.noFetchedWeatherData.localizedDescription)
+            return
+        }
         
         let currentTemperature = WeatherDataFormatter.celsiusTemperature(from: weather.currentWeather.temperature)
         
         let weatherCondition = weather.currentWeather.condition
         
-        guard let first = weather.dailyForecast.forecast.first else { return }
+        guard let first = weather.dailyForecast.forecast.first else {
+            print(CustomWeatherError.noDailyForecast.localizedDescription)
+            return
+        }
         
         let lowestTemperature = WeatherDataFormatter.celsiusTemperature(from: first.lowTemperature)
         let highestTemperature = WeatherDataFormatter.celsiusTemperature(from: first.highTemperature)
         
-        guard let sunrise = weather.dailyForecast.forecast.first?.sun.sunrise, let sunset = weather.dailyForecast.forecast.first?.sun.sunset else { return }
+        guard let sunrise = weather.dailyForecast.forecast.first?.sun.sunrise, let sunset = weather.dailyForecast.forecast.first?.sun.sunset else {
+            
+            print(CustomWeatherError.sunEventUnavailable.localizedDescription)
+            return
+        }
         
         let gifName = weatherCondition.character(sunrise: sunrise, sunset: sunset)
         let comment = weatherCondition.comment(sunrise: sunrise, sunset: sunset)

@@ -16,6 +16,11 @@ class LocalizedWeatherViewModel: ObservableObject {
     @Published var originalSavedLocations: [LocationInfo] = []
     @Published var deletedLocations: [LocationInfo] = []
     
+    @Published var filteredLocations: [String] = []
+    
+    /// weatherLocationManager에 전달해주기 위한 임시 변수입니다.
+    var selectedLocation: CLLocation?
+    
     @Published var mode: WeatherDisplayMode = .modal
 
     func loadLocations() {

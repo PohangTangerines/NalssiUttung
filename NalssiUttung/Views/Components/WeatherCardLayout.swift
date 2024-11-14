@@ -11,15 +11,7 @@ struct WeatherCardLayout: View {
     let currentWeather: CurrentWeather
     let viewOrigin: ViewOrigin
     
-    let address: String?
-    let isCurrentLocation: Bool?
-    
-    init(currentWeather: CurrentWeather, viewOrigin: ViewOrigin, address: String? = nil, isCurrentLocation: Bool? = nil) {
-        self.currentWeather = currentWeather
-        self.viewOrigin = viewOrigin
-        self.address = address
-        self.isCurrentLocation = isCurrentLocation
-    }
+    var address: String?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -30,16 +22,14 @@ struct WeatherCardLayout: View {
                         .font(.pretendardSemibold(.caption))
                     Spacer()
                 case .list:
-                    if let isCurrentLocation = isCurrentLocation, let address = address {
-                        if isCurrentLocation {
-                            Text("나의 위치")
-                                .font(.pretendardSemibold(.caption))
-                            Spacer()
-                        }
-                        Text("\(address)")
+                    if LocationManager.shared.currentAddress == address {
+                        Text("나의 위치")
                             .font(.pretendardSemibold(.caption))
-                            .padding(.trailing, 20.responsibleWidth)
+                        Spacer()
                     }
+                    Text("\(address!)")
+                        .font(.pretendardSemibold(.caption))
+                        .padding(.trailing, 20.responsibleWidth)
                 }
             }
             

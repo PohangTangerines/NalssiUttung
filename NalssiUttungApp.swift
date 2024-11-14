@@ -12,12 +12,13 @@ import WeatherKit
 struct NalssiUttungApp: App {
     @StateObject var toolbarViewModel = ToolbarViewModel()
     @State private var splashOpacity: Double = 1.0
+    @StateObject var weatherLocationManager = WeatherLocationManager()
     
     // TODO: - 애니메이션 때문에 malloc 에러 발생으로 추정. 가능하면 애니메이션 프레임워크 제거하기.
     var body: some Scene {
         WindowGroup {
             ZStack {
-                MainView(mode: .regular, viewOrigin: .main)
+                MainView(mode: .regular)
                     .environmentObject(toolbarViewModel)
                 SplashScreenView()
                     .opacity(splashOpacity)

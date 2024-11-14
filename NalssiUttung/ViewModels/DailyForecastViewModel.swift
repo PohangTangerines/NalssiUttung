@@ -60,8 +60,14 @@ class DailyForecastViewModel: ObservableObject {
     func getOffsetDot(nowTemp: Int) -> CGFloat {
         let minTemp = (dailyForecast.hours.map { $0.temperature }.filter { $0 != 100 }.min() ?? 0)
         let maxTemp = (dailyForecast.hours.map { $0.temperature }.filter { $0 != 100 }.max() ?? 0)
+        let tempRange = maxTemp - minTemp
         
-        return CGFloat( ( 30 / (maxTemp - minTemp) ) * (nowTemp - minTemp) )
+        /// 0으로 나눠지는 경우가 존재하는지 모르겠지만, 관련 사례가 있어서 0으로 나눠지는 것을 방지하기 위해 임시 조치 했습니다.
+        guard tempRange != 0 else {
+            return 0
+        }
+        
+        return CGFloat((30 / tempRange) * (nowTemp - minTemp))
     }
     
     func getChartLine(index: Int, geometry: GeometryProxy) -> Path {
