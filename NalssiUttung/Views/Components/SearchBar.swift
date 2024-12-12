@@ -20,7 +20,11 @@ struct SearchBar: View {
                 
                 TextField("title",
                           text: $toolbarViewModel.searchText,
-                          prompt: Text("지역 검색하기")
+                          prompt:
+                            withAnimation {
+                    toolbarViewModel.isEditMode ? Text("편집 모드 해제 후 검색이 가능합니다.") : Text("지역 검색하기")
+                    
+                }
                     .foregroundStyle(Color.black)
                 )
                 .font(.pretendardMedium(.callout))
@@ -31,6 +35,7 @@ struct SearchBar: View {
                         isFocused = true
                     }
                 }
+                .disabled(toolbarViewModel.isEditMode)
             }
             .padding(.horizontal, 6.responsibleWidth)
             .padding(.vertical, 28.responsibleHeight)
