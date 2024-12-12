@@ -60,8 +60,4 @@ class LocalizedWeatherViewModel: ObservableObject {
         
         coreDataStack.save()
     }
-    
-    func revertChanges() {
-        self.savedLocations = originalSavedLocations
-    }
 }

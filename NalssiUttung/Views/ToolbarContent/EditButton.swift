@@ -29,8 +29,6 @@ struct EditButton: View {
         if toolbarViewModel.isEditMode {
             localizedWeatherViewModel.saveOrderInCoreData()
             localizedWeatherViewModel.deleteLocationsInCoreData()
-        } else {
-            localizedWeatherViewModel.revertChanges()
         }
         toolbarViewModel.isEditMode.toggle()
     }
