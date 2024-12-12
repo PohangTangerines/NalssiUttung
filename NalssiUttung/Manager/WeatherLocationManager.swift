@@ -9,11 +9,6 @@ import CoreLocation
 import SwiftUI
 import WeatherKit
 
-enum WeatherUpdateType {
-    case current
-    case all
-}
-
 class WeatherLocationManager: ObservableObject {
     var selectedLocation: CLLocation? {
         didSet {
@@ -23,6 +18,7 @@ class WeatherLocationManager: ObservableObject {
             }
         }
     }
+    
     @Published var selectedAddress: String?
     var weather: Weather?
     
@@ -30,6 +26,8 @@ class WeatherLocationManager: ObservableObject {
     @Published var dailyForecast: DailyForecast?
     @Published var weeklyForecast: WeeklyForecast?
     @Published var detailedForecast: DetailedForecast?
+    
+    private let updateState = UpdateState()
     
     @MainActor
     private func updateSelectedAddress() async {
@@ -41,10 +39,19 @@ class WeatherLocationManager: ObservableObject {
             print("주소 변환 오류: \(error)")
         }
     }
-
+    
     /// 선택한 location이 있는 경우에는 선택된 location을 바탕으로 날씨를 업데이트합니다.
     /// 없는 경우에는 현재 위치 바탕으로 날씨를 업데이트합니다.
     func fetchWeather(with type: WeatherUpdateType) async {
+        
+        guard await updateState.startUpdating() else { return }
+        
+        defer {
+            Task {
+                await updateState.stopUpdating()
+            }
+        }
+        
         if let selectedLocation = selectedLocation {
             print("선택된 위치\(selectedLocation)로 날씨 데이터를 가져옵니다.")
             
@@ -55,38 +62,37 @@ class WeatherLocationManager: ObservableObject {
             }
         } else {
             print("현재 위치로 날씨 데이터를 가져옵니다.")
-            await LocationManager.shared.updateCurrentLocation()
             
+            await LocationManager.shared.updateCurrentLocation()
+
             guard let currentLocation = LocationManager.shared.currentLocation else {
                 print("현재 위치를 업데이트하는 데 실패했습니다.")
                 return
             }
-            
             do {
                 self.weather = try await WeatherService.shared.weather(for: currentLocation)
             } catch {
                 print("현재 날씨 정보를 불러오는 데 실패했습니다.")
             }
         }
-
-        updateWeather(with: type)
+        
+        await updateWeather(with: type)
     }
     
-    private func updateWeather(with type: WeatherUpdateType) {
+    @MainActor
+    func updateWeather(with type: WeatherUpdateType) {
         switch type {
             
         case .all:
-        self.updateCurrentWeather()
-        self.updateDailyForecast()
-        self.updateWeeklyForecast()
-        self.updateDetailedForecast()
+            self.updateCurrentWeather()
+            self.updateDailyForecast()
+            self.updateWeeklyForecast()
+            self.updateDetailedForecast()
             
         case .current:
             self.updateCurrentWeather()
         }
-        print("성공적으로 데이터를 업데이트했습니다.")
-        print("currentWeather is \(String(describing: currentWeather))")
-
+        print("성공적으로 날씨 데이터를 업데이트했습니다.")
     }
     
     private func updateCurrentWeather() {
@@ -116,14 +122,12 @@ class WeatherLocationManager: ObservableObject {
         let gifName = weatherCondition.character(sunrise: sunrise, sunset: sunset)
         let comment = weatherCondition.comment(sunrise: sunrise, sunset: sunset)
         
-        DispatchQueue.main.async {
-            self.currentWeather = CurrentWeather(temperature: currentTemperature,
-                                                 weatherCondition: weatherCondition,
-                                                 lowestTemperature: lowestTemperature,
-                                                 highestTemperature: highestTemperature,
-                                                 gifName: gifName,
-                                                 comment: comment)
-        }
+        self.currentWeather = CurrentWeather(temperature: currentTemperature,
+                                             weatherCondition: weatherCondition,
+                                             lowestTemperature: lowestTemperature,
+                                             highestTemperature: highestTemperature,
+                                             gifName: gifName,
+                                             comment: comment)
     }
     
     private func updateDailyForecast() {
@@ -172,11 +176,9 @@ class WeatherLocationManager: ObservableObject {
         // 시간 순 정렬
         hours.sort { $0.time < $1.time }
         
-        DispatchQueue.main.async {
-            self.dailyForecast = DailyForecast(sunrise: sunrise,
-                                               sunset: sunset,
-                                               hours: hours)
-        }
+        self.dailyForecast = DailyForecast(sunrise: sunrise,
+                                           sunset: sunset,
+                                           hours: hours)
     }
     
     private func updateWeeklyForecast() {
@@ -201,9 +203,7 @@ class WeatherLocationManager: ObservableObject {
             days.append(WeeklyForecast.Day(day: day, date: convertedDate, weatherCondition: weatherCondition, lowestTemperature: lowestTemperature, highestTemperature: highestTemperature, precipitationChance: precipitationChance))
         }
         
-        DispatchQueue.main.async {
-            self.weeklyForecast = WeeklyForecast(days: days)
-        }
+        self.weeklyForecast = WeeklyForecast(days: days)
     }
     
     private func updateDetailedForecast() {
@@ -211,7 +211,7 @@ class WeatherLocationManager: ObservableObject {
         
         let windDirection = weather.currentWeather.wind.compassDirection
         let convertedWindDirection = WeatherDataFormatter.koreanWindDirection(from: windDirection.rawValue)
-
+        
         let windSpeed = weather.currentWeather.wind.speed
         let convertedWindSpeed = WeatherDataFormatter.windSpeed(from: windSpeed)
         
@@ -229,12 +229,10 @@ class WeatherLocationManager: ObservableObject {
         let precipitationAmount = hourlyForecast.precipitationAmount
         let convertedPrecipitationAmount = WeatherDataFormatter.precipitationAmount(from: precipitationAmount)
         
-        DispatchQueue.main.async {
-            self.detailedForecast = DetailedForecast(precipitation: convertedPrecipitation,
-                                                   precipitationAmount: convertedPrecipitationAmount,
-                                                   windDirection: convertedWindDirection,
-                                                   windSpeed: convertedWindSpeed,
-                                                   visibility: convertedVisibility)
-        }
+        self.detailedForecast = DetailedForecast(precipitation: convertedPrecipitation,
+                                                 precipitationAmount: convertedPrecipitationAmount,
+                                                 windDirection: convertedWindDirection,
+                                                 windSpeed: convertedWindSpeed,
+                                                 visibility: convertedVisibility)
     }
 }

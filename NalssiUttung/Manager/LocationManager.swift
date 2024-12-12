@@ -9,7 +9,6 @@ import Foundation
 import CoreLocation
 import WidgetKit
 
-// TODO: - 왜 currentAddress를 3번? 4번씩 설정?
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
     
@@ -47,55 +46,31 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     var isCurrentLocation: Bool {
         return currentAddress == selectedAddress
     }
-        
-    override init() {
-        super.init()
-        
-        self.locationManager.delegate = self
-        self.locationManager.requestWhenInUseAuthorization()
-    }
     
-    /// 사용자 위치 권한 허가를 받지 못했을 때 기본 위치를 제주공항으로 설정합니다.
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedWhenInUse, .authorizedAlways:
-            self.locationManager.startUpdatingLocation()
-        case .denied, .restricted, .notDetermined:
-            currentLocation = jejuAirportLocation
-        @unknown default:
-            break
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else {
-            print("location is nil")
+    private let updateState = UpdateState()
+
+    /// 현재 위치를 요청합니다. liveUpdates를 사용합니다.
+    /// liveUpdates가 기기의 실시간 정보를 받아오는 기능이라 시뮬레이터에서 제대로 작동하지 못하는 경우도 종종 발생합니다.
+    /// 실기기에서는 정상 작동합니다.
+    func updateCurrentLocation() async {
+        guard await updateState.startUpdating() else {
+            print("현재 위치 업데이트가 이미 진행 중입니다.")
             return
         }
 
-        self.currentLocation = location
-        self.locationManager.stopUpdatingLocation()
-        WidgetCenter.shared.reloadAllTimelines()
-    }
-    
-    /// 현재 위치를 요청합니다.
-    func requestCurrentLocation() async -> CLLocation? {
-        await withCheckedContinuation { continuation in
-            self.locationManager.startUpdatingLocation()
-            continuation.resume(returning: self.locationManager.location)
-            self.locationManager.stopUpdatingLocation()
+        defer {
+            Task {
+                await updateState.stopUpdating()
+            }
         }
-    }
-    
-    /// 현재 위치를 요청합니다. liveUpdates를 사용합니다.
-    func updateCurrentLocation() async {
+        
         do {
             let updates = CLLocationUpdate.liveUpdates()
             for try await update in updates {
                 if let currentLocation = update.location {
                     print("현재 위치는: \(currentLocation)")
                     self.currentLocation = currentLocation
-                    break
+                    return
                 } else {
                     print("위치 업데이트가 유효하지 않습니다. 다시 시도 중...")
                 }
@@ -103,11 +78,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         } catch {
             print("위치 업데이트 중 에러 발생: \(error.localizedDescription)")
         }
-    }
-    
-    enum AddressType {
-        case current
-        case selected
     }
     
     /// 업데이트한 location을 한글 주소로 변경합니다.

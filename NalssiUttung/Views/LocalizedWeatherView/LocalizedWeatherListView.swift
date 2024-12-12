@@ -15,6 +15,8 @@ struct LocalizedWeatherListView: View {
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
     @State var isCurrentLocation: Bool = false
     
+    /// 항목들을 이동시킬 수 있어야 하기 때문에 LazyVStack과 ScrollView의 조합 대신 List를 사용했습니다.
+    /// .onMove로 항목을 이동시킬 수 있습니다. 
     var body: some View {
         List {
             Group {
