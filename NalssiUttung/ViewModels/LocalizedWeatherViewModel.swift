@@ -9,7 +9,6 @@ import SwiftUI
 import CoreLocation
 
 class LocalizedWeatherViewModel: ObservableObject {
-    @ObservedObject var locationManager = LocationManager.shared
     private let coreDataStack = CoreDataStack.shared
     
     @Published var savedLocations: [LocationInfo] = []

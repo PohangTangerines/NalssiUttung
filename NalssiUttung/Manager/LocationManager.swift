@@ -11,10 +11,7 @@ import WidgetKit
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
-    
-    private var locationManager = CLLocationManager()
-    private let jejuAirportLocation = CLLocation(latitude: 33.5115, longitude: 126.4911)
-    
+        
     var currentLocation: CLLocation? {
         didSet {
             updateAddress(for: .current, location: currentLocation)
@@ -40,12 +37,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    // TODO: - 변수를 각각 두는 대신 LocationInfo로 리팩토링하기
+    // TODO: - LocationInfo 삭제하기
     @Published var currentLocationInfo: LocationInfo?
-    
-    var isCurrentLocation: Bool {
-        return currentAddress == selectedAddress
-    }
     
     private let updateState = UpdateState()
 

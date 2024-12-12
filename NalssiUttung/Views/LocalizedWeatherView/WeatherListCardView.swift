@@ -13,9 +13,7 @@ struct WeatherListCardView: View {
     @ObservedObject var locationManager = LocationManager.shared
     @StateObject var weatherLocationManager = WeatherLocationManager()
     
-    let locationInfo: LocationInfo?
-    // TODO: - isCurrentLocation 없앨 수 있을지 고민해 보기.
-    let isCurrentLocation: Bool
+    var locationInfo: LocationInfo?
     
     var body: some View {
         Group {
@@ -43,6 +41,6 @@ struct WeatherListCardView: View {
 }
 
 #Preview {
-    WeatherListCardView(weatherLocationManager: WeatherLocationManager(), locationInfo: LocationInfo.Data[0], isCurrentLocation: true)
+    WeatherListCardView(weatherLocationManager: WeatherLocationManager(), locationInfo: LocationInfo.Data[0])
         .environmentObject(ToolbarViewModel())
 }
