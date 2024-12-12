@@ -9,7 +9,7 @@ import SwiftUI
 import Gifu
 
 struct AnimatedGifView: UIViewRepresentable {
-    @Binding var gifName: String
+    let gifName: String
     @State private var imageView = GIFImageView(frame: CGRect(x: 0, y: 0, width: 280.responsibleHeight, height: 280.responsibleHeight))
     
     func makeUIView(context: Context) -> UIView {
@@ -23,6 +23,6 @@ struct AnimatedGifView: UIViewRepresentable {
     }
 }
 
-//#Preview {
-//    AnimatedGifView(gifName: .constant("clearCharacter"))
-//}
+#Preview {
+    AnimatedGifView(gifName: "clearCharacter")
+}

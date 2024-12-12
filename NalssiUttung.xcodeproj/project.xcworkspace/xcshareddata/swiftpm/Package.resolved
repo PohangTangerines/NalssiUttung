@@ -1,4 +1,5 @@
 {
+  "originHash" : "05fd1ae07493bdad2d616a884ceaeb908f008f60688be22db7f5f698fddabc87",
   "pins" : [
     {
       "identity" : "gifu",
@@ -8,16 +9,7 @@
         "revision" : "82da0086dea14ca9afc9801234ad8dc4cd9e2738",
         "version" : "3.4.1"
       }
-    },
-    {
-      "identity" : "scrollkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/danielsaidi/ScrollKit.git",
-      "state" : {
-        "revision" : "cbb941a2009f92f221c310156fd8be65845be79d",
-        "version" : "0.3.0"
-      }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

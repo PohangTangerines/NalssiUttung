@@ -20,7 +20,6 @@ extension Font {
         case caption2 = 12
     }
     
-    #warning("responsibleWidth로 인한 size 조정이 적절치 않다면 추후 수정")
     static func pretendardSemibold(_ size: FontSize) -> Font {
         custom("Pretendard-Semibold", size: size.rawValue.responsibleWidth)
     }
@@ -39,6 +38,4 @@ extension Font {
         
         return font.lineHeight
     }
-    
-    
 }

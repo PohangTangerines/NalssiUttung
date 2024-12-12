@@ -18,7 +18,7 @@ struct ResourcesView: View {
             HStack(alignment: .center, spacing: 0) {
                 Text("날씨 데이터는  ")
                     .font(.IMHyemin(.footnote))
-                    .foregroundColor(.black)
+                    .foregroundStyle(.black)
                 Image(systemName: "applelogo")
                     .font(.system(size: 30))
                     .padding(.bottom, 7)
@@ -31,13 +31,15 @@ struct ResourcesView: View {
             } label: {
                 Text("other data sources")
                     .underline()
-                    .foregroundColor(.black)
-            }.padding()
+                    .foregroundStyle(.black)
+            }
+            .padding()
             
             Spacer()
-        }.padding(.horizontal, 15)
-            .background(Color.seaSky)
-            .toolbar(.hidden)
+        }
+        .padding(.horizontal, 15)
+        .background(Color.seaSky)
+        .toolbar(.hidden)
     }
 }
 

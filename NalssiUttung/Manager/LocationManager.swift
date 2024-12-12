@@ -11,53 +11,75 @@ import WidgetKit
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
-    
-    private var locationManager = CLLocationManager()
-    private let defaults = UserDefaults(suiteName: "group.nalsam")
-    private let jejuAirportLocation = CLLocation(latitude: 33.5115, longitude: 126.4911)
-    
-    @Published var location: CLLocation {
-        didSet {
-            updateAddress()
-        }
-    }
-    
-    @Published var address: String = ""
-    
-    override private init() {
-        self.location = jejuAirportLocation
-        super.init()
         
-        self.locationManager.delegate = self
-        self.locationManager.requestWhenInUseAuthorization()
-    }
-    
-    /// 사용자 위치 권한 허가를 받지 못했을 때 기본 위치를 제주공항으로 설정합니다.
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedWhenInUse, .authorizedAlways:
-            locationManager.startUpdatingLocation()
-        case .denied, .restricted, .notDetermined:
-            location = jejuAirportLocation
-        @unknown default:
-            break
+    var currentLocation: CLLocation? {
+        didSet {
+            updateAddress(for: .current, location: currentLocation)
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.location = locations.last ?? jejuAirportLocation
-        guard let location = locations.last else { return }
-        let locationData = [location.coordinate.latitude, location.coordinate.longitude]
-        defaults?.set(locationData, forKey: "currentLocation")
-        WidgetCenter.shared.reloadAllTimelines()
+    @Published var selectedLocation: CLLocation? {
+        didSet {
+            updateAddress(for: .selected, location: selectedLocation)
+        }
+    }
+    
+    @Published var currentAddress: String = "" {
+        didSet {
+            self.currentLocationInfo = findLocation(for: currentAddress)
+            print("currentAddress: \(currentAddress)")
+        }
+    }
+    
+    @Published var selectedAddress: String = "" {
+        didSet {
+            print("selectedAddress: \(selectedAddress)")
+        }
+    }
+    
+    // TODO: - LocationInfo 삭제하기
+    @Published var currentLocationInfo: LocationInfo?
+    
+    private let updateState = UpdateState()
+
+    /// 현재 위치를 요청합니다. liveUpdates를 사용합니다.
+    /// liveUpdates가 기기의 실시간 정보를 받아오는 기능이라 시뮬레이터에서 제대로 작동하지 못하는 경우도 종종 발생합니다.
+    /// 실기기에서는 정상 작동합니다.
+    func updateCurrentLocation() async {
+        guard await updateState.startUpdating() else {
+            print("현재 위치 업데이트가 이미 진행 중입니다.")
+            return
+        }
+
+        defer {
+            Task {
+                await updateState.stopUpdating()
+            }
+        }
+        
+        do {
+            let updates = CLLocationUpdate.liveUpdates()
+            for try await update in updates {
+                if let currentLocation = update.location {
+                    print("현재 위치는: \(currentLocation)")
+                    self.currentLocation = currentLocation
+                    return
+                } else {
+                    print("위치 업데이트가 유효하지 않습니다. 다시 시도 중...")
+                }
+            }
+        } catch {
+            print("위치 업데이트 중 에러 발생: \(error.localizedDescription)")
+        }
     }
     
     /// 업데이트한 location을 한글 주소로 변경합니다.
     /// 현재 제주(제주시, 서귀포시)가 아닌 경우 address는 제주공항으로 설정됩니다.
-    func updateAddress() {
+    func updateAddress(for type: AddressType, location: CLLocation?) {
+        guard let location = location else { return }
         let geocoder = CLGeocoder()
         
-        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+        geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
             if let error = error {
                 print("주소 변환 오류: \(error.localizedDescription)")
                 return
@@ -67,22 +89,62 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                let locality = placemark.locality,
                let subLocality = placemark.subLocality {
                 
+                let address: String
                 switch (locality, subLocality) {
                 case ("제주시", "용담이동"):
-                    self.address = "제주공항"
+                    address = "제주공항"
                 case ("제주시", _), ("서귀포시", _):
-                    self.address = "\(locality) \(subLocality)"
+                    address = "\(locality) \(subLocality)"
                 default:
-                    self.address = "제주공항"
+                    address = "제주공항"
+                }
+                
+                switch type {
+                case .current:
+                    self?.currentAddress = address
+                case .selected:
+                    self?.selectedAddress = address
                 }
             }
         }
     }
     
-    func findCoordinates(address val: String) -> CLLocation? {
-        if let location = LocationInfo.Data.first(where: { $0.address == val }) {
-            return CLLocation(latitude: location.latitude, longitude: location.longitude)
+    /// 업데이트한 location을 한글 주소로 변경합니다.
+    /// 현재 제주(제주시, 서귀포시)가 아닌 경우 address는 제주공항으로 설정됩니다.
+    func getAddress(from location: CLLocation?) async throws -> String? {
+        guard let location = location else {
+            print(CustomWeatherError.locationUnavilable)
+            return nil
+        }
+        
+        let geocoder = CLGeocoder()
+        let placemarks = try await geocoder.reverseGeocodeLocation(location)
+        
+        if let placemark = placemarks.first,
+           let locality = placemark.locality,
+           let subLocality = placemark.subLocality {
+            
+            switch (locality, subLocality) {
+            case ("제주시", "용담이동"):
+                return "제주공항"
+            case ("제주시", _), ("서귀포시", _):
+                return  "\(locality) \(subLocality)"
+            default:
+                return "제주공항"
+            }
         }
         return nil
     }
+    
+    func findLocation(for address: String) -> LocationInfo? {
+        return LocationInfo.Data.first(where: { $0.address == address })
+    }
+    
+    func updateSelectedLocation(for address: String) {
+        if let updatedLocation = findLocation(for: address) {
+            self.selectedLocation = CLLocation(latitude: updatedLocation.coordinate.latitude,
+                                               longitude: updatedLocation.coordinate.longitude)
+        }
+    }
+
 }

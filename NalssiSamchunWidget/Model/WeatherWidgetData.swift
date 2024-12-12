@@ -17,15 +17,16 @@ struct WeatherCharacterWidgetData {
 
 extension WeatherCharacterWidgetData {
     static let previewData = WeatherCharacterWidgetData(address: "제주시 애월읍", temperature: Measurement(value: 24, unit: .celsius), character: "clearCharacter")
-    static let failData = WeatherCharacterWidgetData(address: "주소 없음", temperature: Measurement(value: 0, unit: .celsius), character: "")
-    
 }
 
 extension WeatherCharacterWidgetData {
     static func currentWeather(for address: String?) async throws -> WeatherCharacterWidgetData {
         // 현재 위치 정보
-        let address = address ?? "제주공항"
-        let location = LocationManager.shared.findCoordinates(address: address) ?? CLLocation(latitude: 33.8463889, longitude: 126.8205556)
+        guard let address else { throw CustomWeatherError.noAddress }
+        guard let locationInfo: LocationInfo = LocationManager.shared.findLocation(for: address) else {
+            throw CustomWeatherError.noLocationInfo
+        }
+        let location = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)
         
         // 현재 온도
         let weather = try await WeatherService.shared.weather(for: location)
@@ -33,8 +34,14 @@ extension WeatherCharacterWidgetData {
         
         // 현재 날씨 캐릭터
         let condition = weather.currentWeather.condition
-        let character = condition.getWeatherCharacter(for: weather)
+
+        guard let sunrise = weather.dailyForecast.forecast.first?.sun.sunrise,
+           let sunset = weather.dailyForecast.forecast.first?.sun.sunset else {
+            throw CustomWeatherError.sunEventUnavailable
+        }
         
+        let character = condition.character(sunrise: sunrise, sunset: sunset)
+
         return WeatherCharacterWidgetData(address: address, temperature: temperature, character: character)
     }
 }
@@ -48,14 +55,17 @@ struct WeatherCommentWidgetData {
 
 extension WeatherCommentWidgetData {
     static let previewData = WeatherCommentWidgetData(address: "제주시 애월읍", temperature: Measurement(value: 24, unit: .celsius), icon: "dayClear", comment: "바람 강하니 촐람생이처럼 바당 가지 말앙 들어가 있어라")
-    static let failData = WeatherCommentWidgetData(address: "주소 없음", temperature: Measurement(value: 0, unit: .celsius), icon: "", comment: "날씨 멘트를 불러올 수 없습니다.")
 }
 
 extension WeatherCommentWidgetData {
     static func currentWeather(for address: String?) async throws -> WeatherCommentWidgetData {
         // 현재 위치 정보
-        let address = address ?? "제주공항"
-        let location = LocationManager.shared.findCoordinates(address: address) ?? CLLocation(latitude: 33.8463889, longitude: 126.8205556)
+        guard let address = address else { throw CustomWeatherError.noAddress }
+        
+        guard let locationInfo = LocationManager.shared.findLocation(for: address) else {
+            throw CustomWeatherError.noLocationInfo
+        }
+        let location = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)
         
         // 현재 온도
         let weather = try await WeatherService.shared.weather(for: location)
@@ -63,8 +73,14 @@ extension WeatherCommentWidgetData {
         
         // 현재 날씨 아이콘, 멘트
         let condition = weather.currentWeather.condition
-        let icon = condition.getWeatherIcon()
-        let comment = condition.getWeatherComment(for: weather)
+        let icon = condition.icon
+        
+        guard let sunrise = weather.dailyForecast.forecast.first?.sun.sunrise,
+           let sunset = weather.dailyForecast.forecast.first?.sun.sunset else {
+            throw CustomWeatherError.sunEventUnavailable
+        }
+                
+        let comment = condition.comment(sunrise: sunrise, sunset: sunset)
         
         return WeatherCommentWidgetData(address: address, temperature: temperature, icon: icon, comment: comment)
     }

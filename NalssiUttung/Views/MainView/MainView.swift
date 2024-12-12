@@ -5,153 +5,56 @@
 //  Created by 이재원 on 2023/10/01.
 //
 
+import CoreLocation
 import SwiftUI
-import ScrollKit
 import WeatherKit
 
 struct MainView: View {
-    // MARK: Weather Data 관련
-    @ObservedObject var locationManager = LocationManager.shared
-    let weatherManager = WeatherService.shared
+    @StateObject var viewModel = MainViewModel()
+    @StateObject var weatherLocationManager = WeatherLocationManager()
     
-    @State var weatherBoxData: WeatherBoxData?
-    @State var dailyWeatherData: DailyWeatherData?
-    @State var weeklyWeatherData: WeeklyWeatherData?
-    @State var detailedWeatherData: DetailedWeatherData?
-    
-    // MARK: View 전환 관련
-    @State private var dragOffset: CGSize = .zero
-    @State private var canTransition = false
-    @State private var viewOffsetY: CGFloat = 0
-    @State private var isInitView = true
-    
-    // MARK: Modal 관련
-    @State var modalState: ModalState = .notModalView
-    @State var isModalVisible: Bool = false
+    var location: CLLocation?
+    let mode: WeatherDisplayMode
     
     private var dragGesture: some Gesture {
         DragGesture()
             .onChanged { gesture in
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    if isInitView {
-                        if gesture.translation.height < -100 {
-                            canTransition = true
-                            viewOffsetY = -100
-                        } else {
-                            canTransition = false
-                            viewOffsetY = 0
-                        }
-                    } else {
-                        if gesture.translation.height > 100 {
-                            canTransition = true
-                            viewOffsetY = 100
-                        } else {
-                            canTransition = false
-                            viewOffsetY = 0
-                        }
-                    }
-                }
+                viewModel.handleDragGesture(gesture)
             }
             .onEnded { gesture in
-                withAnimation {
-                    viewOffsetY = 0
-                    canTransition = false
-                    if isInitView {
-                        if gesture.translation.height < -100 {
-                            isInitView = false
-                        }
-                    } else {
-                        if gesture.translation.height > 100 {
-                            isInitView = true
-                        }
-                    }
-                }
+                viewModel.endDragGesture(gesture)
             }
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color.seaSky
                     .ignoresSafeArea()
-                VStack(spacing: 0) {
-                    MainHeader(locationText: $locationManager.address, modalState: $modalState, isModalVisible: $isModalVisible)
-                        .task {
-                            locationManager.updateAddress()
-                        }
-                    
-                    if isInitView {
-                        RealTimeWeatherView(weatherBoxData: $weatherBoxData, dailyWeatherData: $dailyWeatherData, canTransition: $canTransition, isModalVisible: .constant(true), isModal: false)
-                            .transition(.move(edge: .top))
-                    } else {
-                        MainScrolledView(weatherBoxData: $weatherBoxData,
-                                         weeklyWeatherData: $weeklyWeatherData,
-                                         detailedWeatherData: $detailedWeatherData)
-                        .transition(.move(edge: .bottom))
-                    }
-                    
-                }.padding(.horizontal, 15)
-                    .gesture(dragGesture)
-                    .offset(y: viewOffsetY)
-                    .task {
-                        let location = locationManager.location
+                Group {
+                    switch viewModel.displayedContent {
                         
-                        if let weather = await weatherManager.getWeather(location: location) {
-                            self.weatherBoxData = weatherManager.getWeatherBoxData(location: location, weather: weather)
-                            self.dailyWeatherData = weatherManager.getDailyWeatherData(weather: weather)
-                            self.weeklyWeatherData = weatherManager.getWeeklyWeatherData(weather: weather)
-                            self.detailedWeatherData = weatherManager.getDetailedWeatherData(weather: weather)
+                    case .main:
+                        CurrentWeatherView(weatherLocationManager: weatherLocationManager, viewModel: viewModel)
+                            .transition(.move(edge: .top))
+                            .padding(.horizontal, 20)
+                        
+                    case .detail:
+                        VStack {
+                            CurrentWeatherDetailView(weatherLocationManager: weatherLocationManager)
+                                .transition(.move(edge: .bottom))
+                                .padding(.horizontal, 20)
                         }
                     }
-            }
-        }
-    }
-    
-    private struct MainHeader: View {
-        @Binding var locationText: String
-        @Binding var modalState: ModalState
-        @Binding var isModalVisible: Bool
-        
-        @ObservedObject var locationStore = LocationStore()
-        
-        var body: some View {
-            ZStack {
-                HStack {
-                    if modalState != .notModalView {
-                        Button {
-                            isModalVisible.toggle()
-                        } label: {
-                            Image(systemName: "취소")
-                                .font(.pretendardSemibold(.body))
-                                .foregroundColor(.black)
-                        }
-                    }
-                    Text("\(locationText)")
-                        .font(.pretendardSemibold(.callout))
-                    Image(systemName: "location.fill")
-                        .font(.system(size: 16, weight: .bold))
                 }
-                HStack {
-                    Spacer()
-                    switch modalState {
-                    case .notModalView:
-                        NavigationLink(destination: LocationListView(locationStore: locationStore)) {
-                            Image(systemName: "plus")
-                                .font(.pretendardSemibold(.body))
-                                .foregroundColor(.black)
-                        }
-                    case .isModalViewAndContainedContent:
-                        EmptyView()
-                    case .isModalViewAndNotContainedContent:
-                        Image(systemName: "추가")
-                            .font(.pretendardSemibold(.body))
-                            .foregroundColor(.black)
-                    }
-                    
-                }
+                .gesture(dragGesture)
+                .offset(y: viewModel.viewOffsetY)
             }
-            .padding(.top, 7.responsibleHeight)
-            .padding(.bottom, 24.responsibleHeight)
+            .toolbar(content: toolbarContent)
+            .task {
+                weatherLocationManager.selectedLocation = location
+                await weatherLocationManager.fetchWeather(with: .all)
+            }
         }
     }
 }

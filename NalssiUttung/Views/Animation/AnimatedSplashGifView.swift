@@ -12,8 +12,6 @@ struct AnimatedSplashGifView: UIViewRepresentable {
     @Binding var gifName: String
     
     @State private var imageView = GIFImageView(frame: CGRect(x: (UIScreen.main.bounds.width - 198) / 2, y: (UIScreen.main.bounds.height - 182) / 2.5, width: 198, height: 182))
-
-//    @State private var imageView = GIFImageView(frame: CGRect(x: 0, y: 0, width: 198, height: 182))
     
     func makeUIView(context: Context) -> UIView {
         let uiView = UIView()
@@ -26,6 +24,6 @@ struct AnimatedSplashGifView: UIViewRepresentable {
     }
 }
 
-//#Preview {
-//    AnimatedSplashGifView()
-//}
+#Preview {
+    AnimatedSplashGifView(gifName: .constant("clearCharacter"))
+}
