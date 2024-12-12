@@ -20,7 +20,7 @@ class LocalizedWeatherViewModel: ObservableObject {
     /// weatherLocationManager에 전달해주기 위한 임시 변수입니다.
     var selectedLocation: CLLocation?
     
-    @Published var mode: WeatherDisplayMode = .modal
+    @Published var mode: WeatherDisplayMode = .modalInList
 
     func loadLocations() {
         self.savedLocations = coreDataStack.fetchAllLocations()

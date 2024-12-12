@@ -64,7 +64,7 @@ struct LocalizedWeatherListView: View {
         .sheet(isPresented: $toolbarViewModel.isModalPresented) {
             MainView(location: isCurrentLocation ?
                      locationManager.currentLocation :
-                     locationManager.selectedLocation, mode: .modalInList)
+                     locationManager.selectedLocation, mode: localizedWeatherViewModel.mode)
         }
         .environment(\.editMode, .constant(toolbarViewModel.isEditMode ? EditMode.active : EditMode.inactive))
         .task {
