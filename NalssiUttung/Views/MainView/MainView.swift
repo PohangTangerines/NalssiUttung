@@ -55,7 +55,7 @@ struct MainView: View {
             .toolbar(content: toolbarContent)
             .task {
                 await updateAddress()
-                await weatherManager.fetchWeather(with: .all)
+                await weatherManager.fetchWeather(with: .all, for: location)
             }
         }
     }
