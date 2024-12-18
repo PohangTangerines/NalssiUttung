@@ -45,6 +45,18 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         return true
     }
     
+    func isLocationJeju(for location: CLLocation) -> Bool {
+        let jejuCenter = CLLocation(latitude: 33.4996, longitude: 126.5312)
+        
+        // 제주도는 대략 50km 정도의 반경을 가지므로, 이 범위 내에 있으면 제주도로 간주
+        let distance = location.distance(from: jejuCenter)
+        
+        // 제주도 범위 기준 (50km 이내)
+        let jejuRadius: CLLocationDistance = 50000
+        
+        return distance <= jejuRadius
+    }
+    
     /// 현재 위치를 요청합니다. liveUpdates를 사용합니다.
     /// liveUpdates가 기기의 실시간 정보를 받아오는 기능이라 시뮬레이터에서 제대로 작동하지 못하는 경우도 종종 발생합니다.
     /// 실기기에서는 정상 작동합니다.
@@ -66,6 +78,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             let updates = CLLocationUpdate.liveUpdates()
             for try await update in updates {
                 if let currentLocation = update.location {
+                    
+                    guard isLocationJeju(for: currentLocation) else {
+                        self.currentLocation = jejuAirport
+                        self.currentAddress = "제주공항"
+                        return
+                    }
+                    
                     print("현재 위치는: \(currentLocation)")
                     
                     self.currentLocation = currentLocation
@@ -106,7 +125,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         return nil
     }
     
-    func findLocation(for address: String) -> LocationInfo? {
+    func findLocationInfo(for address: String) -> LocationInfo? {
         return LocationInfo.Data.first(where: { $0.address == address })
     }
 }

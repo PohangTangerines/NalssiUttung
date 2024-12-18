@@ -59,7 +59,7 @@ struct SavedLocationView: View {
         .onTapGesture {
             localizedWeatherViewModel.updateSelectedLocation(for: filteredLocation)
             
-            guard let location = LocationManager.shared.findLocation(for: filteredLocation) else {
+            guard let location = LocationManager.shared.findLocationInfo(for: filteredLocation) else {
                 print(CustomWeatherError.noLocationInfo.localizedDescription)
                 return
             }

@@ -29,7 +29,7 @@ extension MainView {
         
         ToolbarItem(placement: .topBarTrailing) {
             if let address = address {
-                AddButton(locationInfo: LocationManager.shared.findLocation(for: address), mode: mode)
+                AddButton(locationInfo: LocationManager.shared.findLocationInfo(for: address), mode: mode)
             } else {
                 AddButton(mode: mode)
             }

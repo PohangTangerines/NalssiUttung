@@ -40,7 +40,7 @@ class LocalizedWeatherViewModel: ObservableObject {
     }
     
     func updateSelectedLocation(for address: String) {
-        if let updatedLocation = LocationManager.shared.findLocation(for: address) {
+        if let updatedLocation = LocationManager.shared.findLocationInfo(for: address) {
             self.selectedLocation = CLLocation(latitude: updatedLocation.coordinate.latitude,
                                                longitude: updatedLocation.coordinate.longitude)
         }
