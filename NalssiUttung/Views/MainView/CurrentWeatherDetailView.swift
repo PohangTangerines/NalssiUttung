@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CurrentWeatherDetailView: View {
     @ObservedObject var weatherManager: WeatherManager
-    @ObservedObject var locationManager = LocationManager.shared
     
     var body: some View {
         if let currentWeather = weatherManager.currentWeather,
