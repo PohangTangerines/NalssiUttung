@@ -65,6 +65,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard status == .authorizedWhenInUse || status == .authorizedAlways else {
             print("위치 권한이 허용되지 않았습니다. 상태: \(status)")
             self.currentLocation = jejuAirport
+            updateAddress(for: .current, location: self.currentLocation)
             return
         }
         
