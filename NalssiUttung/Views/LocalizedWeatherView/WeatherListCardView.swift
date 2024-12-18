@@ -10,11 +10,8 @@ import SwiftUI
 
 struct WeatherListCardView: View {
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
-    @ObservedObject var locationManager = LocationManager.shared
     @StateObject var weatherManager = WeatherManager()
-    
-    @ObservedObject var localizedWeatherViewModel: LocalizedWeatherViewModel
-    
+
     var locationInfo: LocationInfo?
     
     var body: some View {
@@ -22,7 +19,7 @@ struct WeatherListCardView: View {
             if let currentWeather = weatherManager.currentWeather {
                 WeatherCardLayout(currentWeather: currentWeather,
                                   viewOrigin: .list,
-                                  address: locationInfo?.address ?? locationManager.currentAddress)
+                                  address: locationInfo?.address ?? LocationManager.shared.currentAddress)
             } else {
                 WeatherCardLayout(currentWeather: CurrentWeather.placeholder,
                                   viewOrigin: .list, address: "")
@@ -31,18 +28,20 @@ struct WeatherListCardView: View {
         }
         .padding(.bottom, 15.responsibleHeight)
         .task {
-            if let locationInfo = locationInfo {
-                localizedWeatherViewModel.selectedLocation = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)
-                print("selectedLocation is \(localizedWeatherViewModel.selectedLocation!)")
-            } else {
-                print("No location Info")
+            /// 선택된 위치가 없으면(LocalizedWeatherListView로부터 LocationInfo를 받지 못하면) 현재 위치 날씨 정보 로드.
+            /// 선택된 위치가 있으면 선택된 위치 날씨 정보 로드.
+            guard let locationInfo = locationInfo else {
+                await weatherManager.fetchWeather(with: .current)
+                return
             }
-            await weatherManager.fetchWeather(with: .current)
+            
+            let selectedLocation = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)
+            await weatherManager.fetchWeather(with: .current, for: selectedLocation)
         }
     }
 }
 
 #Preview {
-    WeatherListCardView(weatherManager: WeatherManager(), localizedWeatherViewModel: LocalizedWeatherViewModel(), locationInfo: LocationInfo.Data[0])
+    WeatherListCardView(locationInfo: LocationInfo.Data[0])
         .environmentObject(ToolbarViewModel())
 }

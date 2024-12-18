@@ -19,7 +19,7 @@ struct LocalizedWeatherListView: View {
     var body: some View {
         List {
             Group {
-                WeatherListCardView(localizedWeatherViewModel: localizedWeatherViewModel)
+                WeatherListCardView()
                     .listRowInsets(EdgeInsets())
                     .listRowBackground(Color.clear)
                     .onTapGesture {
@@ -38,7 +38,7 @@ struct LocalizedWeatherListView: View {
                                     .foregroundStyle(.red)
                             }
                         }
-                        WeatherListCardView(localizedWeatherViewModel: localizedWeatherViewModel, locationInfo: savedLocation)
+                        WeatherListCardView(locationInfo: savedLocation)
                             .onTapGesture {
                                 let location = CLLocation(latitude: savedLocation.coordinate.latitude,
                                                           longitude: savedLocation.coordinate.longitude)
