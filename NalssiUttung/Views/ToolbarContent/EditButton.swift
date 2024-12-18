@@ -12,7 +12,7 @@ struct EditButton: View {
     @ObservedObject var localizedWeatherViewModel: LocalizedWeatherViewModel
     
     var body: some View {
-        if !toolbarViewModel.isTextFieldActive, !localizedWeatherViewModel.savedLocations.isEmpty {
+        if !toolbarViewModel.isTextFieldActive {
             Button {
                 withAnimation {
                     saveUpdates()
@@ -29,6 +29,7 @@ struct EditButton: View {
         if toolbarViewModel.isEditMode {
             localizedWeatherViewModel.saveOrderInCoreData()
             localizedWeatherViewModel.deleteLocationsInCoreData()
+            localizedWeatherViewModel.loadLocations()
         }
         toolbarViewModel.isEditMode.toggle()
     }
