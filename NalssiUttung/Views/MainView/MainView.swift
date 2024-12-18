@@ -17,6 +17,7 @@ struct MainView: View {
     
     var location: CLLocation?
     let mode: WeatherDisplayMode
+    var isCurrentLocation: Bool = true
     
     private var dragGesture: some Gesture {
         DragGesture()

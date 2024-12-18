@@ -20,10 +20,10 @@ extension MainView {
         ToolbarItem(placement: .principal) {
             if location == nil {
                 LocationHeader(address: LocationManager.shared.currentAddress,
-                               isCurrentLocation: true)
+                               isCurrentLocation: isCurrentLocation)
             } else {
                 LocationHeader(address: address,
-                               isCurrentLocation: false)
+                               isCurrentLocation: isCurrentLocation)
             }
         }
         
