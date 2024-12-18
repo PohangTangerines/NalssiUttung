@@ -47,6 +47,7 @@ class LocalizedWeatherViewModel: ObservableObject {
     }
     
     @Published var mode: WeatherDisplayMode = .modalInList
+    @Published var isCurrentLocation: Bool = true
 
     func loadLocations() {
         self.savedLocations = coreDataStack.fetchAllLocations()

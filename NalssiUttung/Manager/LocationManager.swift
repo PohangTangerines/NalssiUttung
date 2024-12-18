@@ -9,7 +9,6 @@ import Foundation
 import CoreLocation
 import WidgetKit
 
-
 /// 현재 위치 정보 관련한 변수와 메서드가 있는 클래스입니다.
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()

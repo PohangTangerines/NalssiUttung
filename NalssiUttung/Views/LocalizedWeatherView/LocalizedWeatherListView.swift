@@ -11,9 +11,7 @@ import CoreLocation
 struct LocalizedWeatherListView: View {
     @ObservedObject var localizedWeatherViewModel: LocalizedWeatherViewModel
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
-    
-    @State var isCurrentLocation: Bool = true
-    
+
     /// 항목들을 이동시킬 수 있어야 하기 때문에 LazyVStack과 ScrollView의 조합 대신 List를 사용했습니다.
     /// .onMove로 항목을 이동시킬 수 있습니다. 
     var body: some View {
@@ -23,7 +21,7 @@ struct LocalizedWeatherListView: View {
                     .listRowInsets(EdgeInsets())
                     .listRowBackground(Color.clear)
                     .onTapGesture {
-                        isCurrentLocation = true
+                        localizedWeatherViewModel.isCurrentLocation = true
                         toolbarViewModel.isModalPresented = true
                     }
                 
@@ -40,11 +38,12 @@ struct LocalizedWeatherListView: View {
                         }
                         WeatherListCardView(locationInfo: savedLocation)
                             .onTapGesture {
-                                let location = CLLocation(latitude: savedLocation.coordinate.latitude,
-                                                          longitude: savedLocation.coordinate.longitude)
-                                localizedWeatherViewModel.selectedLocation = location
+                                localizedWeatherViewModel.selectedLocation = CLLocation(
+                                    latitude: savedLocation.coordinate.latitude,
+                                    longitude: savedLocation.coordinate.longitude
+                                )
                                 
-                                isCurrentLocation = false
+                                localizedWeatherViewModel.isCurrentLocation = false
                                 toolbarViewModel.isModalPresented = true
                             }
                     }
@@ -58,9 +57,11 @@ struct LocalizedWeatherListView: View {
         }
         .listStyle(.plain)
         .sheet(isPresented: $toolbarViewModel.isModalPresented) {
-            MainView(location: isCurrentLocation ? LocationManager.shared.currentLocation : localizedWeatherViewModel.selectedLocation,
+            MainView(location: localizedWeatherViewModel.isCurrentLocation ?
+                     LocationManager.shared.currentLocation :
+                     localizedWeatherViewModel.selectedLocation,
                      mode: localizedWeatherViewModel.mode,
-                     isCurrentLocation: isCurrentLocation)
+                     isCurrentLocation: localizedWeatherViewModel.isCurrentLocation)
         }
         .environment(\.editMode, .constant(toolbarViewModel.isEditMode ? EditMode.active : EditMode.inactive))
         .task {
