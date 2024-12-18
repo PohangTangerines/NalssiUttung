@@ -9,17 +9,7 @@ import CoreLocation
 import SwiftUI
 import WeatherKit
 
-class WeatherLocationManager: ObservableObject {
-    var selectedLocation: CLLocation? {
-        didSet {
-            Task {
-                await fetchWeather(with: .all)
-                await updateSelectedAddress()
-            }
-        }
-    }
-    
-    @Published var selectedAddress: String?
+class WeatherManager: ObservableObject {
     var weather: Weather?
     
     @Published var currentWeather: CurrentWeather?
@@ -28,21 +18,10 @@ class WeatherLocationManager: ObservableObject {
     @Published var detailedForecast: DetailedForecast?
     
     private let updateState = UpdateState()
-    
-    @MainActor
-    private func updateSelectedAddress() async {
-        guard let selectedLocation else { return }
-        
-        do {
-            selectedAddress = try await LocationManager.shared.getAddress(from: selectedLocation)
-        } catch {
-            print("주소 변환 오류: \(error)")
-        }
-    }
-    
+
     /// 선택한 location이 있는 경우에는 선택된 location을 바탕으로 날씨를 업데이트합니다.
     /// 없는 경우에는 현재 위치 바탕으로 날씨를 업데이트합니다.
-    func fetchWeather(with type: WeatherUpdateType) async {
+    func fetchWeather(with type: WeatherUpdateType, for selectedLocation: CLLocation? = nil) async {
         
         guard await updateState.startUpdating() else { return }
         

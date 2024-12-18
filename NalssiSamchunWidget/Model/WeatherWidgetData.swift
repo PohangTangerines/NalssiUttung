@@ -23,11 +23,14 @@ extension WeatherCharacterWidgetData {
     static func currentWeather(for address: String?) async throws -> WeatherCharacterWidgetData {
         // 현재 위치 정보
         guard let address else { throw CustomWeatherError.noAddress }
-        guard let locationInfo: LocationInfo = LocationManager.shared.findLocation(for: address) else {
+        
+        print("현재 주소는: \(address)")
+        guard let locationInfo: LocationInfo = LocationManager.shared.findLocationInfo(for: address) else {
             throw CustomWeatherError.noLocationInfo
         }
-        let location = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)
         
+        let location = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)
+        print("현재 위치는: \(location)")
         // 현재 온도
         let weather = try await WeatherService.shared.weather(for: location)
         let temperature = weather.currentWeather.temperature
@@ -62,7 +65,7 @@ extension WeatherCommentWidgetData {
         // 현재 위치 정보
         guard let address = address else { throw CustomWeatherError.noAddress }
         
-        guard let locationInfo = LocationManager.shared.findLocation(for: address) else {
+        guard let locationInfo = LocationManager.shared.findLocationInfo(for: address) else {
             throw CustomWeatherError.noLocationInfo
         }
         let location = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)

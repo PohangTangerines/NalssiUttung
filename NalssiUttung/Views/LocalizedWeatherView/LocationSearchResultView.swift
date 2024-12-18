@@ -27,14 +27,14 @@ struct LocationSearchResultView: View {
         .scrollContentBackground(.hidden)
         .sheet(isPresented: $toolbarViewModel.isModalPresented) {
             MainView(location: localizedWeatherViewModel.selectedLocation,
-                     mode: localizedWeatherViewModel.mode)
+                     mode: localizedWeatherViewModel.mode,
+                     isCurrentLocation: localizedWeatherViewModel.isCurrentLocation)
         }
     }
 }
 
 struct SavedLocationView: View {
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
-    @StateObject var weatherLocationManager = WeatherLocationManager()
     @ObservedObject var localizedWeatherViewModel: LocalizedWeatherViewModel
     
     let filteredLocation: String
@@ -57,9 +57,9 @@ struct SavedLocationView: View {
             }
         }
         .onTapGesture {
-            LocationManager.shared.updateSelectedLocation(for: filteredLocation)
+            localizedWeatherViewModel.updateSelectedLocation(for: filteredLocation)
             
-            guard let location = LocationManager.shared.findLocation(for: filteredLocation) else {
+            guard let location = LocationManager.shared.findLocationInfo(for: filteredLocation) else {
                 print(CustomWeatherError.noLocationInfo.localizedDescription)
                 return
             }
@@ -67,6 +67,7 @@ struct SavedLocationView: View {
             localizedWeatherViewModel.selectedLocation = CLLocation(latitude: location.coordinate.latitude,
                                                                  longitude: location.coordinate.longitude)
             localizedWeatherViewModel.determineWeatherDisplayMode(for: filteredLocation)
+            localizedWeatherViewModel.isCurrentLocation = false
             toolbarViewModel.isModalPresented = true
         }
         .listRowSeparator(.hidden)
