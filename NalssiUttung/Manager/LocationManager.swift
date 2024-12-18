@@ -16,9 +16,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         
     var currentLocation: CLLocation? {
         didSet {
-//            if currentLocation != jejuAirport {
-//                updateAddress(for: .current, location: currentLocation)
-//            }
             Task {
                 @MainActor in 
 
@@ -30,28 +27,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-//    var selectedLocation: CLLocation? {
-//        didSet {
-//            updateAddress(for: .selected, location: selectedLocation)
-//        }
-//    }
-    
     @Published var currentAddress: String = ""
-//    {
-//        didSet {
-////            self.currentLocationInfo = findLocation(for: currentAddress)
-//            print("currentAddress: \(currentAddress)")
-//        }
-//    }
-    
-//    @Published var selectedAddress: String = "" {
-//        didSet {
-//            print("selectedAddress: \(selectedAddress)")
-//        }
-//    }
-    
-//    // TODO: - LocationInfo 삭제하기
-//    @Published var currentLocationInfo: LocationInfo?
     
     private let updateState = UpdateState()
     
@@ -65,7 +41,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             self.currentAddress = "제주공항"
             return false
         }
-        
         return true
     }
     
@@ -102,52 +77,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             print("위치 업데이트 중 에러 발생: \(error.localizedDescription)")
         }
     }
-    
-//    /// 업데이트한 location을 한글 주소로 변경합니다.
-//    /// 현재 제주(제주시, 서귀포시)가 아닌 경우 address는 제주공항으로 설정됩니다.
-//    func updateAddress(for type: AddressType, location: CLLocation?) -> String? {
-//        guard let location = location else { return nil }
-//        let geocoder = CLGeocoder()
-//        var address: String?
-//        
-//        geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
-//            if let error = error {
-//                print("주소 변환 오류: \(error.localizedDescription)")
-//                return
-//            }
-//            
-//            if let placemark = placemarks?.first,
-//               let locality = placemark.locality,
-//               let subLocality = placemark.subLocality {
-//                
-////                var location = self?.currentLocation
-//                
-//                switch (locality, subLocality) {
-//                case ("제주시", "용담이동"):
-//                    address = "제주공항"
-//                case ("제주시", _), ("서귀포시", _):
-//                    address = "\(locality) \(subLocality)"
-//                default:
-////                    location = self?.jejuAirport
-//                    address = "제주공항"
-//                }
-//                
-//                
-////                switch type {
-////                case .current:
-////                    self?.currentLocation = location
-////                    self?.currentAddress = address
-////                default:
-////                    break
-//////                case .selected:
-//////                    self?.selectedAddress = address
-////                }
-//            }
-//            
-//        }
-//        return address
-//
-//    }
     
     /// 업데이트한 location을 한글 주소로 변경합니다.
     /// 현재 제주(제주시, 서귀포시)가 아닌 경우 address는 제주공항으로 설정됩니다.
