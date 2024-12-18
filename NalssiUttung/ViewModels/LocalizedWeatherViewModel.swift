@@ -10,6 +10,7 @@ import CoreLocation
 
 class LocalizedWeatherViewModel: ObservableObject {
     private let coreDataStack = CoreDataStack.shared
+    private let weatherManager = WeatherManager()
     
     @Published var savedLocations: [LocationInfo] = []
     @Published var originalSavedLocations: [LocationInfo] = []
@@ -17,8 +18,33 @@ class LocalizedWeatherViewModel: ObservableObject {
     
     @Published var filteredLocations: [String] = []
     
-    /// weatherLocationManager에 전달해주기 위한 임시 변수입니다.
-    var selectedLocation: CLLocation?
+    var selectedLocation: CLLocation? {
+        didSet {
+            Task {
+                await weatherManager.fetchWeather(with: .all)
+                await updateSelectedAddress()
+            }
+        }
+    }
+    @Published var selectedAddress: String?
+
+    @MainActor
+    private func updateSelectedAddress() async {
+        guard let selectedLocation else { return }
+        
+        do {
+            selectedAddress = try await LocationManager.shared.getAddress(from: selectedLocation)
+        } catch {
+            print("주소 변환 오류: \(error)")
+        }
+    }
+    
+    func updateSelectedLocation(for address: String) {
+        if let updatedLocation = LocationManager.shared.findLocation(for: address) {
+            self.selectedLocation = CLLocation(latitude: updatedLocation.coordinate.latitude,
+                                               longitude: updatedLocation.coordinate.longitude)
+        }
+    }
     
     @Published var mode: WeatherDisplayMode = .modalInList
 

@@ -4,6 +4,7 @@
 //
 //  Created by 금가경 on 11/2/24.
 //
+
 import SwiftUI
 
 struct CustomNavigationBarModifier<L: View, P: View, R: View, B: View>: ViewModifier {

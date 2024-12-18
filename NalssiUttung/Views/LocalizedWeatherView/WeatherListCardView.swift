@@ -11,13 +11,15 @@ import SwiftUI
 struct WeatherListCardView: View {
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
     @ObservedObject var locationManager = LocationManager.shared
-    @StateObject var weatherLocationManager = WeatherLocationManager()
+    @StateObject var weatherManager = WeatherManager()
+    
+    @ObservedObject var localizedWeatherViewModel: LocalizedWeatherViewModel
     
     var locationInfo: LocationInfo?
     
     var body: some View {
         Group {
-            if let currentWeather = weatherLocationManager.currentWeather {
+            if let currentWeather = weatherManager.currentWeather {
                 WeatherCardLayout(currentWeather: currentWeather,
                                   viewOrigin: .list,
                                   address: locationInfo?.address ?? locationManager.currentAddress)
@@ -30,17 +32,17 @@ struct WeatherListCardView: View {
         .padding(.bottom, 15.responsibleHeight)
         .task {
             if let locationInfo = locationInfo {
-                weatherLocationManager.selectedLocation = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)
-                print("selectedLocation is \(weatherLocationManager.selectedLocation!)")
+                localizedWeatherViewModel.selectedLocation = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)
+                print("selectedLocation is \(localizedWeatherViewModel.selectedLocation!)")
             } else {
                 print("No location Info")
             }
-            await weatherLocationManager.fetchWeather(with: .current)
+            await weatherManager.fetchWeather(with: .current)
         }
     }
 }
 
 #Preview {
-    WeatherListCardView(weatherLocationManager: WeatherLocationManager(), locationInfo: LocationInfo.Data[0])
+    WeatherListCardView(weatherManager: WeatherManager(), localizedWeatherViewModel: LocalizedWeatherViewModel(), locationInfo: LocationInfo.Data[0])
         .environmentObject(ToolbarViewModel())
 }

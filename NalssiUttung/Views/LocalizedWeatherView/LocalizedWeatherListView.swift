@@ -9,8 +9,6 @@ import SwiftUI
 import CoreLocation
 
 struct LocalizedWeatherListView: View {
-    @ObservedObject var locationManager = LocationManager.shared
-    
     @ObservedObject var localizedWeatherViewModel: LocalizedWeatherViewModel
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
     
@@ -21,7 +19,7 @@ struct LocalizedWeatherListView: View {
     var body: some View {
         List {
             Group {
-                WeatherListCardView()
+                WeatherListCardView(localizedWeatherViewModel: localizedWeatherViewModel)
                     .listRowInsets(EdgeInsets())
                     .listRowBackground(Color.clear)
                     .onTapGesture {
@@ -40,13 +38,11 @@ struct LocalizedWeatherListView: View {
                                     .foregroundStyle(.red)
                             }
                         }
-                        WeatherListCardView(locationInfo: savedLocation)
+                        WeatherListCardView(localizedWeatherViewModel: localizedWeatherViewModel, locationInfo: savedLocation)
                             .onTapGesture {
                                 let location = CLLocation(latitude: savedLocation.coordinate.latitude,
                                                           longitude: savedLocation.coordinate.longitude)
                                 localizedWeatherViewModel.selectedLocation = location
-
-                                locationManager.selectedLocation = location
                                 
                                 isCurrentLocation = false
                                 toolbarViewModel.isModalPresented = true
@@ -63,8 +59,8 @@ struct LocalizedWeatherListView: View {
         .listStyle(.plain)
         .sheet(isPresented: $toolbarViewModel.isModalPresented) {
             MainView(location: isCurrentLocation ?
-                     locationManager.currentLocation :
-                     locationManager.selectedLocation, mode: localizedWeatherViewModel.mode)
+                     LocationManager.shared.currentLocation :
+                     localizedWeatherViewModel.selectedLocation, mode: localizedWeatherViewModel.mode)
         }
         .environment(\.editMode, .constant(toolbarViewModel.isEditMode ? EditMode.active : EditMode.inactive))
         .task {
@@ -75,6 +71,6 @@ struct LocalizedWeatherListView: View {
 }
 
 #Preview {
-    LocalizedWeatherView()
+    LocalizedWeatherListView(localizedWeatherViewModel: LocalizedWeatherViewModel())
         .environmentObject(ToolbarViewModel())
 }

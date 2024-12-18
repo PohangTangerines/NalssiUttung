@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct CurrentWeatherDetailView: View {
-    @ObservedObject var weatherLocationManager: WeatherLocationManager
+    @ObservedObject var weatherManager: WeatherManager
     @ObservedObject var locationManager = LocationManager.shared
     
     var body: some View {
-        if let currentWeather = weatherLocationManager.currentWeather,
-           let weeklyForecast = weatherLocationManager.weeklyForecast,
-           let detailedForecast = weatherLocationManager.detailedForecast {
+        if let currentWeather = weatherManager.currentWeather,
+           let weeklyForecast = weatherManager.weeklyForecast,
+           let detailedForecast = weatherManager.detailedForecast {
             VStack(spacing: 0) {
                 WeatherCardLayout(currentWeather: currentWeather, viewOrigin: .main)
                     .padding(.bottom, 30.responsibleHeight)

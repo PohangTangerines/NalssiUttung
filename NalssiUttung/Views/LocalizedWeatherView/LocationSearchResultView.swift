@@ -34,7 +34,6 @@ struct LocationSearchResultView: View {
 
 struct SavedLocationView: View {
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
-    @StateObject var weatherLocationManager = WeatherLocationManager()
     @ObservedObject var localizedWeatherViewModel: LocalizedWeatherViewModel
     
     let filteredLocation: String
@@ -57,7 +56,7 @@ struct SavedLocationView: View {
             }
         }
         .onTapGesture {
-            LocationManager.shared.updateSelectedLocation(for: filteredLocation)
+            localizedWeatherViewModel.updateSelectedLocation(for: filteredLocation)
             
             guard let location = LocationManager.shared.findLocation(for: filteredLocation) else {
                 print(CustomWeatherError.noLocationInfo.localizedDescription)
