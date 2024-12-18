@@ -12,7 +12,7 @@ import WidgetKit
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()
     static let shared = LocationManager()
-    private let jejuAirport = CLLocation(latitude: 33.5115, longitude: 126.4911)
+    private let jejuAirport = CLLocation(latitude: LocationInfo.Data.first!.coordinate.latitude, longitude: LocationInfo.Data.first!.coordinate.longitude)
         
     var currentLocation: CLLocation? {
         didSet {
