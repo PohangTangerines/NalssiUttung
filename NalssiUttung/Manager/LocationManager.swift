@@ -10,15 +10,19 @@ import CoreLocation
 import WidgetKit
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    private var locationManager = CLLocationManager()
     static let shared = LocationManager()
+    private let jejuAirport = CLLocation(latitude: 33.5115, longitude: 126.4911)
         
     var currentLocation: CLLocation? {
         didSet {
-            updateAddress(for: .current, location: currentLocation)
+            if currentLocation != jejuAirport {
+                updateAddress(for: .current, location: currentLocation)
+            }
         }
     }
     
-    @Published var selectedLocation: CLLocation? {
+    var selectedLocation: CLLocation? {
         didSet {
             updateAddress(for: .selected, location: selectedLocation)
         }
@@ -57,11 +61,19 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
         }
         
+        let status = locationManager.authorizationStatus
+        guard status == .authorizedWhenInUse || status == .authorizedAlways else {
+            print("위치 권한이 허용되지 않았습니다. 상태: \(status)")
+            self.currentLocation = jejuAirport
+            return
+        }
+        
         do {
             let updates = CLLocationUpdate.liveUpdates()
             for try await update in updates {
                 if let currentLocation = update.location {
                     print("현재 위치는: \(currentLocation)")
+                    
                     self.currentLocation = currentLocation
                     return
                 } else {
@@ -90,18 +102,23 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                let subLocality = placemark.subLocality {
                 
                 let address: String
+                var location = self?.currentLocation
+                
                 switch (locality, subLocality) {
                 case ("제주시", "용담이동"):
                     address = "제주공항"
                 case ("제주시", _), ("서귀포시", _):
                     address = "\(locality) \(subLocality)"
                 default:
+                    location = self?.jejuAirport
                     address = "제주공항"
                 }
                 
                 switch type {
                 case .current:
+                    self?.currentLocation = location
                     self?.currentAddress = address
+
                 case .selected:
                     self?.selectedAddress = address
                 }
