@@ -61,7 +61,7 @@ class LocalizedWeatherViewModel: ObservableObject {
     }
     
     func determineWeatherDisplayMode(for location: String) {
-        self.mode = coreDataStack.isLocationExist(for: location) ? .modalInList : .modal
+        self.mode = (coreDataStack.isLocationExist(for: location) || isCurrentLocation) ? .modalInList : .modal
     }
     
     func deleteLocationIfexist(for location: LocationInfo) {
