@@ -27,9 +27,8 @@ struct EditButton: View {
     
     func saveUpdates() {
         if toolbarViewModel.isEditMode {
-            localizedWeatherViewModel.saveOrderInCoreData()
             localizedWeatherViewModel.deleteLocationsInCoreData()
-            localizedWeatherViewModel.loadLocations()
+            localizedWeatherViewModel.saveOrderInCoreData()
         }
         toolbarViewModel.isEditMode.toggle()
     }

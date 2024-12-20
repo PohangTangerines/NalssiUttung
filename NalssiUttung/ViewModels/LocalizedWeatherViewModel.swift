@@ -13,7 +13,6 @@ class LocalizedWeatherViewModel: ObservableObject {
     private let weatherManager = WeatherManager()
     
     @Published var savedLocations: [LocationInfo] = []
-    @Published var originalSavedLocations: [LocationInfo] = []
     @Published var deletedLocations: [LocationInfo] = []
     
     @Published var filteredLocations: [String] = []
@@ -57,9 +56,9 @@ class LocalizedWeatherViewModel: ObservableObject {
     
     @Published var mode: WeatherDisplayMode = .modalInList
     
+    /// 코어데이터의 위치 정보를 전부 불러와 savedLocations에 저장합니다.
     func loadLocations() {
         self.savedLocations = coreDataStack.fetchAllLocations()
-        self.originalSavedLocations = self.savedLocations
     }
     
     func save(locationInfo: LocationInfo?) {
@@ -78,14 +77,19 @@ class LocalizedWeatherViewModel: ObservableObject {
         self.mode = (coreDataStack.isLocationExist(for: address) || isSelectedAddressSameAsCurrent(address: address)) ? .modalInList : .modal
     }
     
-    func deleteLocationIfexist(for location: LocationInfo) {
-        if let index = savedLocations.firstIndex(where: { $0.id == location.id }) {
+    /// UI에 보여주는 저장된 목록인 savedLocations 배열에서 선택한 값을 삭제합니다.
+    /// 코어데이터에서 삭제하기 위해 deletedLocations에 값을 저장해둡니다.
+    /// - Parameter locationInfo: 위치, 주소, 좌표 등이 들어있는 위치 전체 정보 값입니다.
+    func deleteLocationIfexist(for locationInfo: LocationInfo) {
+        if let index = savedLocations.firstIndex(where: { $0.id == locationInfo.id }) {
             let locationToRemove = savedLocations[index]
             savedLocations.remove(at: index)
             deletedLocations.append(locationToRemove)
+            print("삭제 목록: \(deletedLocations)")
         }
     }
     
+    /// 값을 모아 두었다가 코어데이터에서 한 번에 삭제합니다. 
     func deleteLocationsInCoreData() {
         coreDataStack.deleteLocations(deletedLocations)
     }

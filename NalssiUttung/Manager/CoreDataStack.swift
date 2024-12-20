@@ -111,9 +111,10 @@ extension CoreDataStack {
         do {
             let results = try context.fetch(fetchRequest)
             
-            if let result = results.first {
+            for result in results {
                 context.delete(result)
             }
+            
         } catch {
             print("Failed to delete LocationInfo: \(error.localizedDescription)")
         }
