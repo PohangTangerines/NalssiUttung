@@ -28,7 +28,7 @@ struct LocationSearchResultView: View {
         .sheet(isPresented: $toolbarViewModel.isModalPresented) {
             MainView(location: localizedWeatherViewModel.selectedLocation,
                      address: localizedWeatherViewModel.selectedAddress,
-                     isCurrentLocation: localizedWeatherViewModel.isCurrentLocation,
+                     isCurrentLocation: localizedWeatherViewModel.isSelectedAddressSameAsCurrent(address: localizedWeatherViewModel.selectedAddress),
                      mode: localizedWeatherViewModel.mode)
         }
     }
@@ -57,8 +57,14 @@ struct SavedLocationView: View {
                 Text(filteredAddress)
             }
         }
+//        .onTapGesture {
+//            localizedWeatherViewModel.updateSelectedLocation(from: filteredAddress)
+//            localizedWeatherViewModel.determineWeatherDisplayMode(for: filteredAddress)
+//            toolbarViewModel.isModalPresented = true
+//        }
         .onTapGesture {
             localizedWeatherViewModel.updateSelectedLocation(from: filteredAddress)
+            localizedWeatherViewModel.selectedAddress = filteredAddress
             localizedWeatherViewModel.determineWeatherDisplayMode(for: filteredAddress)
             toolbarViewModel.isModalPresented = true
         }

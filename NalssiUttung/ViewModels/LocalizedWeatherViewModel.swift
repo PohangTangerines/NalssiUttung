@@ -29,11 +29,10 @@ class LocalizedWeatherViewModel: ObservableObject {
     
     @Published var selectedAddress: String?
     
-    var isCurrentLocation: Bool {
-        if LocationManager.shared.isDeviceLocation && LocationManager.shared.currentAddress == selectedAddress {
-            return true
-        }
-        return false
+    func isSelectedAddressSameAsCurrent(address: String?) -> Bool {
+        guard let address else { return false }
+        return LocationManager.shared.isDeviceLocation &&
+               LocationManager.shared.currentAddress == address
     }
     
     @MainActor
@@ -71,8 +70,12 @@ class LocalizedWeatherViewModel: ObservableObject {
     /// 코어데이터에 위치가 저장되어 있지 않으면 추가 버튼을 삭제시킵니다.
     /// 현재 위치도 추가하지 못하게 막아 두었습니다.
     /// - Parameter address: adress는 주소입니다.
-    func determineWeatherDisplayMode(for address: String) {
-        self.mode = (coreDataStack.isLocationExist(for: address) || !isCurrentLocation) ? .modalInList : .modal
+    func determineWeatherDisplayMode(for address: String?) {
+        guard let address else {
+            self.mode = .modal
+            return
+        }
+        self.mode = (coreDataStack.isLocationExist(for: address) || isSelectedAddressSameAsCurrent(address: address)) ? .modalInList : .modal
     }
     
     func deleteLocationIfexist(for location: LocationInfo) {
