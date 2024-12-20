@@ -21,16 +21,27 @@ class LocalizedWeatherViewModel: ObservableObject {
     var selectedLocation: CLLocation? {
         didSet {
             Task {
-                await weatherManager.fetchWeather(with: .all)
                 await updateSelectedAddress()
+                await weatherManager.fetchWeather(with: .all)
             }
         }
     }
+    
     @Published var selectedAddress: String?
-
+    
+    var isCurrentLocation: Bool {
+        if LocationManager.shared.isDeviceLocation && LocationManager.shared.currentAddress == selectedAddress {
+            return true
+        }
+        return false
+    }
+    
     @MainActor
     private func updateSelectedAddress() async {
-        guard let selectedLocation else { return }
+        guard let selectedLocation else {
+            selectedAddress = nil
+            return
+        }
         
         do {
             selectedAddress = try await LocationManager.shared.getAddress(from: selectedLocation)
@@ -39,24 +50,21 @@ class LocalizedWeatherViewModel: ObservableObject {
         }
     }
     
-    func updateSelectedLocation(for address: String) {
-        if let updatedLocation = LocationManager.shared.findLocationInfo(for: address) {
-            self.selectedLocation = CLLocation(latitude: updatedLocation.coordinate.latitude,
-                                               longitude: updatedLocation.coordinate.longitude)
-        }
+    /// 선택된 주소를 바탕으로 localizedWeatherView의 selectedLocation을 업데이트합니다.
+    /// - Parameter address: 사용자가 선택한 주소를 의미합니다.
+    func updateSelectedLocation(from address: String) {
+        self.selectedLocation = LocationManager.shared.findLocation(from: address)
     }
     
     @Published var mode: WeatherDisplayMode = .modalInList
-    @Published var isCurrentLocation: Bool = true
-
+    
     func loadLocations() {
         self.savedLocations = coreDataStack.fetchAllLocations()
         self.originalSavedLocations = self.savedLocations
     }
     
-    func saveLocation(location: LocationInfo?) {
-        guard let location else { return }
-        coreDataStack.saveLocation(location: location)
+    func save(locationInfo: LocationInfo?) {
+        coreDataStack.save(locationInfo: locationInfo)
         loadLocations()
     }
     
@@ -64,7 +72,7 @@ class LocalizedWeatherViewModel: ObservableObject {
     /// 현재 위치도 추가하지 못하게 막아 두었습니다.
     /// - Parameter address: adress는 주소입니다.
     func determineWeatherDisplayMode(for address: String) {
-        self.mode = (coreDataStack.isLocationExist(for: address) || isCurrentLocation) ? .modalInList : .modal
+        self.mode = (coreDataStack.isLocationExist(for: address) || !isCurrentLocation) ? .modalInList : .modal
     }
     
     func deleteLocationIfexist(for location: LocationInfo) {

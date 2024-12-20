@@ -20,16 +20,16 @@ extension MainView {
         ToolbarItem(placement: .principal) {
             if location == nil {
                 LocationHeader(address: LocationManager.shared.currentAddress,
-                               isCurrentLocation: LocationManager.shared.isCurrentLocation)
+                               isCurrentLocation: isCurrentLocation)
             } else {
                 LocationHeader(address: address,
-                               isCurrentLocation: LocationManager.shared.isCurrentLocation)
+                               isCurrentLocation: isCurrentLocation)
             }
         }
         
         ToolbarItem(placement: .topBarTrailing) {
             if let address = address {
-                AddButton(locationInfo: LocationManager.shared.findLocationInfo(for: address), mode: mode)
+                AddButton(locationInfo: LocationManager.shared.findLocationInfo(from: address), mode: mode)
             } else {
                 AddButton(mode: mode)
             }

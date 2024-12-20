@@ -19,19 +19,19 @@ class ToolbarViewModel: ObservableObject {
     // TODO: - 추후 ToolbarViewModel 말고 다른 뷰모델로 이동시키기
     @Published var searchText: String = "" {
         didSet {
-            filterLocations()
+            filterAddresses()
         }
     }
     
-    @Published var filteredLocations: [String] = []
+    @Published var filteredAddresses: [String] = []
 
-    private var allLocations: [String] = LocationInfo.Data.map { $0.address }
+    private var allAddresses: [String] = LocationInfo.Data.map { $0.address }
     
-    private func filterLocations() {
+    private func filterAddresses() {
         if searchText.isEmpty {
-            filteredLocations = allLocations
+            filteredAddresses = allAddresses
         } else {
-            filteredLocations = allLocations.filter { $0.contains(searchText) }
+            filteredAddresses = allAddresses.filter { $0.contains(searchText) }
         }
     }
 

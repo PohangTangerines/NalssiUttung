@@ -31,7 +31,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     @Published var currentAddress: String = ""
-    private(set) var isCurrentLocation = false
+    private(set) var isDeviceLocation = false
     
     private let updateState = UpdateState()
     
@@ -103,7 +103,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             print("위치 권한이 허용되지 않았습니다.")
             self.currentLocation = jejuAirport
             self.currentAddress = "제주공항"
-            self.isCurrentLocation = false
+            self.isDeviceLocation = false
             return
         }
         
@@ -116,11 +116,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                     
                     if isJeju {
                         self.currentLocation = currentLocation
-                        self.isCurrentLocation = true
+                        self.isDeviceLocation = true
                     } else {
                         self.currentLocation = jejuAirport
                         self.currentAddress = "제주공항"
-                        self.isCurrentLocation = false
+                        self.isDeviceLocation = false
                     }
                     return
                     
@@ -160,7 +160,14 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         return nil
     }
     
-    func findLocationInfo(for address: String) -> LocationInfo? {
+    func findLocationInfo(from address: String) -> LocationInfo? {
         return LocationInfo.Data.first(where: { $0.address == address })
+    }
+    
+    func findLocation(from address: String) -> CLLocation? {
+        guard let coordinate = LocationInfo.Data.first(where: { $0.address == address })?.coordinate else {
+            return nil
+        }
+        return CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
     }
 }

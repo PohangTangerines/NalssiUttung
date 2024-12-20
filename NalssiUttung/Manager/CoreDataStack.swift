@@ -42,9 +42,9 @@ class CoreDataStack: ObservableObject {
 }
 
 extension CoreDataStack {
-    func saveLocation(location: LocationInfo?) {
-        guard let location else {
-            print("No location to save.")
+    func save(locationInfo: LocationInfo?) {
+        guard let locationInfo else {
+            print("저장할 위치 정보가 없습니다.")
             return
         }
         
@@ -52,10 +52,10 @@ extension CoreDataStack {
         let count = count()
         
         let locationValues: [String: Any] = [
-            "name": location.name,
-            "address": location.address,
-            "latitude": location.coordinate.latitude,
-            "longitude": location.coordinate.longitude,
+            "name": locationInfo.name,
+            "address": locationInfo.address,
+            "latitude": locationInfo.coordinate.latitude,
+            "longitude": locationInfo.coordinate.longitude,
             "order": count
         ]
         

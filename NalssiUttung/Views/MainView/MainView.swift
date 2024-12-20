@@ -13,9 +13,9 @@ struct MainView: View {
     @StateObject var viewModel = MainViewModel()
     @StateObject var weatherManager = WeatherManager()
     
-    @State private(set) var location: CLLocation?
-    @State private(set) var address: String?
-    @State private(set) var isCurrentLocation: Bool = false
+    var location: CLLocation?
+    var address: String?
+    var isCurrentLocation: Bool
     
     let mode: WeatherDisplayMode
     
@@ -64,10 +64,6 @@ struct MainView: View {
                 }
                 
                 await weatherManager.fetchWeather(with: .all, for: location)
-            }
-            .onDisappear {
-                location = nil
-                address = nil
             }
         }
     }

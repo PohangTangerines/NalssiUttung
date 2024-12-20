@@ -16,8 +16,8 @@ struct LocationSearchResultView: View {
     // TODO: - 텍스트 bold 대신 색상 바꾸기
     var body : some View {
         List {
-            ForEach(toolbarViewModel.filteredLocations.prefix(10), id: \.self) { filteredLocation in
-                SavedLocationView(localizedWeatherViewModel: localizedWeatherViewModel, filteredLocation: filteredLocation)
+            ForEach(toolbarViewModel.filteredAddresses.prefix(10), id: \.self) { filteredAddress in
+                SavedLocationView(localizedWeatherViewModel: localizedWeatherViewModel, filteredAddress: filteredAddress)
 
             }
             .listRowBackground(Color.seaSky)
@@ -27,7 +27,9 @@ struct LocationSearchResultView: View {
         .scrollContentBackground(.hidden)
         .sheet(isPresented: $toolbarViewModel.isModalPresented) {
             MainView(location: localizedWeatherViewModel.selectedLocation,
-                     isCurrentLocation: localizedWeatherViewModel.isCurrentLocation, mode: localizedWeatherViewModel.mode)
+                     address: localizedWeatherViewModel.selectedAddress,
+                     isCurrentLocation: localizedWeatherViewModel.isCurrentLocation,
+                     mode: localizedWeatherViewModel.mode)
         }
     }
 }
@@ -36,14 +38,14 @@ struct SavedLocationView: View {
     @EnvironmentObject var toolbarViewModel: ToolbarViewModel
     @ObservedObject var localizedWeatherViewModel: LocalizedWeatherViewModel
     
-    let filteredLocation: String
+    let filteredAddress: String
     
     var body: some View {
         HStack {
-            if let range = filteredLocation.range(of: toolbarViewModel.searchText, options: .caseInsensitive) {
-                let beforeText = filteredLocation[..<range.lowerBound]
-                let searchText = filteredLocation[range]
-                let afterText = filteredLocation[range.upperBound...]
+            if let range = filteredAddress.range(of: toolbarViewModel.searchText, options: .caseInsensitive) {
+                let beforeText = filteredAddress[..<range.lowerBound]
+                let searchText = filteredAddress[range]
+                let afterText = filteredAddress[range.upperBound...]
                 
                 Text(beforeText)
                 +
@@ -52,21 +54,12 @@ struct SavedLocationView: View {
                 +
                 Text(afterText)
             } else {
-                Text(filteredLocation)
+                Text(filteredAddress)
             }
         }
         .onTapGesture {
-            localizedWeatherViewModel.updateSelectedLocation(for: filteredLocation)
-            
-            guard let location = LocationManager.shared.findLocationInfo(for: filteredLocation) else {
-                print(CustomWeatherError.noLocationInfo.localizedDescription)
-                return
-            }
-            
-            localizedWeatherViewModel.selectedLocation = CLLocation(latitude: location.coordinate.latitude,
-                                                                 longitude: location.coordinate.longitude)
-            localizedWeatherViewModel.determineWeatherDisplayMode(for: filteredLocation)
-            localizedWeatherViewModel.isCurrentLocation = false
+            localizedWeatherViewModel.updateSelectedLocation(from: filteredAddress)
+            localizedWeatherViewModel.determineWeatherDisplayMode(for: filteredAddress)
             toolbarViewModel.isModalPresented = true
         }
         .listRowSeparator(.hidden)
