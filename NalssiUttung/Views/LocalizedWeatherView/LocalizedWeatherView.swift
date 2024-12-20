@@ -19,7 +19,7 @@ struct LocalizedWeatherView: View {
             } else {
                 LocalizedWeatherListView(localizedWeatherViewModel: localizedWeatherViewModel)
             }
-            if toolbarViewModel.isTextFieldActive && toolbarViewModel.filteredLocations == [] {
+            if toolbarViewModel.isTextFieldActive && toolbarViewModel.filteredAddresses == [] {
                 NoResultView()
             }
         }

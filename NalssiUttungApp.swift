@@ -17,7 +17,7 @@ struct NalssiUttungApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                MainView(mode: .regular)
+                MainView(isCurrentLocation: LocationManager.shared.isDeviceLocation, mode: .regular)
                     .environmentObject(toolbarViewModel)
                 SplashScreenView()
                     .opacity(splashOpacity)

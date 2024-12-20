@@ -26,7 +26,7 @@ struct AddButton: View {
             }
         case .modal:
             Button {
-                coreDataStack.saveLocation(location: locationInfo)
+                coreDataStack.save(locationInfo: locationInfo)
                 dismiss()
                 toolbarViewModel.isTextFieldActive = false
                 toolbarViewModel.isModalPresented = false

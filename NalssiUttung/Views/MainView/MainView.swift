@@ -13,11 +13,11 @@ struct MainView: View {
     @StateObject var viewModel = MainViewModel()
     @StateObject var weatherManager = WeatherManager()
     
-    @State var address: String?
-    
     var location: CLLocation?
+    var address: String?
+    var isCurrentLocation: Bool
+    
     let mode: WeatherDisplayMode
-    var isCurrentLocation: Bool = true
     
     private var dragGesture: some Gesture {
         DragGesture()
@@ -55,18 +55,16 @@ struct MainView: View {
             }
             .toolbar(content: toolbarContent)
             .task {
-                await updateAddress()
+                await LocationManager.shared.updateCurrentLocation()
+                
+                /// 만약 전달된 위치가 없는 경우 현재 날씨를 불러옵니다.
+                /// 전달된 위치가 있는 경우 선택된 위치를 불러옵니다.
+                if location == nil {
+                    await weatherManager.fetchWeather(with: .all)
+                }
+                
                 await weatherManager.fetchWeather(with: .all, for: location)
             }
-        }
-    }
-    
-    @MainActor
-    private func updateAddress() async {
-        do {
-            address = try await LocationManager.shared.getAddress(from: location)
-        } catch {
-            print("메인 뷰에서 위치로부터 주소를 업데이트하는 데 실패했습니다.")
         }
     }
 }

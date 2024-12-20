@@ -25,7 +25,7 @@ extension WeatherCharacterWidgetData {
         guard let address else { throw CustomWeatherError.noAddress }
         
         print("현재 주소는: \(address)")
-        guard let locationInfo: LocationInfo = LocationManager.shared.findLocationInfo(for: address) else {
+        guard let locationInfo: LocationInfo = LocationManager.shared.findLocationInfo(from: address) else {
             throw CustomWeatherError.noLocationInfo
         }
         
@@ -65,7 +65,7 @@ extension WeatherCommentWidgetData {
         // 현재 위치 정보
         guard let address = address else { throw CustomWeatherError.noAddress }
         
-        guard let locationInfo = LocationManager.shared.findLocationInfo(for: address) else {
+        guard let locationInfo = LocationManager.shared.findLocationInfo(from: address) else {
             throw CustomWeatherError.noLocationInfo
         }
         let location = CLLocation(latitude: locationInfo.coordinate.latitude, longitude: locationInfo.coordinate.longitude)

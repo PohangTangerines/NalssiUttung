@@ -18,31 +18,57 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     var currentLocation: CLLocation? {
         didSet {
             Task {
-                @MainActor in 
-
+                @MainActor in
                 if let currentLocation = currentLocation {
-                    try await currentAddress = getAddress(from: currentLocation)!
+                    guard let newAddress = try await getAddress(from: currentLocation) else { return }
+                    currentAddress = newAddress
+                } else {
+                    currentAddress = ""
                 }
             }
-
+            
         }
     }
     
     @Published var currentAddress: String = ""
+    private(set) var isDeviceLocation = false
     
     private let updateState = UpdateState()
     
     @MainActor
     func hasLocationPermission() -> Bool {
         let status = locationManager.authorizationStatus
-        guard status == .authorizedWhenInUse || status == .authorizedAlways else {
-            print("위치 권한이 허용되지 않았습니다. 상태: \(status)")
-            
-            self.currentLocation = jejuAirport
-            self.currentAddress = "제주공항"
+        return status == .authorizedWhenInUse || status == .authorizedAlways
+    }
+    
+    func requestLocationPermission() async -> Bool {
+        let status = locationManager.authorizationStatus
+        
+        switch status {
+        case .notDetermined:
+            let permissionGranted = await withCheckedContinuation { continuation in
+                locationManager.requestWhenInUseAuthorization()
+                self.locationManager.delegate = self
+                self.permissionContinuation = continuation
+            }
+            return permissionGranted
+        case .authorizedWhenInUse, .authorizedAlways:
+            return true
+        default:
+            print("위치 권한이 거부되었습니다.")
             return false
         }
-        return true
+    }
+    
+    private var permissionContinuation: CheckedContinuation<Bool, Never>?
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        if let continuation = permissionContinuation {
+            let status = manager.authorizationStatus
+            let permissionGranted = (status == .authorizedWhenInUse || status == .authorizedAlways)
+            continuation.resume(returning: permissionGranted)
+            permissionContinuation = nil
+        }
     }
     
     func isLocationJeju(for location: CLLocation) -> Bool {
@@ -72,23 +98,32 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
         }
 
-        guard await hasLocationPermission() else { return }
+        let permissionGranted = await requestLocationPermission()
+        guard permissionGranted else {
+            print("위치 권한이 허용되지 않았습니다.")
+            self.currentLocation = jejuAirport
+            self.currentAddress = "제주공항"
+            self.isDeviceLocation = false
+            return
+        }
         
         do {
             let updates = CLLocationUpdate.liveUpdates()
             for try await update in updates {
                 if let currentLocation = update.location {
                     
-                    guard isLocationJeju(for: currentLocation) else {
+                    let isJeju = isLocationJeju(for: currentLocation)
+                    
+                    if isJeju {
+                        self.currentLocation = currentLocation
+                        self.isDeviceLocation = true
+                    } else {
                         self.currentLocation = jejuAirport
                         self.currentAddress = "제주공항"
-                        return
+                        self.isDeviceLocation = false
                     }
-                    
-                    print("현재 위치는: \(currentLocation)")
-                    
-                    self.currentLocation = currentLocation
                     return
+                    
                 } else {
                     print("위치 업데이트가 유효하지 않습니다. 다시 시도 중...")
                 }
@@ -125,7 +160,14 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         return nil
     }
     
-    func findLocationInfo(for address: String) -> LocationInfo? {
+    func findLocationInfo(from address: String) -> LocationInfo? {
         return LocationInfo.Data.first(where: { $0.address == address })
+    }
+    
+    func findLocation(from address: String) -> CLLocation? {
+        guard let coordinate = LocationInfo.Data.first(where: { $0.address == address })?.coordinate else {
+            return nil
+        }
+        return CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
     }
 }

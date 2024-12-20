@@ -21,7 +21,7 @@ struct LocalizedWeatherListView: View {
                     .listRowInsets(EdgeInsets())
                     .listRowBackground(Color.clear)
                     .onTapGesture {
-                        localizedWeatherViewModel.isCurrentLocation = true
+                        localizedWeatherViewModel.selectedLocation = LocationManager.shared.currentLocation
                         localizedWeatherViewModel.determineWeatherDisplayMode(for: LocationManager.shared.currentAddress)
                         toolbarViewModel.isModalPresented = true
                     }
@@ -39,12 +39,12 @@ struct LocalizedWeatherListView: View {
                         }
                         WeatherListCardView(locationInfo: savedLocation)
                             .onTapGesture {
+
                                 localizedWeatherViewModel.selectedLocation = CLLocation(
                                     latitude: savedLocation.coordinate.latitude,
                                     longitude: savedLocation.coordinate.longitude
                                 )
                                 
-                                localizedWeatherViewModel.isCurrentLocation = false
                                 localizedWeatherViewModel.determineWeatherDisplayMode(for: savedLocation.address)
                                 toolbarViewModel.isModalPresented = true
                             }
@@ -59,11 +59,10 @@ struct LocalizedWeatherListView: View {
         .listStyle(.plain)
         .scrollIndicators(.never)
         .sheet(isPresented: $toolbarViewModel.isModalPresented) {
-            MainView(location: localizedWeatherViewModel.isCurrentLocation ?
-                     LocationManager.shared.currentLocation :
-                     localizedWeatherViewModel.selectedLocation,
-                     mode: localizedWeatherViewModel.mode,
-                     isCurrentLocation: localizedWeatherViewModel.isCurrentLocation)
+            MainView(location: localizedWeatherViewModel.selectedLocation,
+                     address: localizedWeatherViewModel.selectedAddress,
+                     isCurrentLocation: localizedWeatherViewModel.isSelectedAddressSameAsCurrent(address: localizedWeatherViewModel.selectedAddress),
+                     mode: localizedWeatherViewModel.mode)
         }
         .environment(\.editMode, .constant(toolbarViewModel.isEditMode ? EditMode.active : EditMode.inactive))
         .task {
