@@ -18,13 +18,15 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     var currentLocation: CLLocation? {
         didSet {
             Task {
-                @MainActor in 
-
+                @MainActor in
                 if let currentLocation = currentLocation {
-                    try await currentAddress = getAddress(from: currentLocation)!
+                    guard let newAddress = try await getAddress(from: currentLocation) else { return }
+                    currentAddress = newAddress
+                } else {
+                    currentAddress = ""
                 }
             }
-
+            
         }
     }
     
@@ -35,14 +37,37 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @MainActor
     func hasLocationPermission() -> Bool {
         let status = locationManager.authorizationStatus
-        guard status == .authorizedWhenInUse || status == .authorizedAlways else {
-            print("위치 권한이 허용되지 않았습니다. 상태: \(status)")
-            
-            self.currentLocation = jejuAirport
-            self.currentAddress = "제주공항"
+        return status == .authorizedWhenInUse || status == .authorizedAlways
+    }
+    
+    func requestLocationPermission() async -> Bool {
+        let status = locationManager.authorizationStatus
+        
+        switch status {
+        case .notDetermined:
+            let permissionGranted = await withCheckedContinuation { continuation in
+                locationManager.requestWhenInUseAuthorization()
+                self.locationManager.delegate = self
+                self.permissionContinuation = continuation
+            }
+            return permissionGranted
+        case .authorizedWhenInUse, .authorizedAlways:
+            return true
+        default:
+            print("위치 권한이 거부되었습니다.")
             return false
         }
-        return true
+    }
+    
+    private var permissionContinuation: CheckedContinuation<Bool, Never>?
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        if let continuation = permissionContinuation {
+            let status = manager.authorizationStatus
+            let permissionGranted = (status == .authorizedWhenInUse || status == .authorizedAlways)
+            continuation.resume(returning: permissionGranted)
+            permissionContinuation = nil
+        }
     }
     
     func isLocationJeju(for location: CLLocation) -> Bool {
@@ -72,7 +97,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
         }
 
-        guard await hasLocationPermission() else { return }
+        let permissionGranted = await requestLocationPermission()
+        guard permissionGranted else {
+            print("위치 권한이 허용되지 않았습니다.")
+            self.currentLocation = jejuAirport
+            self.currentAddress = "제주공항"
+            return
+        }
         
         do {
             let updates = CLLocationUpdate.liveUpdates()
