@@ -60,7 +60,7 @@ struct LocalizedWeatherListView: View {
         .scrollIndicators(.never)
         .sheet(isPresented: $toolbarViewModel.isModalPresented) {
             MainView(location: localizedWeatherViewModel.isCurrentLocation ?
-                     LocationManager.shared.currentLocation :
+                     nil :
                      localizedWeatherViewModel.selectedLocation,
                      isCurrentLocation: localizedWeatherViewModel.isCurrentLocation, mode: localizedWeatherViewModel.mode)
         }
