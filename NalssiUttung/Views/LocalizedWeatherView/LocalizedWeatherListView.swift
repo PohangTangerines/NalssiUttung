@@ -62,8 +62,7 @@ struct LocalizedWeatherListView: View {
             MainView(location: localizedWeatherViewModel.isCurrentLocation ?
                      LocationManager.shared.currentLocation :
                      localizedWeatherViewModel.selectedLocation,
-                     mode: localizedWeatherViewModel.mode,
-                     isCurrentLocation: localizedWeatherViewModel.isCurrentLocation)
+                     isCurrentLocation: localizedWeatherViewModel.isCurrentLocation, mode: localizedWeatherViewModel.mode)
         }
         .environment(\.editMode, .constant(toolbarViewModel.isEditMode ? EditMode.active : EditMode.inactive))
         .task {

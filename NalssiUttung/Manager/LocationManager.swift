@@ -31,6 +31,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     @Published var currentAddress: String = ""
+    private(set) var isCurrentLocation = false
     
     private let updateState = UpdateState()
     
@@ -102,6 +103,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             print("위치 권한이 허용되지 않았습니다.")
             self.currentLocation = jejuAirport
             self.currentAddress = "제주공항"
+            self.isCurrentLocation = false
             return
         }
         
@@ -110,16 +112,18 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             for try await update in updates {
                 if let currentLocation = update.location {
                     
-                    guard isLocationJeju(for: currentLocation) else {
+                    let isJeju = isLocationJeju(for: currentLocation)
+                    
+                    if isJeju {
+                        self.currentLocation = currentLocation
+                        self.isCurrentLocation = true
+                    } else {
                         self.currentLocation = jejuAirport
                         self.currentAddress = "제주공항"
-                        return
+                        self.isCurrentLocation = false
                     }
-                    
-                    print("현재 위치는: \(currentLocation)")
-                    
-                    self.currentLocation = currentLocation
                     return
+                    
                 } else {
                     print("위치 업데이트가 유효하지 않습니다. 다시 시도 중...")
                 }

@@ -27,8 +27,7 @@ struct LocationSearchResultView: View {
         .scrollContentBackground(.hidden)
         .sheet(isPresented: $toolbarViewModel.isModalPresented) {
             MainView(location: localizedWeatherViewModel.selectedLocation,
-                     mode: localizedWeatherViewModel.mode,
-                     isCurrentLocation: localizedWeatherViewModel.isCurrentLocation)
+                     isCurrentLocation: localizedWeatherViewModel.isCurrentLocation, mode: localizedWeatherViewModel.mode)
         }
     }
 }
