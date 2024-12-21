@@ -21,7 +21,6 @@ class LocalizedWeatherViewModel: ObservableObject {
         didSet {
             Task {
                 await updateSelectedAddress()
-                await weatherManager.fetchWeather(with: .all)
             }
         }
     }

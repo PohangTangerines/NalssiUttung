@@ -14,7 +14,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()
     static let shared = LocationManager()
     private let jejuAirport = CLLocation(latitude: LocationInfo.Data.first!.coordinate.latitude, longitude: LocationInfo.Data.first!.coordinate.longitude)
-        
+    
     var currentLocation: CLLocation? {
         didSet {
             Task {
@@ -34,35 +34,40 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private(set) var isDeviceLocation = false
     
     private let updateState = UpdateState()
+    private var permissionContinuation: CheckedContinuation<Bool, Never>?
     
-    @MainActor
-    func hasLocationPermission() -> Bool {
-        let status = locationManager.authorizationStatus
-        return status == .authorizedWhenInUse || status == .authorizedAlways
+    override init() {
+        super.init()
+        locationManager.delegate = self
     }
-    
-    func requestLocationPermission() async -> Bool {
+
+    func checkAndRequestLocationPermission() async -> Bool {
         let status = locationManager.authorizationStatus
         
         switch status {
         case .notDetermined:
-            let permissionGranted = await withCheckedContinuation { continuation in
-                locationManager.requestWhenInUseAuthorization()
-                self.locationManager.delegate = self
-                self.permissionContinuation = continuation
-            }
-            return permissionGranted
+            return await requestPermission()
+            
         case .authorizedWhenInUse, .authorizedAlways:
+            print("위치 권한이 승인되었습니다.")
             return true
+            
         default:
             print("위치 권한이 거부되었습니다.")
             return false
         }
     }
     
-    private var permissionContinuation: CheckedContinuation<Bool, Never>?
+    private func requestPermission() async -> Bool {
+        await withCheckedContinuation { continuation in
+            locationManager.requestWhenInUseAuthorization()
+            self.permissionContinuation = continuation
+        }
+    }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        print("위치 권한이 변경되었습니다.")
+        
         if let continuation = permissionContinuation {
             let status = manager.authorizationStatus
             let permissionGranted = (status == .authorizedWhenInUse || status == .authorizedAlways)
@@ -71,6 +76,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+    func setDefaultLocation() {
+        self.currentLocation = jejuAirport
+        self.currentAddress = "제주공항"
+        self.isDeviceLocation = false
+    }
+
     func isLocationJeju(for location: CLLocation) -> Bool {
         let jejuCenter = CLLocation(latitude: 33.4996, longitude: 126.5312)
         
@@ -97,19 +108,19 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 await updateState.stopUpdating()
             }
         }
-
-        let permissionGranted = await requestLocationPermission()
+        
+        let permissionGranted = await checkAndRequestLocationPermission()
+        
         guard permissionGranted else {
-            print("위치 권한이 허용되지 않았습니다.")
-            self.currentLocation = jejuAirport
-            self.currentAddress = "제주공항"
-            self.isDeviceLocation = false
+            print("위치 권한이 거부되어 기본 위치로 업데이트 완료했습니다. ")
+            setDefaultLocation()
             return
         }
         
         do {
             let updates = CLLocationUpdate.liveUpdates()
             for try await update in updates {
+
                 if let currentLocation = update.location {
                     
                     let isJeju = isLocationJeju(for: currentLocation)
@@ -117,10 +128,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                     if isJeju {
                         self.currentLocation = currentLocation
                         self.isDeviceLocation = true
+                        print("제주도 내부에서 현재 위치로 업데이트를 완료했습니다.")
+
                     } else {
-                        self.currentLocation = jejuAirport
-                        self.currentAddress = "제주공항"
-                        self.isDeviceLocation = false
+                        setDefaultLocation()
+                        print("제주도 외부에서 기본 위치로 위치 업데이트 완료했습니다.")
+
                     }
                     return
                     
