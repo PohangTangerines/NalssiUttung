@@ -8,6 +8,7 @@
 import CoreLocation
 import SwiftUI
 import WeatherKit
+import WidgetKit
 
 class WeatherManager: ObservableObject {
     var weather: Weather?
@@ -56,6 +57,7 @@ class WeatherManager: ObservableObject {
         }
         
         await updateWeather(with: type)
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     @MainActor
