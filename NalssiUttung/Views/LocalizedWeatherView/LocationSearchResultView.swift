@@ -57,14 +57,8 @@ struct SavedLocationView: View {
                 Text(filteredAddress)
             }
         }
-//        .onTapGesture {
-//            localizedWeatherViewModel.updateSelectedLocation(from: filteredAddress)
-//            localizedWeatherViewModel.determineWeatherDisplayMode(for: filteredAddress)
-//            toolbarViewModel.isModalPresented = true
-//        }
         .onTapGesture {
             localizedWeatherViewModel.updateSelectedLocation(from: filteredAddress)
-            localizedWeatherViewModel.selectedAddress = filteredAddress
             localizedWeatherViewModel.determineWeatherDisplayMode(for: filteredAddress)
             toolbarViewModel.isModalPresented = true
         }

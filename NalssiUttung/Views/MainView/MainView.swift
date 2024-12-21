@@ -54,16 +54,14 @@ struct MainView: View {
                 .offset(y: viewModel.viewOffsetY)
             }
             .toolbar(content: toolbarContent)
-            .task {
-                await LocationManager.shared.updateCurrentLocation()
-                
+            .task {                
                 /// 만약 전달된 위치가 없는 경우 현재 날씨를 불러옵니다.
                 /// 전달된 위치가 있는 경우 선택된 위치를 불러옵니다.
                 if location == nil {
                     await weatherManager.fetchWeather(with: .all)
+                } else {
+                    await weatherManager.fetchWeather(with: .all, for: location)
                 }
-                
-                await weatherManager.fetchWeather(with: .all, for: location)
             }
         }
     }
