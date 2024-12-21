@@ -22,7 +22,7 @@ struct LocalizedWeatherListView: View {
                     .listRowBackground(Color.clear)
                     .onTapGesture {
                         localizedWeatherViewModel.selectedLocation = LocationManager.shared.currentLocation
-                        localizedWeatherViewModel.determineWeatherDisplayMode(for: LocationManager.shared.currentAddress)
+                        localizedWeatherViewModel.determineWeatherDisplayMode()
                         toolbarViewModel.isModalPresented = true
                     }
                 
